@@ -1,0 +1,7 @@
+fastapi # for building API
+uvicorn # for running FastAPI application
+ollama # for interfacing with Ollama to use local LLM
+python-dotenv # for loading variables in an environment file
+requests # for sending request when we use the API
+langchain
+jsonschema

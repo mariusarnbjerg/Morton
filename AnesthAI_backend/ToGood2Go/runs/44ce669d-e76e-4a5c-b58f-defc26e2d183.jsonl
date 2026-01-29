@@ -1,0 +1,3 @@
+{"ts": 1769513684, "type": "session_started", "sessionId": "44ce669d-e76e-4a5c-b58f-defc26e2d183", "meta": {"questionsFile": "questions.json"}}
+{"ts": 1769513684, "type": "standard_question_shown", "sessionId": "44ce669d-e76e-4a5c-b58f-defc26e2d183", "questionId": "q1", "text": "Hvad er dit fulde navn?"}
+{"ts": 1769513687, "type": "command_used", "sessionId": "44ce669d-e76e-4a5c-b58f-defc26e2d183", "command": "/chat", "context": {"questionId": "q1"}}

@@ -1,0 +1,17 @@
+{"ts": 1769513725, "type": "session_started", "sessionId": "2c11d847-3f8e-4843-973e-4d8f160cf58c", "meta": {"questionsFile": "questions.json"}}
+{"ts": 1769513725, "type": "standard_question_shown", "sessionId": "2c11d847-3f8e-4843-973e-4d8f160cf58c", "questionId": "q1", "text": "Hvad er dit fulde navn?"}
+{"ts": 1769513728, "type": "command_used", "sessionId": "2c11d847-3f8e-4843-973e-4d8f160cf58c", "command": "/chat", "context": {"questionId": "q1"}}
+{"ts": 1769513729, "type": "chat", "sessionId": "2c11d847-3f8e-4843-973e-4d8f160cf58c", "questionId": "chat", "text": {"role": "user", "content": "hej"}}
+{"ts": 1769513763, "type": "chat", "sessionId": "2c11d847-3f8e-4843-973e-4d8f160cf58c", "questionId": "chat", "text": {"role": "user", "content": "hej"}}
+{"ts": 1769513780, "type": "standard_answer_given", "sessionId": "2c11d847-3f8e-4843-973e-4d8f160cf58c", "questionId": "q1", "text": "marius"}
+{"ts": 1769513780, "type": "standard_question_shown", "sessionId": "2c11d847-3f8e-4843-973e-4d8f160cf58c", "questionId": "q2", "text": "Hvor gammel er du?"}
+{"ts": 1769513784, "type": "command_used", "sessionId": "2c11d847-3f8e-4843-973e-4d8f160cf58c", "command": "/chat", "context": {"questionId": "q2"}}
+{"ts": 1769513785, "type": "chat", "sessionId": "2c11d847-3f8e-4843-973e-4d8f160cf58c", "questionId": "chat", "text": {"role": "user", "content": "Hej"}}
+{"ts": 1769513797, "type": "standard_answer_given", "sessionId": "2c11d847-3f8e-4843-973e-4d8f160cf58c", "questionId": "q2", "text": "25"}
+{"ts": 1769513797, "type": "standard_question_shown", "sessionId": "2c11d847-3f8e-4843-973e-4d8f160cf58c", "questionId": "q3", "text": "Hvilken operation skal du have?"}
+{"ts": 1769513799, "type": "standard_answer_given", "sessionId": "2c11d847-3f8e-4843-973e-4d8f160cf58c", "questionId": "q3", "text": ""}
+{"ts": 1769513799, "type": "standard_question_shown", "sessionId": "2c11d847-3f8e-4843-973e-4d8f160cf58c", "questionId": "q4", "text": "Har du nogen allergier?"}
+{"ts": 1769513800, "type": "standard_answer_given", "sessionId": "2c11d847-3f8e-4843-973e-4d8f160cf58c", "questionId": "q4", "text": ""}
+{"ts": 1769513800, "type": "standard_question_shown", "sessionId": "2c11d847-3f8e-4843-973e-4d8f160cf58c", "questionId": "q5", "text": "Har du allergier?"}
+{"ts": 1769513801, "type": "standard_answer_given", "sessionId": "2c11d847-3f8e-4843-973e-4d8f160cf58c", "questionId": "q5", "text": ""}
+{"ts": 1769513801, "type": "session_finished", "sessionId": "2c11d847-3f8e-4843-973e-4d8f160cf58c"}

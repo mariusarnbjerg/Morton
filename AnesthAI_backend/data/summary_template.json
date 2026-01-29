@@ -1,0 +1,17 @@
+{
+  "patient": {
+    "name": "",
+    "age": 0,
+    "allergies": "",
+    "prior_anesthesia": "",
+    "current_surgery": ""
+  },
+  "questionnaire_answers": [
+    { "question_id": "", "question": "", "answer": "" }
+  ],
+  "patient_questions": [
+    { "question": "", "answer": "" }
+  ],
+  "red_flags": [],
+  "notes": ""
+}

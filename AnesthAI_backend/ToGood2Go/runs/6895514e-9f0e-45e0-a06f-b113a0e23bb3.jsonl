@@ -1,0 +1,13 @@
+{"ts": "2026-01-27T11:25:20.127351+00:00", "type": "session_started", "sessionId": "6895514e-9f0e-45e0-a06f-b113a0e23bb3", "meta": {"questionsFile": "questions.json"}}
+{"ts": "2026-01-27T11:25:20.128350+00:00", "type": "standard_question_shown", "sessionId": "6895514e-9f0e-45e0-a06f-b113a0e23bb3", "questionId": "q1", "text": "Hvad er dit fulde navn?"}
+{"ts": "2026-01-27T11:25:23.589668+00:00", "type": "standard_answer_given", "sessionId": "6895514e-9f0e-45e0-a06f-b113a0e23bb3", "questionId": "q1", "text": "Marius"}
+{"ts": "2026-01-27T11:25:23.590690+00:00", "type": "standard_question_shown", "sessionId": "6895514e-9f0e-45e0-a06f-b113a0e23bb3", "questionId": "q2", "text": "Hvor gammel er du?"}
+{"ts": "2026-01-27T11:25:24.797155+00:00", "type": "standard_answer_given", "sessionId": "6895514e-9f0e-45e0-a06f-b113a0e23bb3", "questionId": "q2", "text": "25"}
+{"ts": "2026-01-27T11:25:24.798160+00:00", "type": "standard_question_shown", "sessionId": "6895514e-9f0e-45e0-a06f-b113a0e23bb3", "questionId": "q3", "text": "Hvilken operation skal du have?"}
+{"ts": "2026-01-27T11:25:27.862193+00:00", "type": "standard_answer_given", "sessionId": "6895514e-9f0e-45e0-a06f-b113a0e23bb3", "questionId": "q3", "text": "Knæoperation"}
+{"ts": "2026-01-27T11:25:27.863194+00:00", "type": "standard_question_shown", "sessionId": "6895514e-9f0e-45e0-a06f-b113a0e23bb3", "questionId": "q4", "text": "Har du nogen allergier?"}
+{"ts": "2026-01-27T11:25:30.493843+00:00", "type": "standard_answer_given", "sessionId": "6895514e-9f0e-45e0-a06f-b113a0e23bb3", "questionId": "q4", "text": "Nej"}
+{"ts": "2026-01-27T11:25:30.494829+00:00", "type": "standard_question_shown", "sessionId": "6895514e-9f0e-45e0-a06f-b113a0e23bb3", "questionId": "q5", "text": "Har du allergier?"}
+{"ts": "2026-01-27T11:25:32.238134+00:00", "type": "command_used", "sessionId": "6895514e-9f0e-45e0-a06f-b113a0e23bb3", "command": "/chat", "context": {"questionId": "q5"}}
+{"ts": "2026-01-27T11:25:59.246767+00:00", "type": "standard_answer_given", "sessionId": "6895514e-9f0e-45e0-a06f-b113a0e23bb3", "questionId": "q5", "text": "Nej"}
+{"ts": "2026-01-27T11:25:59.247769+00:00", "type": "session_finished", "sessionId": "6895514e-9f0e-45e0-a06f-b113a0e23bb3"}

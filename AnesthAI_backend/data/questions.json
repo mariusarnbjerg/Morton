@@ -1,0 +1,10 @@
+{
+  "language": "da",
+  "questions": [
+      { "id": "q1", "text": "What is your Name?", "type": "free_text", "required": true },
+      { "id": "q2", "text": "What is your age?", "type": "number", "required": true },
+      { "id": "q3", "text": "Do you have any allergies?", "type": "free_text", "required": true },
+      { "id": "q4", "text": "Have you had anesthesia before?", "type": "yesno", "required": true },
+      { "id": "q5", "text": "What kind of surgery are you in for?", "type": "free_text", "required": true }
+    ]
+}

@@ -1,0 +1,34 @@
+{
+  "sessionId": "6895514e-9f0e-45e0-a06f-b113a0e23bb3",
+  "createdAt": "2026-01-27T11:25:59.247769+00:00",
+  "questions": [
+    {
+      "id": "q1",
+      "text": "Hvad er dit fulde navn?"
+    },
+    {
+      "id": "q2",
+      "text": "Hvor gammel er du?"
+    },
+    {
+      "id": "q3",
+      "text": "Hvilken operation skal du have?"
+    },
+    {
+      "id": "q4",
+      "text": "Har du nogen allergier?"
+    },
+    {
+      "id": "q5",
+      "text": "Har du allergier?"
+    }
+  ],
+  "answers": {
+    "q1": "Marius",
+    "q2": "25",
+    "q3": "Knæoperation",
+    "q4": "Nej",
+    "q5": "Nej"
+  },
+  "transcriptJsonl": "runs\\6895514e-9f0e-45e0-a06f-b113a0e23bb3.jsonl"
+}

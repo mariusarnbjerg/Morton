@@ -5,7 +5,7 @@ from app.domain.models import Message
 
 class ISummarizer(ABC):
     @abstractmethod
-    def summarize(self, transcript: List[Message], template: Dict[str, Any]) -> Dict[str, Any]:
+    def summarize(self, transcript: List[Message], schema: Dict[str, Any]) -> Dict[str, Any]:
         """Return structured JSON matching template."""
         pass
 

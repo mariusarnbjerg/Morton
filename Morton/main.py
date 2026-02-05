@@ -3,9 +3,9 @@ import json
 from app.domain.models import Conversation, Mode
 from app.adapters.question_flow_json import JsonQuestionFlow
 from app.adapters.store_memory import MemoryTranscriptStore
-from app.application.orchestrator import ConversationOrchestrator
 from app.adapters.ollama_chatbot import OllamaChatbot
-from app.adapters.ollama_summarizer import OllamaSummarizer
+# from app.adapters.ollama_summarizer import OllamaSummarizer
+from app.adapters.improved_ollama_summarizer import OllamaSummarizer
 from app.application.orchestrator import ConversationOrchestrator
 
 model = "llama3.1" # "jobautomation/OpenEuroLLM-Danish:latest"
@@ -23,7 +23,7 @@ def main():
         store,
         chatbot=chatbot,
         summarizer=summarizer,
-        template_path="data/summary_template.json",
+        template_path="data/summary_schema.json",
     )
 
     conv = Conversation(conversation_id="test-1")
@@ -32,7 +32,6 @@ def main():
     print("Example: ?What does fasting mean before surgery?\n")
 
     print("BOT:", res.bot_text)
-
 
     while True:
         user = input("YOU: ").strip()

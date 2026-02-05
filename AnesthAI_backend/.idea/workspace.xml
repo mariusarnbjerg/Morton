@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="08611f7d-93ee-423f-90e5-82c6f9343aa7" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../Morton/Learning Ollama.ipynb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Morton/app/adapters/improved_ollama_summarizer.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Morton/data/summary_schema.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Morton/ollama_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../Morton/.idea/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/AnesthAI_backend.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../Morton/.idea/Morton.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Morton/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Morton/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Morton/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToGood2Go/conversation_engine.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Morton/ToGood2Go/conversation_engine.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToGood2Go/interview.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Morton/ToGood2Go/interview.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToGood2Go/interview_with_chat.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Morton/ToGood2Go/interview_with_chat.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToGood2Go/llm_helpers.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Morton/ToGood2Go/llm_helpers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToGood2Go/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Morton/ToGood2Go/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToGood2Go/questions.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Morton/ToGood2Go/questions.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToGood2Go/runs/2c11d847-3f8e-4843-973e-4d8f160cf58c.json" beforeDir="false" afterPath="$PROJECT_DIR$/../Morton/ToGood2Go/runs/2c11d847-3f8e-4843-973e-4d8f160cf58c.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToGood2Go/runs/2c11d847-3f8e-4843-973e-4d8f160cf58c.jsonl" beforeDir="false" afterPath="$PROJECT_DIR$/../Morton/ToGood2Go/runs/2c11d847-3f8e-4843-973e-4d8f160cf58c.jsonl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToGood2Go/runs/44ce669d-e76e-4a5c-b58f-defc26e2d183.jsonl" beforeDir="false" afterPath="$PROJECT_DIR$/../Morton/ToGood2Go/runs/44ce669d-e76e-4a5c-b58f-defc26e2d183.jsonl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToGood2Go/runs/6895514e-9f0e-45e0-a06f-b113a0e23bb3.json" beforeDir="false" afterPath="$PROJECT_DIR$/../Morton/ToGood2Go/runs/6895514e-9f0e-45e0-a06f-b113a0e23bb3.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToGood2Go/runs/6895514e-9f0e-45e0-a06f-b113a0e23bb3.jsonl" beforeDir="false" afterPath="$PROJECT_DIR$/../Morton/ToGood2Go/runs/6895514e-9f0e-45e0-a06f-b113a0e23bb3.jsonl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToGood2Go/runs/b961d894-c907-45f1-94d2-6096b6aa1b10.jsonl" beforeDir="false" afterPath="$PROJECT_DIR$/../Morton/ToGood2Go/runs/b961d894-c907-45f1-94d2-6096b6aa1b10.jsonl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToGood2Go/services/dialog_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Morton/ToGood2Go/services/dialog_manager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToGood2Go/services/llm.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Morton/ToGood2Go/services/llm.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToGood2Go/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Morton/ToGood2Go/test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToGood2Go/utils/session_store.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Morton/ToGood2Go/utils/session_store.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ToGood2Go/vector.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Morton/ToGood2Go/vector.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/adapters/ollama_chatbot.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Morton/app/adapters/ollama_chatbot.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/adapters/ollama_summarizer.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Morton/app/adapters/ollama_summarizer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/adapters/question_flow_json.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Morton/app/adapters/question_flow_json.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/adapters/store_memory.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Morton/app/adapters/store_memory.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/adapters/template_schema.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Morton/app/adapters/template_schema.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/application/orchestrator.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Morton/app/application/orchestrator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/domain/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Morton/app/domain/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/interfaces/chatbot.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Morton/app/interfaces/chatbot.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/interfaces/question_flow.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Morton/app/interfaces/question_flow.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/interfaces/summarizer.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Morton/app/interfaces/summarizer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/interfaces/transcript_store.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Morton/app/interfaces/transcript_store.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/questions.json" beforeDir="false" afterPath="$PROJECT_DIR$/../Morton/data/questions.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/summary_template.json" beforeDir="false" afterPath="$PROJECT_DIR$/../Morton/data/summary_template.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Morton/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../Morton/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/summary_output (1).json" beforeDir="false" afterPath="$PROJECT_DIR$/../Morton/summary_output (1).json" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Jupyter Notebook" />
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="HttpClientEndpointsTabState">
+    <option name="cachedRequestData" value="&lt;CachedHttpClientTabRequests&gt;&#10;  &lt;entry key=&quot;3182cf97b72546fc8be383eb1c1da2c6c958713f&quot; value=&quot;###&amp;#10;POST http://localhost:8000/generate?prompt=&amp;quot;hello world&amp;quot;&quot; /&gt;&#10;&lt;/CachedHttpClientTabRequests&gt;" />
+  </component>
+  <component name="HttpClientOnboardingState">{
+  &quot;isOnboardingCommentShown&quot;: true
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
+  <component name="ProjectId" id="36NtFdDYj3Rv4HU6Fh3rig87lDC" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;Python.interview.executor&quot;: &quot;Run&quot;,
+    &quot;Python.interview_with_chat.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;Python.ollama_test.executor&quot;: &quot;Run&quot;,
+    &quot;Python.test.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/development/gitrep/Morton/AnesthAI_backend&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Mariu\PycharmProjects\AnesthAI_backend\data" />
+      <recent name="C:\Users\Mariu\PycharmProjects\AnesthAI_backend\ToGood2Go" />
+      <recent name="C:\Users\Mariu\PycharmProjects\AnesthAI_backend" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
+      <module name="Morton" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="Tox" factoryName="Tox">
+      <module name="Morton" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="docs" factoryName="Docutils task">
+      <module name="Morton" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="docutils_input_file" value="" />
+      <option name="docutils_output_file" value="" />
+      <option name="docutils_params" value="" />
+      <option name="docutils_task" value="" />
+      <option name="docutils_open_in_browser" value="false" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="docs" factoryName="Sphinx task">
+      <module name="Morton" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="docutils_input_file" value="" />
+      <option name="docutils_output_file" value="" />
+      <option name="docutils_params" value="" />
+      <option name="docutils_task" value="" />
+      <option name="docutils_open_in_browser" value="false" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Autodetect">
+      <module name="Morton" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Doctests">
+      <module name="Morton" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-python-sdk-a101402ee41c-968fe969f28a-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-252.28238.29" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="08611f7d-93ee-423f-90e5-82c6f9343aa7" name="Changes" comment="" />
+      <created>1764858758457</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1764858758457</updated>
+      <workItem from="1764858771671" duration="31823000" />
+      <workItem from="1768993083132" duration="8000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/AnesthAI_backend$test.coverage" NAME="test Coverage Results" MODIFIED="1765885140812" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/AnesthAI_backend$main.coverage" NAME="main Coverage Results" MODIFIED="1765807992944" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+  </component>
+</project>

@@ -16,7 +16,6 @@ class OrchestratorResult:
     bot_text: Optional[str] = None
     done: bool = False
 
-
 class ConversationOrchestrator:
     def __init__(self, question_flow: IQuestionFlow, transcript_store: ITranscriptStore, chatbot:Optional[IChatbot] = None, summarizer: Optional[ISummarizer] = None, template_path: Optional[str] = None):
         self.question_flow = question_flow
@@ -69,9 +68,13 @@ class ConversationOrchestrator:
             ) or "None yet."
 
             ctx = (
-                f"Current standardized question: '{current_q.text}' (id={current_q.id}).\n"
-                f"Standardized questions answered so far:\n{answered_lines}\n"
-                "If the user asks what has been asked/answered so far, use this list."
+                f"IMPORTANT CONTEXT:\n"
+                f"The patient is currently being asked this standardized question:\n"
+                f"  → \"{current_q.text}\" (question id: {current_q.id})\n\n"
+                f"When the patient asks 'why do you need to know this?' or 'why are you asking this?' or refers to 'this question', "
+                f"they are referring to THIS CURRENT QUESTION: \"{current_q.text}\"\n\n"
+                f"Previously answered standardized questions:\n{answered_lines}\n\n"
+                f"If the patient asks what has been asked/answered so far, refer to the list above."
             )
 
             answer = self.chatbot.answer(user_text=user_text, transcript=transcript, context=ctx)
@@ -123,7 +126,7 @@ class ConversationOrchestrator:
             template = json.load(f)
 
         transcript = self.store.get(conv.conversation_id)
-        summary = self.summarizer.summarize(transcript=transcript, template=template)
+        summary = self.summarizer.summarize(transcript=transcript, schema=template)
 
         # Deterministic questionnaire answers:
         summary["questionnaire_answers"] = self.build_questionnaire_answers(conv)

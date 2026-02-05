@@ -1,0 +1,63 @@
+{
+  "patient": {
+    "name": "Marius Langemark Arnbjerg",
+    "age": 25,
+    "allergies": "[\"Pollen\", \"Peanuts\", \"Sugar\"]",
+    "prior_anesthesia": "yes",
+    "current_surgery": "unknown",
+    "asa_classification": "ASA-III",
+    "smoking_status": "unknown",
+    "fasting_compliance": "compliant"
+  },
+  "questionnaire_answers": [
+    {
+      "question_id": "q1",
+      "question": "What is your Name?",
+      "answer": "Marius Langemark Arnbjerg"
+    },
+    {
+      "question_id": "q2",
+      "question": "What is your age?",
+      "answer": "25"
+    },
+    {
+      "question_id": "q3",
+      "question": "Do you have any allergies?",
+      "answer": "Yes, I'm allergic to Pollen and Peanuts."
+    },
+    {
+      "question_id": "q4",
+      "question": "Have you had anesthesia before?",
+      "answer": "Yes, I've had it once before during a knee surgery"
+    },
+    {
+      "question_id": "q5",
+      "question": "What kind of surgery are you in for?",
+      "answer": "Shouldn't you know that?"
+    },
+    {
+      "question_id": "q6",
+      "question": "Do you smoke?",
+      "answer": "Sometimes"
+    },
+    {
+      "question_id": "q7",
+      "question": "Have you been fasting according to the instructions?",
+      "answer": "Yes"
+    }
+  ],
+  "patient_questions": [
+    {
+      "question": "I forgot to say that I am also allergic to Sugar",
+      "answer": "We'll make sure to note down your allergy to sugar as well. Does your pollen and peanut allergy require any special medication or precautions during our procedure?"
+    }
+  ],
+  "red_flags": [
+    {
+      "category": "allergy_concern",
+      "severity": "high",
+      "description": "Allergic to pollen, peanuts, and sugar"
+    }
+  ],
+  "notes": "The patient's allergy to sugar was noted as a new information."
+}

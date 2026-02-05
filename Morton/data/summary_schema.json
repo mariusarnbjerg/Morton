@@ -1,0 +1,128 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "patient": {
+      "type": "object",
+      "description": "Basic patient demographic and medical information extracted from the questionnaire",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Patient's full name"
+        },
+        "age": {
+          "type": "integer",
+          "description": "Patient's age in years"
+        },
+        "allergies": {
+          "type": "string",
+          "description": "List of known allergies (medications, food, environmental). Use 'None' if patient has no allergies, 'Unknown' if not discussed."
+        },
+        "prior_anesthesia": {
+          "type": "string",
+          "enum": ["yes", "no", "unknown"],
+          "description": "Whether patient has had anesthesia before. yes=previous anesthesia experience, no=first time, unknown=patient unsure or not discussed"
+        },
+        "current_surgery": {
+          "type": "string",
+          "description": "Type of surgery or procedure patient is scheduled for"
+        },
+        "asa_classification": {
+          "type": "string",
+          "enum": ["ASA-I", "ASA-II", "ASA-III", "ASA-IV", "ASA-V", "not_assessed"],
+          "description": "ASA Physical Status Classification based on patient health: ASA-I=healthy patient, ASA-II=mild systemic disease, ASA-III=severe systemic disease, ASA-IV=severe disease threatening life, ASA-V=moribund, not_assessed=insufficient information"
+        },
+        "smoking_status": {
+          "type": "string",
+          "enum": ["never", "former", "current_light", "current_heavy", "unknown"],
+          "description": "Smoking history: never=never smoked, former=quit smoking, current_light=<1 pack/day, current_heavy=≥1 pack/day, unknown=not discussed"
+        },
+        "fasting_compliance": {
+          "type": "string",
+          "enum": ["compliant", "non_compliant", "unclear", "not_discussed"],
+          "description": "Whether patient followed pre-surgery fasting instructions (NPO status)"
+        }
+      },
+      "required": ["name", "age", "allergies", "prior_anesthesia", "current_surgery", "asa_classification", "smoking_status", "fasting_compliance"]
+    },
+    "questionnaire_answers": {
+      "type": "array",
+      "description": "Structured list of standardized questions and patient's answers. This will be populated deterministically by the orchestrator - DO NOT extract from transcript.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "question_id": {
+            "type": "string",
+            "description": "Unique identifier for the question (e.g., 'q1', 'q2')"
+          },
+          "question": {
+            "type": "string",
+            "description": "The standardized question text"
+          },
+          "answer": {
+            "type": "string",
+            "description": "Patient's verbatim answer to this question"
+          }
+        },
+        "required": ["question_id", "question", "answer"]
+      }
+    },
+    "patient_questions": {
+      "type": "array",
+      "description": "Free-form questions the patient asked during the questionnaire (chat mode). This will be populated deterministically by the orchestrator - DO NOT extract from transcript.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "question": {
+            "type": "string",
+            "description": "The question the patient asked"
+          },
+          "answer": {
+            "type": "string",
+            "description": "The chatbot's response to the patient's question"
+          }
+        },
+        "required": ["question", "answer"]
+      }
+    },
+    "red_flags": {
+      "type": "array",
+      "description": "Critical medical concerns or warnings identified from the transcript that require anesthesiologist attention",
+      "items": {
+        "type": "object",
+        "properties": {
+          "category": {
+            "type": "string",
+            "enum": [
+              "difficult_airway",
+              "cardiac_risk",
+              "medication_interaction",
+              "allergy_concern",
+              "fasting_violation",
+              "pregnancy_concern",
+              "bleeding_risk",
+              "respiratory_risk",
+              "other"
+            ],
+            "description": "Type of medical concern"
+          },
+          "severity": {
+            "type": "string",
+            "enum": ["low", "medium", "high", "critical"],
+            "description": "Urgency level: low=note for review, medium=needs discussion, high=requires immediate attention, critical=surgery may need postponement"
+          },
+          "description": {
+            "type": "string",
+            "description": "Detailed explanation of the concern and relevant patient information"
+          }
+        },
+        "required": ["category", "severity", "description"]
+      }
+    },
+    "notes": {
+      "type": "string",
+      "description": "Additional clinical observations, patient concerns, or contextual information that doesn't fit other categories. Use this for qualitative insights from the conversation."
+    }
+  },
+  "required": ["patient", "questionnaire_answers", "patient_questions", "red_flags", "notes"]
+}

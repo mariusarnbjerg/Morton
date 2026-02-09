@@ -1,5 +1,4 @@
 import json
-
 from app.domain.models import Conversation, Mode
 from app.adapters.question_flow_json import JsonQuestionFlow
 from app.adapters.store_memory import MemoryTranscriptStore

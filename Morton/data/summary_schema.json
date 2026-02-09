@@ -73,6 +73,10 @@
       "items": {
         "type": "object",
         "properties": {
+          "question_id": {
+            "type": "string",
+            "description": "Unique identifier for the question (e.g., 'q1', 'q2') at which the patient asked their question"
+          },
           "question": {
             "type": "string",
             "description": "The question the patient asked"
@@ -82,7 +86,7 @@
             "description": "The chatbot's response to the patient's question"
           }
         },
-        "required": ["question", "answer"]
+        "required": ["question_id", "question", "answer"]
       }
     },
     "red_flags": {
@@ -111,7 +115,7 @@
             "enum": ["low", "medium", "high", "critical"],
             "description": "Urgency level: low=note for review, medium=needs discussion, high=requires immediate attention, critical=surgery may need postponement"
           },
-          "description": {
+          "details": {
             "type": "string",
             "description": "Detailed explanation of the concern and relevant patient information"
           }

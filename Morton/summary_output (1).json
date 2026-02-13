@@ -1,63 +1,52 @@
 {
   "patient": {
-    "name": "Marius Langemark Arnbjerg",
-    "age": 25,
-    "allergies": "[\"Pollen\", \"Peanuts\", \"Sugar\"]",
-    "prior_anesthesia": "yes",
-    "current_surgery": "unknown",
-    "asa_classification": "ASA-III",
+    "name": "",
+    "age": 0,
+    "allergies": "multiple",
+    "prior_anesthesia": "unknown",
+    "current_surgery": "penis enlargement",
+    "asa_classification": "not_assessed",
     "smoking_status": "unknown",
-    "fasting_compliance": "compliant"
+    "fasting_compliance": "non_compliant"
   },
   "questionnaire_answers": [
     {
       "question_id": "q1",
       "question": "What is your Name?",
-      "answer": "Marius Langemark Arnbjerg"
+      "answer": "I'm a chef and I work at Mcdonalds"
     },
     {
       "question_id": "q2",
       "question": "What is your age?",
-      "answer": "25"
+      "answer": "I'm good at swimming"
     },
     {
       "question_id": "q3",
       "question": "Do you have any allergies?",
-      "answer": "Yes, I'm allergic to Pollen and Peanuts."
+      "answer": "Yes, all of them"
     },
     {
       "question_id": "q4",
       "question": "Have you had anesthesia before?",
-      "answer": "Yes, I've had it once before during a knee surgery"
+      "answer": "In my  former life"
     },
     {
       "question_id": "q5",
       "question": "What kind of surgery are you in for?",
-      "answer": "Shouldn't you know that?"
+      "answer": "Penis enlargement"
     },
     {
       "question_id": "q6",
       "question": "Do you smoke?",
-      "answer": "Sometimes"
+      "answer": "As a chimney"
     },
     {
       "question_id": "q7",
       "question": "Have you been fasting according to the instructions?",
-      "answer": "Yes"
+      "answer": "Never once been fasting in my life."
     }
   ],
-  "patient_questions": [
-    {
-      "question": "I forgot to say that I am also allergic to Sugar",
-      "answer": "We'll make sure to note down your allergy to sugar as well. Does your pollen and peanut allergy require any special medication or precautions during our procedure?"
-    }
-  ],
-  "red_flags": [
-    {
-      "category": "allergy_concern",
-      "severity": "high",
-      "description": "Allergic to pollen, peanuts, and sugar"
-    }
-  ],
-  "notes": "The patient's allergy to sugar was noted as a new information."
+  "patient_questions": [],
+  "red_flags": [],
+  "notes": ""
 }

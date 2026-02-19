@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import { Send, Bot, User, Lightbulb } from 'lucide-react';
 import { Button } from '@/app/components/ui/button';
 import { Input } from '@/app/components/ui/input';
+import { apiClient } from '@/api/client';
 
 interface Message {
   id: string;
@@ -19,46 +20,13 @@ const suggestedQuestions = [
   "Vil jeg mærke smerte under indgrebet?"
 ];
 
-const botResponses: { [key: string]: string } = {
-  "prepare": "For at forberede dig til din operation:\n\n• Spis eller drik ikke noget i 8 timer før dit indgreb (medmindre du får andre instruktioner)\n• Tag din faste medicin med en lille slurk vand (tjek med din læge først)\n• Fjern alle smykker, kontaktlinser og tandproteser\n• Brug behageligt, løstsiddende tøj\n• Sørg for, at nogen kan køre dig hjem\n• Følg eventuelle specifikke instruktioner fra dit operationsteam\n\nDin anæstesilæge vil gennemgå det hele med dig inden indgrebet.",
-  "risks": "Fuld bedøvelse er meget sikker for de fleste patienter. Almindelige, midlertidige effekter inkluderer:\n\n• Kvalme eller opkast (kan behandles med medicin)\n• Ondt i halsen fra vejrtrækningsrør\n• Træthed og forvirring i nogle timer\n• Let hæshed\n\nAlvorlige komplikationer er sjældne, men kan inkludere:\n• Allergiske reaktioner\n• Vejrtrækningsbesvær\n• Ændringer i blodtryk eller hjerterytme\n\nDin anæstesilæge overvåger dig nøje under hele indgrebet og justerer medicinen efter behov for at holde dig sikker. De vil tale med dig om dine specifikke risikofaktorer under din præoperative vurdering.",
-  "wake": "De fleste patienter begynder at vågne inden for 5-15 minutter efter bedøvelsen stoppes, men fuld restitution tager længere tid:\n\n• Første opvågning: 5-15 minutter\n• Klar nok til at svare: 30-60 minutter\n• Føler sig mere normal: 4-6 timer\n• Fuld restitution: 24 timer\n\nDen præcise tid varierer afhængigt af:\n• Type og varighed af operation\n• Hvilken medicin der anvendes\n• Din alder og generelle helbred\n• Din individuelle reaktion på bedøvelse\n\nDu vil blive overvåget tæt i opvågningsafsnittet, indtil du er stabil og har det godt.",
-  "eat": "**Fastevejledning** (typisk):\n\n**Spis eller drik IKKE:**\n• 8 timer før operation ved fast føde\n• 6 timer før ved lette måltider\n• 2 timer før ved klare væsker (vand, sort kaffe, klar juice)\n\n**Hvorfor er dette vigtigt?**\nBedøvelse afslapper dine muskler, inklusive dem der forhindrer maveindhold i at komme op. En tom mave mindsker risikoen for aspiration (maveindhold der kommer ned i lungerne), hvilket kan være farligt.\n\n**Vigtigt:**\nFølg altid de specifikke instruktioner fra dit operationsteam, da retningslinjer kan variere afhængigt af dit indgreb og din sygehistorie. Hvis du ved et uheld spiser eller drikker, så informér din anæstesilæge med det samme.",
-  "effects": "Almindelige bivirkninger efter bedøvelse inkluderer:\n\n**De første timer:**\n• Træthed og døsighed\n• Kvalme eller opkast\n• Ondt i halsen\n• Tør mund\n• Følelse af kulde eller rysten\n• Forvirring eller hukommelseshuller\n\n**De næste 24-48 timer:**\n• Let svimmelhed\n• Hovedpine\n• Muskelømhed\n• Svært ved at koncentrere sig\n\n**De fleste bivirkninger:**\n• Er midlertidige og milde\n• Forsvinder inden for 24-48 timer\n• Kan håndteres med medicin\n• Overvåges tæt af sundhedspersonalet\n\nKontakt din sundhedsudbyder, hvis du oplever alvorlige symptomer eller noget bekymrende efter du er kommet hjem.",
-  "pain": "**Under indgrebet:**\nNej, du vil IKKE mærke smerte under operationen. Bedøvelse sikrer, at du er helt bevidstløs og smertefri. Du vil ikke mærke, se, høre eller huske noget.\n\n**Hvordan virker det:**\n• Fuld bedøvelse bringer dig i en dyb søvn\n• Smertestillende medicin gives løbende\n• Dine vitale værdier overvåges konstant\n• Anæstesilægen justerer medicinen efter behov\n\n**Efter indgrebet:**\nDu kan opleve smerte, når bedøvelsen aftager, men:\n• Smertestillende gives, før du vågner\n• Dit smerteniveau vurderes regelmæssigt\n• Du kan få ekstra medicin efter behov\n• Smertelindring er en prioritet for dit behandlingsteam\n\nTøv aldrig med at sige til sygeplejerskerne, hvis du har smerter - der findes mange effektive muligheder for at holde dig komfortabel.",
-  "default": "Jeg forstår, at du har spørgsmål om din bedøvelse og dit indgreb. Jeg kan give generel information, men jeg kan ikke erstatte den personlige behandling og rådgivning fra dit sundhedsteam.\n\nFor specifikke spørgsmål om din situation, kan du:\n• Tale med din anæstesilæge ved din præoperative samtale\n• Ringe til dit operationsteams afdeling\n• Stille spørgsmål på dagen for dit indgreb\n\nEr der et generelt emne om bedøvelse, jeg kan hjælpe med at forklare? Du kan også vælge blandt de foreslåede spørgsmål nedenfor."
-};
-
-function getBotResponse(userMessage: string): string {
-  const lowerMessage = userMessage.toLowerCase();
-
-  if (lowerMessage.includes('prepare') || lowerMessage.includes('preparation')) {
-    return botResponses.prepare;
-  } else if (lowerMessage.includes('risk') || lowerMessage.includes('danger') || lowerMessage.includes('safe')) {
-    return botResponses.risks;
-  } else if (lowerMessage.includes('wake') || lowerMessage.includes('recovery') || lowerMessage.includes('conscious')) {
-    return botResponses.wake;
-  } else if (lowerMessage.includes('eat') || lowerMessage.includes('drink') || lowerMessage.includes('fast') || lowerMessage.includes('food')) {
-    return botResponses.eat;
-  } else if (lowerMessage.includes('side effect') || lowerMessage.includes('after') || lowerMessage.includes('expect')) {
-    return botResponses.effects;
-  } else if (lowerMessage.includes('pain') || lowerMessage.includes('hurt') || lowerMessage.includes('feel')) {
-    return botResponses.pain;
-  }
-
-  return botResponses.default;
-}
-
 export function PatientChatbot() {
-  const [messages, setMessages] = useState<Message[]>([
-    {
-      id: '1',
-      text: "Hej! Jeg er her for at hjælpe med at besvare dine spørgsmål om bedøvelse og dit kommende indgreb. Jeg kan give generel information, så du kan føle dig bedre forberedt og informeret.\n\nHusk, at denne chat kun er til undervisnings- og informationsformål og ikke erstatter medicinsk rådgivning fra dit sundhedsteam. Ved specifikke bekymringer om din situation bør du altid tale med din anæstesilæge eller operationsteam.\n\nHvordan kan jeg hjælpe dig i dag?",
-      sender: 'bot',
-      timestamp: new Date()
-    }
-  ]);
+  const [messages, setMessages] = useState<Message[]>([]);
   const [inputValue, setInputValue] = useState('');
+  const [conversationId, setConversationId] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [isInitialized, setIsInitialized] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
@@ -69,28 +37,119 @@ export function PatientChatbot() {
     scrollToBottom();
   }, [messages]);
 
-  const handleSendMessage = (text: string) => {
+  // Initialize conversation when component mounts
+  useEffect(() => {
+    initializeConversation();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const initializeConversation = async () => {
+    if (isInitialized) return;
+
+    try {
+      setIsLoading(true);
+      setError(null);
+      console.log('🔄 Initializing conversation...');
+
+      const response = await apiClient.startConversation(); // returns conversation_id + maybe question
+      setConversationId(response.conversation_id);
+      setIsInitialized(true);
+
+      console.log('✅ Conversation initialized with ID:', response.conversation_id);
+
+      const welcomeMessage: Message = {
+        id: 'welcome',
+        text:
+          "Hej! Jeg er her for at hjælpe med at besvare dine spørgsmål om bedøvelse og dit kommende indgreb. Jeg kan give generel information, så du kan føle dig bedre forberedt og informeret.\n\n" +
+          "Husk, at denne chat kun er til undervisnings- og informationsformål og ikke erstatter medicinsk rådgivning fra dit sundhedsteam. Ved specifikke bekymringer om din situation bør du altid tale med din anæstesilæge eller operationsteam.\n\n" +
+          "Hvordan kan jeg hjælpe dig i dag?",
+        sender: 'bot',
+        timestamp: new Date(),
+      };
+
+      // If backend provides a first question, show it as a separate bot message
+      const backendQuestion = response.question?.trim();
+      const initialMessages: Message[] = [welcomeMessage];
+
+      if (backendQuestion) {
+        initialMessages.push({
+          id: 'backend-question',
+          text: backendQuestion,
+          sender: 'bot',
+          timestamp: new Date(),
+        });
+      }
+
+      setMessages(initialMessages);
+    } catch (err) {
+      const errorMessage =
+        err instanceof Error ? err.message : 'Failed to initialize conversation';
+      setError(errorMessage);
+      console.error('❌ Initialization error:', err);
+
+      const errorMsg: Message = {
+        id: 'error-init',
+        text: `Beklager, jeg kunne ikke oprette forbindelse til serveren. Fejl: ${errorMessage}`,
+        sender: 'bot',
+        timestamp: new Date(),
+      };
+      setMessages([errorMsg]);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleSendMessage = async (text: string) => {
     if (!text.trim()) return;
+    if (!conversationId) {
+      console.error('❌ No conversation ID available');
+      setError('Conversation not initialized. Please refresh the page.');
+      return;
+    }
 
     const userMessage: Message = {
       id: Date.now().toString(),
       text: text.trim(),
       sender: 'user',
-      timestamp: new Date()
+      timestamp: new Date(),
     };
 
     setMessages(prev => [...prev, userMessage]);
     setInputValue('');
+    setIsLoading(true);
+    setError(null);
 
-    setTimeout(() => {
+    try {
+      console.log('📤 Sending message to API...');
+      const response = await apiClient.sendChatMessage(conversationId, text.trim());
+
+      const botText = response.text?.trim() || '(tomt svar fra serveren)';
+
       const botMessage: Message = {
         id: (Date.now() + 1).toString(),
-        text: getBotResponse(text),
+        text: botText,
         sender: 'bot',
-        timestamp: new Date()
+        timestamp: new Date(),
       };
+
       setMessages(prev => [...prev, botMessage]);
-    }, 800);
+      console.log('✅ Response received and displayed');
+    } catch (err) {
+      const errorMessage =
+        err instanceof Error ? err.message : 'Failed to send message';
+      setError(errorMessage);
+      console.error('❌ Send message error:', err);
+
+      const errorMsg: Message = {
+        id: 'error-' + Date.now(),
+        text: `Beklager, jeg kunne ikke behandle din besked. Fejl: ${errorMessage}`,
+        sender: 'bot',
+        timestamp: new Date(),
+      };
+      setMessages(prev => [...prev, errorMsg]);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleSuggestedQuestion = (question: string) => {
@@ -117,13 +176,28 @@ export function PatientChatbot() {
             </div>
           </div>
 
-          {/* Vigtig bar - kompakt */}
           <div className="mt-1.5 bg-blue-50 border border-blue-200 rounded-md px-2 py-0.5 text-[10px] text-blue-900 leading-snug">
-            <span className="font-semibold">Vigtigt:</span>{" "}
+            <span className="font-semibold">Vigtigt:</span>{' '}
             Denne chatbot giver kun generel uddannelsesinformation. Den erstatter ikke rådgivning fra din anæstesilæge eller dit sundhedsteam.
           </div>
         </div>
       </div>
+
+      {/* Error Banner */}
+      {error && (
+        <div className="bg-red-50 border-b border-red-200 px-4 py-2">
+          <div className="max-w-4xl mx-auto flex items-center gap-2 text-sm text-red-800">
+            <svg className="size-4" fill="currentColor" viewBox="0 0 20 20">
+              <path
+                fillRule="evenodd"
+                d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+                clipRule="evenodd"
+              />
+            </svg>
+            <span>{error}</span>
+          </div>
+        </div>
+      )}
 
       {/* Messages */}
       <div className="flex-1 min-h-0 overflow-y-auto p-4">
@@ -156,12 +230,29 @@ export function PatientChatbot() {
               )}
             </div>
           ))}
+
+          {/* Loading indicator */}
+          {isLoading && (
+            <div className="flex gap-3 justify-start">
+              <div className="size-8 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0 mt-1">
+                <Bot className="size-4 text-blue-600" />
+              </div>
+              <div className="bg-white border border-slate-200 rounded-lg px-3 py-2">
+                <div className="flex gap-1">
+                  <span className="size-2 bg-slate-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></span>
+                  <span className="size-2 bg-slate-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></span>
+                  <span className="size-2 bg-slate-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></span>
+                </div>
+              </div>
+            </div>
+          )}
+
           <div ref={messagesEndRef} />
         </div>
       </div>
 
-      {/* Foreslåede spørgsmål */}
-      {messages.length === 1 && (
+      {/* Suggested questions */}
+      {messages.length <= 2 && !isLoading && (
         <div className="bg-slate-50 border-t border-slate-200 p-3 flex-shrink-0">
           <div className="max-w-4xl mx-auto">
             <div className="flex items-center gap-2 mb-2">
@@ -173,7 +264,8 @@ export function PatientChatbot() {
                 <button
                   key={idx}
                   onClick={() => handleSuggestedQuestion(question)}
-                  className="text-left p-2 bg-white border border-slate-200 rounded-lg hover:border-blue-400 hover:bg-blue-50 transition-colors text-xs text-slate-700"
+                  disabled={isLoading || !conversationId}
+                  className="text-left p-2 bg-white border border-slate-200 rounded-lg hover:border-blue-400 hover:bg-blue-50 transition-colors text-xs text-slate-700 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {question}
                 </button>
@@ -191,16 +283,17 @@ export function PatientChatbot() {
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
               onKeyDown={(e) => {
-                if (e.key === 'Enter') {
+                if (e.key === 'Enter' && !isLoading) {
                   handleSendMessage(inputValue);
                 }
               }}
               placeholder="Skriv dit spørgsmål om bedøvelse..."
               className="flex-1 bg-slate-50 border-slate-300"
+              disabled={isLoading || !conversationId}
             />
             <Button
               onClick={() => handleSendMessage(inputValue)}
-              disabled={!inputValue.trim()}
+              disabled={!inputValue.trim() || isLoading || !conversationId}
               className="bg-blue-600 hover:bg-blue-700"
             >
               <Send className="size-4" />

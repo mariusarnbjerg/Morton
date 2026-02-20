@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 
 from typing import Dict
 from app.domain.models import Conversation
-from app.application.orchestrator import ConversationOrchestrator
+from app.application.orchestrator_with_validation import ConversationOrchestrator
 from app.adapters.question_flow_json import JsonQuestionFlow
 from app.adapters.store_memory import MemoryTranscriptStore
 from app.adapters.ollama_chatbot import OllamaChatbot

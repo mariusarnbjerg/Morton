@@ -17,17 +17,18 @@ interface Message {
   timestamp: number;
 }
 
-export default function App() {
+function App() {
 
     // Herunder defineres nogle state variabler - Når disse ændres, opdaters UI automatisk
     const [conversationId] = useState(`patient-${Date.now()}`); // Sikrer at conversation ID'et er unikt
     const [currentQuestion, setCurrentQuestion] = useState<Question | null>(null);
     const [answer, setAnswer] = useState('');
-    const [messages, setMessages] = useState<UIMessage[]>([]);
+    const [messages, setMessages] = useState<Message[]>([]);
     const [isDone, setIsDone] = useState(false);
     const [loading, setLoading] = useState(false);
     const [progress, setProgress] = useState({ current: 0, total: 0 });
 
+  // Start the conversation when component loads
   useEffect(() => {
     startConversation();
   }, []); // Empty array means this only runs once when it loads
@@ -199,45 +200,130 @@ export default function App() {
     }
   }, [messages]);
 
-
   return (
-    <AppShell>
-      <div className="grid gap-4">
-        <ChatHeader
-          title="Informationsassistent om bedøvelse"
-          subtitle="Din guide til at forstå bedøvelse"
-        />
-
-        <MessageList messages={messages} loading={loading} />
-
-        {!isDone && (
-          <ChatInput
-            currentQuestion={currentQuestion?.text ?? null}
-            value={answer}
-            disabled={loading}
-            onChange={setAnswer}
-            onSend={submitAnswer}
-            onKeyDown={(e) => {
-              if (e.key === "Enter" && !e.shiftKey) {
-                e.preventDefault();
-                submitAnswer();
-              }
-            }}
-          />
-        )}
-
-        {isDone && (
-          <div className="bg-white border rounded-2xl shadow-sm p-8 text-center">
-            <div className="mx-auto h-14 w-14 rounded-full bg-emerald-500 text-white grid place-items-center text-2xl font-bold">
-              ✓
+    <div className="app">
+      {/* Header */}
+      <header className="app-header">
+        <div className="header-content">
+          <div className="logo-section">
+            <div className="logo-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+              </svg>
             </div>
-            <div className="mt-4 text-xl font-bold">Tak for dine svar!</div>
-            <div className="mt-2 text-slate-600">
-              Dit spørgeskema er nu fuldført og sendt til gennemsyn.
+            <div>
+              <h1 className="logo-title">AnæstesiCare</h1>
+              <p className="logo-subtitle">AI-understøttet præ-anæstesi vurdering</p>
             </div>
           </div>
-        )}
-      </div>
-    </AppShell>
+
+          {progress.total > 0 && (
+            <div className="progress-indicator">
+              <span className="progress-text">
+                Spørgsmål {progress.current} af {progress.total}
+              </span>
+              <div className="progress-bar">
+                <div
+                  className="progress-fill"
+                  style={{ width: `${(progress.current / progress.total) * 100}%` }}
+                />
+              </div>
+            </div>
+          )}
+        </div>
+      </header>
+
+      {/* Main Content */}
+      <main className="app-main">
+        <div className="chat-container">
+          {/* Messages */}
+          <div className="messages-container">
+            {messages.map((msg, idx) => (
+              <div key={idx} className={`message-wrapper ${msg.role}`}>
+                <div className="message-bubble">
+                  <div className="message-content">{msg.content}</div>
+                  <div className="message-time">
+                    {new Date(msg.timestamp).toLocaleTimeString('da-DK', {
+                      hour: '2-digit',
+                      minute: '2-digit'
+                    })}
+                  </div>
+                </div>
+              </div>
+            ))}
+
+            {loading && (
+              <div className="message-wrapper bot">
+                <div className="message-bubble">
+                  <div className="typing-indicator">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Input Area */}
+          {!isDone && currentQuestion && (
+            <div className="input-container">
+              <div className="current-question-banner">
+                <span className="question-label">Aktuelt spørgsmål:</span>
+                <span className="question-text">{currentQuestion.text}</span>
+              </div>
+
+              <div className="input-wrapper">
+                <textarea
+                  value={answer}
+                  onChange={(e) => setAnswer(e.target.value)}
+                  onKeyPress={handleKeyPress}
+                  placeholder="Skriv dit svar her..."
+                  disabled={loading}
+                  className="input-field"
+                  rows={2}
+                />
+
+                <button
+                  onClick={submitAnswer}
+                  disabled={loading || !answer.trim()}
+                  className="submit-button"
+                >
+                  {loading ? (
+                    <span>Sender...</span>
+                  ) : (
+                    <>
+                      <span>Send</span>
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
+                      </svg>
+                    </>
+                  )}
+                </button>
+              </div>
+
+              <p className="input-hint">
+                💡 Tip: Stil bare dit spørgsmål direkte - systemet registrerer automatisk om du spørger eller svarer
+              </p>
+            </div>
+          )}
+
+          {/* Completion */}
+          {isDone && (
+            <div className="completion-container">
+              <div className="completion-content">
+                <div className="completion-icon">✓</div>
+                <h2 className="completion-title">Tak for dine svar!</h2>
+                <p className="completion-text">
+                  Dit spørgeskema er nu fuldført og sendt til gennemsyn.
+                </p>
+              </div>
+            </div>
+          )}
+        </div>
+      </main>
+    </div>
   );
 }
+
+export default App;

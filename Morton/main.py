@@ -5,7 +5,7 @@ from app.adapters.store_memory import MemoryTranscriptStore
 from app.adapters.ollama_chatbot import OllamaChatbot
 # from app.adapters.ollama_summarizer import OllamaSummarizer
 from app.adapters.improved_ollama_summarizer import OllamaSummarizer
-from app.application.orchestrator import ConversationOrchestrator
+from app.application.orchestrator_with_validation import ConversationOrchestrator
 
 model = "llama3.1" # "jobautomation/OpenEuroLLM-Danish:latest"
 

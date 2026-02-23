@@ -1,52 +1,58 @@
 {
   "patient": {
-    "name": "",
-    "age": 0,
-    "allergies": "multiple",
-    "prior_anesthesia": "unknown",
-    "current_surgery": "penis enlargement",
-    "asa_classification": "not_assessed",
-    "smoking_status": "unknown",
-    "fasting_compliance": "non_compliant"
+    "name": "Marius",
+    "age": 25,
+    "allergies": "Gluten, pollen and dust, Penicillin",
+    "prior_anesthesia": "yes",
+    "current_surgery": "knee surgery (ACL reconstruction)",
+    "asa_classification": "ASA-IV",
+    "smoking_status": "current_heavy",
+    "fasting_compliance": "compliant"
   },
   "questionnaire_answers": [
     {
       "question_id": "q1",
       "question": "What is your Name?",
-      "answer": "I'm a chef and I work at Mcdonalds"
+      "answer": "Marius"
     },
     {
       "question_id": "q2",
       "question": "What is your age?",
-      "answer": "I'm good at swimming"
+      "answer": "25"
     },
     {
       "question_id": "q3",
       "question": "Do you have any allergies?",
-      "answer": "Yes, all of them"
+      "answer": "Gluten, pollen and dust"
     },
     {
       "question_id": "q4",
       "question": "Have you had anesthesia before?",
-      "answer": "In my  former life"
+      "answer": "Yes, one time"
     },
     {
       "question_id": "q5",
       "question": "What kind of surgery are you in for?",
-      "answer": "Penis enlargement"
+      "answer": "Knee surgery. ACL reconstruction."
     },
     {
       "question_id": "q6",
       "question": "Do you smoke?",
-      "answer": "As a chimney"
+      "answer": "I somke weed"
     },
     {
       "question_id": "q7",
       "question": "Have you been fasting according to the instructions?",
-      "answer": "Never once been fasting in my life."
+      "answer": "Yes"
     }
   ],
   "patient_questions": [],
-  "red_flags": [],
-  "notes": ""
+  "red_flags": [
+    {
+      "category": "allergy_concern",
+      "severity": "high",
+      "details": "penicillin allergy"
+    }
+  ],
+  "notes": "patient's smoking status and substance use should be further assessed."
 }

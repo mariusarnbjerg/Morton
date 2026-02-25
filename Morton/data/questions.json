@@ -1,6 +1,7 @@
 {
   "language": "en",
   "questions": [
+      { "id": "q0", "text": "Hi! I am here to conduct the consultation prior to your surgery. We will go through a series of questions regarding your medical history and current health status. If you have any questions feel free to ask at any time, otherwise let me know when you're ready to begin.", "type": "free_text", "required": true },
       { "id": "q1", "text": "What is your name?", "type": "free_text", "required": true },
       { "id": "q2", "text": "How old are you?", "type": "number", "required": true },
       { "id": "q3", "text": "Have you ever had anesthesia before, and did you experience any problems?", "type": "free_text", "required": true },

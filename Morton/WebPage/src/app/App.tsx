@@ -6,12 +6,10 @@ import { CalendarView } from '@/app/components/CalendarView';
 import { PatientDetails } from '@/app/components/PatientDetails';
 import { PatientSummaryModal } from '@/app/components/PatientSummaryModal';
 import { PatientChatbot } from '@/app/components/PatientChatbot';
-import type { Patient } from '@/data/mockPatients';
 
 type View = 'search' | 'calendar' | 'details' | 'chatbot';
 type UserRole = 'doctor' | 'patient';
 
-// ---- Chatbot types (fra din gamle App) ----
 interface Question {
   text: string;
   questionId: string;
@@ -177,6 +175,7 @@ export default function App() {
         return;
       }
 
+
       // Handle auto-detected question (switch to chat mode)
       if (data.bot_text && String(data.bot_text).includes('---\nBack to the questionnaire:\n')) {
         const parts = String(data.bot_text).split('---\nBack to the questionnaire:\n');
@@ -190,6 +189,7 @@ export default function App() {
             timestamp: Date.now(),
           },
         ]);
+
 
         setCurrentQuestion({
           text: parts[1].trim(),

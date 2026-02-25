@@ -206,7 +206,7 @@ class ConversationOrchestrator:
         q = self.question_flow.get_question(conv)
         if not q:
             conv.state = ConversationState.DONE
-            return OrchestratorResult(bot_text=answer + "\n\nQuestionnaire complete.", done=True)
+            return OrchestratorResult(bot_text=answer + "\n\nConsultation complete.", done=True)
 
         conv.state = ConversationState.FLOW_WAITING_ANSWER
         conv.active_question_id = q.id
@@ -216,7 +216,7 @@ class ConversationOrchestrator:
             Message(role=Role.SYSTEM, content=q.text, meta={"question_id": q.id, "reask": True})
         )
 
-        combined = f"{answer}\n\n---\nBack to the questionnaire:\n{q.text}"
+        combined = f"{answer}\n\n---\nBack to the question:\n{q.text}"
         return OrchestratorResult(bot_text=combined, done=False)
 
     # Rest of the methods stay the same...

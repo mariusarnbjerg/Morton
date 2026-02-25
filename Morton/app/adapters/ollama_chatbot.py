@@ -19,7 +19,7 @@ class OllamaChatbot(IChatbot):
         model: str = "llama3.1",
         base_url: str = "http://localhost:11434",
         system_prompt: Optional[str] = None,
-        timeout_s: int = 60,
+        timeout_s: int = 60
     ):
         self.model = model
         self.base_url = base_url.rstrip("/")

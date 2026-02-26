@@ -10,16 +10,13 @@ import { PatientChatbot } from '@/app/components/PatientChatbot';
 type View = 'search' | 'calendar' | 'details' | 'chatbot';
 type UserRole = 'doctor' | 'patient';
 
-interface Question {
-  text: string;
-  questionId: string;
-}
-
 export interface Message {
-  role: 'bot' | 'user' | 'bot-chat' | 'user-chat' | 'validation-error';
+  role: 'bot' | 'user';
   content: string;
   timestamp: number;
 }
+
+const API_BASE = 'http://localhost:8000/api/v1';
 
 export default function App() {
   const [userRole, setUserRole] = useState<UserRole>('doctor');
@@ -28,17 +25,15 @@ export default function App() {
   const [modalPatient, setModalPatient] = useState<Patient | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // ---- Chatbot state (integreret) ----
+  // ---- Chatbot state ----
   const conversationId = useMemo(() => `patient-${Date.now()}`, []);
-  const [currentQuestion, setCurrentQuestion] = useState<Question | null>(null);
-  const [answer, setAnswer] = useState('');
   const [messages, setMessages] = useState<Message[]>([]);
+  const [answer, setAnswer] = useState('');
   const [isDone, setIsDone] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [progress, setProgress] = useState({ current: 0, total: 0 });
+  const [answeredCount, setAnsweredCount] = useState(0);
 
-  const API_BASE = 'http://localhost:8000/api/v1';
-
+  // ---- Doctor navigation ----
   const handlePatientSelect = (patient: Patient) => {
     setSelectedPatient(patient);
     setCurrentView('details');
@@ -62,187 +57,76 @@ export default function App() {
 
   const switchRole = (role: UserRole) => {
     setUserRole(role);
-    if (role === 'patient') {
-      setCurrentView('chatbot');
-    } else {
-      setCurrentView('search');
-    }
+    setCurrentView(role === 'patient' ? 'chatbot' : 'search');
     setSelectedPatient(null);
   };
 
-  // ---- Chatbot logic ----
-  const fetchProgress = async () => {
-    try {
-      const response = await fetch(`${API_BASE}/conversations/${conversationId}/state`);
-      const data = await response.json();
-      setProgress({
-        current: data.answered_count || 0,
-        total: data.total_questions || 0,
-      });
-    } catch (error) {
-      console.error('Failed to fetch progress:', error);
-    }
-  };
-
+  // ---- Start conversation ----
   const startConversation = async () => {
     try {
-      const response = await fetch(`${API_BASE}/conversations/start`, {
+      const res = await fetch(`${API_BASE}/conversations/start`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ conversation_id: conversationId }),
       });
-
-      const data = await response.json();
-
-      setCurrentQuestion({ text: data.question, questionId: data.question_id });
-      setMessages([
-        {
-          role: 'bot',
-          content: data.question,
-          timestamp: Date.now(),
-        },
-      ]);
-      setIsDone(Boolean(data.done));
-
-      fetchProgress();
-    } catch (error) {
-      console.error('Failed to start conversation:', error);
-      // Du kan vælge at vise den i UI i stedet:
-      setMessages([
-        {
-          role: 'validation-error',
-          content: 'Kunne ikke forbinde til API. Er serveren startet?',
-          timestamp: Date.now(),
-        },
-      ]);
+      const data = await res.json();
+      setMessages([{ role: 'bot', content: data.bot_text, timestamp: Date.now() }]);
+      setIsDone(data.done);
+    } catch {
+      setMessages([{
+        role: 'bot',
+        content: 'Kunne ikke forbinde til API. Er serveren startet?',
+        timestamp: Date.now(),
+      }]);
     }
   };
 
-  // Start kun samtalen når man går i patient/chatbot-visning
   useEffect(() => {
     if (userRole !== 'patient') return;
-
-    // Undgå at starte igen hvis vi allerede har beskeder
     if (messages.length > 0) return;
-
     startConversation();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userRole]);
 
+  // ---- Submit any message (answer or question) ----
   const submitAnswer = async () => {
-    if (!answer.trim()) return;
+    if (!answer.trim() || loading) return;
 
+    const userMessage = answer.trim();
+    setAnswer('');
     setLoading(true);
 
-    // Add user answer to messages
     setMessages((prev) => [
       ...prev,
-      {
-        role: 'user',
-        content: answer,
-        timestamp: Date.now(),
-      },
+      { role: 'user', content: userMessage, timestamp: Date.now() },
     ]);
 
     try {
-      const response = await fetch(`${API_BASE}/conversations/${conversationId}/answer`, {
+      const res = await fetch(`${API_BASE}/conversations/${conversationId}/message`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ answer }),
+        body: JSON.stringify({ message: userMessage }),
       });
+      const data = await res.json();
 
-      const data = await response.json();
+      setMessages((prev) => [
+        ...prev,
+        { role: 'bot', content: data.bot_text, timestamp: Date.now() },
+      ]);
 
-      // Handle validation failure
-      if (data.validation_failed) {
-        const parts = String(data.bot_text || '').split('---\nPlease answer:\n');
+      setIsDone(data.done);
 
-        if (parts.length === 2) {
-          setMessages((prev) => [
-            ...prev,
-            { role: 'validation-error', content: parts[0].trim(), timestamp: Date.now() },
-            { role: 'bot', content: parts[1].trim(), timestamp: Date.now() },
-          ]);
-        } else {
-          setMessages((prev) => [
-            ...prev,
-            { role: 'validation-error', content: String(data.bot_text || '').trim(), timestamp: Date.now() },
-          ]);
-        }
-
-        setAnswer('');
-        setLoading(false);
-        return;
-      }
-
-
-      // Handle auto-detected question (switch to chat mode)
-      if (data.bot_text && String(data.bot_text).includes('---\nBack to the questionnaire:\n')) {
-        const parts = String(data.bot_text).split('---\nBack to the questionnaire:\n');
-
-        setMessages((prev) => [
-          ...prev,
-          {
-            role: 'bot-chat',
-            content:
-              `💡 Jeg opdagede at du stillede et spørgsmål, så lad mig besvare det:\n\n${parts[0].trim()}`,
-            timestamp: Date.now(),
-          },
-        ]);
-
-
-        setCurrentQuestion({
-          text: parts[1].trim(),
-          questionId: data.question_id || currentQuestion?.questionId || '',
-        });
-
-        setMessages((prev) => [
-          ...prev,
-          {
-            role: 'bot',
-            content: parts[1].trim(),
-            timestamp: Date.now(),
-          },
-        ]);
-
-        setAnswer('');
-        setLoading(false);
-        fetchProgress();
-        return;
-      }
-
-      // Normal flow: valid answer accepted
-      if (data.done) {
-        setIsDone(true);
-        setMessages((prev) => [
-          ...prev,
-          {
-            role: 'bot',
-            content: '✅ Spørgeskema fuldført! Tak for dine svar.',
-            timestamp: Date.now(),
-          },
-        ]);
-      } else {
-        setCurrentQuestion({ text: data.question, questionId: data.question_id });
-        setMessages((prev) => [
-          ...prev,
-          {
-            role: 'bot',
-            content: data.question,
-            timestamp: Date.now(),
-          },
-        ]);
-      }
-
-      setAnswer('');
-      fetchProgress();
-    } catch (error) {
-      console.error('Failed to submit answer:', error);
+      // Update answered count from state endpoint (fire-and-forget)
+      fetch(`${API_BASE}/conversations/${conversationId}/state`)
+        .then((r) => r.json())
+        .then((s) => setAnsweredCount(s.answered_count ?? 0))
+        .catch(() => {});
+    } catch {
       setMessages((prev) => [
         ...prev,
         {
-          role: 'validation-error',
-          content: 'Fejl ved indsendelse af svar. Prøv venligst igen.',
+          role: 'bot',
+          content: 'Der opstod en fejl. Prøv venligst igen.',
           timestamp: Date.now(),
         },
       ]);
@@ -257,18 +141,16 @@ export default function App() {
       <div className="bg-white border-b border-slate-200 shadow-sm flex-shrink-0">
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
-            {/* Logo/Brand */}
             <div className="flex items-center gap-3">
               <div className="size-10 rounded-lg bg-blue-600 flex items-center justify-center">
                 <Stethoscope className="size-6 text-white" />
               </div>
               <div>
                 <h1 className="text-xl text-slate-900">AnæstesiCare</h1>
-                <p className="text-xs text-slate-500">AI-understøttet vurderingsplatform</p>
+                <p className="text-xs text-slate-500">AI-supported assessment tool</p>
               </div>
             </div>
 
-            {/* Role Switcher */}
             <div className="flex items-center gap-2 bg-slate-100 p-1 rounded-lg">
               <Button
                 variant="ghost"
@@ -281,7 +163,7 @@ export default function App() {
                 }
               >
                 <Stethoscope className="size-4 mr-2" />
-                Lægevisning
+                Doctor's view
               </Button>
 
               <Button
@@ -295,12 +177,11 @@ export default function App() {
                 }
               >
                 <User className="size-4 mr-2" />
-                Patientvisning
+                Patient view
               </Button>
             </div>
           </div>
 
-          {/* Doctor Navigation */}
           {userRole === 'doctor' && (
             <div className="flex items-center gap-2 mt-4 border-t border-slate-200 pt-4">
               <Button
@@ -310,7 +191,7 @@ export default function App() {
                 className={currentView === 'search' ? '' : 'text-slate-600'}
               >
                 <Search className="size-4 mr-2" />
-                Patientsøgning
+                Patient search
               </Button>
 
               <Button
@@ -320,31 +201,14 @@ export default function App() {
                 className={currentView === 'calendar' ? '' : 'text-slate-600'}
               >
                 <Calendar className="size-4 mr-2" />
-                Tidsplan
+                Time schedule
               </Button>
             </div>
           )}
-
-          {/* Progress badge kan også vises her i headeren når patient
-          {userRole === 'patient' && progress.total > 0 && (
-            <div className="mt-4 border-t border-slate-200 pt-4">
-              <div className="flex items-center justify-between">
-                <span className="text-sm text-slate-600">
-                  Spørgsmål {progress.current} af {progress.total}
-                </span>
-                <div className="h-2 w-48 bg-slate-200 rounded-full overflow-hidden">
-                  <div
-                    className="h-full bg-blue-600"
-                    style={{ width: `${(progress.current / progress.total) * 100}%` }}
-                  />
-                </div>
-              </div>
-            </div>
-          )}*/}
         </div>
       </div>
 
-      {/* Main Content Area */}
+      {/* Main Content */}
       <div className="flex-1 min-h-0 overflow-y-auto">
         {userRole === 'doctor' ? (
           <>
@@ -353,7 +217,6 @@ export default function App() {
             {currentView === 'details' && selectedPatient && (
               <PatientDetails patient={selectedPatient} onBack={handleBackToCalendar} />
             )}
-
             <PatientSummaryModal
               patient={modalPatient}
               isOpen={isModalOpen}
@@ -369,8 +232,8 @@ export default function App() {
             submitAnswer={submitAnswer}
             loading={loading}
             isDone={isDone}
-            progress={progress}
-            currentQuestion={currentQuestion}
+            answeredCount={answeredCount}
+            conversationId={conversationId}
           />
         )}
       </div>

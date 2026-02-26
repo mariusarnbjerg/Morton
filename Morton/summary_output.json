@@ -1,0 +1,165 @@
+{
+  "patient": {
+    "name": "Marius",
+    "age": 25,
+    "allergies": "gluten, penicillin",
+    "prior_anesthesia": "yes",
+    "current_surgery": "upcoming",
+    "asa_classification": "ASA-III",
+    "smoking_status": "current_heavy",
+    "fasting_compliance": "not_discussed"
+  },
+  "questionnaire_answers": [
+    {
+      "question_id": "q1",
+      "question": "What is your name?",
+      "answer": "Marius"
+    },
+    {
+      "question_id": "q2",
+      "question": "How old are you?",
+      "answer": "25"
+    },
+    {
+      "question_id": "q3",
+      "question": "Have you ever had anesthesia before?",
+      "answer": "Yes"
+    },
+    {
+      "question_id": "q4",
+      "question": "Has anyone in your family ever had an adverse reaction to anesthesia?",
+      "answer": "No, not that I'm aware"
+    },
+    {
+      "question_id": "q5",
+      "question": "Has a doctor ever told you that you were difficult to intubate or that you have a difficult airway?",
+      "answer": "no"
+    },
+    {
+      "question_id": "q6",
+      "question": "Do you have sleep apnea or use a CPAP machine at night?",
+      "answer": "No"
+    },
+    {
+      "question_id": "q7",
+      "question": "Do you have any loose teeth, dentures, or dental implants?",
+      "answer": "dentures"
+    },
+    {
+      "question_id": "q8",
+      "question": "Do you have any allergies to medications, latex, or anesthesia drugs?",
+      "answer": "gluten; penicillin"
+    },
+    {
+      "question_id": "q9",
+      "question": "Do you take any daily prescription medications?",
+      "answer": "No"
+    },
+    {
+      "question_id": "q10",
+      "question": "Do you take blood thinners such as aspirin, warfarin, Eliquis, or Xarelto?",
+      "answer": "aspirin; None"
+    },
+    {
+      "question_id": "q11",
+      "question": "Do you take any non-prescription medications, supplements, or herbal remedies — including things like fish oil, vitamins, or over-the-counter painkillers?",
+      "answer": "I sometimes take Panadol for headaches"
+    },
+    {
+      "question_id": "q12",
+      "question": "Do you have any heart conditions, chest pain, or a history of heart surgery or stents?",
+      "answer": "Had a heart attack a couple of years back"
+    },
+    {
+      "question_id": "q13",
+      "question": "Do you have asthma, COPD, or any other breathing problems?",
+      "answer": "asthma"
+    },
+    {
+      "question_id": "q14",
+      "question": "Do you get short of breath when walking on flat ground or climbing stairs?",
+      "answer": "no"
+    },
+    {
+      "question_id": "q15",
+      "question": "Do you experience acid reflux or heartburn, or take any medication for it?",
+      "answer": "No"
+    },
+    {
+      "question_id": "q16",
+      "question": "Have you had any recent infections, fever, or major health changes in the last few weeks?",
+      "answer": "no"
+    },
+    {
+      "question_id": "q17",
+      "question": "Do you smoke or use any nicotine products?",
+      "answer": "I use snus"
+    },
+    {
+      "question_id": "q18",
+      "question": "How much alcohol do you consume on a weekly basis?",
+      "answer": "Four glasses"
+    },
+    {
+      "question_id": "q19",
+      "question": "Do you use any recreational or illicit drugs?",
+      "answer": "Sometimes I smoke weed"
+    },
+    {
+      "question_id": "q19b",
+      "question": "What do you use, and how often?",
+      "answer": "joints"
+    },
+    {
+      "question_id": "q20",
+      "question": "Are you feeling anxious or worried about the anesthesia or the operation?",
+      "answer": "I'm a bit worried"
+    },
+    {
+      "question_id": "q21",
+      "question": "Is there anything else about your health or previous surgeries that you think the anesthesiologist should know?",
+      "answer": "There is nothing further."
+    }
+  ],
+  "patient_questions": [
+    {
+      "question": "Why do you ask?",
+      "answer": "We just need to make sure we have the correct information on file for your surgery, and it will help us stay in touch with you after the procedure is done. What is your name?"
+    },
+    {
+      "question": "I'm 25 years old. Is that a good thing?",
+      "answer": "Being 25 is a perfect age for most surgeries - we'll make sure everything goes smoothly.\n\nNow that I have some basic information about you, can you tell me if you've ever had anesthesia before?"
+    },
+    {
+      "question": "Why is that relevant?",
+      "answer": "We ask this question as a precaution so we can be prepared if there's any potential risk for you during the procedure. Has anyone in your family ever had an adverse reaction to anesthesia?"
+    },
+    {
+      "question": "What does that mean?",
+      "answer": "\"Intubation is just a process where we help you breathe during surgery by inserting a tube into your windpipe - it's usually done with a gentle and painless procedure.\" \n\nHas a doctor ever told you that you were difficult to intubate or that you have a difficult airway?"
+    },
+    {
+      "question": "Why is the moon round?",
+      "answer": "The moon's shape is due to its own gravity pulling it into a sphere as it spins on its axis.\n\nDo you have any loose teeth, dentures, or dental implants?"
+    },
+    {
+      "question": "What could other examples be?",
+      "answer": "Examples might include Coumadin, Plavix, and Pradaxa - we'll review all of this with your surgeon before surgery, don't worry! Do you take blood thinners such as aspirin, warfarin, Eliquis, or Xarelto?"
+    },
+    {
+      "question": "Could you provide some examples?",
+      "answer": "Examples might include cigarettes, e-cigarettes, chewing tobacco, or smoking-related products like pipes or hookahs. Do you smoke or use any nicotine products?"
+    },
+    {
+      "question": "I'm a bit worried. What can I expect?",
+      "answer": "We'll make sure you're comfortable and safe every step of the way - during the anesthesia, in recovery, and afterwards, so just try to take it easy and breathe.\n\nYou mentioned smoking marijuana on occasion; I want to make sure we consider how that might affect your pain management and recovery after surgery."
+    }
+  ],
+  "red_flags": [
+    {
+      "category": "medication_interaction",
+      "severity": "high"
+    }
+  ],
+  "notes": " patient seems to be somewhat anxious about the upcoming surgery and anesthesia. They are currently using snus, consume alcohol in moderate amounts (4 glasses per week), and occasionally smoke marijuana."
+}

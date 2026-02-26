@@ -1,0 +1,23 @@
+{
+  "language": "en",
+  "questions": [
+      { "id": "q0", "text": "Hi! I am here to conduct the consultation prior to your surgery. We will go through a series of questions regarding your medical history and current health status. If you have any questions feel free to ask at any time, otherwise let me know when you're ready to begin.", "type": "free_text", "required": true },
+      { "id": "q1", "text": "What is your name?", "type": "free_text", "required": true },
+      { "id": "q2", "text": "How old are you?", "type": "number", "required": true },
+      { "id": "q3", "text": "Have you ever had anesthesia before, and did you experience any problems?", "type": "free_text", "required": true },
+      { "id": "q4", "text": "Has a doctor ever told you that you were difficult to intubate or had a difficult airway?", "type": "yesno", "required": true },
+      { "id": "q5", "text": "Do you have sleep apnea or use a CPAP machine at night?", "type": "free_text", "required": true },
+      { "id": "q6", "text": "Do you have any loose teeth, dentures, or dental implants?", "type": "free_text", "required": true },
+      { "id": "q7", "text": "Do you have any allergies to medications, latex, or anesthesia drugs?", "type": "free_text", "required": true },
+      { "id": "q8", "text": "Do you take any daily prescription medications?", "type": "free_text", "required": true },
+      { "id": "q9", "text": "Do you take blood thinners such as aspirin, warfarin, Eliquis, or Xarelto?", "type": "free_text", "required": true },
+      { "id": "q10", "text": "Do you have any heart conditions, chest pain, or a history of heart surgery or stents?", "type": "free_text", "required": true },
+      { "id": "q11", "text": "Do you have asthma, COPD, or breathing problems?", "type": "free_text", "required": true },
+      { "id": "q12", "text": "Do you get short of breath when walking on flat ground or climbing stairs?", "type": "free_text", "required": true },
+      { "id": "q13", "text": "Do you experience acid reflux or heartburn, or take medication for it?", "type": "free_text", "required": true },
+      { "id": "q14", "text": "Have you had any recent infections, fever, or major health changes in the last few weeks?", "type": "free_text", "required": true },
+      { "id": "q15", "text": "Do you smoke or use nicotine products?", "type": "free_text", "required": true },
+      { "id": "q16", "text": "Are you feeling anxious or worried about the anesthesia or the operation?", "type": "free_text", "required": true },
+      { "id": "q17", "text": "Is there anything important about your health or previous surgeries that you want the anesthesiologist to know?", "type": "free_text", "required": true }
+    ]
+}

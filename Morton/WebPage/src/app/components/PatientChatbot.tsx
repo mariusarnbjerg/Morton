@@ -1,18 +1,13 @@
 import { useRef, useEffect } from 'react';
-import { Send, Bot, User, Lightbulb } from 'lucide-react';
+import { Send, Bot, User, Download } from 'lucide-react';
 import { Button } from '@/app/components/ui/button';
 import { Input } from '@/app/components/ui/input';
 
-// Matcher din API-chat state (fra App)
-export type ChatRole = 'bot' | 'user' | 'bot-chat' | 'user-chat' | 'validation-error';
-
 export interface ChatMessage {
-  role: ChatRole;
+  role: 'bot' | 'user';
   content: string;
   timestamp: number;
 }
-
-type Question = { text: string; questionId: string } | null;
 
 type Props = {
   messages: ChatMessage[];
@@ -21,18 +16,9 @@ type Props = {
   submitAnswer: () => void;
   loading: boolean;
   isDone: boolean;
-  progress: { current: number; total: number };
-  currentQuestion: Question;
+  answeredCount: number;
+  conversationId: string;
 };
-
-const suggestedQuestions = [
-  'Hvad skal jeg gøre for at forberede mig til min operation?',
-  'Hvilke risici er der ved fuld bedøvelse?',
-  'Hvor lang tid tager det at vågne efter bedøvelse?',
-  'Må jeg spise eller drikke før mit indgreb?',
-  'Hvilke bivirkninger kan jeg forvente?',
-  'Vil jeg mærke smerte under indgrebet?',
-];
 
 export function PatientChatbot({
   messages,
@@ -41,17 +27,13 @@ export function PatientChatbot({
   submitAnswer,
   loading,
   isDone,
-  progress,
-  currentQuestion,
+  answeredCount,
+  conversationId
 }: Props) {
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  };
-
   useEffect(() => {
-    scrollToBottom();
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages, loading]);
 
   const handleSend = () => {
@@ -59,66 +41,69 @@ export function PatientChatbot({
     submitAnswer();
   };
 
-  const handleSuggestedQuestion = (question: string) => {
-    setAnswer(question);
-    // send direkte, så det føles “klik-og-svar”
-    // (vi bruger microtask så state når at opdatere inden submit)
-    queueMicrotask(() => submitAnswer());
-  };
+const downloadTranscript = () => {
+    const lines = messages.map((m) => {
+      const time = new Date(m.timestamp).toLocaleTimeString('da-DK', {
+        hour: '2-digit',
+        minute: '2-digit'
+      });
+      const speaker = m.role === 'user' ? 'Patient' : 'Assistant';
+      return `[${time}] ${speaker}: ${m.content}`;
+    });
 
-  // UI mapping: hvilken “avatar” skal vises
-  const isUser = (role: ChatRole) => role === 'user' || role === 'user-chat';
-  const isBot = (role: ChatRole) =>
-    role === 'bot' || role === 'bot-chat' || role === 'validation-error';
+    const text = [
+      `${conversationId} — transcript`,
+      `Date: ${new Date().toLocaleDateString('da-DK')}`,
+      '─'.repeat(50),
+      '',
+      ...lines,
+    ].join('\n');
 
-  // Bubble style baseret på role
-  const bubbleClass = (role: ChatRole) => {
-    if (isUser(role)) return 'bg-blue-600 text-white';
-    if (role === 'validation-error') return 'bg-red-50 border border-red-200 text-red-800';
-    if (role === 'bot-chat') return 'bg-amber-50 border border-amber-200 text-amber-900';
-    return 'bg-white border border-slate-200 text-slate-700';
+    const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${conversationId}.txt`; // transcript filename
+    a.click();
+    URL.revokeObjectURL(url);
   };
 
   return (
     <div className="h-full bg-gradient-to-b from-blue-50 to-white flex flex-col">
-      {/* Header - Kompakt */}
+      {/* Header */}
       <div className="bg-white border-b border-slate-200 shadow-sm flex-shrink-0">
-        <div className="max-w-4xl mx-auto px-1 py-5">
-          <div className="flex items-center gap-2">
+        <div className="max-w-4xl mx-auto px-4 py-4">
+          <div className="flex items-center gap-3">
             <div className="size-8 rounded-full bg-blue-100 flex items-center justify-center">
               <Bot className="size-5 text-blue-600" />
             </div>
-
             <div className="min-w-0">
               <h1 className="text-lg font-medium text-slate-900 leading-tight">
-                Informationsassistent om bedøvelse
+                Clinical assistant for anesthesia
               </h1>
-              <p className="text-[10px] text-slate-600 leading-tight">
-                Din guide til at forstå bedøvelse
+              <p className="text-xs text-slate-500 leading-tight">
+                Preperation for anesthesia
               </p>
             </div>
-
-            {/* Progress (hvis du vil vise den her også)*/}
-            {progress.total > 0 && (
-              <div className="ml-auto text-[16px] text-slate-600">
-                Spørgsmål {progress.current} / {progress.total}
+            {answeredCount > 0 && (
+              <div className="ml-auto flex items-center gap-3">
+                <span className="text-sm text-slate-500">{answeredCount} question(s) answered</span>
+                <button
+                  onClick={downloadTranscript}
+                  title="Download transcript"
+                  className="flex items-center gap-1.5 text-xs text-slate-500 hover:text-slate-800 border border-slate-200 hover:border-slate-400 rounded-md px-2 py-1 transition-colors"
+                >
+                  <Download className="size-3.5" />
+                  Download transcript
+                </button>
               </div>
             )}
           </div>
 
-          {/* Vigtig bar - kompakt */}
-          <div className="mt-1.5 bg-blue-50 border border-blue-200 rounded-md px-2 py-0.5 text-[12px] text-blue-900 leading-snug">
-            <span className="font-semibold">Vigtigt:</span>{' '}
-            Denne chatbot giver kun generel uddannelsesinformation. Den erstatter ikke rådgivning fra din
-            anæstesilæge eller dit sundhedsteam.
+          <div className="mt-2 bg-blue-50 border border-blue-200 rounded-md px-3 py-1.5 text-xs text-blue-900">
+            <span className="font-semibold">Important:</span>{' '}
+            This assistant only provides general information. It does not replace guidance from medical professionals.
           </div>
-
-          {/* Aktuelt spørgsmål banner (fra spørgeskema-flowet)
-          {!isDone && currentQuestion && (
-            <div className="mt-1.5 bg-slate-50 border border-slate-200 rounded-md px-2 py-0.5 text-[12px] text-slate-700 leading-snug">
-              <span className="font-semibold">Aktuelt spørgsmål:</span> {currentQuestion.text}
-            </div>
-          )}*/}
         </div>
       </div>
 
@@ -128,34 +113,23 @@ export function PatientChatbot({
           {messages.map((message, idx) => (
             <div
               key={`${message.timestamp}-${idx}`}
-              className={`flex gap-3 ${isUser(message.role) ? 'justify-end' : 'justify-start'}`}
+              className={`flex gap-3 ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
             >
-              {isBot(message.role) && (
-                <div
-                  className={`size-8 rounded-full flex items-center justify-center flex-shrink-0 mt-1 ${
-                    message.role === 'validation-error'
-                      ? 'bg-red-100'
-                      : message.role === 'bot-chat'
-                        ? 'bg-amber-100'
-                        : 'bg-blue-100'
-                  }`}
-                >
-                  <Bot
-                    className={`size-4 ${
-                      message.role === 'validation-error'
-                        ? 'text-red-700'
-                        : message.role === 'bot-chat'
-                          ? 'text-amber-700'
-                          : 'text-blue-600'
-                    }`}
-                  />
+              {message.role === 'bot' && (
+                <div className="size-8 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0 mt-1">
+                  <Bot className="size-4 text-blue-600" />
                 </div>
               )}
 
-              <div className={`max-w-[70%] rounded-lg px-3 py-2 ${bubbleClass(message.role)}`}>
+              <div
+                className={`max-w-[70%] rounded-lg px-3 py-2 ${
+                  message.role === 'user'
+                    ? 'bg-blue-600 text-white'
+                    : 'bg-white border border-slate-200 text-slate-700'
+                }`}
+              >
                 <p className="whitespace-pre-line leading-relaxed text-sm">{message.content}</p>
-
-                <div className="mt-1 text-[10px] opacity-70">
+                <div className="mt-1 text-[10px] opacity-60">
                   {new Date(message.timestamp).toLocaleTimeString('da-DK', {
                     hour: '2-digit',
                     minute: '2-digit',
@@ -163,7 +137,7 @@ export function PatientChatbot({
                 </div>
               </div>
 
-              {isUser(message.role) && (
+              {message.role === 'user' && (
                 <div className="size-8 rounded-full bg-slate-200 flex items-center justify-center flex-shrink-0 mt-1">
                   <User className="size-4 text-slate-600" />
                 </div>
@@ -171,14 +145,15 @@ export function PatientChatbot({
             </div>
           ))}
 
-          {/* Loading indicator (matcher din gamle “typing”)*/}
           {loading && (
-            <div className="flex gap-3 justify-start">
+            <div className="flex items-center gap-3">
               <div className="size-8 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0 mt-1">
                 <Bot className="size-4 text-blue-600" />
               </div>
-              <div className="max-w-[70%] rounded-lg px-3 py-2 bg-white border border-slate-200 text-slate-700">
-                <p className="text-sm">Skriver…</p>
+              <div className="flex gap-1">
+                <span className="h-2 w-2 rounded-full bg-slate-300 inline-block animate-bounce" />
+                <span className="h-2 w-2 rounded-full bg-slate-300 inline-block animate-bounce [animation-delay:120ms]" />
+                <span className="h-2 w-2 rounded-full bg-slate-300 inline-block animate-bounce [animation-delay:240ms]" />
               </div>
             </div>
           )}
@@ -186,30 +161,6 @@ export function PatientChatbot({
           <div ref={messagesEndRef} />
         </div>
       </div>
-
-      {/* Foreslåede spørgsmål (vis kun i starten)
-      {messages.length === 1 && !isDone && (
-        <div className="bg-slate-50 border-t border-slate-200 p-3 flex-shrink-0">
-          <div className="max-w-4xl mx-auto">
-            <div className="flex items-center gap-2 mb-2">
-              <Lightbulb className="size-3.5 text-amber-600" />
-              <h3 className="text-xs text-slate-700">Foreslåede spørgsmål:</h3>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-              {suggestedQuestions.map((question, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => handleSuggestedQuestion(question)}
-                  disabled={loading}
-                  className="text-left p-2 bg-white border border-slate-200 rounded-lg hover:border-blue-400 hover:bg-blue-50 transition-colors text-xs text-slate-700 disabled:opacity-50"
-                >
-                  {question}
-                </button>
-              ))}
-            </div>
-          </div>
-        </div>
-      )}*/}
 
       {/* Input */}
       <div className="bg-white border-t border-slate-200 p-3 flex-shrink-0">
@@ -224,7 +175,7 @@ export function PatientChatbot({
                   handleSend();
                 }
               }}
-              placeholder="Skriv dit svar / spørgsmål..."
+              placeholder={isDone ? 'The consultation has ended' : 'Type your answer or question…'}
               className="flex-1 bg-slate-50 border-slate-300"
               disabled={loading || isDone}
             />
@@ -236,9 +187,8 @@ export function PatientChatbot({
               <Send className="size-4" />
             </Button>
           </div>
-
-          <p className="text-xs text-slate-500 mt-1">
-            Tryk Enter for at sende • Dette er kun til generel information
+          <p className="text-xs text-slate-400 mt-1">
+            Press Enter to send
           </p>
         </div>
       </div>

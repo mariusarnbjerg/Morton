@@ -6,3 +6,4 @@ python-dotenv # for loading variables in an environment file
 requests # for sending request when we use the API
 langchain
 jsonschema
+dotenv

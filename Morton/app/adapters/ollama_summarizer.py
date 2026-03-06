@@ -5,6 +5,13 @@ from typing import Any, Dict, List
 
 from app.interfaces.summarizer import ISummarizer
 from app.domain.models import Message, Role
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+OLLAMA_MODEL    = os.getenv("OLLAMA_MODEL",    "llama3.1")
+OLLAMA_BASE_URL = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")
 
 class OllamaSummarizer(ISummarizer):
     """
@@ -16,8 +23,8 @@ class OllamaSummarizer(ISummarizer):
 
     def __init__(
             self,
-            model: str = "llama3.1",
-            base_url: str = "http://localhost:11434",
+            model: str = OLLAMA_MODEL,
+            base_url: str = OLLAMA_BASE_URL,
             timeout_s: int = 120,
     ):
         self.model = model

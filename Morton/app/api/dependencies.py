@@ -10,14 +10,15 @@ from app.domain.models import Conversation
 from app.application.orchestrator import ConversationOrchestrator
 from app.adapters.question_flow_json import JsonQuestionFlow
 from app.adapters.store_memory import MemoryTranscriptStore
-from app.adapters.improved_ollama_summarizer import OllamaSummarizer
+from app.adapters.ollama_summarizer import OllamaSummarizer
+from app.adapters.ollama_llm_client import OllamaLLMClient
 
 load_dotenv()
 
 OLLAMA_MODEL    = os.getenv("OLLAMA_MODEL",    "llama3.1")
 OLLAMA_BASE_URL = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")
 QUESTIONS_PATH  = os.getenv("QUESTIONS_PATH",  "data/questions.json")
-TEMPLATE_PATH   = os.getenv("TEMPLATE_PATH",   "data/summary_schema.json")
+SUMMARY_SCHEMA_PATH   = os.getenv("SUMMARY_SCHEMA_PATH",   "data/summary_schema.json")
 
 active_conversations: Dict[str, Conversation] = {}
 
@@ -48,14 +49,14 @@ def get_orchestrator() -> ConversationOrchestrator:
         store      = MemoryTranscriptStore()
         qflow      = JsonQuestionFlow(QUESTIONS_PATH)
         summarizer = OllamaSummarizer(model=OLLAMA_MODEL, base_url=OLLAMA_BASE_URL)
+        llm_client = OllamaLLMClient(model=OLLAMA_MODEL, base_url=OLLAMA_BASE_URL)
 
         _orchestrator_instance = ConversationOrchestrator(
             question_flow=qflow,
             transcript_store=store,
+            llm_client=llm_client,
             summarizer=summarizer,
-            template_path=TEMPLATE_PATH,
-            model=OLLAMA_MODEL,
-            base_url=OLLAMA_BASE_URL,
+            summary_schema_path=SUMMARY_SCHEMA_PATH,
         )
         print("✅ Orchestrator ready!")
 

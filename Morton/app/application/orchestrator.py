@@ -1,11 +1,11 @@
 """
-Conversational orchestrator - two focused LLM calls per turn.
+Conversational orchestrator - manages state, delegates language to ILLMClient.
 
-Call 1 - EXTRACT (tiny structured schema):
-  Given the current question and patient message, extract what was answered.
-
-Call 2 - REPLY (free text):
-  Given exactly what to do next, generate a natural reply.
+The orchestrator coordinates the conversation flow:
+  1. Receives patient messages
+  2. Delegates language tasks to the LLM client (extract, reply, confirm, detect question)
+  3. Updates conversation state based on structured results
+  4. Returns the assistant's reply
 
 Python manages all state. The LLM only handles language.
 
@@ -17,7 +17,6 @@ Key design rule for follow-ups:
 
 from __future__ import annotations
 import json
-import requests
 from dataclasses import dataclass
 from typing import Optional, Dict, Any, List
 
@@ -27,61 +26,7 @@ from app.domain.models import (
 from app.interfaces.question_flow import IQuestionFlow
 from app.interfaces.transcript_store import ITranscriptStore
 from app.interfaces.summarizer import ISummarizer
-
-
-EXTRACT_SCHEMA = {
-    "type": "object",
-    "properties": {
-        "answer": {
-            "type": "string",
-            "description": "The answer extracted from the patient message. Empty string if not answered."
-        },
-        "is_complete": {
-            "type": "boolean",
-            "description": "True if the answer satisfies the completion criteria."
-        },
-        "needs_followup": {
-            "type": "boolean",
-            "description": (
-                "True if the answer triggers a follow-up. "
-                "For example: patient said yes to a yes/no question that requires detail."
-            )
-        }
-    },
-    "required": ["answer", "is_complete", "needs_followup"]
-}
-
-
-CONFIRM_SCHEMA = {
-    "type": "object",
-    "properties": {
-        "confirmed": {
-            "type": "boolean",
-            "description": "True if the patient is agreeing with or confirming the summary (even if they also add more). False if they are disagreeing, correcting, or unclear."
-        },
-        "additional_info": {
-            "type": "string",
-            "description": "Any NEW information the patient added beyond just confirming. For example if asked to confirm gluten allergy and they say 'yes and also penicillin', this field should contain 'penicillin'. Empty string if nothing new was added."
-        }
-    },
-    "required": ["confirmed", "additional_info"]
-}
-
-
-IS_QUESTION_SCHEMA = {
-    "type": "object",
-    "properties": {
-        "is_question": {
-            "type": "boolean",
-            "description": (
-                "True if the patient is asking a question — either instead of answering, or in addition to answering. "
-                "Examples that ARE questions: 'Why do you ask?', 'What does that mean?', 'Will I be awake?', 'Should I be worried?', 'I don't understand'. "
-                "Examples that are NOT questions: 'Yes', 'No', 'My name is Marius', 'I'm 25', 'I had a heart attack'."
-            )
-        }
-    },
-    "required": ["is_question"]
-}
+from app.interfaces.llm_client import ILLMClient
 
 
 @dataclass
@@ -95,19 +40,15 @@ class ConversationOrchestrator:
         self,
         question_flow: IQuestionFlow,
         transcript_store: ITranscriptStore,
+        llm_client: ILLMClient,
         summarizer: Optional[ISummarizer] = None,
-        template_path: Optional[str] = None,
-        model: str = "llama3.1",
-        base_url: str = "http://localhost:11434",
-        timeout_s: int = 60,
+        summary_schema_path: Optional[str] = None,
     ):
         self.question_flow = question_flow
         self.store = transcript_store
+        self.llm = llm_client
         self.summarizer = summarizer
-        self.template_path = template_path
-        self.model = model
-        self.base_url = base_url.rstrip("/")
-        self.timeout_s = timeout_s
+        self.summary_schema_path = summary_schema_path
 
     # -----------------------------------------------------------------------
     # Public API
@@ -131,8 +72,6 @@ class ConversationOrchestrator:
     def handle_user_message(self, conv: Conversation, user_text: str) -> OrchestratorResult:
         self.store.append(conv.conversation_id, Message(role=Role.PATIENT, content=user_text))
 
-        # patient_question detection happens after extraction (see below)
-
         # Determine what we're currently trying to answer
         active_fu = self.question_flow.get_active_follow_up(conv)
         current_q = self.question_flow.get_question(conv)
@@ -143,21 +82,20 @@ class ConversationOrchestrator:
         if conv.state == ConversationState.AWAITING_CONFIRMATION:
             extraction = None
         else:
-            extraction = self._call_extract(focus, user_text) if focus else None
+            extraction = self.llm.extract(focus, user_text) if focus else None
         print(f"[DEBUG] focus: {focus.id if focus else None} | state: {conv.state.value} | extraction: {extraction}")
 
         # Update state (pure Python) — returns instruction for reply
         instruction = self._update_state(conv, focus, active_fu, extraction, user_text)
 
         # Call 1b: Detect patient question — separate focused call, only when message is conversational
-        # We only bother if the extraction didn't fully answer the question, or if there's no clear answer
         extracted_answer = (extraction or {}).get("answer", "").strip()
         looks_conversational = (
             not extracted_answer or
             any(w in user_text.lower() for w in ("why", "what", "how", "will", "should", "can you", "don't understand", "?"))
         )
         if looks_conversational:
-            is_q_result = self._call_is_question(user_text)
+            is_q_result = self.llm.detect_question(user_text)
             patient_question = user_text.strip() if is_q_result else ""
         else:
             patient_question = ""
@@ -167,7 +105,8 @@ class ConversationOrchestrator:
 
         # Call 2: Reply
         transcript = self.store.get(conv.conversation_id)
-        reply = self._call_reply(conv, transcript, instruction)
+        patient_name = conv.answers.get("q1", "")
+        reply = self.llm.generate_reply(transcript, instruction, patient_name)
         print(f"[DEBUG] reply: {reply[:100]}\n")
 
         self.store.append(conv.conversation_id, Message(role=Role.ASSISTANT, content=reply))
@@ -182,56 +121,15 @@ class ConversationOrchestrator:
     def finalize(self, conv: Conversation) -> dict:
         if not self.summarizer:
             raise RuntimeError("Summarizer not configured.")
-        if not self.template_path:
-            raise RuntimeError("template_path not configured.")
-        with open(self.template_path, "r", encoding="utf-8") as f:
-            template = json.load(f)
+        if not self.summary_schema_path:
+            raise RuntimeError("summary_schema_path not configured.")
+        with open(self.summary_schema_path, "r", encoding="utf-8") as f:
+            schema = json.load(f)
         transcript = self.store.get(conv.conversation_id)
-        summary = self.summarizer.summarize(transcript=transcript, schema=template)
+        summary = self.summarizer.summarize(transcript=transcript, schema=schema)
         summary["questionnaire_answers"] = self._build_questionnaire_answers(conv)
         summary["patient_questions"] = self._build_patient_questions(transcript)
         return summary
-
-    # -----------------------------------------------------------------------
-    # Call 1: Extract
-    # -----------------------------------------------------------------------
-
-    def _call_extract(self, focus, user_text: str) -> Dict[str, Any]:
-        """Ask the LLM: what did the patient answer, and is it complete?"""
-        criteria = (
-            getattr(focus, "completion_criteria", None)
-            or "Patient directly answered the question."
-        )
-
-        followup_hint = ""
-        if hasattr(focus, "follow_ups") and focus.follow_ups:
-            triggers = "\n".join(f"  - {fu.trigger}" for fu in focus.follow_ups)
-            followup_hint = (
-                f"\nIMPORTANT: Set needs_followup=true if the patient's answer meets ANY of these conditions:\n{triggers}\nNote: if the patient said 'yes' or confirmed the premise, that typically triggers a follow-up."
-            )
-
-        system = (
-            "You are analyzing a patient's response to a single medical questionnaire question. "
-            "Your job: extract the answer and judge completeness based strictly on the completion criteria provided. "
-            "Do not invent stricter requirements than the criteria states. "
-            "'yes' alone is incomplete for questions needing specific details, "
-            "but 'no' or 'none' is complete for questions asking whether something exists. "
-            "If the completion criteria says approximate answers are acceptable, accept them. "
-            "If the patient says they don't know, and the criteria allows for that, mark as complete. "
-            "IMPORTANT: If the patient is asking a question instead of answering "
-            "(e.g. 'Why do you ask?', 'Why is that relevant?', 'What does that mean?'), "
-            "set answer to empty string and is_complete to false. "
-            "Do NOT infer or fabricate an answer from context when the patient has not provided one."
-        )
-
-        user = (
-            f'Question ({focus.id}): "{focus.text}"\n'
-            f"Completion criteria: {criteria}"
-            f"{followup_hint}\n\n"
-            f'Patient said: "{user_text}"'
-        )
-
-        return self._ollama_structured(system, user, EXTRACT_SCHEMA)
 
     # -----------------------------------------------------------------------
     # State update — pure Python, no LLM
@@ -265,7 +163,15 @@ class ConversationOrchestrator:
         # Handle confirmation state first — patient is confirming a summary
         # ------------------------------------------------------------------
         if conv.state == ConversationState.AWAITING_CONFIRMATION:
-            confirm_result = self._call_confirm(user_text, conv.pending_confirmation_question_id, conv)
+            # Gather context for the confirmation check
+            transcript = self.store.get(conv.conversation_id)
+            last_bot = next(
+                (m.content for m in reversed(transcript) if m.role == Role.ASSISTANT),
+                ""
+            )
+            current_answer = conv.answers.get(conv.pending_confirmation_question_id, "") if conv.pending_confirmation_question_id else ""
+
+            confirm_result = self.llm.check_confirmation(user_text, last_bot, current_answer)
             print(f"[DEBUG] confirm_result: {confirm_result}")
 
             if confirm_result.get("confirmed", False):
@@ -338,7 +244,8 @@ class ConversationOrchestrator:
                         "action": "confirm",
                         "question_text": None,
                         "question_id": parent_q.id,
-                        "acknowledged_answer": acknowledged
+                        "acknowledged_answer": acknowledged,
+                        "confirm_answer": conv.answers.get(parent_q.id, acknowledged),
                     }
 
                 if parent_q.id not in conv.completed_question_ids:
@@ -377,7 +284,8 @@ class ConversationOrchestrator:
                 "action": "confirm",
                 "question_text": None,
                 "question_id": current_q.id,
-                "acknowledged_answer": acknowledged
+                "acknowledged_answer": acknowledged,
+                "confirm_answer": conv.answers.get(current_q.id, acknowledged),
             }
 
         self.question_flow.advance(conv)
@@ -399,173 +307,6 @@ class ConversationOrchestrator:
             "question_id": next_q.id,
             "acknowledged_answer": acknowledged
         }
-
-    # -----------------------------------------------------------------------
-    # Call 2: Reply
-    # -----------------------------------------------------------------------
-
-    def _call_reply(
-        self,
-        conv: Conversation,
-        transcript: List[Message],
-        instruction: Dict[str, Any]
-    ) -> str:
-        """Generate a natural reply given a precise instruction about what to do next."""
-        action = instruction["action"]
-        question_text = instruction.get("question_text")
-        acknowledged = instruction.get("acknowledged_answer", "")
-        patient_question = instruction.get("patient_question", "")
-        patient_name = conv.answers.get("q1", "")
-
-        if action == "ask_next":
-            if acknowledged:
-                task = (
-                    f"The patient just provided information. React to it naturally in one brief warm sentence "
-                    f"(do NOT quote or repeat the raw extracted value verbatim — rephrase naturally based on "
-                    f"the conversation above), then ask this next question: \"{question_text}\""
-                )
-            else:
-                task = f"Ask this question naturally: \"{question_text}\""
-
-        elif action == "ask_followup":
-            task = (
-                f"The patient just answered. Acknowledge what they said naturally in one brief sentence "
-                f"(based on the conversation above, not a raw value), "
-                f"then ask this follow-up question: \"{question_text}\""
-            )
-
-        elif action == "confirm":
-            qid = instruction.get("question_id", "")
-            answer = conv.answers.get(qid, acknowledged)
-            task = (
-                f"Briefly summarize the patient's answer (\"{answer}\") back to them "
-                f"and ask them to confirm it is correct. Keep it short and natural."
-            )
-
-        elif action == "reask":
-            if acknowledged:
-                task = (
-                    f"The patient said \"{acknowledged}\" but this didn't fully answer the question. "
-                    f"Gently and warmly ask again: \"{question_text}\""
-                )
-            else:
-                task = f"The patient didn't answer the question. Politely ask again: \"{question_text}\""
-
-        elif action == "done":
-            task = (
-                "All questions are complete. Thank the patient warmly, "
-                "let them know the consultation is finished, and wish them well."
-            )
-        else:
-            task = f"Ask: \"{question_text}\""
-
-        # If the patient asked a question, answer it first before the main task
-        if patient_question:
-            task = (
-                f"The patient asked: \"{patient_question}\". "
-                f"Answer it briefly and reassuringly in one sentence. Then: {task}"
-            )
-
-        # Last few turns for conversational context
-        recent = [m for m in transcript if m.role in (Role.PATIENT, Role.ASSISTANT)][-6:]
-        history = "\n".join(
-            f"{'Patient' if m.role == Role.PATIENT else 'Assistant'}: {m.content}"
-            for m in recent
-        )
-
-        system = (
-            "You are a warm, professional clinical assistant conducting a pre-anesthesia consultation. "
-            "Speak naturally and conversationally — not like a form or a checklist. "
-            "Keep replies concise: one brief acknowledgment (if needed) and one question. "
-            "Do not add unsolicited medical information or explanations. "
-            "Do not invent personal details about yourself such as your name or age. "
-            "If the patient expresses fear or anxiety, acknowledge it with empathy before moving on. "
-            + (f"The patient's name is {patient_name}. " if patient_name else "")
-        )
-
-        user = (
-            f"Recent conversation:\n{history}\n\n"
-            f"Your task: {task}\n\n"
-            f"Write only your reply to the patient. No labels, no JSON, no explanation."
-        )
-
-        payload = {
-            "model": self.model,
-            "messages": [
-                {"role": "system", "content": system},
-                {"role": "user", "content": user}
-            ],
-            "stream": False
-        }
-        r = requests.post(f"{self.base_url}/api/chat", json=payload, timeout=self.timeout_s)
-        r.raise_for_status()
-        return r.json()["message"]["content"].strip()
-
-    # -----------------------------------------------------------------------
-    # Shared Ollama helper
-    # -----------------------------------------------------------------------
-
-    def _call_is_question(self, user_text: str) -> bool:
-        """
-        Single-purpose call: is the patient asking a question?
-        Only called when the message looks conversational.
-        """
-        system = (
-            "You are classifying a single patient message. "
-            "Return is_question=true if the patient is asking something — "
-            "even if they also provided an answer. "
-            "Return is_question=false if they are only answering (e.g. 'Yes', 'No', 'I'm 25', 'My name is Marius')."
-        )
-        user = f'Patient said: "{user_text}"'
-        result = self._ollama_structured(system, user, IS_QUESTION_SCHEMA)
-        return result.get("is_question", False)
-
-    def _call_confirm(self, user_text: str, question_id: Optional[str], conv: Conversation) -> Dict[str, Any]:
-        """
-        Ask the LLM whether the patient is confirming the summary, and whether they added new info.
-        Returns {"confirmed": bool, "additional_info": str}
-        Handles both positive ("yes, correct") and negative ("no, I haven't") confirmations.
-        """
-        transcript = self.store.get(conv.conversation_id)
-        last_bot = next(
-            (m.content for m in reversed(transcript) if m.role == Role.ASSISTANT),
-            ""
-        )
-        current_answer = conv.answers.get(question_id, "") if question_id else ""
-
-        system = (
-            "You are determining whether a patient is confirming a summary read back to them, "
-            "and whether they added any new information. "
-            "Consider context carefully — 'no, I haven't' in response to 'You haven't been told X, right?' is a confirmation. "
-            "If the patient confirms AND adds new info (e.g. 'yes, and also penicillin'), "
-            "set confirmed=true and put the new info in additional_info."
-        )
-        user = (
-            f'The assistant just said: "{last_bot}"\n'
-            f'Current recorded answer: "{current_answer}"\n'
-            f'The patient responded: "{user_text}"\n\n'
-            f"Is the patient confirming? Did they add any new information?"
-        )
-        result = self._ollama_structured(system, user, CONFIRM_SCHEMA)
-        return result
-
-    def _ollama_structured(self, system: str, user: str, schema: Dict) -> Dict[str, Any]:
-        payload = {
-            "model": self.model,
-            "messages": [
-                {"role": "system", "content": system},
-                {"role": "user", "content": user}
-            ],
-            "stream": False,
-            "format": schema
-        }
-        r = requests.post(f"{self.base_url}/api/chat", json=payload, timeout=self.timeout_s)
-        r.raise_for_status()
-        raw = r.json()["message"]["content"]
-        try:
-            return json.loads(raw)
-        except json.JSONDecodeError as e:
-            raise ValueError(f"Structured LLM call returned invalid JSON: {e}\nOutput: {raw}")
 
     # -----------------------------------------------------------------------
     # Summary helpers

@@ -2,8 +2,10 @@ import json
 from app.domain.models import Conversation
 from app.adapters.question_flow_json import JsonQuestionFlow
 from app.adapters.store_memory import MemoryTranscriptStore
-from app.adapters.improved_ollama_summarizer import OllamaSummarizer
+from app.adapters.ollama_summarizer import OllamaSummarizer
+from app.adapters.ollama_llm_client import OllamaLLMClient
 from app.application.orchestrator import ConversationOrchestrator
+
 
 MODEL = "llama3.1"
 BASE_URL = "http://localhost:11434"
@@ -13,14 +15,14 @@ def main():
     store = MemoryTranscriptStore()
     qflow = JsonQuestionFlow("data/questions.json")
     summarizer = OllamaSummarizer(model=MODEL, base_url=BASE_URL)
+    llm_client = OllamaLLMClient(model=MODEL, base_url=BASE_URL)
 
     orch = ConversationOrchestrator(
         question_flow=qflow,
         transcript_store=store,
         summarizer=summarizer,
-        template_path="data/summary_schema.json",
-        model=MODEL,
-        base_url=BASE_URL,
+        summary_schema_path="data/summary_schema.json",
+        llm_client=llm_client,
     )
 
     conv = Conversation(conversation_id="test-1")

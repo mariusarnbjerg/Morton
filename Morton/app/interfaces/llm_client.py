@@ -73,13 +73,3 @@ class ILLMClient(ABC):
             }
         """
         pass
-
-    @abstractmethod
-    def detect_question(self, user_text: str) -> bool:
-        """
-        Classify whether the patient is asking a question.
-
-        Returns:
-            True if the patient is asking something, False if only answering.
-        """
-        pass

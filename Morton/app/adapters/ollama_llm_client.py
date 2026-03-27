@@ -41,6 +41,7 @@ EXTRACT_SCHEMA = {
     "required": ["answer", "is_complete", "needs_followup"]
 }
 
+
 CONFIRM_SCHEMA = {
     "type": "object",
     "properties": {
@@ -55,22 +56,6 @@ CONFIRM_SCHEMA = {
     },
     "required": ["confirmed", "additional_info"]
 }
-
-IS_QUESTION_SCHEMA = {
-    "type": "object",
-    "properties": {
-        "is_question": {
-            "type": "boolean",
-            "description": (
-                "True if the patient is asking a question — either instead of answering, or in addition to answering. "
-                "Examples that ARE questions: 'Why do you ask?', 'What does that mean?', 'Will I be awake?', 'Should I be worried?', 'I don't understand'. "
-                "Examples that are NOT questions: 'Yes', 'No', 'My name is Marius', 'I'm 25', 'I had a heart attack'."
-            )
-        }
-    },
-    "required": ["is_question"]
-}
-
 
 class OllamaLLMClient(ILLMClient):
     """
@@ -112,7 +97,7 @@ class OllamaLLMClient(ILLMClient):
             )
 
         system = (
-            "You are analyzing a patient's response to a single medical questionnaire question. "
+            "You are analyzing a patient's response to a single medical questionnaire question."
             "Your job: extract the answer and judge completeness based strictly on the completion criteria provided. "
             "Do not invent stricter requirements than the criteria states. "
             "'yes' alone is incomplete for questions needing specific details, "
@@ -144,14 +129,14 @@ class OllamaLLMClient(ILLMClient):
         action = instruction["action"]
         question_text = instruction.get("question_text")
         acknowledged = instruction.get("acknowledged_answer", "")
-        patient_question = instruction.get("patient_question", "")
 
         if action == "ask_next":
             if acknowledged:
                 task = (
-                    f"The patient just provided information. React to it naturally in one brief warm sentence "
-                    f"(do NOT quote or repeat the raw extracted value verbatim — rephrase naturally based on "
-                    f"the conversation above), then ask this next question: \"{question_text}\""
+                    f"The patient just answered: \"{acknowledged}\". "
+                    f"Acknowledge this neutrally in a natural sentence. "
+                    f"Only reference this answer, nothing else from the conversation. "
+                    f"Then ask this next question: \"{question_text}\""
                 )
             else:
                 task = f"Ask this question naturally: \"{question_text}\""
@@ -171,28 +156,38 @@ class OllamaLLMClient(ILLMClient):
             )
 
         elif action == "reask":
-            if acknowledged:
-                task = (
-                    f"The patient said \"{acknowledged}\" but this didn't fully answer the question. "
-                    f"Gently and warmly ask again: \"{question_text}\""
-                )
-            else:
-                task = f"The patient didn't answer the question. Politely ask again: \"{question_text}\""
+            task = (
+                f"The patient's last message did not answer the current question. "
+                f"Respond naturally to whatever they said."
+                f"If they shared medical information, acknowledge it."
+                f"If they seem confused, clarify."
+                f"Then gently guide back to the unanswered question: \"{question_text}\""
+            )
+
+        elif action == "free_chat":
+            task = (
+                "Look at the patient's last message in the conversation above and respond appropriately: "
+                "- If they asked a question, answer it directly and factually in one or two sentences. "
+                "- If they shared medical information, acknowledge it and let the patient know it will be noted- Don't make assumptions or follow-up questions. "
+                "- If they expressed an emotion, acknowledge it in one neutral sentence without inferring further. "
+                "Do not assume anything about their condition or state of mind beyond what they explicitly said. "
+                "Then ask: \"Is there anything else on your mind, or are you ready to continue?\""
+            )
+
+        elif action == "reentry":
+            task = (
+                f"The patient is ready to continue. "
+                f"Do not reference anything from the previous conversation or make assumptions about their state of mind. "
+                f"Ask this question directly: \"{question_text}\""
+            )
 
         elif action == "done":
             task = (
-                "All questions are complete. Thank the patient warmly, "
-                "let them know the consultation is finished, and wish them well."
+                "All questions are complete. Thank the patient and "
+                "let them know the consultation is finished but don't assume anything about their operation."
             )
         else:
             task = f"Ask: \"{question_text}\""
-
-        # If the patient asked a question, answer it first before the main task
-        if patient_question:
-            task = (
-                f"The patient asked: \"{patient_question}\". "
-                f"Answer it briefly and reassuringly in one sentence. Then: {task}"
-            )
 
         # Last few turns for conversational context
         recent = [m for m in transcript if m.role in (Role.PATIENT, Role.ASSISTANT)][-6:]
@@ -202,13 +197,13 @@ class OllamaLLMClient(ILLMClient):
         )
 
         system = (
-            "You are a warm, professional clinical assistant conducting a pre-anesthesia consultation. "
-            "Speak naturally and conversationally — not like a form or a checklist. "
-            "Keep replies concise: one brief acknowledgment (if needed) and one question. "
-            "Do not add unsolicited medical information or explanations. "
-            "Do not invent personal details about yourself such as your name or age. "
-            "If the patient expresses fear or anxiety, acknowledge it with empathy before moving on. "
-            + (f"The patient's name is {patient_name}. " if patient_name else "")
+                "You are a professional clinical assistant conducting a pre-anesthesia consultation. "
+                "Speak naturally and conversationally — not like a form or a checklist. "
+                "Keep replies concise: one brief acknowledgment (if needed) and one question. "
+                "Do not add unsolicited medical information or explanations. "
+                "Do not invent personal details about yourself such as your name or age. "
+                "Acknowledge the patient's previous reply before moving on but don't infer anything from it. "
+                + (f"The patient's name is {patient_name}. " if patient_name else "")
         )
 
         user = (
@@ -250,18 +245,6 @@ class OllamaLLMClient(ILLMClient):
             f"Is the patient confirming? Did they add any new information?"
         )
         return self._ollama_structured(system, user, CONFIRM_SCHEMA)
-
-    def detect_question(self, user_text: str) -> bool:
-        """Classify whether the patient is asking a question."""
-        system = (
-            "You are classifying a single patient message. "
-            "Return is_question=true if the patient is asking something — "
-            "even if they also provided an answer. "
-            "Return is_question=false if they are only answering (e.g. 'Yes', 'No', 'I'm 25', 'My name is Marius')."
-        )
-        user = f'Patient said: "{user_text}"'
-        result = self._ollama_structured(system, user, IS_QUESTION_SCHEMA)
-        return result.get("is_question", False)
 
     # -------------------------------------------------------------------
     # Ollama HTTP helper

@@ -71,13 +71,30 @@ class Question:
 
 class ConversationState(str, Enum):
     """
-    Simplified state — the LLM now drives conversation naturally.
-    No more FLOW_WAITING_ANSWER or CHAT_MODE routing.
+    IN_PROGRESS:           Normal flow — extracting answers, advancing questions.
+    FREE_CHAT:             Patient didn't answer the current question — chatting freely
+                           until they signal they're ready to continue.
+    AWAITING_CONFIRMATION: Layer C — waiting for patient to confirm a summary read back to them.
+    DONE:                  All required questions answered.
     """
     IN_PROGRESS = "in_progress"
-    AWAITING_CONFIRMATION = "awaiting_confirmation"  # Layer C: waiting for patient to confirm summary
+    FREE_CHAT = "free_chat"
+    AWAITING_CONFIRMATION = "awaiting_confirmation"
     DONE = "done"
 
+
+FREE_CHAT_QUESTION = FollowUpQuestion(
+    id="free_chat",
+    text="Is there anything else on your mind, or are you ready to continue?",
+    trigger="",
+    completion_criteria=(
+        "Patient has indicated they are ready to continue or have nothing more to add. "
+        "This includes both affirmative signals ('yes', 'sure', 'let's go', 'ready') "
+        "AND negative signals ('no', 'nothing else', 'nope', 'nothing more', 'I'm good'). "
+        "Return is_complete=false only if the patient is clearly still engaging — "
+        "asking a new question, sharing new information, or expressing a concern."
+    ),
+)
 
 @dataclass
 class Conversation:

@@ -6,7 +6,7 @@
       "text": "Hi! I'm here to conduct your pre-surgery consultation. We'll go through some questions about your medical history and current health — it should only take a few minutes. Feel free to ask me anything along the way. Just let me know when you're ready to begin.",
       "type": "free_text",
       "required": true,
-      "completion_criteria": "Patient has acknowledged the introduction and indicated they are ready to proceed."
+      "completion_criteria": "Patient has indicated they are ready to proceed."
     },
     {
       "id": "q1",
@@ -20,7 +20,7 @@
       "text": "How old are you?",
       "type": "number",
       "required": true,
-      "completion_criteria": "Patient has provided a numeric age."
+      "completion_criteria": "Patient has provided an age."
     },
     {
       "id": "q3",
@@ -32,7 +32,7 @@
         {
           "id": "q3b",
           "text": "Did you experience any problems with it?",
-          "trigger": "patient says yes, confirms, or implies they have had anesthesia before — including 'yes once', 'yes twice', 'a few times', etc.",
+          "trigger": "Patient says yes, confirms, or implies they have had anesthesia before — including 'yes once', 'yes twice', 'a few times', etc.",
           "type": "free_text",
           "completion_criteria": "Patient has described any problems or side effects, or clearly stated there were none. Any direct response is complete.",
           "confirmation_required": false
@@ -62,7 +62,7 @@
       "type": "yesno",
       "required": true,
       "completion_criteria": "Patient has clearly confirmed or denied being told about a difficult airway.",
-      "confirmation_required": true
+      "confirmation_required": false
     },
     {
       "id": "q6",
@@ -76,20 +76,20 @@
       "text": "Do you have any loose teeth, dentures, or dental implants?",
       "type": "free_text",
       "required": true,
-      "completion_criteria": "Patient has confirmed or denied loose teeth, dentures, or implants."
+      "completion_criteria": "Patient has confirmed or denied loose teeth, dentures, implants, or any other dental work."
     },
     {
       "id": "q8",
       "text": "Do you have any allergies to medications, latex, or anesthesia drugs?",
       "type": "free_text",
       "required": true,
-      "completion_criteria": "Patient has either explicitly denied all allergies (complete), OR has named at least one specific allergen. 'Yes' alone is NOT complete — specific allergen names are required.",
-      "confirmation_required": true,
+      "completion_criteria": "Patient has confirmed or denied experiencing allergies",
+      "confirmation_required": false,
       "follow_ups": [
         {
           "id": "q8b",
           "text": "Which ones, and what kind of reaction do you get?",
-          "trigger": "patient confirms having any allergies",
+          "trigger": "Patient confirms having any allergies",
           "type": "free_text",
           "completion_criteria": "Patient has named specific allergens. General confirmation ('yes I have allergies') is not enough — actual allergen names are needed.",
           "confirmation_required": false
@@ -101,13 +101,13 @@
       "text": "Do you take any daily prescription medications?",
       "type": "free_text",
       "required": true,
-      "completion_criteria": "Patient has denied taking prescription medications (complete), OR has named at least one specific medication. 'Yes', 'I take pills', or vague descriptions are NOT complete — specific drug names are required.",
-      "confirmation_required": true,
+      "completion_criteria": "Patient has confirmed or denied taking prescription medications",
+      "confirmation_required": false,
       "follow_ups": [
         {
           "id": "q9b",
           "text": "Could you list them for me?",
-          "trigger": "patient confirms or implies they take prescription medications but has not yet named them specifically",
+          "trigger": "Patient has confirmed or implied taking prescription medications but has not yet named them specifically",
           "type": "free_text",
           "completion_criteria": "Patient has named at least one specific medication. Approximate names are acceptable (e.g. 'blood pressure pill' if they don't know the name).",
           "confirmation_required": false
@@ -119,20 +119,20 @@
       "text": "Do you take blood thinners such as aspirin, warfarin, Eliquis, or Xarelto?",
       "type": "free_text",
       "required": true,
-      "completion_criteria": "Patient has denied taking blood thinners (any clear denial is complete), OR has named specific blood thinners.",
-      "confirmation_required": true
+      "completion_criteria": "Patient has confirmed or denied taking blood thinners (any clear denial is complete)",
+      "confirmation_required": false
     },
     {
       "id": "q11",
       "text": "Do you take any non-prescription medications, supplements, or herbal remedies — including things like fish oil, vitamins, or over-the-counter painkillers?",
       "type": "free_text",
       "required": true,
-      "completion_criteria": "Patient has either denied taking non-prescription medications and supplements, or provided a specific list AND confirmed there are no others.",
+      "completion_criteria": "Patient has confirmed or denied taking non-prescription medications and supplements",
       "follow_ups": [
         {
           "id": "q11b",
           "text": "Could you list what you're taking?",
-          "trigger": "patient confirms taking non-prescription medications, supplements, or herbal remedies but has not yet listed them",
+          "trigger": "Patient confirms taking non-prescription medications, supplements, or herbal remedies but has not yet listed them",
           "type": "free_text",
           "completion_criteria": "Patient has listed specific items and confirmed the list is complete.",
           "confirmation_required": false
@@ -144,7 +144,7 @@
       "text": "Do you have any heart conditions, chest pain, or a history of heart surgery or stents?",
       "type": "free_text",
       "required": true,
-      "completion_criteria": "Patient has confirmed or denied cardiac history. If confirmed, the nature of the condition is described."
+      "completion_criteria": "Patient has confirmed or denied cardiac history."
     },
     {
       "id": "q13",
@@ -184,7 +184,7 @@
         {
           "id": "q17b",
           "text": "How long have you been using it, and roughly how much per day?",
-          "trigger": "patient confirms current or recent smoking or nicotine use",
+          "trigger": "Patient confirms current or recent smoking or nicotine use",
           "type": "free_text",
           "completion_criteria": "Patient has provided any indication of duration OR frequency of use. Approximate answers are acceptable. If the patient cannot or does not know, that is also complete.",
           "confirmation_required": false
@@ -210,7 +210,7 @@
           "text": "What do you use, and how often?",
           "trigger": "patient confirms using recreational or illicit drugs",
           "type": "free_text",
-          "completion_criteria": "Patient has described what they use (e.g. cannabis, cocaine, heroin — general name is sufficient, brand/strain not required) AND roughly how often. If the patient says they don't know the specific type, that is acceptable as long as frequency is given.",
+          "completion_criteria": "Patient has described what they use AND roughly how often. If the patient says they don't know the specific type, that is acceptable as long as frequency is given.",
           "confirmation_required": false
         }
       ]
@@ -225,6 +225,13 @@
     {
       "id": "q21",
       "text": "Is there anything else about your health or previous surgeries that you think the anesthesiologist should know?",
+      "type": "free_text",
+      "required": true,
+      "completion_criteria": "Patient has either provided additional information or explicitly confirmed there is nothing more to add."
+    },
+    {
+      "id": "q22",
+      "text": "Do you have any additional questions or concerns that you would like to discuss?",
       "type": "free_text",
       "required": true,
       "completion_criteria": "Patient has either provided additional information or explicitly confirmed there is nothing more to add."

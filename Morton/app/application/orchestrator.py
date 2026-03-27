@@ -21,7 +21,8 @@ from dataclasses import dataclass
 from typing import Optional, Dict, Any, List
 
 from app.domain.models import (
-    Conversation, ConversationState, Message, Role, Question, FollowUpQuestion
+    Conversation, ConversationState, Message, Role, Question, FollowUpQuestion,
+    FREE_CHAT_QUESTION
 )
 from app.interfaces.question_flow import IQuestionFlow
 from app.interfaces.transcript_store import ITranscriptStore
@@ -61,8 +62,6 @@ class ConversationOrchestrator:
             return OrchestratorResult(bot_text="No questions configured.", done=True)
 
         reply = opening_q.text
-        conv.completed_question_ids.append(opening_q.id)
-        self.question_flow.advance(conv)
 
         self.store.append(conv.conversation_id, Message(
             role=Role.ASSISTANT, content=reply, meta={"question_id": opening_q.id}
@@ -79,7 +78,10 @@ class ConversationOrchestrator:
 
         # Call 1: Extract
         # Skip extraction when awaiting confirmation — patient is confirming, not answering a question
+        # Skip extraction when in free chat — patient is chatting freely, not answering a question
         if conv.state == ConversationState.AWAITING_CONFIRMATION:
+            extraction = None
+        elif conv.state == ConversationState.FREE_CHAT:
             extraction = None
         else:
             extraction = self.llm.extract(focus, user_text) if focus else None
@@ -87,21 +89,6 @@ class ConversationOrchestrator:
 
         # Update state (pure Python) — returns instruction for reply
         instruction = self._update_state(conv, focus, active_fu, extraction, user_text)
-
-        # Call 1b: Detect patient question — separate focused call, only when message is conversational
-        extracted_answer = (extraction or {}).get("answer", "").strip()
-        looks_conversational = (
-            not extracted_answer or
-            any(w in user_text.lower() for w in ("why", "what", "how", "will", "should", "can you", "don't understand", "?"))
-        )
-        if looks_conversational:
-            is_q_result = self.llm.detect_question(user_text)
-            patient_question = user_text.strip() if is_q_result else ""
-        else:
-            patient_question = ""
-        instruction["patient_question"] = patient_question
-
-        print(f"[DEBUG] instruction: {instruction}")
 
         # Call 2: Reply
         transcript = self.store.get(conv.conversation_id)
@@ -146,7 +133,7 @@ class ConversationOrchestrator:
         """
         Apply extraction results to conversation state.
         Returns an instruction dict telling the reply call exactly what to do:
-          action:      ask_next | ask_followup | reask | confirm | done
+          action:      ask_next | ask_followup | free_chat | reentry | confirm | done
           question_text: the exact text to ask next (or None)
           question_id:   the id of the question being asked next
           acknowledged_answer: what the patient just answered (for natural transitions)
@@ -158,6 +145,34 @@ class ConversationOrchestrator:
         # Store answer if we got something meaningful
         if acknowledged and focus:
             conv.answers[focus.id] = acknowledged
+
+        # ------------------------------------------------------------------
+        # FREE_CHAT — patient is chatting freely, waiting to signal readiness
+        # ------------------------------------------------------------------
+        if conv.state == ConversationState.FREE_CHAT:
+            free_chat_extraction = self.llm.extract(FREE_CHAT_QUESTION, user_text)
+            print(f"[DEBUG] FREE_CHAT extraction: {free_chat_extraction}")
+            if free_chat_extraction.get("is_complete", False):
+                conv.state = ConversationState.IN_PROGRESS
+                # q0 is a greeting — never re-ask it, just advance to q1
+                if focus and focus.id == "q0":
+                    if focus.id not in conv.completed_question_ids:
+                        conv.completed_question_ids.append(focus.id)
+                    self.question_flow.advance(conv)
+                    return self._next_question_instruction(conv, "")
+                return {
+                    "action": "reentry",
+                    "question_text": focus.text if focus else None,
+                    "question_id": focus.id if focus else None,
+                    "acknowledged_answer": ""
+                }
+            else:
+                return {
+                    "action": "free_chat",
+                    "question_text": focus.text if focus else None,
+                    "question_id": focus.id if focus else None,
+                    "acknowledged_answer": ""
+                }
 
         # ------------------------------------------------------------------
         # Handle confirmation state first — patient is confirming a summary
@@ -205,14 +220,16 @@ class ConversationOrchestrator:
         # ------------------------------------------------------------------
 
         if not is_complete:
+            conv.state = ConversationState.FREE_CHAT
             return {
-                "action": "reask",
+                "action": "free_chat",
                 "question_text": focus.text if focus else None,
                 "question_id": focus.id if focus else None,
                 "acknowledged_answer": acknowledged
             }
 
-        # Answer is complete — mark it
+        # Answer is complete — mark it and ensure we're back in normal flow
+        conv.state = ConversationState.IN_PROGRESS
         if focus and focus.id not in conv.completed_question_ids:
             conv.completed_question_ids.append(focus.id)
 

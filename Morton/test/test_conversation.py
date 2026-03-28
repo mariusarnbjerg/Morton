@@ -354,7 +354,7 @@ class ConversationTester:
         r = requests.post(
             f"{self.api}/conversations/{self.conversation_id}/message",
             json={"message": message},
-            timeout=60,
+            timeout=120,
         )
         r.raise_for_status()
         data = r.json()

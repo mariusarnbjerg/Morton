@@ -159,7 +159,7 @@ class ConversationOrchestrator:
                     if focus.id not in conv.completed_question_ids:
                         conv.completed_question_ids.append(focus.id)
                     self.question_flow.advance(conv)
-                    return self._next_question_instruction(conv, "")
+                    return self._next_question_instruction(conv, "", user_text)
                 return {
                     "action": "reentry",
                     "question_text": focus.text if focus else None,
@@ -206,7 +206,7 @@ class ConversationOrchestrator:
                 current_q = self.question_flow.get_question(conv)
                 if current_q and current_q.id == confirmed_id:
                     self.question_flow.advance(conv)
-                return self._next_question_instruction(conv, acknowledged)
+                return self._next_question_instruction(conv, acknowledged, user_text)
             else:
                 return {
                     "action": "reask",
@@ -251,7 +251,8 @@ class ConversationOrchestrator:
                         "action": "ask_followup",
                         "question_text": remaining_fus[0].text,
                         "question_id": remaining_fus[0].id,
-                        "acknowledged_answer": acknowledged
+                        "acknowledged_answer": acknowledged,
+                        "full_message": user_text
                     }
 
                 if parent_q.confirmation_required and parent_q.id not in conv.completed_question_ids:
@@ -268,7 +269,7 @@ class ConversationOrchestrator:
                 if parent_q.id not in conv.completed_question_ids:
                     conv.completed_question_ids.append(parent_q.id)
                 self.question_flow.advance(conv)
-            return self._next_question_instruction(conv, acknowledged)
+            return self._next_question_instruction(conv, acknowledged, user_text)
 
         # ------------------------------------------------------------------
         # This was a top-level question
@@ -290,7 +291,8 @@ class ConversationOrchestrator:
                         "action": "ask_followup",
                         "question_text": next_fu.text,
                         "question_id": next_fu.id,
-                        "acknowledged_answer": acknowledged
+                        "acknowledged_answer": acknowledged,
+                        "full_message": user_text
                     }
 
         current_q = self.question_flow.get_question(conv)
@@ -306,9 +308,10 @@ class ConversationOrchestrator:
             }
 
         self.question_flow.advance(conv)
-        return self._next_question_instruction(conv, acknowledged)
+        return self._next_question_instruction(conv, acknowledged, user_text)
 
-    def _next_question_instruction(self, conv: Conversation, acknowledged: str) -> Dict[str, Any]:
+    def _next_question_instruction(self, conv: Conversation, acknowledged: str, full_message: str = "") -> Dict[
+        str, Any]:
         """Return an ask_next instruction for whatever question is up next, or done."""
         next_q = self.question_flow.get_question(conv)
         if not next_q:
@@ -316,13 +319,15 @@ class ConversationOrchestrator:
                 "action": "done",
                 "question_text": None,
                 "question_id": None,
-                "acknowledged_answer": acknowledged
+                "acknowledged_answer": acknowledged,
+                "full_message": full_message
             }
         return {
             "action": "ask_next",
             "question_text": next_q.text,
             "question_id": next_q.id,
-            "acknowledged_answer": acknowledged
+            "acknowledged_answer": acknowledged,
+            "full_message": full_message
         }
 
     # -----------------------------------------------------------------------

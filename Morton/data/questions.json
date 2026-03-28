@@ -196,7 +196,7 @@
       "text": "How much alcohol do you consume on a weekly basis?",
       "type": "free_text",
       "required": true,
-      "completion_criteria": "Patient has provided an approximate weekly alcohol intake, or confirmed they do not drink."
+      "completion_criteria": "Patient has provided any indication of their alcohol consumption — including approximate amounts, frequency, type of drink, or a denial of drinking. Any answer that gives a sense of how much they drink is complete. Examples: 'a glass of wine on weekends', 'about 2 per week', 'I don't drink', 'maybe 5 beers a week'."
     },
     {
       "id": "q19",

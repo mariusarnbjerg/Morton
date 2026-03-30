@@ -114,7 +114,6 @@ PERSONAS: Dict[str, Dict[str, List[str]]] = {
         "name": "Chatty Patient",
         "responses": [
             "It's a lovely day today, isn't it?",              # q0 — triggers FREE_CHAT
-            "Ready to begin",                                  # q0 FREE_CHAT — signals ready
             "I'm Sarah, nice to meet you!",                    # q1
             "Why do you need my age? I'm 45",                  # q2 — answer + question
             "Yes once, why do you ask?",                       # q3 — answer + question → triggers q3b
@@ -125,9 +124,9 @@ PERSONAS: Dict[str, Dict[str, List[str]]] = {
             "No dental issues",                                # q7
             "No allergies at all",                             # q8
             "No medications",                                  # q9
-            "What are blood thinners for? No I don't take any",  # q10 — question + answer
-            "Just vitamin C sometimes",                        # q11
-            "No heart problems, should I be worried?",         # q12 — answer + question
+            "Just vitamin C sometimes",                        # q11 → triggers q11b
+            "Just vitamin C, that's everything",               # q11b
+            "No heart problems, should I be worried?",         # q12
             "No, that's all",                                  # q12 FREE_CHAT — signals ready
             "No breathing problems",                           # q13
             "No shortness of breath",                          # q14

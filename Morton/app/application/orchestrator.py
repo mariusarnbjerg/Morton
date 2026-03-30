@@ -94,6 +94,15 @@ class ConversationOrchestrator:
         transcript = self.store.get(conv.conversation_id)
         patient_name = conv.answers.get("q1", "")
         reply = self.llm.generate_reply(transcript, instruction, patient_name)
+
+        # For deterministic actions, append the question text in Python
+        action = instruction.get("action")
+        question_text = instruction.get("question_text")
+        if action in ("ask_next", "ask_followup") and question_text:
+            reply = f"{reply}\n\n{question_text}" if reply.strip() else question_text
+        elif action == "reentry" and question_text:
+            reply = question_text
+
         print(f"[DEBUG] reply: {reply[:100]}\n")
 
         self.store.append(conv.conversation_id, Message(role=Role.ASSISTANT, content=reply))
@@ -159,7 +168,7 @@ class ConversationOrchestrator:
                     if focus.id not in conv.completed_question_ids:
                         conv.completed_question_ids.append(focus.id)
                     self.question_flow.advance(conv)
-                    return self._next_question_instruction(conv, "", user_text)
+                    return self._next_question_instruction(conv, "", user_text, focus.text if focus else "")
                 return {
                     "action": "reentry",
                     "question_text": focus.text if focus else None,
@@ -206,7 +215,7 @@ class ConversationOrchestrator:
                 current_q = self.question_flow.get_question(conv)
                 if current_q and current_q.id == confirmed_id:
                     self.question_flow.advance(conv)
-                return self._next_question_instruction(conv, acknowledged, user_text)
+                return self._next_question_instruction(conv, acknowledged, user_text, focus.text if focus else "")
             else:
                 return {
                     "action": "reask",
@@ -252,9 +261,9 @@ class ConversationOrchestrator:
                         "question_text": remaining_fus[0].text,
                         "question_id": remaining_fus[0].id,
                         "acknowledged_answer": acknowledged,
-                        "full_message": user_text
+                        "full_message": user_text,
+                        "current_question_text": focus.text if focus else ""
                     }
-
                 if parent_q.confirmation_required and parent_q.id not in conv.completed_question_ids:
                     conv.pending_confirmation_question_id = parent_q.id
                     conv.state = ConversationState.AWAITING_CONFIRMATION
@@ -269,7 +278,7 @@ class ConversationOrchestrator:
                 if parent_q.id not in conv.completed_question_ids:
                     conv.completed_question_ids.append(parent_q.id)
                 self.question_flow.advance(conv)
-            return self._next_question_instruction(conv, acknowledged, user_text)
+            return self._next_question_instruction(conv, acknowledged, user_text, focus.text if focus else "")
 
         # ------------------------------------------------------------------
         # This was a top-level question
@@ -308,11 +317,9 @@ class ConversationOrchestrator:
             }
 
         self.question_flow.advance(conv)
-        return self._next_question_instruction(conv, acknowledged, user_text)
+        return self._next_question_instruction(conv, acknowledged, user_text, focus.text if focus else "")
 
-    def _next_question_instruction(self, conv: Conversation, acknowledged: str, full_message: str = "") -> Dict[
-        str, Any]:
-        """Return an ask_next instruction for whatever question is up next, or done."""
+    def _next_question_instruction(self, conv: Conversation, acknowledged: str, full_message: str = "", current_question_text: str = "") -> Dict[str, Any]:
         next_q = self.question_flow.get_question(conv)
         if not next_q:
             return {
@@ -320,14 +327,16 @@ class ConversationOrchestrator:
                 "question_text": None,
                 "question_id": None,
                 "acknowledged_answer": acknowledged,
-                "full_message": full_message
+                "full_message": full_message,
+                "current_question_text": current_question_text
             }
         return {
             "action": "ask_next",
             "question_text": next_q.text,
             "question_id": next_q.id,
             "acknowledged_answer": acknowledged,
-            "full_message": full_message
+            "full_message": full_message,
+            "current_question_text": current_question_text
         }
 
     # -----------------------------------------------------------------------

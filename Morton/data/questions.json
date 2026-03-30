@@ -69,7 +69,7 @@
       "text": "Do you have sleep apnea or use a CPAP machine at night?",
       "type": "free_text",
       "required": true,
-      "completion_criteria": "Patient has confirmed or denied sleep apnea and CPAP use."
+      "completion_criteria": "Patient has confirmed or denied sleep apnea or CPAP use."
     },
     {
       "id": "q7",

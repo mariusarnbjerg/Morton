@@ -167,6 +167,8 @@ const downloadTranscript = () => {
         <div className="max-w-4xl mx-auto">
           <div className="flex gap-3">
             <Input
+              key={`input-${messages.length}`}
+              autoFocus
               value={answer}
               onChange={(e) => setAnswer(e.target.value)}
               onKeyDown={(e) => {

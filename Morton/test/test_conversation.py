@@ -124,6 +124,7 @@ PERSONAS: Dict[str, Dict[str, List[str]]] = {
             "No dental issues",                                # q7
             "No allergies at all",                             # q8
             "No medications",                                  # q9
+            "No blood thinners"                                # q10
             "Just vitamin C sometimes",                        # q11 → triggers q11b
             "Just vitamin C, that's everything",               # q11b
             "No heart problems, should I be worried?",         # q12

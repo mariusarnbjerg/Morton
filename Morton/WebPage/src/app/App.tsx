@@ -6,8 +6,9 @@ import { CalendarView } from '@/app/components/CalendarView';
 import { PatientDetails } from '@/app/components/PatientDetails';
 import { PatientSummaryModal } from '@/app/components/PatientSummaryModal';
 import { PatientChatbot } from '@/app/components/PatientChatbot';
+import { ConsultationSummary, type SummaryData } from '@/app/components/ConsultationSummary';
 
-type View = 'search' | 'calendar' | 'details' | 'chatbot';
+type View = 'search' | 'calendar' | 'details' | 'chatbot' | 'consultation-summary';
 type UserRole = 'doctor' | 'patient';
 
 export interface Message {
@@ -33,7 +34,33 @@ export default function App() {
   const [loading, setLoading] = useState(false);
   const [answeredCount, setAnsweredCount] = useState(0);
 
-  // ---- Doctor navigation ----
+    // ---- Summary state (shared between patient completion & doctor view) ----
+  const [consultationSummary, setConsultationSummary] = useState<SummaryData | null>(null);
+  const [summaryLoading, setSummaryLoading] = useState(false);
+
+  // ---- Fetch summary when consultation completes ----
+  useEffect(() => {
+    if (!isDone || consultationSummary || summaryLoading) return;
+
+    const fetchSummary = async () => {
+      setSummaryLoading(true);
+      try {
+        const res = await fetch(`${API_BASE}/conversations/${conversationId}/summary`);
+        if (res.ok) {
+          const data = await res.json();
+          setConsultationSummary(data);
+        }
+      } catch {
+        // Summary fetch failed — doctor can still use other views
+      } finally {
+        setSummaryLoading(false);
+      }
+    };
+
+    fetchSummary();
+  }, [isDone, conversationId, consultationSummary, summaryLoading]);
+
+   // ---- Doctor navigation ----
   const handlePatientSelect = (patient: Patient) => {
     setSelectedPatient(patient);
     setCurrentView('details');
@@ -57,7 +84,12 @@ export default function App() {
 
   const switchRole = (role: UserRole) => {
     setUserRole(role);
-    setCurrentView(role === 'patient' ? 'chatbot' : 'search');
+    if (role === 'patient') {
+      setCurrentView('chatbot');
+    } else {
+      // When switching to doctor view, show summary if one exists
+      setCurrentView(consultationSummary ? 'consultation-summary' : 'search');
+    }
     setSelectedPatient(null);
   };
 
@@ -135,8 +167,11 @@ export default function App() {
     }
   };
 
+  // ---- Determine if the "Latest consultation" tab should show ----
+  const showSummaryTab = consultationSummary != null;
+
   return (
-    <div className="h-screen flex flex-col overflow-hidden">
+     <div className="h-screen flex flex-col overflow-hidden">
       {/* Top Navigation Bar */}
       <div className="bg-white border-b border-slate-200 shadow-sm flex-shrink-0">
         <div className="max-w-7xl mx-auto px-6 py-4">
@@ -184,6 +219,19 @@ export default function App() {
 
           {userRole === 'doctor' && (
             <div className="flex items-center gap-2 mt-4 border-t border-slate-200 pt-4">
+              {showSummaryTab && (
+                <Button
+                  variant={currentView === 'consultation-summary' ? 'default' : 'ghost'}
+                  size="sm"
+                  onClick={() => setCurrentView('consultation-summary')}
+                  className={currentView === 'consultation-summary' ? '' : 'text-slate-600'}
+                >
+                  <Stethoscope className="size-4 mr-2" />
+                  Latest consultation
+                  <span className="ml-1.5 inline-flex items-center justify-center size-2 rounded-full bg-emerald-400" />
+                </Button>
+              )}
+
               <Button
                 variant={currentView === 'search' ? 'default' : 'ghost'}
                 size="sm"
@@ -212,6 +260,12 @@ export default function App() {
       <div className="flex-1 min-h-0 overflow-y-auto">
         {userRole === 'doctor' ? (
           <>
+            {currentView === 'consultation-summary' && consultationSummary && (
+              <ConsultationSummary
+                summary={consultationSummary}
+                onDismiss={() => setCurrentView('search')}
+              />
+            )}
             {currentView === 'search' && <PatientSearch onPatientSelect={handlePatientSelect} />}
             {currentView === 'calendar' && <CalendarView onPatientClick={handlePatientClick} />}
             {currentView === 'details' && selectedPatient && (

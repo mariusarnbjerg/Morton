@@ -102,6 +102,8 @@ class ConversationOrchestrator:
             reply = f"{reply}\n\n{question_text}" if reply.strip() else question_text
         elif action == "reentry" and question_text:
             reply = question_text
+        elif action == "free_chat":
+            reply = f"{reply}\n\n{FREE_CHAT_QUESTION.text}" if reply.strip() else FREE_CHAT_QUESTION.text
 
         print(f"[DEBUG] reply: {reply[:100]}\n")
 

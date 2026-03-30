@@ -133,18 +133,15 @@ class OllamaLLMClient(ILLMClient):
         acknowledged = instruction.get("acknowledged_answer", "")
         current_question_text = instruction.get("current_question_text", "")
 
-        if action == "ask_next":
+        if action in ("ask_next", "ask_followup"):
             full_message = instruction.get("full_message", "").strip()
             if full_message and full_message.lower() != acknowledged.lower():
                 task = (
                     f"The patient was asked: \"{current_question_text}\". "
                     f"They said: \"{full_message}\". "
-                    f"Their answer was: \"{acknowledged}\". "
-                    f"FIRST check if the patient asked a question in their message. "
-                    f"If yes, you MUST answer it directly and factually in one sentence — this takes priority. "
-                    f"If no question was asked, acknowledge their extra information briefly without assumptions. "
-                    f"Do NOT reference anything else from the conversation. "
-                    f"Do NOT ask any question."
+                    f"The patient asked a question. You MUST answer it. "
+                    f"If they asked a medical question, answer it in one factual sentence. "
+                    f"If they didn't ask a question, write exactly one of: 'Got it.', 'Thanks.', 'Understood.', 'Noted.'"
                 )
             else:
                 task = (
@@ -153,34 +150,8 @@ class OllamaLLMClient(ILLMClient):
                     f"Their answer was: \"{acknowledged}\". "
                     f"If they asked a question in addition to answering, answer it directly and factually in one sentence. "
                     f"Otherwise respond warmly and naturally to their answer in one brief sentence. "
-                    f"Good examples: 'Good to know.', 'Understood.', 'Thanks for letting me know.', 'That's helpful.'. "
-                    f"Do NOT repeat or rephrase their answer back to them. "
-                    f"Do NOT reference any other part of the conversation. "
-                    f"Do NOT ask any question."
-                )
-
-        elif action == "ask_followup":
-            full_message = instruction.get("full_message", "").strip()
-            if full_message and full_message.lower() != acknowledged.lower():
-                task = (
-                    f"The patient was asked: \"{current_question_text}\". "
-                    f"They said: \"{full_message}\". "
-                    f"Their answer was: \"{acknowledged}\". "
-                    f"FIRST check if the patient asked a question in their message. "
-                    f"If yes, you MUST answer it directly and factually in one sentence — this takes priority. "
-                    f"If no question was asked, acknowledge their extra information briefly without assumptions. "
-                    f"Do NOT reference anything else from the conversation. "
-                    f"Do NOT ask any question."
-                )
-            else:
-                task = (
-                    f"The patient was asked: \"{current_question_text}\". "
-                    f"They said: \"{full_message}\". "
-                    f"Their answer was: \"{acknowledged}\". "
-                    f"If they asked a question in addition to answering, answer it directly and factually in one sentence. "
-                    f"Otherwise respond warmly and naturally to their answer in one brief sentence. "
-                    f"Good examples: 'Good to know.', 'Understood.', 'Thanks for letting me know.', 'That's helpful.'. "
-                    f"Do NOT repeat or rephrase their answer back to them. "
+                    f"Good examples: 'Good to know.', 'Understood.', 'Noted'. "
+                    f"Do NOT repeat their answer back to them. "
                     f"Do NOT reference any other part of the conversation. "
                     f"Do NOT ask any question."
                 )
@@ -203,12 +174,14 @@ class OllamaLLMClient(ILLMClient):
 
         elif action == "free_chat":
             task = (
-                "Look at the patient's last message in the conversation above and respond appropriately: "
-                "- If they asked a question, answer it directly and factually in one or two sentences. "
-                "- If they shared medical information, acknowledge it and let the patient know it will be noted- Don't make assumptions or follow-up questions. "
-                "- If they expressed an emotion, acknowledge it in one neutral sentence without inferring further. "
-                "Do not assume anything about their condition or state of mind beyond what they explicitly said. "
-                "Then ask: \"Is there anything else on your mind, or are you ready to continue?\""
+                "The patient said something outside the questionnaire. Respond naturally:\n"
+                "- If they said something casual like 'lovely day' or 'how are you', respond warmly in one sentence "
+                "(e.g. 'It sure is!' or 'I'm doing well, thanks for asking!').\n"
+                "- If they asked a medical question, answer it briefly and factually.\n"
+                "- If they shared medical information, acknowledge it briefly.\n"
+                "- If they expressed an emotion, acknowledge it with empathy.\n"
+                "IMPORTANT: Do NOT repeat or echo what the patient said. Respond to it.\n"
+                "Write only one or two sentences. Do not ask any questions."
             )
 
         elif action == "reentry":
@@ -223,7 +196,7 @@ class OllamaLLMClient(ILLMClient):
             task = f"Ask: \"{question_text}\""
 
         # Last few turns for conversational context
-        recent = [m for m in transcript if m.role in (Role.PATIENT, Role.ASSISTANT)][-6:]
+        recent = [m for m in transcript if m.role in (Role.PATIENT, Role.ASSISTANT)][-4:]
         history = "\n".join(
             f"{'Patient' if m.role == Role.PATIENT else 'Assistant'}: {m.content}"
             for m in recent
@@ -239,7 +212,7 @@ class OllamaLLMClient(ILLMClient):
                 "Your ONLY job is to respond to what the patient just said — one brief, natural sentence. "
                 "Do NOT ask any questions. Questions are handled separately. "
                 "Do not add unsolicited medical information or explanations. "
-                "Do not invent or assume anything not explicitly stated by the patient. "
+                "Do not invent or assume anything about the patient not explicitly stated by the patient. "
                 "Do not invent personal details about yourself such as your name or age. "
                 "Do NOT make any clinical assertions about the patient's procedure, treatment, or diagnosis. "
                 "If the patient asks about their specific procedure, say only that the medical team will discuss that with them. "
@@ -259,7 +232,11 @@ class OllamaLLMClient(ILLMClient):
                 {"role": "system", "content": system},
                 {"role": "user", "content": user}
             ],
-            "stream": False
+            "stream": False,
+            "think": True,
+            "options": {
+                "repeat_penalty": 1.5
+            }
         }
         r = requests.post(f"{self.base_url}/api/chat", json=payload, timeout=self.timeout_s)
         r.raise_for_status()
@@ -300,7 +277,8 @@ class OllamaLLMClient(ILLMClient):
                 {"role": "user", "content": user}
             ],
             "stream": False,
-            "format": schema
+            "format": schema,
+            "think": False
         }
         r = requests.post(f"{self.base_url}/api/chat", json=payload, timeout=self.timeout_s)
         r.raise_for_status()

@@ -1,22 +1,240 @@
 {
   "language": "en",
   "questions": [
-      { "id": "q1", "text": "What is your name?", "type": "free_text", "required": true },
-      { "id": "q2", "text": "How old are you?", "type": "number", "required": true },
-      { "id": "q3", "text": "Have you ever had anesthesia before, and did you experience any problems?", "type": "free_text", "required": true },
-      { "id": "q4", "text": "Has a doctor ever told you that you were difficult to intubate or had a difficult airway?", "type": "yesno", "required": true },
-      { "id": "q5", "text": "Do you have sleep apnea or use a CPAP machine at night?", "type": "free_text", "required": true },
-      { "id": "q6", "text": "Do you have any loose teeth, dentures, or dental implants?", "type": "free_text", "required": true },
-      { "id": "q7", "text": "Do you have any allergies to medications, latex, or anesthesia drugs?", "type": "free_text", "required": true },
-      { "id": "q8", "text": "Do you take any daily prescription medications?", "type": "free_text", "required": true },
-      { "id": "q9", "text": "Do you take blood thinners such as aspirin, warfarin, Eliquis, or Xarelto?", "type": "free_text", "required": true },
-      { "id": "q10", "text": "Do you have any heart conditions, chest pain, or a history of heart surgery or stents?", "type": "free_text", "required": true },
-      { "id": "q11", "text": "Do you have asthma, COPD, or breathing problems?", "type": "free_text", "required": true },
-      { "id": "q12", "text": "Do you get short of breath when walking on flat ground or climbing stairs?", "type": "free_text", "required": true },
-      { "id": "q13", "text": "Do you experience acid reflux or heartburn, or take medication for it?", "type": "free_text", "required": true },
-      { "id": "q14", "text": "Have you had any recent infections, fever, or major health changes in the last few weeks?", "type": "free_text", "required": true },
-      { "id": "q15", "text": "Do you smoke or use nicotine products?", "type": "free_text", "required": true },
-      { "id": "q16", "text": "Are you feeling anxious or worried about the anesthesia or the operation?", "type": "free_text", "required": true },
-      { "id": "q17", "text": "Is there anything important about your health or previous surgeries that you want the anesthesiologist to know?", "type": "free_text", "required": true }
-    ]
+    {
+      "id": "q0",
+      "text": "Hi! I'm here to conduct your pre-surgery consultation. We'll go through some questions about your medical history and current health — it should only take a few minutes. Feel free to ask me anything along the way. Just let me know when you're ready to begin.",
+      "type": "free_text",
+      "required": true,
+      "completion_criteria": "Patient has indicated they are ready to proceed."
+    },
+    {
+      "id": "q1",
+      "text": "What is your name?",
+      "type": "free_text",
+      "required": true,
+      "completion_criteria": "Patient has provided a name."
+    },
+    {
+      "id": "q2",
+      "text": "How old are you?",
+      "type": "number",
+      "required": true,
+      "completion_criteria": "Patient has provided an age."
+    },
+    {
+      "id": "q3",
+      "text": "Have you ever had anesthesia before?",
+      "type": "yesno",
+      "required": true,
+      "completion_criteria": "Patient has clearly confirmed or denied prior anesthesia experience. Any affirmative (yes, once, twice, a few times) or denial (no, never) is complete.",
+      "follow_ups": [
+        {
+          "id": "q3b",
+          "text": "Did you experience any problems with it?",
+          "trigger": "Patient says yes, confirms, or implies they have had anesthesia before — including 'yes once', 'yes twice', 'a few times', etc.",
+          "type": "free_text",
+          "completion_criteria": "Patient has described any problems or side effects, or clearly stated there were none. Any direct response is complete.",
+          "confirmation_required": false
+        }
+      ]
+    },
+    {
+      "id": "q4",
+      "text": "Has anyone in your family ever had an adverse reaction to anesthesia?",
+      "type": "yesno",
+      "required": true,
+      "completion_criteria": "Patient has clearly confirmed or denied family history of anesthesia reactions.",
+      "follow_ups": [
+        {
+          "id": "q4b",
+          "text": "What type of reaction was it — for example, malignant hyperthermia, prolonged muscle relaxation, or something else?",
+          "trigger": "patient confirms a family member had an adverse anesthesia reaction",
+          "type": "free_text",
+          "completion_criteria": "Patient has described the type of reaction, even if only approximately.",
+          "confirmation_required": false
+        }
+      ]
+    },
+    {
+      "id": "q5",
+      "text": "Has a doctor ever told you that you were difficult to intubate or that you have a difficult airway?",
+      "type": "yesno",
+      "required": true,
+      "completion_criteria": "Patient has clearly confirmed or denied being told about a difficult airway.",
+      "confirmation_required": false
+    },
+    {
+      "id": "q6",
+      "text": "Do you have sleep apnea or use a CPAP machine at night?",
+      "type": "free_text",
+      "required": true,
+      "completion_criteria": "Patient has confirmed or denied sleep apnea or CPAP use."
+    },
+    {
+      "id": "q7",
+      "text": "Do you have any loose teeth, dentures, or dental implants?",
+      "type": "free_text",
+      "required": true,
+      "completion_criteria": "Patient has confirmed or denied loose teeth, dentures, implants, or any other dental work."
+    },
+    {
+      "id": "q8",
+      "text": "Do you have any allergies to medications, latex, or anesthesia drugs?",
+      "type": "free_text",
+      "required": true,
+      "completion_criteria": "Patient has confirmed or denied experiencing allergies",
+      "confirmation_required": false,
+      "follow_ups": [
+        {
+          "id": "q8b",
+          "text": "Which ones, and what kind of reaction do you get?",
+          "trigger": "Patient confirms having any allergies",
+          "type": "free_text",
+          "completion_criteria": "Patient has named specific allergens. General confirmation ('yes I have allergies') is not enough — actual allergen names are needed.",
+          "confirmation_required": false
+        }
+      ]
+    },
+    {
+      "id": "q9",
+      "text": "Do you take any daily prescription medications?",
+      "type": "free_text",
+      "required": true,
+      "completion_criteria": "Patient has confirmed or denied taking prescription medications",
+      "confirmation_required": false,
+      "follow_ups": [
+        {
+          "id": "q9b",
+          "text": "Could you list them for me?",
+          "trigger": "Patient has confirmed or implied taking prescription medications but has not yet named them specifically",
+          "type": "free_text",
+          "completion_criteria": "Patient has named at least one specific medication. Approximate names are acceptable (e.g. 'blood pressure pill' if they don't know the name).",
+          "confirmation_required": false
+        }
+      ]
+    },
+    {
+      "id": "q10",
+      "text": "Do you take blood thinners such as aspirin, warfarin, Eliquis, or Xarelto?",
+      "type": "free_text",
+      "required": true,
+      "completion_criteria": "Patient has confirmed or denied taking blood thinners (any clear denial is complete)",
+      "confirmation_required": false
+    },
+    {
+      "id": "q11",
+      "text": "Do you take any non-prescription medications, supplements, or herbal remedies — including things like fish oil, vitamins, or over-the-counter painkillers?",
+      "type": "free_text",
+      "required": true,
+      "completion_criteria": "Patient has confirmed or denied taking non-prescription medications and supplements",
+      "follow_ups": [
+        {
+          "id": "q11b",
+          "text": "Could you list what you're taking?",
+          "trigger": "Patient confirms taking non-prescription medications, supplements, or herbal remedies but has not yet listed them",
+          "type": "free_text",
+          "completion_criteria": "Patient has listed specific items and confirmed the list is complete.",
+          "confirmation_required": false
+        }
+      ]
+    },
+    {
+      "id": "q12",
+      "text": "Do you have any heart conditions, chest pain, or a history of heart surgery or stents?",
+      "type": "free_text",
+      "required": true,
+      "completion_criteria": "Patient has confirmed or denied cardiac history."
+    },
+    {
+      "id": "q13",
+      "text": "Do you have asthma, COPD, or any other breathing problems?",
+      "type": "free_text",
+      "required": true,
+      "completion_criteria": "Patient has confirmed or denied respiratory conditions."
+    },
+    {
+      "id": "q14",
+      "text": "Do you get short of breath when walking on flat ground or climbing stairs?",
+      "type": "free_text",
+      "required": true,
+      "completion_criteria": "Patient has confirmed or denied exertional shortness of breath."
+    },
+    {
+      "id": "q15",
+      "text": "Do you experience acid reflux or heartburn, or take any medication for it?",
+      "type": "free_text",
+      "required": true,
+      "completion_criteria": "Patient has confirmed or denied acid reflux symptoms and medication use."
+    },
+    {
+      "id": "q16",
+      "text": "Have you had any recent infections, fever, or major health changes in the last few weeks?",
+      "type": "free_text",
+      "required": true,
+      "completion_criteria": "Patient has confirmed or denied recent health changes."
+    },
+    {
+      "id": "q17",
+      "text": "Do you smoke or use any nicotine products?",
+      "type": "free_text",
+      "required": true,
+      "completion_criteria": "Patient has confirmed or denied smoking and nicotine use.",
+      "follow_ups": [
+        {
+          "id": "q17b",
+          "text": "How long have you been using it, and roughly how much per day?",
+          "trigger": "Patient confirms current or recent smoking or nicotine use",
+          "type": "free_text",
+          "completion_criteria": "Patient has provided any indication of duration OR frequency of use. Approximate answers are acceptable. If the patient cannot or does not know, that is also complete.",
+          "confirmation_required": false
+        }
+      ]
+    },
+    {
+      "id": "q18",
+      "text": "How much alcohol do you consume on a weekly basis?",
+      "type": "free_text",
+      "required": true,
+      "completion_criteria": "Patient has provided any indication of their alcohol consumption — including approximate amounts, frequency, type of drink, or a denial of drinking. Any answer that gives a sense of how much they drink is complete. Examples: 'a glass of wine on weekends', 'about 2 per week', 'I don't drink', 'maybe 5 beers a week'."
+    },
+    {
+      "id": "q19",
+      "text": "Do you use any recreational or illicit drugs?",
+      "type": "free_text",
+      "required": true,
+      "completion_criteria": "Patient has confirmed or denied illicit drug use.",
+      "follow_ups": [
+        {
+          "id": "q19b",
+          "text": "What do you use, and how often?",
+          "trigger": "patient confirms using recreational or illicit drugs",
+          "type": "free_text",
+          "completion_criteria": "Patient has described what they use AND roughly how often. If the patient says they don't know the specific type, that is acceptable as long as frequency is given.",
+          "confirmation_required": false
+        }
+      ]
+    },
+    {
+      "id": "q20",
+      "text": "Are you feeling anxious or worried about the anesthesia or the operation?",
+      "type": "free_text",
+      "required": true,
+      "completion_criteria": "Patient has expressed their emotional state regarding the procedure."
+    },
+    {
+      "id": "q21",
+      "text": "Is there anything else about your health or previous surgeries that you think the anesthesiologist should know?",
+      "type": "free_text",
+      "required": true,
+      "completion_criteria": "Patient has either provided additional information or explicitly confirmed there is nothing more to add."
+    },
+    {
+      "id": "q22",
+      "text": "Do you have any additional questions or concerns that you would like to discuss?",
+      "type": "free_text",
+      "required": true,
+      "completion_criteria": "Patient has either provided additional information or explicitly confirmed there is nothing more to add."
+    }
+  ]
 }

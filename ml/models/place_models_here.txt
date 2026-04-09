@@ -1,0 +1,11 @@
+After running the Colab notebook (all cells 1-19), download these two files
+from /content/ml_outputs/ in Colab and place them here:
+
+  1. asa_model_*.joblib       → rename to: asa_model.joblib
+  2. model_metadata_*.json   → rename to: model_metadata.json
+
+Once both files are here, you can run:
+  python ml/predict.py
+  uvicorn ml.api.main:app --reload --port 8000
+
+Do NOT commit these files to Git (they are in .gitignore).

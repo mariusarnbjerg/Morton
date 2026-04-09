@@ -205,3 +205,8 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# ML model artifacts
+ml/data/
+ml/models/*.joblib
+ml/models/*.json

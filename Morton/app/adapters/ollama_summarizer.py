@@ -25,7 +25,7 @@ class OllamaSummarizer(ISummarizer):
             self,
             model: str = OLLAMA_MODEL,
             base_url: str = OLLAMA_BASE_URL,
-            timeout_s: int = 120,
+            timeout_s: int = 200,
     ):
         self.model = model
         self.base_url = base_url.rstrip("/")

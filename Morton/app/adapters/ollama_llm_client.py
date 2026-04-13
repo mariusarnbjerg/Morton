@@ -41,22 +41,6 @@ EXTRACT_SCHEMA = {
     "required": ["answer", "is_complete", "needs_followup"]
 }
 
-
-CONFIRM_SCHEMA = {
-    "type": "object",
-    "properties": {
-        "confirmed": {
-            "type": "boolean",
-            "description": "True if the patient is agreeing with or confirming the summary (even if they also add more). False if they are disagreeing, correcting, or unclear."
-        },
-        "additional_info": {
-            "type": "string",
-            "description": "Any NEW information the patient added beyond just confirming. For example if asked to confirm gluten allergy and they say 'yes and also penicillin', this field should contain 'penicillin'. Empty string if nothing new was added."
-        }
-    },
-    "required": ["confirmed", "additional_info"]
-}
-
 class OllamaLLMClient(ILLMClient):
     """
     Ollama-backed implementation of ILLMClient.
@@ -100,8 +84,10 @@ class OllamaLLMClient(ILLMClient):
             "You are analyzing a patient's response to a single medical questionnaire question."
             "Your job: extract the answer and judge completeness based strictly on the completion criteria provided. "
             "Do not invent stricter requirements than the criteria states. "
-            "'yes' alone is incomplete for questions needing specific details, "
-            "but 'no' or 'none' is complete for questions asking whether something exists. "
+            "For questions that ask whether something exists or has happened, "
+            "a clear 'yes' or 'no' is a complete answer — even without details. "
+            "Only mark 'yes' as incomplete when the completion criteria explicitly "
+            "requires specific details (like names, dates, or descriptions). "
             "If the completion criteria says approximate answers are acceptable, accept them. "
             "If the patient says they don't know, and the criteria allows for that, mark as complete. "
             "IMPORTANT: A patient may both answer AND ask a question in the same message "
@@ -133,136 +119,115 @@ class OllamaLLMClient(ILLMClient):
         acknowledged = instruction.get("acknowledged_answer", "")
         current_question_text = instruction.get("current_question_text", "")
 
+        # ------------------------------------------------------------------
+        # Deterministic actions — no LLM call.
+        # ------------------------------------------------------------------
+        if action == "reentry":
+            return ""
+
         if action in ("ask_next", "ask_followup"):
             full_message = instruction.get("full_message", "").strip()
-            if full_message and full_message.lower() != acknowledged.lower():
-                task = (
-                    f"The patient was asked: \"{current_question_text}\". "
-                    f"They said: \"{full_message}\". "
-                    f"The patient asked a question. You MUST answer it. "
-                    f"If they asked a medical question, answer it in one factual sentence. "
-                    f"If they didn't ask a question, write exactly one of: 'Got it.', 'Thanks.', 'Understood.', 'Noted.'"
-                )
-            else:
-                task = (
-                    f"The patient was asked: \"{current_question_text}\". "
-                    f"They said: \"{full_message}\". "
-                    f"Their answer was: \"{acknowledged}\". "
-                    f"If they asked a question in addition to answering, answer it directly and factually in one sentence. "
-                    f"Otherwise respond warmly and naturally to their answer in one brief sentence. "
-                    f"Good examples: 'Good to know.', 'Understood.', 'Noted'. "
-                    f"Do NOT repeat their answer back to them. "
-                    f"Do NOT reference any other part of the conversation. "
-                    f"Do NOT ask any question."
-                )
+            acknowledged = instruction.get("acknowledged_answer", "").strip()
+            has_extra = full_message and full_message.lower() != acknowledged.lower()
 
-        elif action == "confirm":
-            answer = instruction.get("confirm_answer", acknowledged)
+            # Clean answer with nothing extra — skip the LLM entirely.
+            if not has_extra:
+                return ""
+
+            current_question_text = instruction.get("current_question_text", "").strip()
             task = (
-                f"Briefly summarize the patient's answer (\"{answer}\") back to them "
-                f"and ask them to confirm it is correct. Keep it short and natural."
+                f'You just asked the patient: "{current_question_text}". '
+                f'They replied: "{full_message}". '
+                f"Reply in one warm, natural sentence. "
+                f"If they asked something back, answer it briefly and factually."
             )
 
+        # ------------------------------------------------------------------
+        # Reask — patient didn't answer, but is still engaged with the
+        # current question. Respond to what they said; orchestrator will
+        # re-append the current question.
+        # ------------------------------------------------------------------
         elif action == "reask":
+            full_message = instruction.get("full_message", "").strip()
+            current_question_text = instruction.get("current_question_text", "").strip()
             task = (
-                f"The patient's last message did not answer the current question. "
-                f"Respond naturally to whatever they said."
-                f"If they shared medical information, acknowledge it."
-                f"If they seem confused, clarify."
-                f"Then gently guide back to the unanswered question: \"{question_text}\""
+                f'You just asked the patient: "{current_question_text}". '
+                f'They replied: "{full_message}". '
+                f"If their reply contains a question, answer that question briefly and "
+                f"factually in one sentence — this is your top priority. "
+                f"Otherwise, reply with one warm, natural sentence."
             )
 
+        # ------------------------------------------------------------------
+        # Free chat — patient's reply did not satisfy the current question.
+        # ------------------------------------------------------------------
         elif action == "free_chat":
+            full_message = (
+                    instruction.get("full_message", "").strip()
+                    or instruction.get("acknowledged_answer", "").strip()
+            )
+            pending_question = instruction.get("question_text", "").strip()
             task = (
-                "The patient said something outside the questionnaire. Respond naturally:\n"
-                "- If they said something casual like 'lovely day' or 'how are you', respond warmly in one sentence "
-                "(e.g. 'It sure is!' or 'I'm doing well, thanks for asking!').\n"
-                "- If they asked a medical question, answer it briefly and factually.\n"
-                "- If they shared medical information, acknowledge it briefly.\n"
-                "- If they expressed an emotion, acknowledge it with empathy.\n"
-                "IMPORTANT: Do NOT repeat or echo what the patient said. Respond to it.\n"
-                "Write only one or two sentences. Do not ask any questions."
+                f'You just asked the patient: "{pending_question}". '
+                f'They replied: "{full_message}". '
+                f"Reply in one warm, natural sentence."
             )
 
-        elif action == "reentry":
-            return ""
-
+        # ------------------------------------------------------------------
+        # Done.
+        # ------------------------------------------------------------------
         elif action == "done":
             task = (
-                "All questions are complete. Thank the patient and "
-                "let them know the consultation is finished but don't assume anything about their operation."
+                "All questions are complete. Thank the patient warmly in one or two "
+                "sentences and let them know the consultation is finished. Do not "
+                "make any assumptions about their procedure."
             )
+
         else:
-            task = f"Ask: \"{question_text}\""
-
-        # Last few turns for conversational context
-        recent = [m for m in transcript if m.role in (Role.PATIENT, Role.ASSISTANT)][-4:]
-        history = "\n".join(
-            f"{'Patient' if m.role == Role.PATIENT else 'Assistant'}: {m.content}"
-            for m in recent
-        )
-
-        # reentry needs no acknowledgment — question is appended deterministically
-        if task is None:
             return ""
 
+        # ------------------------------------------------------------------
+        # Stable system prompt — sets persona, no decision logic.
+        # ------------------------------------------------------------------
         system = (
-                "You are a warm, professional clinical assistant conducting a pre-anesthesia consultation. "
-                "Speak naturally and conversationally — not like a form or a checklist. "
-                "Your ONLY job is to respond to what the patient just said — one brief, natural sentence. "
-                "Do NOT ask any questions. Questions are handled separately. "
-                "Do not add unsolicited medical information or explanations. "
-                "Do not invent or assume anything about the patient not explicitly stated by the patient. "
-                "Do not invent personal details about yourself such as your name or age. "
-                "Do NOT make any clinical assertions about the patient's procedure, treatment, or diagnosis. "
-                "If the patient asks about their specific procedure, say only that the medical team will discuss that with them. "
-                "If the patient expresses fear or anxiety, acknowledge it with empathy. "
-                + (f"The patient's name is {patient_name}. " if patient_name else "")
+                "You are a warm, professional clinical assistant conducting a "
+                "pre-anesthesia consultation. Speak naturally, like a person, not a form. "
+                "Reply in ONE brief sentence unless told otherwise. "
+                "Never ask any questions — questions are appended separately. "
+                "Never repeat the patient's words back to them. "
+                "Never invent medical facts, personal details about yourself, or "
+                "anything the patient did not explicitly say. "
+                "You are NOT a medical expert. If the patient asks any medical, clinical, "
+                "or pharmaceutical question — including about drugs, procedures, conditions, "
+                "symptoms, or treatments — do not answer it. Say only that their medical "
+                "team or pharmacist can answer that for them. "
+                "If the patient asks to discuss something further with the medical team, "
+                "or wants to flag a concern, reassure them that everything they share here "
+                "is passed on to the team afterward — they don't need to repeat themselves. "
+                "If the patient expresses fear or anxiety, acknowledge it with empathy."
+                + (f" The patient's name is {patient_name}." if patient_name else "")
         )
 
         user = (
-            f"Recent conversation:\n{history}\n\n"
-            f"Your task: {task}\n\n"
-            f"Write only your reply to the patient. No labels, no JSON, no explanation."
+            f"{task}\n\n"
+            f"Write only your reply. No labels, no JSON, no explanation, no questions."
         )
 
         payload = {
             "model": self.model,
             "messages": [
                 {"role": "system", "content": system},
-                {"role": "user", "content": user}
+                {"role": "user", "content": user},
             ],
             "stream": False,
             "think": True,
             "options": {
-                "repeat_penalty": 1.5
-            }
+                "repeat_penalty": 1.2,
+            },
         }
         r = requests.post(f"{self.base_url}/api/chat", json=payload, timeout=self.timeout_s)
         r.raise_for_status()
         return r.json()["message"]["content"].strip()
-
-    def check_confirmation(
-        self,
-        user_text: str,
-        last_bot_message: str,
-        current_answer: str,
-    ) -> Dict[str, Any]:
-        """Determine whether the patient is confirming a summary."""
-        system = (
-            "You are determining whether a patient is confirming a summary read back to them, "
-            "and whether they added any new information. "
-            "Consider context carefully — 'no, I haven't' in response to 'You haven't been told X, right?' is a confirmation. "
-            "If the patient confirms AND adds new info (e.g. 'yes, and also penicillin'), "
-            "set confirmed=true and put the new info in additional_info."
-        )
-        user = (
-            f'The assistant just said: "{last_bot_message}"\n'
-            f'Current recorded answer: "{current_answer}"\n'
-            f'The patient responded: "{user_text}"\n\n'
-            f"Is the patient confirming? Did they add any new information?"
-        )
-        return self._ollama_structured(system, user, CONFIRM_SCHEMA)
 
     # -------------------------------------------------------------------
     # Ollama HTTP helper

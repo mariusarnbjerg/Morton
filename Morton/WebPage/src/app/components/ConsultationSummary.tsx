@@ -1,17 +1,19 @@
 import { useState } from 'react';
 import {
-  User,
   AlertTriangle,
   ChevronDown,
   ChevronRight,
   MessageSquare,
-  Shield,
   FileText,
   Cigarette,
   Heart,
   Pill,
-  HelpCircle,
   Clock,
+  Stethoscope,
+  Brain,
+  Wind,
+  Droplet,
+  Activity,
 } from 'lucide-react';
 import { Button } from '@/app/components/ui/button';
 import { Card } from '@/app/components/ui/card';
@@ -22,18 +24,50 @@ import { Badge } from '@/app/components/ui/badge';
 interface PatientInfo {
   name: string;
   age: number;
-  allergies: string;
-  prior_anesthesia: 'yes' | 'no' | 'unknown';
-  current_surgery: string;
-  asa_classification: string;
-  smoking_status: string;
-  fasting_compliance: string;
 }
 
-interface QAItem {
-  question_id: string;
-  question: string;
-  answer: string;
+interface AnesthesiaHistory {
+  prior_anesthesia: 'yes' | 'no' | 'unknown';
+  prior_anesthesia_issues: string;
+  family_reaction: 'yes' | 'no' | 'unknown';
+  family_reaction_type: string;
+}
+
+interface Airway {
+  difficult_airway: 'yes' | 'no' | 'unknown';
+  sleep_apnea: string;
+  dental: string;
+}
+
+interface AllergiesAndMedications {
+  allergies: string;
+  prescription_medications: string;
+  blood_thinners: string;
+  supplements: string;
+}
+
+interface Cardiopulmonary {
+  cardiac_history: string;
+  respiratory_history: string;
+  exertional_dyspnea: 'yes' | 'no' | 'unknown';
+}
+
+interface GIAndRecentHealth {
+  acid_reflux: string;
+  recent_health_changes: string;
+}
+
+interface Lifestyle {
+  smoking_status: 'never' | 'former' | 'current_light' | 'current_heavy' | 'unknown';
+  smoking_details: string;
+  alcohol: string;
+  recreational_drugs: string;
+}
+
+interface Psychological {
+  anxiety_level: string;
+  additional_history: string;
+  additional_questions: string;
 }
 
 interface RedFlag {
@@ -43,17 +77,34 @@ interface RedFlag {
   description?: string;
 }
 
-interface PatientQuestion {
+interface QAItem {
+  question_id: string;
   question: string;
   answer: string;
 }
 
+interface TranscriptMessage {
+  role: 'patient' | 'assistant';
+  content: string;
+  timestamp: number;
+}
+
 export interface SummaryData {
+  // LLM-generated structured interpretation
   patient: PatientInfo;
-  questionnaire_answers: QAItem[];
-  patient_questions: PatientQuestion[];
+  anesthesia_history: AnesthesiaHistory;
+  airway: Airway;
+  allergies_and_medications: AllergiesAndMedications;
+  cardiopulmonary: Cardiopulmonary;
+  gi_and_recent_health: GIAndRecentHealth;
+  lifestyle: Lifestyle;
+  psychological: Psychological;
   red_flags: RedFlag[];
+  asa_classification: string;
   notes: string;
+  // Deterministically populated by the orchestrator
+  questionnaire_answers: QAItem[];
+  raw_transcript: TranscriptMessage[];
 }
 
 interface Props {
@@ -66,8 +117,8 @@ interface Props {
 const ASA_LABELS: Record<string, { label: string; desc: string; color: string }> = {
   'ASA-I':        { label: 'ASA I',  desc: 'Healthy patient',                     color: 'bg-emerald-100 text-emerald-800 border-emerald-300' },
   'ASA-II':       { label: 'ASA II', desc: 'Mild systemic disease',               color: 'bg-sky-100 text-sky-800 border-sky-300' },
-  'ASA-III':      { label: 'ASA III', desc: 'Severe systemic disease',             color: 'bg-amber-100 text-amber-800 border-amber-300' },
-  'ASA-IV':       { label: 'ASA IV', desc: 'Severe life-threatening disease',      color: 'bg-orange-100 text-orange-800 border-orange-300' },
+  'ASA-III':      { label: 'ASA III', desc: 'Severe systemic disease',            color: 'bg-amber-100 text-amber-800 border-amber-300' },
+  'ASA-IV':       { label: 'ASA IV', desc: 'Severe life-threatening disease',     color: 'bg-orange-100 text-orange-800 border-orange-300' },
   'ASA-V':        { label: 'ASA V',  desc: 'Moribund patient',                    color: 'bg-red-100 text-red-800 border-red-300' },
   'not_assessed': { label: 'N/A',    desc: 'Insufficient information',            color: 'bg-slate-100 text-slate-600 border-slate-300' },
 };
@@ -80,11 +131,10 @@ const SMOKING_LABELS: Record<string, string> = {
   unknown: 'Unknown',
 };
 
-const FASTING_LABELS: Record<string, string> = {
-  compliant: 'Compliant',
-  non_compliant: 'Non-compliant',
-  unclear: 'Unclear',
-  not_discussed: 'Not discussed',
+const YESNO_LABELS: Record<string, string> = {
+  yes: 'Yes',
+  no: 'No',
+  unknown: 'Unknown',
 };
 
 const SEVERITY_STYLES: Record<string, string> = {
@@ -106,10 +156,10 @@ const CATEGORY_LABELS: Record<string, string> = {
   cardiac_risk: 'Cardiac risk',
   medication_interaction: 'Medication interaction',
   allergy_concern: 'Allergy concern',
-  fasting_violation: 'Fasting violation',
   pregnancy_concern: 'Pregnancy concern',
   bleeding_risk: 'Bleeding risk',
   respiratory_risk: 'Respiratory risk',
+  family_anesthesia_reaction: 'Family anesthesia reaction',
   other: 'Other',
 };
 
@@ -149,12 +199,37 @@ function Section({
   );
 }
 
+// ── Field row helper ─────────────────────────────────────────────────────
+
+function Field({ label, value }: { label: string; value: string | undefined }) {
+  return (
+    <div className="py-2 border-b border-slate-100 last:border-b-0">
+      <p className="text-[11px] uppercase tracking-wide text-slate-400 mb-0.5">{label}</p>
+      <p className="text-sm text-slate-800 leading-snug">{value || '—'}</p>
+    </div>
+  );
+}
+
 // ── Main Component ───────────────────────────────────────────────────────
 
 export function ConsultationSummary({ summary, onDismiss }: Props) {
-  const { patient, questionnaire_answers, patient_questions, red_flags, notes } = summary;
+  const {
+    patient,
+    anesthesia_history,
+    airway,
+    allergies_and_medications,
+    cardiopulmonary,
+    gi_and_recent_health,
+    lifestyle,
+    psychological,
+    red_flags,
+    asa_classification,
+    notes,
+    questionnaire_answers,
+    raw_transcript,
+  } = summary;
 
-  const asa = ASA_LABELS[patient.asa_classification] ?? ASA_LABELS['not_assessed'];
+  const asa = ASA_LABELS[asa_classification] ?? ASA_LABELS['not_assessed'];
 
   return (
     <div className="min-h-full bg-slate-50 py-8 px-4">
@@ -172,7 +247,6 @@ export function ConsultationSummary({ summary, onDismiss }: Props) {
             <h2 className="text-2xl text-slate-900">{patient.name || 'Unknown patient'}</h2>
             <p className="text-sm text-slate-500 mt-0.5">
               {patient.age ? `${patient.age} years` : ''}
-              {patient.current_surgery ? ` · ${patient.current_surgery}` : ''}
             </p>
           </div>
           <Button variant="ghost" size="sm" onClick={onDismiss} className="text-slate-500 mt-1">
@@ -191,7 +265,7 @@ export function ConsultationSummary({ summary, onDismiss }: Props) {
           <Card className="p-3 bg-white border-slate-200">
             <p className="text-[11px] uppercase tracking-wide text-slate-400 mb-1">Allergies</p>
             <p className="text-sm text-slate-800 leading-snug">
-              {patient.allergies || 'None'}
+              {allergies_and_medications.allergies || 'None'}
             </p>
           </Card>
 
@@ -200,14 +274,14 @@ export function ConsultationSummary({ summary, onDismiss }: Props) {
             <div className="flex items-center gap-1.5">
               <Cigarette className="size-3.5 text-slate-400" />
               <p className="text-sm text-slate-800">
-                {SMOKING_LABELS[patient.smoking_status] ?? patient.smoking_status}
+                {SMOKING_LABELS[lifestyle.smoking_status] ?? lifestyle.smoking_status}
               </p>
             </div>
           </Card>
 
           <Card className="p-3 bg-white border-slate-200">
             <p className="text-[11px] uppercase tracking-wide text-slate-400 mb-1">Prior anaesthesia</p>
-            <p className="text-sm text-slate-800 capitalize">{patient.prior_anesthesia}</p>
+            <p className="text-sm text-slate-800 capitalize">{anesthesia_history.prior_anesthesia}</p>
           </Card>
         </div>
 
@@ -255,7 +329,86 @@ export function ConsultationSummary({ summary, onDismiss }: Props) {
           </Section>
         )}
 
-        {/* ── Full Q & A transcript ──────────────────────────────── */}
+        {/* ── Anesthesia history ─────────────────────────────────── */}
+        <Section
+          title="Anesthesia history"
+          icon={<Stethoscope className="size-4" />}
+          defaultOpen={false}
+        >
+          <Field label="Prior anesthesia" value={YESNO_LABELS[anesthesia_history.prior_anesthesia]} />
+          <Field label="Prior anesthesia issues" value={anesthesia_history.prior_anesthesia_issues} />
+          <Field label="Family reaction" value={YESNO_LABELS[anesthesia_history.family_reaction]} />
+          <Field label="Family reaction type" value={anesthesia_history.family_reaction_type} />
+        </Section>
+
+        {/* ── Airway ─────────────────────────────────────────────── */}
+        <Section
+          title="Airway"
+          icon={<Wind className="size-4" />}
+          defaultOpen={false}
+        >
+          <Field label="Difficult airway" value={YESNO_LABELS[airway.difficult_airway]} />
+          <Field label="Sleep apnea / CPAP" value={airway.sleep_apnea} />
+          <Field label="Dental" value={airway.dental} />
+        </Section>
+
+        {/* ── Allergies & medications ────────────────────────────── */}
+        <Section
+          title="Allergies & medications"
+          icon={<Pill className="size-4" />}
+          defaultOpen={false}
+        >
+          <Field label="Allergies" value={allergies_and_medications.allergies} />
+          <Field label="Prescription medications" value={allergies_and_medications.prescription_medications} />
+          <Field label="Blood thinners" value={allergies_and_medications.blood_thinners} />
+          <Field label="Supplements & OTC" value={allergies_and_medications.supplements} />
+        </Section>
+
+        {/* ── Cardiopulmonary ────────────────────────────────────── */}
+        <Section
+          title="Cardiopulmonary"
+          icon={<Heart className="size-4" />}
+          defaultOpen={false}
+        >
+          <Field label="Cardiac history" value={cardiopulmonary.cardiac_history} />
+          <Field label="Respiratory history" value={cardiopulmonary.respiratory_history} />
+          <Field label="Shortness of breath on exertion" value={YESNO_LABELS[cardiopulmonary.exertional_dyspnea]} />
+        </Section>
+
+        {/* ── GI & recent health ─────────────────────────────────── */}
+        <Section
+          title="Recent health"
+          icon={<Droplet className="size-4" />}
+          defaultOpen={false}
+        >
+          <Field label="Acid reflux" value={gi_and_recent_health.acid_reflux} />
+          <Field label="Recent health changes" value={gi_and_recent_health.recent_health_changes} />
+        </Section>
+
+        {/* ── Lifestyle ──────────────────────────────────────────── */}
+        <Section
+          title="Lifestyle"
+          icon={<Activity className="size-4" />}
+          defaultOpen={false}
+        >
+          <Field label="Smoking status" value={SMOKING_LABELS[lifestyle.smoking_status]} />
+          <Field label="Smoking details" value={lifestyle.smoking_details} />
+          <Field label="Alcohol" value={lifestyle.alcohol} />
+          <Field label="Recreational drugs" value={lifestyle.recreational_drugs} />
+        </Section>
+
+        {/* ── Psychological ──────────────────────────────────────── */}
+        <Section
+          title="Psychological & additional"
+          icon={<Brain className="size-4" />}
+          defaultOpen={false}
+        >
+          <Field label="Anxiety level" value={psychological.anxiety_level} />
+          <Field label="Additional history" value={psychological.additional_history} />
+          <Field label="Additional questions" value={psychological.additional_questions} />
+        </Section>
+
+        {/* ── Full Q & A transcript (deterministic) ──────────────── */}
         <Section
           title="Full questionnaire responses"
           icon={<MessageSquare className="size-4" />}
@@ -279,21 +432,32 @@ export function ConsultationSummary({ summary, onDismiss }: Props) {
           </div>
         </Section>
 
-        {/* ── Patient-initiated questions ─────────────────────────── */}
-        {patient_questions.length > 0 && (
+        {/* ── Full raw transcript (deterministic) ───────────────── */}
+        {raw_transcript.length > 0 && (
           <Section
-            title="Questions asked by patient"
-            icon={<HelpCircle className="size-4" />}
+            title="Full conversation transcript"
+            icon={<MessageSquare className="size-4" />}
             defaultOpen={false}
             badge={
-              <span className="text-xs text-slate-400">{patient_questions.length}</span>
+              <span className="text-xs text-slate-400">{raw_transcript.length} messages</span>
             }
           >
-            <div className="space-y-3">
-              {patient_questions.map((pq, i) => (
-                <div key={i} className="bg-slate-50 rounded-lg p-3 border border-slate-100">
-                  <p className="text-sm font-medium text-slate-800 mb-1">"{pq.question}"</p>
-                  <p className="text-sm text-slate-600 leading-relaxed">{pq.answer}</p>
+            <div className="space-y-2">
+              {raw_transcript.map((msg, i) => (
+                <div
+                  key={i}
+                  className={`rounded-lg p-3 border ${
+                    msg.role === 'patient'
+                      ? 'bg-blue-50 border-blue-100'
+                      : 'bg-slate-50 border-slate-100'
+                  }`}
+                >
+                  <p className="text-[10px] uppercase tracking-wide text-slate-500 mb-1 font-medium">
+                    {msg.role === 'patient' ? 'Patient' : 'Assistant'}
+                  </p>
+                  <p className="text-sm text-slate-800 leading-relaxed whitespace-pre-line">
+                    {msg.content}
+                  </p>
                 </div>
               ))}
             </div>

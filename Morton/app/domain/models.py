@@ -44,7 +44,6 @@ class FollowUpQuestion:
     trigger: str                            # Natural language condition for LLM to evaluate
     type: str = "free_text"
     completion_criteria: Optional[str] = None
-    confirmation_required: bool = False
 
 
 @dataclass
@@ -55,7 +54,6 @@ class Question:
     Layers of completion enforcement:
       - Layer A: Global prompt-level rules (always active, no config needed)
       - Layer B: completion_criteria — explicit per-question definition of "answered"
-      - Layer C: confirmation_required — LLM generates a closing confirmation before marking done
     """
     id: str
     text: str
@@ -64,8 +62,7 @@ class Question:
     help_prompt: Optional[str] = None
     choices: Optional[List[str]] = None
     validation: Optional[Dict[str, Any]] = None
-    completion_criteria: Optional[str] = None       # Layer B
-    confirmation_required: bool = False             # Layer C
+    completion_criteria: Optional[str] = None
     follow_ups: List[FollowUpQuestion] = field(default_factory=list)
 
 
@@ -74,12 +71,10 @@ class ConversationState(str, Enum):
     IN_PROGRESS:           Normal flow — extracting answers, advancing questions.
     FREE_CHAT:             Patient didn't answer the current question — chatting freely
                            until they signal they're ready to continue.
-    AWAITING_CONFIRMATION: Layer C — waiting for patient to confirm a summary read back to them.
     DONE:                  All required questions answered.
     """
     IN_PROGRESS = "in_progress"
     FREE_CHAT = "free_chat"
-    AWAITING_CONFIRMATION = "awaiting_confirmation"
     DONE = "done"
 
 
@@ -107,11 +102,8 @@ class Conversation:
     # Tracks the active follow-up question id, if any (None = on parent question)
     active_follow_up_id: Optional[str] = None
 
-    # Tracks which question is currently awaiting Layer C confirmation
-    pending_confirmation_question_id: Optional[str] = None
-
     # All collected answers keyed by question id (includes follow-up ids)
     answers: Dict[str, str] = field(default_factory=dict)
 
-    # Tracks which question ids have been fully completed (including follow-ups + confirmation)
+    # Tracks which question ids have been fully completed (including follow-ups)
     completed_question_ids: List[str] = field(default_factory=list)

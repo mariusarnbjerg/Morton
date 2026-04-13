@@ -3,7 +3,7 @@ Conversational orchestrator - manages state, delegates language to ILLMClient.
 
 The orchestrator coordinates the conversation flow:
   1. Receives patient messages
-  2. Delegates language tasks to the LLM client (extract, reply, confirm, detect question)
+  2. Delegates language tasks to the LLM client (extract, reply, detect question)
   3. Updates conversation state based on structured results
   4. Returns the assistant's reply
 
@@ -77,11 +77,8 @@ class ConversationOrchestrator:
         focus = active_fu if active_fu else current_q
 
         # Call 1: Extract
-        # Skip extraction when awaiting confirmation — patient is confirming, not answering a question
         # Skip extraction when in free chat — patient is chatting freely, not answering a question
-        if conv.state == ConversationState.AWAITING_CONFIRMATION:
-            extraction = None
-        elif conv.state == ConversationState.FREE_CHAT:
+        if conv.state == ConversationState.FREE_CHAT:
             extraction = None
         else:
             extraction = self.llm.extract(focus, user_text) if focus else None
@@ -100,6 +97,8 @@ class ConversationOrchestrator:
         question_text = instruction.get("question_text")
         if action in ("ask_next", "ask_followup") and question_text:
             reply = f"{reply}\n\n{question_text}" if reply.strip() else question_text
+        elif action == "reask" and question_text:
+            reply = f"{reply}\n\n{question_text}" if reply.strip() else question_text
         elif action == "reentry" and question_text:
             reply = question_text
         elif action == "free_chat":
@@ -110,7 +109,7 @@ class ConversationOrchestrator:
         self.store.append(conv.conversation_id, Message(role=Role.ASSISTANT, content=reply))
 
         unanswered = self.question_flow.get_unanswered_required_ids(conv)
-        if not unanswered and conv.state != ConversationState.AWAITING_CONFIRMATION:
+        if not unanswered:
             conv.state = ConversationState.DONE
             return OrchestratorResult(bot_text=reply, done=True)
 
@@ -126,7 +125,7 @@ class ConversationOrchestrator:
         transcript = self.store.get(conv.conversation_id)
         summary = self.summarizer.summarize(transcript=transcript, schema=schema)
         summary["questionnaire_answers"] = self._build_questionnaire_answers(conv)
-        summary["patient_questions"] = self._build_patient_questions(transcript)
+        summary["raw_transcript"] = self._build_raw_transcript(transcript)
         return summary
 
     # -----------------------------------------------------------------------
@@ -144,7 +143,7 @@ class ConversationOrchestrator:
         """
         Apply extraction results to conversation state.
         Returns an instruction dict telling the reply call exactly what to do:
-          action:      ask_next | ask_followup | free_chat | reentry | confirm | done
+          action:      ask_next | ask_followup | free_chat | reentry | done
           question_text: the exact text to ask next (or None)
           question_id:   the id of the question being asked next
           acknowledged_answer: what the patient just answered (for natural transitions)
@@ -186,57 +185,31 @@ class ConversationOrchestrator:
                 }
 
         # ------------------------------------------------------------------
-        # Handle confirmation state first — patient is confirming a summary
-        # ------------------------------------------------------------------
-        if conv.state == ConversationState.AWAITING_CONFIRMATION:
-            # Gather context for the confirmation check
-            transcript = self.store.get(conv.conversation_id)
-            last_bot = next(
-                (m.content for m in reversed(transcript) if m.role == Role.ASSISTANT),
-                ""
-            )
-            current_answer = conv.answers.get(conv.pending_confirmation_question_id, "") if conv.pending_confirmation_question_id else ""
-
-            confirm_result = self.llm.check_confirmation(user_text, last_bot, current_answer)
-            print(f"[DEBUG] confirm_result: {confirm_result}")
-
-            if confirm_result.get("confirmed", False):
-                confirmed_id = conv.pending_confirmation_question_id
-
-                # If patient added new information while confirming, append it to the stored answer
-                additional = confirm_result.get("additional_info", "").strip()
-                if additional and confirmed_id:
-                    existing = conv.answers.get(confirmed_id, "")
-                    conv.answers[confirmed_id] = f"{existing}; {additional}" if existing else additional
-                    print(f"[DEBUG] Patient added info during confirmation: {additional}")
-
-                if confirmed_id and confirmed_id not in conv.completed_question_ids:
-                    conv.completed_question_ids.append(confirmed_id)
-                conv.pending_confirmation_question_id = None
-                conv.state = ConversationState.IN_PROGRESS
-                current_q = self.question_flow.get_question(conv)
-                if current_q and current_q.id == confirmed_id:
-                    self.question_flow.advance(conv)
-                return self._next_question_instruction(conv, acknowledged, user_text, focus.text if focus else "")
-            else:
-                return {
-                    "action": "reask",
-                    "question_text": focus.text if focus else None,
-                    "question_id": focus.id if focus else None,
-                    "acknowledged_answer": ""
-                }
-
-        # ------------------------------------------------------------------
         # Normal flow
         # ------------------------------------------------------------------
 
         if not is_complete:
-            conv.state = ConversationState.FREE_CHAT
+            # q0 is the greeting — allow free-form chat until the patient signals ready.
+            if focus and focus.id == "q0":
+                conv.state = ConversationState.FREE_CHAT
+                return {
+                    "action": "free_chat",
+                    "question_text": focus.text,
+                    "question_id": focus.id,
+                    "completion_criteria": focus.completion_criteria or "",
+                    "acknowledged_answer": acknowledged,
+                    "full_message": user_text,
+                }
+
+            # Normal questions — patient is still engaged with the current question,
+            # they just haven't satisfied it yet. Reply to what they said and re-ask.
             return {
-                "action": "free_chat",
+                "action": "reask",
                 "question_text": focus.text if focus else None,
                 "question_id": focus.id if focus else None,
-                "acknowledged_answer": acknowledged
+                "acknowledged_answer": acknowledged,
+                "full_message": user_text,
+                "current_question_text": focus.text if focus else "",
             }
 
         # Answer is complete — mark it and ensure we're back in normal flow
@@ -266,20 +239,11 @@ class ConversationOrchestrator:
                         "full_message": user_text,
                         "current_question_text": focus.text if focus else ""
                     }
-                if parent_q.confirmation_required and parent_q.id not in conv.completed_question_ids:
-                    conv.pending_confirmation_question_id = parent_q.id
-                    conv.state = ConversationState.AWAITING_CONFIRMATION
-                    return {
-                        "action": "confirm",
-                        "question_text": None,
-                        "question_id": parent_q.id,
-                        "acknowledged_answer": acknowledged,
-                        "confirm_answer": conv.answers.get(parent_q.id, acknowledged),
-                    }
 
                 if parent_q.id not in conv.completed_question_ids:
                     conv.completed_question_ids.append(parent_q.id)
                 self.question_flow.advance(conv)
+
             return self._next_question_instruction(conv, acknowledged, user_text, focus.text if focus else "")
 
         # ------------------------------------------------------------------
@@ -305,18 +269,6 @@ class ConversationOrchestrator:
                         "acknowledged_answer": acknowledged,
                         "full_message": user_text
                     }
-
-        current_q = self.question_flow.get_question(conv)
-        if current_q and current_q.confirmation_required and current_q.id == focus.id:
-            conv.pending_confirmation_question_id = current_q.id
-            conv.state = ConversationState.AWAITING_CONFIRMATION
-            return {
-                "action": "confirm",
-                "question_text": None,
-                "question_id": current_q.id,
-                "acknowledged_answer": acknowledged,
-                "confirm_answer": conv.answers.get(current_q.id, acknowledged),
-            }
 
         self.question_flow.advance(conv)
         return self._next_question_instruction(conv, acknowledged, user_text, focus.text if focus else "")
@@ -357,17 +309,13 @@ class ConversationOrchestrator:
                     items.append({"question_id": fu.id, "question": fu.text, "answer": fu_ans})
         return items
 
-    def _build_patient_questions(self, transcript: List[Message]) -> list:
-        out = []
-        messages = [m for m in transcript if m.role in (Role.PATIENT, Role.ASSISTANT)]
-        question_starters = ("why", "what", "how", "when", "where", "who", "can you", "could you")
-        for i, m in enumerate(messages):
-            if m.role == Role.PATIENT:
-                text = m.content.strip()
-                is_question = (
-                    text.endswith("?") or
-                    any(text.lower().startswith(w) for w in question_starters)
-                )
-                if is_question and i + 1 < len(messages) and messages[i + 1].role == Role.ASSISTANT:
-                    out.append({"question": text, "answer": messages[i + 1].content})
-        return out
+    def _build_raw_transcript(self, transcript: List[Message]) -> list:
+        return [
+            {
+                "role": m.role.value,
+                "content": m.content,
+                "timestamp": m.ts,
+            }
+            for m in transcript
+            if m.role in (Role.PATIENT, Role.ASSISTANT)
+        ]

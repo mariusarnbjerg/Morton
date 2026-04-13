@@ -34,8 +34,7 @@
           "text": "Did you experience any problems with it?",
           "trigger": "Patient says yes, confirms, or implies they have had anesthesia before — including 'yes once', 'yes twice', 'a few times', etc.",
           "type": "free_text",
-          "completion_criteria": "Patient has described any problems or side effects, or clearly stated there were none. Any direct response is complete.",
-          "confirmation_required": false
+          "completion_criteria": "Patient has described any problems or side effects, or clearly stated there were none. Any direct response is complete."
         }
       ]
     },
@@ -49,10 +48,9 @@
         {
           "id": "q4b",
           "text": "What type of reaction was it — for example, malignant hyperthermia, prolonged muscle relaxation, or something else?",
-          "trigger": "patient confirms a family member had an adverse anesthesia reaction",
+          "trigger": "Patient confirms a family member had an adverse anesthesia reaction",
           "type": "free_text",
-          "completion_criteria": "Patient has described the type of reaction, even if only approximately.",
-          "confirmation_required": false
+          "completion_criteria": "Patient has described the type of reaction, even if only approximately."
         }
       ]
     },
@@ -61,38 +59,35 @@
       "text": "Has a doctor ever told you that you were difficult to intubate or that you have a difficult airway?",
       "type": "yesno",
       "required": true,
-      "completion_criteria": "Patient has clearly confirmed or denied being told about a difficult airway.",
-      "confirmation_required": false
+      "completion_criteria": "Patient has clearly confirmed or denied being told about a difficult airway."
     },
     {
       "id": "q6",
       "text": "Do you have sleep apnea or use a CPAP machine at night?",
       "type": "free_text",
       "required": true,
-      "completion_criteria": "Patient has confirmed or denied sleep apnea or CPAP use."
+      "completion_criteria": "Patient has confirmed or denied sleep apnea or CPAP use. A bare 'yes' or 'no' is sufficient and complete."
     },
     {
       "id": "q7",
       "text": "Do you have any loose teeth, dentures, or dental implants?",
       "type": "free_text",
       "required": true,
-      "completion_criteria": "Patient has confirmed or denied loose teeth, dentures, implants, or any other dental work."
+      "completion_criteria": "Patient has confirmed or denied loose teeth, dentures, implants, or any other dental work. A bare 'yes' or 'no' is sufficient and complete."
     },
     {
       "id": "q8",
       "text": "Do you have any allergies to medications, latex, or anesthesia drugs?",
       "type": "free_text",
       "required": true,
-      "completion_criteria": "Patient has confirmed or denied experiencing allergies",
-      "confirmation_required": false,
+      "completion_criteria": "Patient has confirmed or denied experiencing allergies to medications, latex, or anesthesia drugs.",
       "follow_ups": [
         {
           "id": "q8b",
           "text": "Which ones, and what kind of reaction do you get?",
-          "trigger": "Patient confirms having any allergies",
+          "trigger": "Patient confirms having allergies but used only a vague word like 'yes' or 'some' without naming any specific allergen",
           "type": "free_text",
-          "completion_criteria": "Patient has named specific allergens. General confirmation ('yes I have allergies') is not enough — actual allergen names are needed.",
-          "confirmation_required": false
+          "completion_criteria": "Patient has named specific allergens. General confirmation ('yes I have allergies') is not enough — actual allergen names are needed."
         }
       ]
     },
@@ -101,16 +96,14 @@
       "text": "Do you take any daily prescription medications?",
       "type": "free_text",
       "required": true,
-      "completion_criteria": "Patient has confirmed or denied taking prescription medications",
-      "confirmation_required": false,
+      "completion_criteria": "Patient has confirmed or denied taking any prescription medications",
       "follow_ups": [
         {
           "id": "q9b",
           "text": "Could you list them for me?",
-          "trigger": "Patient has confirmed or implied taking prescription medications but has not yet named them specifically",
+          "trigger": "Patient confirms taking prescription medications but used only a vague word like 'yes' or 'some' without naming any specific medication",
           "type": "free_text",
-          "completion_criteria": "Patient has named at least one specific medication. Approximate names are acceptable (e.g. 'blood pressure pill' if they don't know the name).",
-          "confirmation_required": false
+          "completion_criteria": "Patient has named at least one specific medication. Approximate names are acceptable (e.g. 'blood pressure pill' if they don't know the name)."
         }
       ]
     },
@@ -119,8 +112,7 @@
       "text": "Do you take blood thinners such as aspirin, warfarin, Eliquis, or Xarelto?",
       "type": "free_text",
       "required": true,
-      "completion_criteria": "Patient has confirmed or denied taking blood thinners (any clear denial is complete)",
-      "confirmation_required": false
+      "completion_criteria": "Patient has confirmed or denied taking blood thinners. A bare 'yes' or 'no' is sufficient and complete."
     },
     {
       "id": "q11",
@@ -132,10 +124,9 @@
         {
           "id": "q11b",
           "text": "Could you list what you're taking?",
-          "trigger": "Patient confirms taking non-prescription medications, supplements, or herbal remedies but has not yet listed them",
+          "trigger": "Patient confirms taking supplements but used only a vague word like 'yes', 'some', or 'a few' without naming any specific item",
           "type": "free_text",
-          "completion_criteria": "Patient has listed specific items and confirmed the list is complete.",
-          "confirmation_required": false
+          "completion_criteria": "Patient has named at least one specific supplement or stated they don't know."
         }
       ]
     },
@@ -144,35 +135,35 @@
       "text": "Do you have any heart conditions, chest pain, or a history of heart surgery or stents?",
       "type": "free_text",
       "required": true,
-      "completion_criteria": "Patient has confirmed or denied cardiac history."
+      "completion_criteria": "Patient has confirmed or denied cardiac history. A bare 'yes' or 'no' is sufficient and complete."
     },
     {
       "id": "q13",
       "text": "Do you have asthma, COPD, or any other breathing problems?",
       "type": "free_text",
       "required": true,
-      "completion_criteria": "Patient has confirmed or denied respiratory conditions."
+      "completion_criteria": "Patient has confirmed or denied respiratory conditions. A bare 'yes' or 'no' is sufficient and complete."
     },
     {
       "id": "q14",
       "text": "Do you get short of breath when walking on flat ground or climbing stairs?",
       "type": "free_text",
       "required": true,
-      "completion_criteria": "Patient has confirmed or denied exertional shortness of breath."
+      "completion_criteria": "Patient has confirmed or denied exertional shortness of breath. A bare 'yes' or 'no' is sufficient and complete."
     },
     {
       "id": "q15",
       "text": "Do you experience acid reflux or heartburn, or take any medication for it?",
       "type": "free_text",
       "required": true,
-      "completion_criteria": "Patient has confirmed or denied acid reflux symptoms and medication use."
+      "completion_criteria": "Patient has confirmed or denied acid reflux symptoms and medication use. A bare 'yes' or 'no' is sufficient and complete."
     },
     {
       "id": "q16",
       "text": "Have you had any recent infections, fever, or major health changes in the last few weeks?",
       "type": "free_text",
       "required": true,
-      "completion_criteria": "Patient has confirmed or denied recent health changes."
+      "completion_criteria": "Patient has confirmed or denied recent health changes. A bare 'yes' or 'no' is sufficient and complete."
     },
     {
       "id": "q17",
@@ -184,10 +175,9 @@
         {
           "id": "q17b",
           "text": "How long have you been using it, and roughly how much per day?",
-          "trigger": "Patient confirms current or recent smoking or nicotine use",
+          "trigger": "Patient confirms smoking or nicotine use but did not mention both duration and frequency",
           "type": "free_text",
-          "completion_criteria": "Patient has provided any indication of duration OR frequency of use. Approximate answers are acceptable. If the patient cannot or does not know, that is also complete.",
-          "confirmation_required": false
+          "completion_criteria": "Patient has provided any indication of duration OR frequency of use. Approximate answers are acceptable. If the patient cannot or does not know, that is also complete."
         }
       ]
     },
@@ -203,15 +193,14 @@
       "text": "Do you use any recreational or illicit drugs?",
       "type": "free_text",
       "required": true,
-      "completion_criteria": "Patient has confirmed or denied illicit drug use.",
+      "completion_criteria": "Patient has confirmed or denied illicit drug use. A bare 'yes' or 'no' is sufficient and complete.",
       "follow_ups": [
         {
           "id": "q19b",
           "text": "What do you use, and how often?",
-          "trigger": "patient confirms using recreational or illicit drugs",
+          "trigger": "Patient confirms drug use but did not name what they use or how often",
           "type": "free_text",
-          "completion_criteria": "Patient has described what they use AND roughly how often. If the patient says they don't know the specific type, that is acceptable as long as frequency is given.",
-          "confirmation_required": false
+          "completion_criteria": "Patient has described what they use AND roughly how often. If the patient says they don't know the specific type, that is acceptable as long as frequency is given."
         }
       ]
     },

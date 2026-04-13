@@ -13,7 +13,6 @@ class ILLMClient(ABC):
     The LLM client handles all natural language processing:
       - Extracting answers from patient messages
       - Generating conversational replies
-      - Checking whether a patient confirmed a summary
       - Detecting whether a patient is asking a question
     """
 
@@ -53,23 +52,5 @@ class ILLMClient(ABC):
 
         Returns:
             The assistant's reply as a string.
-        """
-        pass
-
-    @abstractmethod
-    def check_confirmation(
-        self,
-        user_text: str,
-        last_bot_message: str,
-        current_answer: str,
-    ) -> Dict[str, Any]:
-        """
-        Determine whether the patient is confirming a summary read back to them.
-
-        Returns:
-            {
-                "confirmed": bool,       # Whether the patient confirmed
-                "additional_info": str   # Any new information added beyond confirming
-            }
         """
         pass

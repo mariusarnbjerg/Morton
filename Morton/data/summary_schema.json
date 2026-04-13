@@ -4,94 +4,168 @@
   "properties": {
     "patient": {
       "type": "object",
-      "description": "Basic patient demographic and medical information extracted from the questionnaire",
+      "description": "Basic patient identification",
       "properties": {
         "name": {
           "type": "string",
-          "description": "Patient's full name"
+          "description": "Patient's full name (from q1)"
         },
         "age": {
           "type": "integer",
-          "description": "Patient's age in years"
-        },
-        "allergies": {
-          "type": "string",
-          "description": "List of known allergies (medications, food, environmental). Use 'None' if patient has no allergies, 'Unknown' if not discussed."
-        },
+          "description": "Patient's age in years (from q2)"
+        }
+      },
+      "required": ["name", "age"]
+    },
+    "anesthesia_history": {
+      "type": "object",
+      "description": "Prior anesthesia experience and family history",
+      "properties": {
         "prior_anesthesia": {
           "type": "string",
           "enum": ["yes", "no", "unknown"],
-          "description": "Whether patient has had anesthesia before. yes=previous anesthesia experience, no=first time, unknown=patient unsure or not discussed"
+          "description": "Whether patient has had anesthesia before (from q3)"
         },
-        "current_surgery": {
+        "prior_anesthesia_issues": {
           "type": "string",
-          "description": "Type of surgery or procedure patient is scheduled for"
+          "description": "Any problems experienced during prior anesthesia, or 'None' if none reported (from q3b). Use 'N/A' if no prior anesthesia."
         },
-        "asa_classification": {
+        "family_reaction": {
           "type": "string",
-          "enum": ["ASA-I", "ASA-II", "ASA-III", "ASA-IV", "ASA-V", "not_assessed"],
-          "description": "ASA Physical Status Classification based on patient health: ASA-I=healthy patient, ASA-II=mild systemic disease, ASA-III=severe systemic disease, ASA-IV=severe disease threatening life, ASA-V=moribund, not_assessed=insufficient information"
+          "enum": ["yes", "no", "unknown"],
+          "description": "Whether any family member has had an adverse reaction to anesthesia (from q4)"
         },
+        "family_reaction_type": {
+          "type": "string",
+          "description": "Type of family adverse reaction, e.g. malignant hyperthermia (from q4b). Use 'N/A' if no family history."
+        }
+      },
+      "required": ["prior_anesthesia", "prior_anesthesia_issues", "family_reaction", "family_reaction_type"]
+    },
+    "airway": {
+      "type": "object",
+      "description": "Airway and intubation-related information",
+      "properties": {
+        "difficult_airway": {
+          "type": "string",
+          "enum": ["yes", "no", "unknown"],
+          "description": "Whether patient has been told they have a difficult airway (from q5)"
+        },
+        "sleep_apnea": {
+          "type": "string",
+          "description": "Sleep apnea status and CPAP use, if any (from q6)"
+        },
+        "dental": {
+          "type": "string",
+          "description": "Dental status — loose teeth, dentures, implants, or 'None' (from q7)"
+        }
+      },
+      "required": ["difficult_airway", "sleep_apnea", "dental"]
+    },
+    "allergies_and_medications": {
+      "type": "object",
+      "description": "Allergies and all medications the patient takes",
+      "properties": {
+        "allergies": {
+          "type": "string",
+          "description": "List of known allergies with reactions if provided. Use 'None' if no allergies (from q8, q8b)."
+        },
+        "prescription_medications": {
+          "type": "string",
+          "description": "List of prescription medications with doses if provided. Use 'None' if none (from q9, q9b)."
+        },
+        "blood_thinners": {
+          "type": "string",
+          "description": "Blood thinner use including name and dose if provided. Use 'None' if none (from q10)."
+        },
+        "supplements": {
+          "type": "string",
+          "description": "Non-prescription medications, supplements, or herbal remedies. Use 'None' if none (from q11, q11b)."
+        }
+      },
+      "required": ["allergies", "prescription_medications", "blood_thinners", "supplements"]
+    },
+    "cardiopulmonary": {
+      "type": "object",
+      "description": "Heart and lung health",
+      "properties": {
+        "cardiac_history": {
+          "type": "string",
+          "description": "Heart conditions, chest pain, heart surgery, or stents. Use 'None' if none (from q12)."
+        },
+        "respiratory_history": {
+          "type": "string",
+          "description": "Asthma, COPD, or other breathing problems. Use 'None' if none (from q13)."
+        },
+        "exertional_dyspnea": {
+          "type": "string",
+          "enum": ["yes", "no", "unknown"],
+          "description": "Whether patient gets short of breath walking on flat ground or climbing stairs (from q14)"
+        }
+      },
+      "required": ["cardiac_history", "respiratory_history", "exertional_dyspnea"]
+    },
+    "gi_and_recent_health": {
+      "type": "object",
+      "description": "Gastrointestinal and recent health changes",
+      "properties": {
+        "acid_reflux": {
+          "type": "string",
+          "description": "Acid reflux or heartburn status and any medication taken for it (from q15)."
+        },
+        "recent_health_changes": {
+          "type": "string",
+          "description": "Recent infections, fever, or major health changes in the last few weeks. Use 'None' if none (from q16)."
+        }
+      },
+      "required": ["acid_reflux", "recent_health_changes"]
+    },
+    "lifestyle": {
+      "type": "object",
+      "description": "Smoking, alcohol, and drug use",
+      "properties": {
         "smoking_status": {
           "type": "string",
           "enum": ["never", "former", "current_light", "current_heavy", "unknown"],
-          "description": "Smoking history: never=never smoked, former=quit smoking, current_light=<1 pack/day, current_heavy=≥1 pack/day, unknown=not discussed"
+          "description": "Smoking history: never, former, current_light (<1 pack/day), current_heavy (≥1 pack/day), or unknown (from q17, q17b)"
         },
-        "fasting_compliance": {
+        "smoking_details": {
           "type": "string",
-          "enum": ["compliant", "non_compliant", "unclear", "not_discussed"],
-          "description": "Whether patient followed pre-surgery fasting instructions (NPO status)"
+          "description": "Duration and amount of smoking if reported. Use 'N/A' if non-smoker (from q17b)."
+        },
+        "alcohol": {
+          "type": "string",
+          "description": "Weekly alcohol consumption, verbatim if possible (from q18)."
+        },
+        "recreational_drugs": {
+          "type": "string",
+          "description": "Recreational or illicit drug use with frequency if reported. Use 'None' if none (from q19, q19b)."
         }
       },
-      "required": ["name", "age", "allergies", "prior_anesthesia", "current_surgery", "asa_classification", "smoking_status", "fasting_compliance"]
+      "required": ["smoking_status", "smoking_details", "alcohol", "recreational_drugs"]
     },
-    "questionnaire_answers": {
-      "type": "array",
-      "description": "Structured list of standardized questions and patient's answers. This will be populated deterministically by the orchestrator - DO NOT extract from transcript.",
-      "items": {
-        "type": "object",
-        "properties": {
-          "question_id": {
-            "type": "string",
-            "description": "Unique identifier for the question (e.g., 'q1', 'q2')"
-          },
-          "question": {
-            "type": "string",
-            "description": "The standardized question text"
-          },
-          "answer": {
-            "type": "string",
-            "description": "Patient's verbatim answer to this question"
-          }
+    "psychological": {
+      "type": "object",
+      "description": "Patient's emotional state and additional concerns",
+      "properties": {
+        "anxiety_level": {
+          "type": "string",
+          "description": "Patient's expressed emotional state regarding the procedure (from q20)."
         },
-        "required": ["question_id", "question", "answer"]
-      }
-    },
-    "patient_questions": {
-      "type": "array",
-      "description": "Free-form questions the patient asked during the questionnaire (chat mode). This will be populated deterministically by the orchestrator - DO NOT extract from transcript.",
-      "items": {
-        "type": "object",
-        "properties": {
-          "question_id": {
-            "type": "string",
-            "description": "Unique identifier for the question (e.g., 'q1', 'q2') at which the patient asked their question"
-          },
-          "question": {
-            "type": "string",
-            "description": "The question the patient asked"
-          },
-          "answer": {
-            "type": "string",
-            "description": "The chatbot's response to the patient's question"
-          }
+        "additional_history": {
+          "type": "string",
+          "description": "Any additional health or surgical history the patient mentioned. Use 'None' if none (from q21)."
         },
-        "required": ["question_id", "question", "answer"]
-      }
+        "additional_questions": {
+          "type": "string",
+          "description": "Any additional questions or concerns the patient raised. Use 'None' if none (from q22)."
+        }
+      },
+      "required": ["anxiety_level", "additional_history", "additional_questions"]
     },
     "red_flags": {
       "type": "array",
-      "description": "Critical medical concerns or warnings identified from the transcript that require anesthesiologist attention",
+      "description": "Critical medical concerns requiring anesthesiologist attention",
       "items": {
         "type": "object",
         "properties": {
@@ -102,10 +176,10 @@
               "cardiac_risk",
               "medication_interaction",
               "allergy_concern",
-              "fasting_violation",
               "pregnancy_concern",
               "bleeding_risk",
               "respiratory_risk",
+              "family_anesthesia_reaction",
               "other"
             ],
             "description": "Type of medical concern"
@@ -113,20 +187,37 @@
           "severity": {
             "type": "string",
             "enum": ["low", "medium", "high", "critical"],
-            "description": "Urgency level: low=note for review, medium=needs discussion, high=requires immediate attention, critical=surgery may need postponement"
+            "description": "Urgency: low=note for review, medium=needs discussion, high=requires attention, critical=surgery may need postponement"
           },
           "details": {
             "type": "string",
-            "description": "Detailed explanation of the concern and relevant patient information"
+            "description": "Explanation of the concern and relevant patient information"
           }
         },
-        "required": ["category", "severity", "description"]
+        "required": ["category", "severity", "details"]
       }
+    },
+    "asa_classification": {
+      "type": "string",
+      "enum": ["ASA-I", "ASA-II", "ASA-III", "ASA-IV", "ASA-V", "not_assessed"],
+      "description": "ASA Physical Status: ASA-I=healthy, ASA-II=mild systemic disease, ASA-III=severe systemic disease, ASA-IV=severe disease threatening life, ASA-V=moribund, not_assessed=insufficient information"
     },
     "notes": {
       "type": "string",
-      "description": "Additional clinical observations, patient concerns, or contextual information that doesn't fit other categories. Use this for qualitative insights from the conversation."
+      "description": "Brief clinical summary of the patient's health condition and important findings for the anesthesiologist."
     }
   },
-  "required": ["patient", "questionnaire_answers", "patient_questions", "red_flags", "notes"]
+  "required": [
+    "patient",
+    "anesthesia_history",
+    "airway",
+    "allergies_and_medications",
+    "cardiopulmonary",
+    "gi_and_recent_health",
+    "lifestyle",
+    "psychological",
+    "red_flags",
+    "asa_classification",
+    "notes"
+  ]
 }

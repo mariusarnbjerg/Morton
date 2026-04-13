@@ -1,6 +1,6 @@
 """
 Loads questions from questions.json and serves them sequentially,
-now supporting follow-up questions, completion_criteria, and confirmation_required.
+now supporting follow-up questions, completion_criteria.
 """
 
 from __future__ import annotations
@@ -27,8 +27,7 @@ class JsonQuestionFlow(IQuestionFlow):
                 text=fu["text"],
                 trigger=fu["trigger"],
                 type=fu.get("type", "free_text"),
-                completion_criteria=fu.get("completion_criteria"),
-                confirmation_required=fu.get("confirmation_required", False),
+                completion_criteria=fu.get("completion_criteria")
             ))
 
         return Question(
@@ -40,8 +39,7 @@ class JsonQuestionFlow(IQuestionFlow):
             choices=data.get("choices"),
             validation=data.get("validation"),
             completion_criteria=data.get("completion_criteria"),
-            confirmation_required=data.get("confirmation_required", False),
-            follow_ups=follow_ups,
+            follow_ups=follow_ups
         )
 
     def get_all_questions(self) -> List[Question]:
@@ -88,5 +86,4 @@ class JsonQuestionFlow(IQuestionFlow):
         """Move to the next top-level question and clear follow-up state."""
         conv.question_index += 1
         conv.active_follow_up_id = None
-        conv.pending_confirmation_question_id = None
         return conv

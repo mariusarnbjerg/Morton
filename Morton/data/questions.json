@@ -32,7 +32,7 @@
         {
           "id": "q3b",
           "text": "Did you experience any problems with it?",
-          "trigger": "Patient says yes, confirms, or implies they have had anesthesia before — including 'yes once', 'yes twice', 'a few times', etc.",
+          "trigger": "Patient says yes, confirms, or implies they have had anesthesia before — including 'yes once', 'yes twice', 'a few times'.",
           "type": "free_text",
           "completion_criteria": "Patient has described any problems or side effects, or clearly stated there were none. Any direct response is complete."
         }

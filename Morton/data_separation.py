@@ -3,6 +3,7 @@ import re
 
 # --- READ EXCEL FILE ---
 file_path = r"C:/Users/Mariu/Downloads/Endelige_udtræk_INC6299351.xlsx"
+out_path=r"C:/Users/Mariu/Downloads/separate_data.xlsx"
 sheet_name = "Anæstesiprætilsynsnotatet"
 
 
@@ -99,4 +100,4 @@ print(final_df.head(100))
 
 # # --- EXPORT CLEANED DATA ---
 # final_df.to_csv("cleaned_data.csv", index=False, encoding="utf-8-sig")
-final_df.to_excel("cleaned_data.xlsx", index=False)
+final_df.to_excel(out_path, index=False)

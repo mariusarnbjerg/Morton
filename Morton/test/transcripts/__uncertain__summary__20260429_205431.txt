@@ -1,0 +1,15 @@
+PERSONA SUMMARY — UNCERTAIN
+Date: 2026-04-29 20:54
+Runs: 1
+
+  ────────────────────────────────────────────────────────
+  UNCERTAIN (Uncertain Patient)
+  ────────────────────────────────────────────────────────
+  Completed:              1/1
+  Avg turns:              26.0  (min 26, max 26)
+  Avg first-attempt rate: 100.0%
+  Avg duration:           5m 40s  (total 5m 40s)
+
+  Run    Turns    1st-attempt          Re-asked                       Time     Result
+  ───    ─────    ───────────          ────────                       ────     ──────
+  1      26       26/26 (100.0%)       —                              5m40s    PASS

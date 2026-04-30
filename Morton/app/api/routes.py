@@ -49,9 +49,17 @@ async def send_message(conversation_id: str, req: MessageRequest):
     orch = get_orchestrator()
     res  = orch.handle_user_message(conv, req.message)
 
+    # Derive current question ID from conversation state
+    current_qid = conv.active_follow_up_id
+    if not current_qid:
+        qflow = orch.question_flow
+        current_q = qflow.get_question(conv)
+        current_qid = current_q.id if current_q else None
+
     return MessageResponse(
         bot_text=res.bot_text,
         done=res.done,
+        current_question_id=current_qid,
     )
 
 
@@ -65,12 +73,21 @@ async def get_conversation_state(conversation_id: str):
     Get the current state of a conversation (for progress display).
     """
     conv = get_conversation(conversation_id)
+    orch = get_orchestrator()
+
+    # Derive current question ID from conversation state
+    current_qid = conv.active_follow_up_id
+    if not current_qid:
+        qflow = orch.question_flow
+        current_q = qflow.get_question(conv)
+        current_qid = current_q.id if current_q else None
 
     return ConversationStateResponse(
         conversation_id=conv.conversation_id,
         state=conv.state.value,
         answered_count=len(conv.answers),
         done=conv.state.value == "done",
+        current_question_id=current_qid,
     )
 
 

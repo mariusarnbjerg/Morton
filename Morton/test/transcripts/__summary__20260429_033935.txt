@@ -1,0 +1,84 @@
+
+============================================================
+  FULL EVALUATION SUMMARY
+============================================================
+  Date:             2026-04-29 03:39
+  Runs per persona: 10
+  Transcripts dir:  C:\development\gitrep\Morton\Morton\test\transcripts
+
+  ────────────────────────────────────────────────────────
+  UNCERTAIN (Uncertain Patient)
+  ────────────────────────────────────────────────────────
+  Completed:              9/10
+  Avg turns:              26.0  (min 26, max 26)
+  Avg first-attempt rate: 100.0%
+  Avg duration:           6m 15s  (total 62m 35s)
+
+  Run    Turns    1st-attempt          Re-asked                       Time     Result
+  ───    ─────    ───────────          ────────                       ────     ──────
+  1      26       26/26 (100.0%)       —                              6m03s    PASS
+  2      26       26/26 (100.0%)       —                              7m07s    PASS
+  3      26       26/26 (100.0%)       —                              6m34s    PASS
+  4      26       26/26 (100.0%)       —                              5m49s    PASS
+  5      26       26/26 (100.0%)       —                              5m53s    PASS
+  6      26       26/26 (100.0%)       —                              5m42s    PASS
+  7      26       26/26 (100.0%)       —                              5m28s    PASS
+  8      26       26/26 (100.0%)       —                              6m32s    PASS
+  9      26       26/26 (100.0%)       —                              6m58s    FAIL
+  10     26       26/26 (100.0%)       —                              6m26s    PASS
+
+  ────────────────────────────────────────────────────────
+  INQUISITIVE (Inquisitive Patient)
+  ────────────────────────────────────────────────────────
+  Completed:              9/10
+  Avg turns:              28.1  (min 20, max 29)
+  Avg first-attempt rate: 100.0%
+  Avg duration:           9m 32s  (total 95m 25s)
+
+  Run    Turns    1st-attempt          Re-asked                       Time     Result
+  ───    ─────    ───────────          ────────                       ────     ──────
+  1      20       19/19 (100.0%)       —                              7m24s    FAIL
+  2      29       28/28 (100.0%)       —                              9m16s    PASS
+  3      29       28/28 (100.0%)       —                              9m56s    PASS
+  4      29       28/28 (100.0%)       —                              10m06s   PASS
+  5      29       28/28 (100.0%)       —                              9m34s    PASS
+  6      29       28/28 (100.0%)       —                              10m49s   PASS
+  7      29       28/28 (100.0%)       —                              8m55s    PASS
+  8      29       28/28 (100.0%)       —                              9m52s    PASS
+  9      29       28/28 (100.0%)       —                              9m50s    PASS
+  10     29       28/28 (100.0%)       —                              9m40s    PASS
+
+  ────────────────────────────────────────────────────────
+  CONTRADICTORY (Contradictory Patient)
+  ────────────────────────────────────────────────────────
+  Completed:              10/10
+  Avg turns:              28.9  (min 28, max 29)
+  Avg first-attempt rate: 100.0%
+  Avg duration:           5m 17s  (total 52m 52s)
+
+  Run    Turns    1st-attempt          Re-asked                       Time     Result
+  ───    ─────    ───────────          ────────                       ────     ──────
+  1      29       29/29 (100.0%)       —                              5m04s    PASS
+  2      29       29/29 (100.0%)       —                              4m39s    PASS
+  3      29       29/29 (100.0%)       —                              5m08s    PASS
+  4      29       29/29 (100.0%)       —                              5m33s    PASS
+  5      29       29/29 (100.0%)       —                              5m11s    PASS
+  6      28       27/27 (100.0%)       —                              6m01s    PASS
+  7      29       29/29 (100.0%)       —                              5m37s    PASS
+  8      29       29/29 (100.0%)       —                              5m19s    PASS
+  9      29       29/29 (100.0%)       —                              5m11s    PASS
+  10     29       29/29 (100.0%)       —                              5m04s    PASS
+
+  ========================================================
+  CROSS-PERSONA COMPARISON
+  ========================================================
+
+  Persona            Completed    Avg turns    Avg 1st-att    Avg time   Most re-asked
+  ───────            ─────────    ─────────    ───────────    ────────   ─────────────
+  uncertain          9/10         26.0         100.0         % 6m15s      —
+  inquisitive        9/10         28.1         100.0         % 9m32s      —
+  contradictory      10/10         28.9         100.0         % 5m17s      —
+
+  ────────────────────────────────────────────────────────
+  OVERALL: 28/30 completed (93%)  —  Total time: 210m 52s
+  ────────────────────────────────────────────────────────

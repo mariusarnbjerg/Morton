@@ -31,6 +31,7 @@ class StartConversationResponse(BaseModel):
 class MessageResponse(BaseModel):
     bot_text: str
     done: bool = False
+    current_question_id: Optional[str] = None
 
 
 class ConversationStateResponse(BaseModel):
@@ -38,3 +39,4 @@ class ConversationStateResponse(BaseModel):
     state: str
     answered_count: int
     done: bool
+    current_question_id: Optional[str] = None

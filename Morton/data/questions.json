@@ -27,7 +27,7 @@
       "text": "Have you ever had anesthesia before?",
       "type": "yesno",
       "required": true,
-      "completion_criteria": "Patient has clearly confirmed or denied prior anesthesia experience. Any affirmative (yes, once, twice, a few times) or denial (no, never) is complete.",
+      "completion_criteria": "Patient has confirmed, denied, or expressed uncertainty about prior anesthesia experience. Clear answers (yes, no, once, never) are complete. Uncertain but directional answers ('I think so', 'maybe once', 'not sure but I think I have') are also complete.",
       "follow_ups": [
         {
           "id": "q3b",
@@ -43,14 +43,14 @@
       "text": "Has anyone in your family ever had an adverse reaction to anesthesia?",
       "type": "yesno",
       "required": true,
-      "completion_criteria": "Patient has clearly confirmed or denied family history of anesthesia reactions.",
+      "completion_criteria": "Patient has confirmed, denied, or expressed uncertainty about family history of anesthesia reactions. Clear answers ('yes', 'no') and uncertain answers ('I don't know', 'not sure', 'I don't think so') are all complete.",
       "follow_ups": [
         {
           "id": "q4b",
           "text": "What type of reaction was it — for example, malignant hyperthermia, prolonged muscle relaxation, or something else?",
           "trigger": "Patient confirms a family member had an adverse anesthesia reaction",
           "type": "free_text",
-          "completion_criteria": "Patient has described the type of reaction, even if only approximately."
+          "completion_criteria": "Patient has described or expressed uncertainty about the type of reaction, even if only approximately."
         }
       ]
     },
@@ -59,35 +59,35 @@
       "text": "Has a doctor ever told you that you were difficult to intubate or that you have a difficult airway?",
       "type": "yesno",
       "required": true,
-      "completion_criteria": "Patient has clearly confirmed or denied being told about a difficult airway."
+      "completion_criteria": "Patient has confirmed, denied, or expressed uncertainty about being told they have a difficult airway. Clear answers ('yes', 'no') and uncertain answers ('I don't know', 'not sure', 'I don't think so') are all complete."
     },
     {
       "id": "q6",
       "text": "Do you have sleep apnea or use a CPAP machine at night?",
       "type": "free_text",
       "required": true,
-      "completion_criteria": "Patient has confirmed or denied sleep apnea or CPAP use. A bare 'yes' or 'no' is sufficient and complete."
+      "completion_criteria": "Patient has confirmed, denied, or described their sleep situation. Any response that addresses sleep apnea or CPAP is complete, including uncertain answers like 'I snore but haven't been diagnosed' or 'not sure'. A bare 'yes' or 'no' is also sufficient."
     },
     {
       "id": "q7",
       "text": "Do you have any loose teeth, dentures, or dental implants?",
       "type": "free_text",
       "required": true,
-      "completion_criteria": "Patient has confirmed or denied loose teeth, dentures, implants, or any other dental work. A bare 'yes' or 'no' is sufficient and complete."
+      "completion_criteria": "Patient has confirmed, denied, or expressed uncertainty about having loose teeth, dentures, implants, or any other dental work. Clear answers ('yes', 'no') and uncertain answers ('I don't know', 'not sure', 'I don't think so') are all complete."
     },
     {
       "id": "q8",
       "text": "Do you have any allergies to medications, latex, or anesthesia drugs?",
       "type": "free_text",
       "required": true,
-      "completion_criteria": "Patient has confirmed or denied experiencing allergies to medications, latex, or anesthesia drugs.",
+      "completion_criteria": "Patient has confirmed, denied, or expressed uncertainty about having allergies. 'Not that I know of', 'I don't think so', 'none that I'm aware of' are all complete.",
       "follow_ups": [
         {
           "id": "q8b",
           "text": "Which ones, and what kind of reaction do you get?",
           "trigger": "Patient confirms having allergies but used only a vague word like 'yes' or 'some' without naming any specific allergen",
           "type": "free_text",
-          "completion_criteria": "Patient has named specific allergens. General confirmation ('yes I have allergies') is not enough — actual allergen names are needed."
+          "completion_criteria": "Patient has named or described specific allergens or triggers, even approximately. Descriptions like 'plasters', 'some tape', 'latex gloves' count. If the patient says they are not sure it is a real allergy, that is also a complete response."
         }
       ]
     },
@@ -96,7 +96,7 @@
       "text": "Do you take any daily prescription medications?",
       "type": "free_text",
       "required": true,
-      "completion_criteria": "Patient has confirmed or denied taking any prescription medications",
+      "completion_criteria": "Patient has confirmed, denied, or expressed uncertainty about taking any prescription medications. Clear answers ('yes', 'no') and uncertain answers ('I don't know', 'not sure', 'I don't think so') are all complete.",
       "follow_ups": [
         {
           "id": "q9b",
@@ -112,14 +112,14 @@
       "text": "Do you take blood thinners such as aspirin, warfarin, Eliquis, or Xarelto?",
       "type": "free_text",
       "required": true,
-      "completion_criteria": "Patient has confirmed or denied taking blood thinners. A bare 'yes' or 'no' is sufficient and complete."
+      "completion_criteria": "Patient has confirmed, denied, or expressed uncertainty about taking blood thinners. Clear answers ('yes', 'no') and uncertain answers ('I don't know', 'not sure', 'I don't think so') are all complete."
     },
     {
       "id": "q11",
       "text": "Do you take any non-prescription medications, supplements, or herbal remedies — including things like fish oil, vitamins, or over-the-counter painkillers?",
       "type": "free_text",
       "required": true,
-      "completion_criteria": "Patient has confirmed or denied taking non-prescription medications and supplements",
+      "completion_criteria": "Patient has confirmed, denied, or expressed uncertainty about taking non-prescription medications and supplements. Any response that addresses the question is complete, including 'I don't think so' or 'maybe some vitamins'.",
       "follow_ups": [
         {
           "id": "q11b",
@@ -135,49 +135,49 @@
       "text": "Do you have any heart conditions, chest pain, or a history of heart surgery or stents?",
       "type": "free_text",
       "required": true,
-      "completion_criteria": "Patient has confirmed or denied cardiac history. A bare 'yes' or 'no' is sufficient and complete."
+      "completion_criteria": "Patient has confirmed, denied, or expressed uncertainty about cardiac history. Clear answers ('yes', 'no') and uncertain answers ('I don't know', 'not sure', 'I don't think so') are all complete."
     },
     {
       "id": "q13",
       "text": "Do you have asthma, COPD, or any other breathing problems?",
       "type": "free_text",
       "required": true,
-      "completion_criteria": "Patient has confirmed or denied respiratory conditions. A bare 'yes' or 'no' is sufficient and complete."
+      "completion_criteria": "Patient has confirmed, denied, or expressed uncertainty about respiratory conditions. Clear answers ('yes', 'no') and uncertain answers ('Not really', 'maybe sometimes', 'I don't think so') are all complete."
     },
     {
       "id": "q14",
       "text": "Do you get short of breath when walking on flat ground or climbing stairs?",
       "type": "free_text",
       "required": true,
-      "completion_criteria": "Patient has confirmed or denied exertional shortness of breath. A bare 'yes' or 'no' is sufficient and complete."
+      "completion_criteria": "Patient has confirmed, denied, or expressed uncertainty about experiencing exertional shortness of breath. Clear answers ('yes', 'no') and uncertain answers ('I don't know', 'not sure', 'I don't think so') are all complete."
     },
     {
       "id": "q15",
       "text": "Do you experience acid reflux or heartburn, or take any medication for it?",
       "type": "free_text",
       "required": true,
-      "completion_criteria": "Patient has confirmed or denied acid reflux symptoms and medication use. A bare 'yes' or 'no' is sufficient and complete."
+      "completion_criteria": "Patient has addressed acid reflux or heartburn in any way. This includes confirming symptoms ('sometimes', 'after spicy food'), denying symptoms, mentioning medication, or saying they don't know. The patient does NOT need to address both symptoms and medication — either one is sufficient. A bare 'yes' or 'no' is also complete."
     },
     {
       "id": "q16",
       "text": "Have you had any recent infections, fever, or major health changes in the last few weeks?",
       "type": "free_text",
       "required": true,
-      "completion_criteria": "Patient has confirmed or denied recent health changes. A bare 'yes' or 'no' is sufficient and complete."
+      "completion_criteria": "Patient has addressed recent health changes in any way. 'Not that I can think of', 'I had a fever last week but it went away', 'no I don't think so' are all complete. A bare 'yes' or 'no' is also complete."
     },
     {
       "id": "q17",
       "text": "Do you smoke or use any nicotine products?",
       "type": "free_text",
       "required": true,
-      "completion_criteria": "Patient has confirmed or denied smoking and nicotine use.",
+      "completion_criteria": "Patient has addressed smoking or nicotine use in any way. 'I quit', 'I used to but stopped', 'mostly quit', 'sometimes at parties' are all complete. A bare 'yes' or 'no' is also complete.",
       "follow_ups": [
         {
           "id": "q17b",
           "text": "How long have you been using it, and roughly how much per day?",
           "trigger": "Patient confirms smoking or nicotine use but did not mention both duration and frequency",
           "type": "free_text",
-          "completion_criteria": "Patient has provided any indication of duration OR frequency of use. Approximate answers are acceptable. If the patient cannot or does not know, that is also complete."
+          "completion_criteria": "Patient has provided any indication of duration OR frequency of use. Approximate answers are acceptable. If the patient cannot answer or does not know, that is also complete."
         }
       ]
     },
@@ -193,7 +193,7 @@
       "text": "Do you use any recreational or illicit drugs?",
       "type": "free_text",
       "required": true,
-      "completion_criteria": "Patient has confirmed or denied illicit drug use. A bare 'yes' or 'no' is sufficient and complete.",
+      "completion_criteria": "Patient has confirmed, denied, or expressed uncertainty about illicit drug use. A bare 'yes' or 'no' is sufficient and complete.",
       "follow_ups": [
         {
           "id": "q19b",

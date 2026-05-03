@@ -15,7 +15,7 @@ from app.adapters.ollama_llm_client import OllamaLLMClient
 
 load_dotenv()
 
-OLLAMA_MODEL    = os.getenv("OLLAMA_MODEL",    "llama3.1")
+OLLAMA_MODEL    = os.getenv("OLLAMA_MODEL",    "qwen3:8b")
 OLLAMA_BASE_URL = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")
 QUESTIONS_PATH  = os.getenv("QUESTIONS_PATH",  "data/questions.json")
 SUMMARY_SCHEMA_PATH   = os.getenv("SUMMARY_SCHEMA_PATH",   "data/summary_schema.json")

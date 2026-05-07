@@ -1,0 +1,35 @@
+PERSONA SUMMARY — UNCERTAIN
+Date: 2026-05-03 16:42
+Runs: 10
+
+  ────────────────────────────────────────────────────────
+  UNCERTAIN (Uncertain Patient)
+  ────────────────────────────────────────────────────────
+  Completed:              10/10
+  Avg turns:              27.0  (min 27, max 27)
+  Avg first-attempt rate: 100.0%
+  Avg acknowledgment rate:26.2%
+  Avg follow-ups triggered:4.0/7
+  Avg duration:           5m 2s  (total 50m 26s)
+
+  Run    Turns    1st-att            Ack     F-ups   Re-asked               Time     Result
+  ───    ─────    ───────            ───     ─────   ────────               ────     ──────
+  1      27       27/27 (100.0%)     27%     4/7     —                      4m58s    PASS
+  2      27       27/27 (100.0%)     23%     4/7     —                      4m41s    PASS
+  3      27       27/27 (100.0%)     23%     4/7     —                      5m25s    PASS
+  4      27       27/27 (100.0%)     31%     4/7     —                      5m02s    PASS
+  5      27       27/27 (100.0%)     27%     4/7     —                      5m08s    PASS
+  6      27       27/27 (100.0%)     31%     4/7     —                      4m59s    PASS
+  7      27       27/27 (100.0%)     27%     4/7     —                      5m02s    PASS
+  8      27       27/27 (100.0%)     31%     4/7     —                      5m42s    PASS
+  9      27       27/27 (100.0%)     23%     4/7     —                      4m43s    PASS
+  10     27       27/27 (100.0%)     19%     4/7     —                      4m43s    PASS
+
+  Follow-up triggers (across 10 runs):
+    q11b: 10/10 runs (100%)
+    q17b: never triggered
+    q19b: never triggered
+    q3b: 10/10 runs (100%)
+    q4b: 10/10 runs (100%)
+    q8b: never triggered
+    q9b: 10/10 runs (100%)

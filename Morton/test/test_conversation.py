@@ -1,5 +1,5 @@
 """
-Automated conversation tester for AnæstesiCare — Evaluation Edition.
+Automated conversation tester used for Evaluation.
 
 Runs patient personas against the chatbot API with question-aware routing:
 the API returns `current_question_id` after each message, and the script
@@ -47,7 +47,7 @@ TRANSCRIPT_DIR = os.path.join(SCRIPT_DIR, "transcripts")
 # one is repeated.
 # ============================================================================
 
-PERSONAS: Dict[str, Dict] = {
+PERSONAS_1: Dict[str, Dict] = {
 
     # ------------------------------------------------------------------
     # UNCERTAIN: vague, unsure answers — tests completion criteria
@@ -185,6 +185,217 @@ PERSONAS: Dict[str, Dict] = {
     },
 }
 
+"""
+Evaluation personas for 2nd iteration testing — REVISED.
+
+These personas are derived from behavioral patterns observed across 20
+real user transcripts from the 1st iteration test. Each response is
+sourced from or inspired by a specific transcript, referenced in comments.
+
+IMPORTANT: These personas use DIFFERENT phrasings from those that informed
+the completion criteria refinements, to avoid overfitting the evaluation
+to the specific language the criteria were tuned for.
+
+Source transcript IDs use the last 3 digits for brevity:
+  #382 = 1772382629904, #379 = 1772379728253, etc.
+"""
+
+PERSONAS: Dict[str, Dict] = {
+
+    # ==================================================================
+    # PERSONA 1: UNCERTAIN / VAGUE
+    #
+    # Tests: completion criteria with hedging language, "I don't know"
+    # responses, forgotten details, and directional-but-unclear answers.
+    #
+    # All phrasings differ from those used during criteria refinement.
+    # ==================================================================
+    "uncertain": {
+        "name": "Uncertain Patient",
+        "responses": {
+            "q0": ["sure I guess"],  # inspired by #188 "Sure"
+            "q1": ["Henrik"],
+            "q2": ["55 I believe"],  # inspired by #185 "oh sorry, my age is actually 30" (uncertain about own details)
+            "q3": ["hmm, I'm not sure.. maybe?"],
+            # inspired by #185 "I'm not sure.." and #188 "I dont think so, but Im unsure"
+            "q3b": ["I honestly cant remember, it was years ago"],  # inspired by #179 "Not in particular"
+            "q4": ["I assume not, I am not sure"],
+            # from #179 verbatim (different from q3 phrasing used in criteria fix)
+            "q4b": ["I really dont know the details"],  # inspired by #374 "the unknown situation"
+            "q5": ["I dont think I do? this is kind of new to me"],
+            # inspired by #185 "I don't think I do? I'm not sure. this is my first time."
+            "q6": ["I havent been diagnosed but people tell me I stop breathing at night"],
+            # from #382 (different phrasing than "I snore alot" used in old persona)
+            "q7": ["no I dont believe so"],  # inspired by #191 "not that i know of"
+            "q8": ["none that I'm aware of"],  # inspired by #202 "Not that I know of"
+            "q8b": ["I honestly cant say for certain"],  # inspired by #179 "I assume not"
+            "q9": ["I do take something but I cant remember what its called"],
+            # from #198 "yes but I don't remember the name" (different phrasing than old persona)
+            "q9b": ["its for something with my stomach I think, I really dont know the name"],
+            # inspired by #377a "I dontt know what kind of medication it is"
+            "q10": ["not as far as I know"],  # inspired by #191 "Not as far as i know"
+            "q11": ["I take some vitamins when I remember to"],  # from #191 "I take multivitamins the days i remember"
+            "q11b": ["just regular vitamins I think, nothing special"],  # inspired by #374 "only normal vitamins"
+            "q12": ["not that I'm aware of no"],  # inspired by #371 "not to my knowledge"
+            "q13": ["not really I dont think so"],  # inspired by #188 "Not really"
+            "q14": ["sometimes a little, but I think thats just because im out of shape"],
+            # from #192 (different phrasing than old persona)
+            "q15": ["I get heartburn occasionally but its nothing serious I think"],
+            # inspired by #358 "I do have a heartburn sometimes but nothing serious"
+            "q16": ["no I dont believe so"],  # inspired by #179 "not in particular"
+            "q17": ["no not anymore"],  # from #219 "no not anymore"
+            "q17b": ["I stopped a while back, cant remember exactly when"],  # inspired by #219 quitting context
+            "q18": ["not really that much"],  # from #291 "Not really that much"
+            "q19": ["no I dont think so"],  # inspired by #201 "no i dont think so"
+            "q19b": ["no"],
+            "q20": ["not really, I think it will be fine"],  # inspired by #192 "not really, i trust the doctors"
+            "q21": ["I cant think of anything right now"],  # inspired by #179 "I do not think so"
+            "q22": ["no I believe we covered it all"],  # inspired by #191 "no i dont think so"
+        },
+    },
+
+    # ==================================================================
+    # PERSONA 2: INQUISITIVE / COMPOUND
+    #
+    # Tests: answer extraction from compound messages (answer + question),
+    # medical scope boundary, off-topic resilience.
+    #
+    # All phrasings differ from the old persona to avoid overlap with
+    # criteria examples.
+    # ==================================================================
+    "inquisitive": {
+        "name": "Inquisitive Patient",
+        "responses": {
+            "q0": ["yes I'm ready, how long will this take by the way?"],
+            # inspired by #379 "Yes - what do you want to know about?"
+            "q1": ["Maria, what is this information used for exactly?"],
+            # inspired by #377b "can you tell me about the surgical procedure"
+            "q2": ["44, does age matter for the anesthesia?"],  # inspired by #377b "Why do you need my age?"
+            "q3": ["I had it once for a tooth extraction, what kind will I be getting?"],
+            # inspired by #218 "yes, but only when I gave birth... only from my stomach and down"
+            "q3b": ["no it went fine, but should I expect side effects this time?"],
+            # inspired by #377b "No, but should i be worried?"
+            "q4": ["not that I know of, is that something that runs in families?"],
+            # inspired by #205 "my mother once got a rash after, should i be concerned?"
+            "q4b": ["I said I dont know of any"],
+            "q5": ["no, what would happen if I did have a difficult airway?"],
+            # inspired by #377b "Will I be intubated?"
+            "q6": ["no I dont, but what is a CPAP machine exactly?"],
+            # inspired by #382 "What does it mean if I have sleep apnea?"
+            "q7": ["I have some metal wires behind my teeth from braces, is that a concern?"],
+            # from #202 "I have a metal wire on the back of both my rows of teeth"
+            "q8": ["yes I react to some types of tape, could that be a problem during surgery?"],
+            # inspired by #377a latex allergy context
+            "q8b": ["medical tape gives me a rash, do you use that during the operation?"],
+            # inspired by #377a "whatever allergy that XXS condoms contain"
+            "q9": ["yes I take eye drops that are prescription, do those count?"],
+            # from #202 "During summer I take eye drops which are prescription"
+            "q9b": ["prescription eye drops for allergies, I dont know the brand name"],
+            # inspired by #198 "yes but I don't remember the name"
+            "q10": ["no, what are those used for exactly?"],  # from #377b "what is warfarin used for?"
+            "q11": ["I take creatine and some hair vitamins, should I stop those before surgery?"],
+            # from #202 "I take creatine, 6g daily and vitamins for nails and hair"
+            "q11b": ["creatine, hair vitamins, and sometimes D vitamin"],  # from #202
+            "q12": ["no, but can anesthesia affect the heart?"],  # inspired by #377b concern-style questions
+            "q13": ["no but what is COPD? I keep hearing that word"],
+            # inspired by #371 "what is copd?" and #295 "I do not know what anesthesia is"
+            "q14": ["only if I really push myself like running, is that a problem?"],
+            # inspired by #185 "yes, after 20km"
+            "q15": ["I get it sometimes when I drink wine, is that relevant?"],
+            # from #218 "2 times a month... when drinking wine"
+            "q16": ["I had a cold a while back but I feel fine now, does that matter?"],
+            # inspired by #358 "I only had a cold 2 weeks ago"
+            "q17": ["no never, but my partner smokes inside, is passive smoking a concern?"],
+            # inspired by general concern pattern
+            "q17b": ["I said I dont smoke"],
+            "q18": ["maybe 2 glasses on the weekend, is that too much before surgery?"],
+            # inspired by #371 "in what unit?"
+            "q19": ["no, but can recreational drugs interact with anesthesia?"],
+            # inspired by #205 "can i be charged by what i say here"
+            "q19b": ["no I said I dont use any"],
+            "q20": ["a bit yes, what happens if I wake up during the procedure?"],
+            # inspired by #185 "I am. I will be unconscious. I'm afraid i'll be ded"
+            "q21": ["I donate blood regularly, should I mention that?"],  # from #202 "I donate blood"
+            "q22": ["yes, how soon before surgery do I need to stop eating?"],
+            # inspired by #382 fasting question context
+        },
+    },
+
+    # ==================================================================
+    # PERSONA 3: CONTRADICTORY / CORRECTING
+    #
+    # Tests: state management with self-corrections, accidental yes/no,
+    # retroactive information, frustration with re-asking.
+    #
+    # Phrasings are drawn from different transcripts than the old persona.
+    # ==================================================================
+    "contradictory": {
+        "name": "Contradictory Patient",
+        "responses": {
+            "q0": ["lets go"],
+            "q1": ["Katrine Holm"],
+            "q2": ["oh sorry I'm 31, I keep saying 30 out of habit"],  # from #185 "oh sorry, my age is actually 30"
+            "q3": ["yes, well actually I think it was local anesthesia not full"],
+            # from #218 "yes, but only when I gave birth... only from my stomach and down"
+            "q3b": [
+                "no wait, I'm not sure it counts as real anesthesia actually",
+                # inspired by #192 "wait i forgot i had been under anesthesia i think"
+                "I think it was just local, no problems with it though",
+            ],
+            "q4": ["hmm yes I think my aunt had something"],  # inspired by #205 "my mother once got a rash after"
+            "q4b": [
+                "actually I might be mixing it up with something else, I'm not confident",
+                # inspired by #374 "the unknown situation"
+                "honestly I dont remember, it might not have been anesthesia related",
+            ],
+            "q5": ["no, well I was told my throat is narrow on one side"],
+            # from #218 "yes in one side of my noise" and #202 "enlarged epiglottis"
+            "q6": ["no, actually my husband says I stop breathing sometimes at night"],
+            # inspired by #291 "Might have sleep apnea"
+            "q7": ["no, oh wait I do have crowns on some teeth"],  # inspired by #218 "I have kroner på tænderne"
+            "q8": ["no, well actually I react to some plasters but I wouldnt call it an allergy"],
+            # inspired by #205 "well, not that i know of"
+            "q8b": [
+                "I said I dont think its a real allergy, my skin just gets irritated",
+                "just irritation from adhesive plasters, nothing serious",
+            ],
+            "q9": ["no, oh wait I do take something for my thyroid I forgot about that"],
+            # inspired by #192 "wait i forgot" pattern
+            "q9b": ["thyroid medication, I always forget to count it"],
+            "q10": ["no I dont, actually wait does ibuprofen count as a blood thinner?"],
+            # inspired by #371 "What if I take medications every second day?"
+            "q11": ["no, well I take painkillers when I get headaches"],
+            # from #377b "No, but sometimes i get headaches and take medications"
+            "q11b": ["just panodil for headaches, nothing else"],  # inspired by #382 "panodiler"
+            "q12": [
+                "yes",
+                "no sorry I was thinking of my father, he has heart issues not me",
+                # inspired by #382 "No, I don't have any problems with my heart health - you got that wrong"
+            ],
+            "q13": ["I have asthma, well had asthma, I havent used my inhaler in years"],
+            # inspired by #219 "no not anymore" pattern
+            "q14": ["no, well maybe a little when climbing many stairs"],
+            # inspired by #192 "Sometimes a little, but I think thats just because Im not in the best shape"
+            "q15": ["no, actually yes sometimes but only after eating late"],
+            # inspired by #218 "yes sometimes acid reflux"
+            "q16": ["no, oh actually I had a bad cold two weeks ago but I'm over it now"],
+            # from #358 "I only had a cold 2 weeks ago"
+            "q17": ["I used to smoke but I stopped, well I still have one at parties sometimes"],
+            # inspired by #192 "only at parties"
+            "q17b": ["smoked for maybe 5 years, quit 3 years ago, now just socially"],
+            "q18": ["I dont drink, well maybe a beer or two on fridays"],
+            # inspired by #185 "Why do you assume i drank alcohol? I did not" then later admitting some
+            "q19": ["yes"],
+            "q19b": ["actually no, I dont use anything"],
+            "q20": ["no im fine, well actually I am a little worried about waking up during it"],
+            # inspired by #185 "I am. I will be unconscious. I'm afraid i'll be ded"
+            "q21": ["no wait I forgot, I had my tonsils removed as a kid, does that matter?"],
+            # from #192 "wait i forgot i had been under anesthesia i think when i got rid of my tonsils"
+            "q22": ["no that should be everything, well actually who reads all this afterwards?"],
+            # inspired by #205 "so this will not be shared to the authorities?"
+        },
+    },
+}
 
 # ============================================================================
 # Fallback responses
@@ -230,11 +441,11 @@ class C:
 
 class ConversationTester:
     def __init__(
-        self,
-        base_url: str,
-        persona_key: str,
-        run_number: int = 1,
-        delay: float = 0.0,
+            self,
+            base_url: str,
+            persona_key: str,
+            run_number: int = 1,
+            delay: float = 0.0,
     ):
         self.base_url = base_url.rstrip("/")
         self.api = f"{self.base_url}/api/v1"
@@ -257,6 +468,14 @@ class ConversationTester:
         # Track how many patient turns each question required
         self._question_attempts: Dict[str, int] = {}
 
+        # Track acknowledgment vs bare question responses
+        self._acknowledged_count = 0
+        self._bare_question_count = 0
+
+        # Track which follow-up questions were triggered
+        self._followup_ids = {"q3b", "q4b", "q8b", "q9b", "q11b", "q17b", "q19b"}
+        self._followups_triggered: List[str] = []
+
     def _get_response(self, question_id: str) -> Optional[str]:
         """Get the next prepared response for a question ID."""
         responses = self.persona["responses"].get(question_id)
@@ -278,11 +497,11 @@ class ConversationTester:
         """Run the full conversation. Returns (passed, stats)."""
         self._start_time = time.time()
 
-        print(f"\n{C.BOLD}{'='*60}")
+        print(f"\n{C.BOLD}{'=' * 60}")
         print(f"  Persona: {self.persona['name']}  |  Run {self.run_number}")
         print(f"  Conversation ID: {self.conversation_id}")
         print(f"  API: {self.api}")
-        print(f"{'='*60}{C.RESET}\n")
+        print(f"{'=' * 60}{C.RESET}\n")
 
         # Step 1: Start conversation
         try:
@@ -311,7 +530,7 @@ class ConversationTester:
                     return self._finalize()
                 response = FREE_CHAT_FALLBACKS[
                     (self.free_chat_turns - 1) % len(FREE_CHAT_FALLBACKS)
-                ]
+                    ]
                 meta = f"→ free_chat (auto #{self.free_chat_turns})"
             else:
                 self.free_chat_turns = 0
@@ -328,7 +547,8 @@ class ConversationTester:
                     loop_fallbacks = ["Yes", "No", "I don't know", "No", "Yes"]
                     response = loop_fallbacks[(attempts - 4) % len(loop_fallbacks)]
                     meta = f"→ {current_qid} (LOOP BREAKER attempt #{attempts})"
-                    print(f"  {C.RED}⚠ Loop detected on {current_qid} ({attempts} attempts) — forcing bare answer{C.RESET}")
+                    print(
+                        f"  {C.RED}⚠ Loop detected on {current_qid} ({attempts} attempts) — forcing bare answer{C.RESET}")
                 else:
                     # Normal: use the persona's prepared response
                     response = self._get_response(current_qid) if current_qid else None
@@ -339,7 +559,7 @@ class ConversationTester:
                     self.fallback_count += 1
                     response = GENERIC_FALLBACKS[
                         (self.fallback_count - 1) % len(GENERIC_FALLBACKS)
-                    ]
+                        ]
                     meta = f"→ {current_qid} (NO PREPARED RESPONSE — fallback #{self.fallback_count})"
                     print(f"  {C.YELLOW}⚠ No response for {current_qid}, using fallback{C.RESET}")
 
@@ -352,8 +572,22 @@ class ConversationTester:
             self._print_patient(response, meta)
 
             try:
-                bot_text, done, current_qid = self._send_message(response)
+                bot_text, done, current_qid, was_acknowledged = self._send_message(response)
+
+                # Track acknowledgment from API
+                if not done:
+                    if was_acknowledged:
+                        self._acknowledged_count += 1
+                    else:
+                        self._bare_question_count += 1
+
+                # Track follow-up triggers
+                if current_qid and current_qid in self._followup_ids and current_qid not in self._followups_triggered:
+                    self._followups_triggered.append(current_qid)
+
                 bot_meta = f"asking: {current_qid}" if current_qid else "done"
+                if not done:
+                    bot_meta += f" | {'ack' if was_acknowledged else 'bare'}"
                 self._log("Assistant", bot_text, bot_meta)
                 self._print_bot(bot_text, current_qid)
             except Exception as e:
@@ -382,6 +616,7 @@ class ConversationTester:
             pass
 
         return self._finalize()
+
     # API calls
     # ------------------------------------------------------------------
 
@@ -400,11 +635,11 @@ class ConversationTester:
 
         return data["bot_text"], data.get("done", False), current_qid
 
-    def _send_message(self, message: str) -> Tuple[str, bool, Optional[str]]:
+    def _send_message(self, message: str) -> Tuple[str, bool, Optional[str], bool]:
         r = requests.post(
             f"{self.api}/conversations/{self.conversation_id}/message",
             json={"message": message},
-            timeout=120,
+            timeout=300,
         )
         r.raise_for_status()
         data = r.json()
@@ -412,6 +647,7 @@ class ConversationTester:
             data["bot_text"],
             data.get("done", False),
             data.get("current_question_id"),
+            data.get("acknowledged", False),
         )
 
     def _get_state(self) -> dict:
@@ -425,7 +661,7 @@ class ConversationTester:
     def _get_summary(self) -> dict:
         r = requests.get(
             f"{self.api}/conversations/{self.conversation_id}/summary",
-            timeout=120,
+            timeout=300,
         )
         r.raise_for_status()
         return r.json()
@@ -477,10 +713,19 @@ class ConversationTester:
         lines.append(f"Questions asked: {total_questions}")
         lines.append(f"First-attempt acceptance: {first_attempt}/{total_questions} ({first_attempt_rate:.0f}%)")
 
+        total_bot_responses = self._acknowledged_count + self._bare_question_count
+        ack_rate = (self._acknowledged_count / total_bot_responses * 100) if total_bot_responses > 0 else 0
+        lines.append(f"Acknowledgment rate: {self._acknowledged_count}/{total_bot_responses} ({ack_rate:.0f}%)")
+        lines.append(f"Bare question responses: {self._bare_question_count}/{total_bot_responses}")
+
         if re_asked:
             lines.append(f"Re-asked questions:")
             for qid, attempts in re_asked.items():
                 lines.append(f"  {qid}: {attempts} attempts")
+
+        lines.append("")
+        fu_str = ", ".join(self._followups_triggered) if self._followups_triggered else "none"
+        lines.append(f"Follow-ups triggered: {len(self._followups_triggered)}/7 ({fu_str})")
 
         lines.append("")
         lines.append("Turns per question:")
@@ -523,9 +768,9 @@ class ConversationTester:
         print(f"  {C.GREEN}👤 Patient (turn {self.turn_count}){meta_tag}:{C.RESET} {text}")
 
     def _print_summary(self, summary: dict):
-        print(f"\n{C.BOLD}{'─'*60}")
+        print(f"\n{C.BOLD}{'─' * 60}")
         print(f"  SUMMARY")
-        print(f"{'─'*60}{C.RESET}")
+        print(f"{'─' * 60}{C.RESET}")
         print(json.dumps(summary, indent=2, ensure_ascii=False))
 
     def _error(self, msg: str):
@@ -542,6 +787,9 @@ class ConversationTester:
 
         elapsed = time.time() - self._start_time
 
+        total_bot_responses = self._acknowledged_count + self._bare_question_count
+        ack_rate = (self._acknowledged_count / total_bot_responses * 100) if total_bot_responses > 0 else 0
+
         stats = {
             "persona": self.persona_key,
             "run": self.run_number,
@@ -556,19 +804,29 @@ class ConversationTester:
             "passed": len(self.errors) == 0,
             "turns_per_question": dict(sorted(questions_asked.items())),
             "elapsed_s": round(elapsed, 1),
+            "acknowledged": self._acknowledged_count,
+            "bare_question": self._bare_question_count,
+            "acknowledgment_rate": round(ack_rate, 1),
+            "followups_triggered": list(self._followups_triggered),
+            "followup_count": len(self._followups_triggered),
         }
 
         # Format duration
         minutes, secs = divmod(int(elapsed), 60)
         time_str = f"{minutes}m {secs}s" if minutes else f"{secs}s"
 
-        print(f"\n{C.BOLD}{'='*60}")
+        fu_str = ", ".join(self._followups_triggered) if self._followups_triggered else "none"
+
+        print(f"\n{C.BOLD}{'=' * 60}")
         print(f"  RESULTS — {self.persona['name']} Run {self.run_number}")
-        print(f"{'='*60}{C.RESET}")
+        print(f"{'=' * 60}{C.RESET}")
         print(f"  Total turns:              {self.turn_count}")
         print(f"  Questions asked:          {total_questions}")
         print(f"  First-attempt accepted:   {first_attempt}/{total_questions} ({first_attempt_rate:.0f}%)")
         print(f"  Re-asked questions:       {len(re_asked)}")
+        print(f"  Follow-ups triggered:     {len(self._followups_triggered)}/7 ({fu_str})")
+        print(f"  Acknowledgments:          {self._acknowledged_count}/{total_bot_responses} ({ack_rate:.0f}%)")
+        print(f"  Bare questions:           {self._bare_question_count}/{total_bot_responses}")
         print(f"  Free chat turns:          {self.free_chat_turns}")
         print(f"  Fallbacks:                {self.fallback_count}")
         print(f"  Errors:                   {len(self.errors)}")
@@ -662,27 +920,40 @@ def main():
         total_time_str = f"{total_m}m {total_s}s" if total_m else f"{total_s}s"
         avg_time_str = f"{avg_m}m {avg_s}s" if avg_m else f"{avg_s}s"
 
-        out_fn(f"  {'─'*56}")
+        ack_rates = [r.get("acknowledgment_rate", 0) for r in runs]
+        avg_ack = sum(ack_rates) / len(ack_rates) if ack_rates else 0
+
+        fu_counts = [r.get("followup_count", 0) for r in runs]
+        avg_fu = sum(fu_counts) / len(fu_counts) if fu_counts else 0
+
+        out_fn(f"  {'─' * 56}")
         out_fn(f"  {C.BOLD}{persona_key.upper()}{C.RESET} ({PERSONAS[persona_key]['name']})")
-        out_fn(f"  {'─'*56}")
+        out_fn(f"  {'─' * 56}")
         out_fn(f"  Completed:              {passed}/{total}")
         out_fn(f"  Avg turns:              {avg_turns:.1f}  (min {min_turns}, max {max_turns_val})")
         out_fn(f"  Avg first-attempt rate: {avg_fa:.1f}%")
+        out_fn(f"  Avg acknowledgment rate:{avg_ack:.1f}%")
+        out_fn(f"  Avg follow-ups triggered:{avg_fu:.1f}/7")
         out_fn(f"  Avg duration:           {avg_time_str}  (total {total_time_str})")
 
         # Per-run table
         out_fn()
-        out_fn(f"  {'Run':<6} {'Turns':<8} {'1st-attempt':<20} {'Re-asked':<30} {'Time':<8} {'Result'}")
-        out_fn(f"  {'───':<6} {'─────':<8} {'───────────':<20} {'────────':<30} {'────':<8} {'──────'}")
+        out_fn(
+            f"  {'Run':<6} {'Turns':<8} {'1st-att':<18} {'Ack':<7} {'F-ups':<7} {'Re-asked':<22} {'Time':<8} {'Result'}")
+        out_fn(
+            f"  {'───':<6} {'─────':<8} {'───────':<18} {'───':<7} {'─────':<7} {'────────':<22} {'────':<8} {'──────'}")
 
         for r in runs:
             re_asked_str = ", ".join(f"{q}({a}x)" for q, a in r["re_asked"].items()) if r["re_asked"] else "—"
             status = f"{C.GREEN}PASS{C.RESET}" if r["passed"] else f"{C.RED}FAIL{C.RESET}"
             fa_str = f"{r['first_attempt_accepted']}/{r['questions_asked']} ({r['first_attempt_rate']}%)"
+            ack_str = f"{r.get('acknowledgment_rate', 0):.0f}%"
+            fu_str = f"{r.get('followup_count', 0)}/7"
             elapsed = r.get("elapsed_s", 0)
             m, s = divmod(int(elapsed), 60)
             time_str = f"{m}m{s:02d}s" if m else f"{s}s"
-            out_fn(f"  {r['run']:<6} {r['total_turns']:<8} {fa_str:<20} {re_asked_str:<30} {time_str:<8} {status}")
+            out_fn(
+                f"  {r['run']:<6} {r['total_turns']:<8} {fa_str:<18} {ack_str:<7} {fu_str:<7} {re_asked_str:<22} {time_str:<8} {status}")
 
         # Which questions get re-asked most often
         reask_totals: Dict[str, int] = {}
@@ -694,7 +965,24 @@ def main():
             out_fn()
             out_fn(f"  Questions re-asked (across {total} runs):")
             for qid, count in sorted(reask_totals.items(), key=lambda x: -x[1]):
-                out_fn(f"    {qid}: re-asked in {count}/{total} runs ({count/total*100:.0f}%)")
+                out_fn(f"    {qid}: re-asked in {count}/{total} runs ({count / total * 100:.0f}%)")
+
+        # Follow-up trigger consistency
+        all_followup_ids = {"q3b", "q4b", "q8b", "q9b", "q11b", "q17b", "q19b"}
+        fu_trigger_counts: Dict[str, int] = {}
+        for r in runs:
+            for fid in r.get("followups_triggered", []):
+                fu_trigger_counts[fid] = fu_trigger_counts.get(fid, 0) + 1
+
+        out_fn()
+        out_fn(f"  Follow-up triggers (across {total} runs):")
+        for fid in sorted(all_followup_ids):
+            count = fu_trigger_counts.get(fid, 0)
+            if count > 0:
+                consistency = f"{count}/{total} runs ({count / total * 100:.0f}%)"
+            else:
+                consistency = "never triggered"
+            out_fn(f"    {fid}: {consistency}")
 
         out_fn()
 
@@ -721,14 +1009,15 @@ def main():
                 time.sleep(1)
 
         # ── Per-persona summary (printed immediately after all runs for this persona) ──
-        print(f"\n{'='*60}")
+        print(f"\n{'=' * 60}")
         print(f"  PERSONA SUMMARY — {persona_key.upper()}")
-        print(f"{'='*60}")
+        print(f"{'=' * 60}")
         print_persona_summary(persona_key, all_stats[persona_key])
 
         # Save per-persona summary to file
         os.makedirs(TRANSCRIPT_DIR, exist_ok=True)
         persona_summary_lines = []
+
         def _capture(line: str = ""):
             clean = line
             for code in [C.BLUE, C.GREEN, C.YELLOW, C.RED, C.GRAY, C.BOLD, C.RESET]:
@@ -767,9 +1056,9 @@ def main():
             clean = clean.replace(code, "")
         summary_lines.append(clean)
 
-    out(f"\n{'='*60}")
+    out(f"\n{'=' * 60}")
     out(f"  FULL EVALUATION SUMMARY")
-    out(f"{'='*60}")
+    out(f"{'=' * 60}")
     out(f"  Date:             {datetime.now().strftime('%Y-%m-%d %H:%M')}")
     out(f"  Runs per persona: {args.runs}")
     out(f"  Transcripts dir:  {TRANSCRIPT_DIR}")
@@ -780,12 +1069,12 @@ def main():
         print_persona_summary(persona_key, all_stats[persona_key], out_fn=out)
 
     # ── Cross-persona comparison table ──
-    out(f"  {'='*56}")
+    out(f"  {'=' * 56}")
     out(f"  CROSS-PERSONA COMPARISON")
-    out(f"  {'='*56}")
+    out(f"  {'=' * 56}")
     out()
-    out(f"  {'Persona':<18} {'Completed':<12} {'Avg turns':<12} {'Avg 1st-att':<14} {'Avg time':<10} {'Most re-asked'}")
-    out(f"  {'───────':<18} {'─────────':<12} {'─────────':<12} {'───────────':<14} {'────────':<10} {'─────────────'}")
+    out(f"  {'Persona':<18} {'Completed':<12} {'Avg turns':<12} {'Avg 1st-att':<14} {'Avg ack':<10} {'Avg f-ups':<10} {'Avg time':<10} {'Most re-asked'}")
+    out(f"  {'───────':<18} {'─────────':<12} {'─────────':<12} {'───────────':<14} {'───────':<10} {'─────────':<10} {'────────':<10} {'─────────────'}")
 
     total_passed = 0
     total_runs = 0
@@ -800,9 +1089,13 @@ def main():
 
         turns_list = [r["total_turns"] for r in runs]
         fa_rates = [r["first_attempt_rate"] for r in runs]
+        ack_rates = [r.get("acknowledgment_rate", 0) for r in runs]
+        fu_counts = [r.get("followup_count", 0) for r in runs]
         elapsed_list = [r.get("elapsed_s", 0) for r in runs]
         avg_turns = sum(turns_list) / len(turns_list) if turns_list else 0
         avg_fa = sum(fa_rates) / len(fa_rates) if fa_rates else 0
+        avg_ack = sum(ack_rates) / len(ack_rates) if ack_rates else 0
+        avg_fu = sum(fu_counts) / len(fu_counts) if fu_counts else 0
         avg_elapsed = sum(elapsed_list) / len(elapsed_list) if elapsed_list else 0
         grand_total_elapsed += sum(elapsed_list)
 
@@ -820,15 +1113,15 @@ def main():
         else:
             worst_str = "—"
 
-        out(f"  {persona_key:<18} {passed}/{total:<10} {avg_turns:<12.1f} {avg_fa:<14.1f}% {avg_time_str:<10} {worst_str}")
+        out(f"  {persona_key:<18} {passed}/{total:<10} {avg_turns:<12.1f} {avg_fa:<14.1f}% {avg_ack:<9.1f}% {avg_fu:<9.1f} {avg_time_str:<10} {worst_str}")
 
     out()
-    out(f"  {'─'*56}")
+    out(f"  {'─' * 56}")
     overall_rate = (total_passed / total_runs * 100) if total_runs > 0 else 0
     grand_m, grand_s = divmod(int(grand_total_elapsed), 60)
     grand_time_str = f"{grand_m}m {grand_s}s" if grand_m else f"{grand_s}s"
     out(f"  OVERALL: {total_passed}/{total_runs} completed ({overall_rate:.0f}%)  —  Total time: {grand_time_str}")
-    out(f"  {'─'*56}")
+    out(f"  {'─' * 56}")
     out()
 
     # Write summary file

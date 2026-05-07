@@ -60,6 +60,7 @@ async def send_message(conversation_id: str, req: MessageRequest):
         bot_text=res.bot_text,
         done=res.done,
         current_question_id=current_qid,
+        acknowledged=res.acknowledged,
     )
 
 

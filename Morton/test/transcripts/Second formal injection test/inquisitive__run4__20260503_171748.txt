@@ -1,0 +1,676 @@
+Inquisitive Patient — Run 4
+Conversation ID: eval-inquisitive-run4-1777820880
+Date: 2026-05-03 17:17
+──────────────────────────────────────────────────
+
+[Assistant]  [asking: q0]: Hi! I'm here to conduct your pre-surgery consultation. We'll go through some questions about your medical history and current health — it should only take a few minutes. Feel free to ask me anything along the way. Just let me know when you're ready to begin.
+
+[Patient]  [→ q0]: yes I'm ready, how long will this take by the way?
+
+[Assistant]  [asking: q1 | ack]: It should only take a few minutes—thank you for being ready! Let's get started.
+
+What is your name?
+
+[Patient]  [→ q1]: Maria, what is this information used for exactly?
+
+[Assistant]  [asking: q2 | ack]: Your name helps us ensure you receive the right care and safety measures during your procedure.
+
+How old are you?
+
+[Patient]  [→ q2]: 44, does age matter for the anesthesia?
+
+[Assistant]  [asking: q3 | ack]: Your age is part of the assessment, but your medical team will review all factors together—everything you share here is passed along to them.
+
+Have you ever had anesthesia before?
+
+[Patient]  [→ q3]: I had it once for a tooth extraction, what kind will I be getting?
+
+[Assistant]  [asking: q3b | ack]: Maria, your anesthesiologist will provide details about the specific type of anesthesia you’ll receive. Let me know if you have any other questions.
+
+Did you experience any problems with it?
+
+[Patient]  [→ q3b]: no it went fine, but should I expect side effects this time?
+
+[Assistant]  [asking: q4 | ack]: It's natural to be concerned, Maria — your medical team will provide detailed information about any potential side effects specific to your situation.
+
+Has anyone in your family ever had an adverse reaction to anesthesia?
+
+[Patient]  [→ q4]: not that I know of, is that something that runs in families?
+
+[Assistant]  [asking: q5 | ack]: It’s great you’re thinking about your family history—while I can’t confirm if it runs in families, your medical team can provide more details about risk factors and how they’ll monitor you safely.
+
+Has a doctor ever told you that you were difficult to intubate or that you have a difficult airway?
+
+[Patient]  [→ q5]: no, what would happen if I did have a difficult airway?
+
+[Assistant]  [asking: q6 | ack]: Your medical team will explain the steps they’ll take if a difficult airway is encountered. Everything you share here is passed on to them, so you don’t need to repeat it.
+
+Do you have sleep apnea or use a CPAP machine at night?
+
+[Patient]  [→ q6]: no I dont, but what is a CPAP machine exactly?
+
+[Assistant]  [asking: q7 | ack]: A CPAP machine is a device that delivers gentle air pressure through a mask to keep your airways open during sleep, helping people with sleep apnea breathe more easily.
+
+Do you have any loose teeth, dentures, or dental implants?
+
+[Patient]  [→ q7]: I have some metal wires behind my teeth from braces, is that a concern?
+
+[Assistant]  [asking: q8 | ack]: Your braces with metal wires are part of your dental history, and our team will take that into account during your consultation to ensure everything is considered.
+
+Do you have any allergies to medications, latex, or anesthesia drugs?
+
+[Patient]  [→ q8]: yes I react to some types of tape, could that be a problem during surgery?
+
+[Assistant]  [asking: q8b | ack]: Your reaction to tape is noted, and our team will take necessary precautions to ensure your comfort and safety during surgery.
+
+Which ones, and what kind of reaction do you get?
+
+[Patient]  [→ q8b]: medical tape gives me a rash, do you use that during the operation?
+
+[Assistant]  [asking: q9 | ack]: We use adhesive tapes during procedures, but if you have a reaction to them, we can use alternative methods to secure your belongings safely.
+
+Do you take any daily prescription medications?
+
+[Patient]  [→ q9]: yes I take eye drops that are prescription, do those count?
+
+[Assistant]  [asking: q9b | ack]: Yes, your prescription eye drops are important to note—they’ll be reviewed by the medical team to ensure everything is safe for your procedure.
+
+Could you list them for me?
+
+[Patient]  [→ q9b]: prescription eye drops for allergies, I dont know the brand name
+
+[Assistant]  [asking: q10 | ack]: Thank you, Maria. I've noted your prescription eye drops for allergies, and the team will review them and address any concerns.
+
+Do you take blood thinners such as aspirin, warfarin, Eliquis, or Xarelto?
+
+[Patient]  [→ q10]: no, what are those used for exactly?
+
+[Assistant]  [asking: q11 | ack]: Your medical team can provide detailed information about blood thinners and their uses.
+
+Do you take any non-prescription medications, supplements, or herbal remedies — including things like fish oil, vitamins, or over-the-counter painkillers?
+
+[Patient]  [→ q11]: I take creatine and some hair vitamins, should I stop those before surgery?
+
+[Assistant]  [asking: q11b | ack]: Maria, it's best to consult your medical team or pharmacist about stopping any supplements before surgery—they can provide personalized advice based on your specific situation.
+
+Could you list what you're taking?
+
+[Patient]  [→ q11b]: creatine, hair vitamins, and sometimes D vitamin
+
+[Assistant]  [asking: q12 | bare]: Do you have any heart conditions, chest pain, or a history of heart surgery or stents?
+
+[Patient]  [→ q12]: no, but can anesthesia affect the heart?
+
+[Assistant]  [asking: q13 | ack]: Your concerns are important, Maria. Your medical team can provide detailed information about how anesthesia might affect your heart.
+
+Do you have asthma, COPD, or any other breathing problems?
+
+[Patient]  [→ q13]: no but what is COPD? I keep hearing that word
+
+[Assistant]  [asking: q14 | ack]: COPD stands for Chronic Obstructive Pulmonary Disease, which is a lung condition that makes breathing harder over time—your medical team can explain more about it if needed.
+
+Do you get short of breath when walking on flat ground or climbing stairs?
+
+[Patient]  [→ q14]: only if I really push myself like running, is that a problem?
+
+[Assistant]  [asking: q15 | bare]: Do you experience acid reflux or heartburn, or take any medication for it?
+
+[Patient]  [→ q15]: I get it sometimes when I drink wine, is that relevant?
+
+[Assistant]  [asking: q16 | ack]: Yes, that’s important for your care—we’ll make sure your team is aware and can address it safely.
+
+Have you had any recent infections, fever, or major health changes in the last few weeks?
+
+[Patient]  [→ q16]: I had a cold a while back but I feel fine now, does that matter?
+
+[Assistant]  [asking: q17 | ack]: Your medical team will review your full health history to ensure everything is clear for your procedure — it’s great you’re feeling better, but they’ll have the final say on what’s needed.
+
+Do you smoke or use any nicotine products?
+
+[Patient]  [→ q17]: no never, but my partner smokes inside, is passive smoking a concern?
+
+[Assistant]  [asking: q18 | ack]: I understand your concern about passive smoking; your medical team can provide detailed guidance on this.
+
+How much alcohol do you consume on a weekly basis?
+
+[Patient]  [→ q18]: maybe 2 glasses on the weekend, is that too much before surgery?
+
+[Assistant]  [asking: q19 | ack]: Maria, it's important to share all details with your medical team—they’ll assess how alcohol might affect your surgery. Let me know if there’s anything else you’d like to discuss.
+
+Do you use any recreational or illicit drugs?
+
+[Patient]  [→ q19]: no, but can recreational drugs interact with anesthesia?
+
+[Assistant]  [asking: q20 | ack]: Your medical team can provide detailed information about how medications interact with anesthesia — it’s important to share all your medications and health history so we can ensure your safety.
+
+Are you feeling anxious or worried about the anesthesia or the operation?
+
+[Patient]  [→ q20]: a bit yes, what happens if I wake up during the procedure?
+
+[Assistant]  [asking: q21 | ack]: It's completely normal to feel that way, Maria, but your anesthesia team will work closely with you to ensure you stay comfortably asleep and unaware during the procedure.
+
+Is there anything else about your health or previous surgeries that you think the anesthesiologist should know?
+
+[Patient]  [→ q21]: I donate blood regularly, should I mention that?
+
+[Assistant]  [asking: q22 | ack]: Yes, it's good to mention blood donation as it can impact anesthesia, but your medical team will handle the specifics.
+
+Do you have any additional questions or concerns that you would like to discuss?
+
+[Patient]  [→ q22]: yes, how soon before surgery do I need to stop eating?
+
+[Assistant]  [done]: Thank you, Maria, for being here today. Your questions have been noted, and everything you shared will be passed on to the medical team.
+
+──────────────────────────────────────────────────
+Total patient turns: 27
+Free chat auto-responses: 0
+Fallback responses: 0
+Duration: 9m 48s
+Questions asked: 27
+First-attempt acceptance: 27/27 (100%)
+Acknowledgment rate: 24/26 (92%)
+Bare question responses: 2/26
+
+Follow-ups triggered: 4/7 (q3b, q8b, q9b, q11b)
+
+Turns per question:
+  q0: 1
+  q1: 1
+  q10: 1
+  q11: 1
+  q11b: 1
+  q12: 1
+  q13: 1
+  q14: 1
+  q15: 1
+  q16: 1
+  q17: 1
+  q18: 1
+  q19: 1
+  q2: 1
+  q20: 1
+  q21: 1
+  q22: 1
+  q3: 1
+  q3b: 1
+  q4: 1
+  q5: 1
+  q6: 1
+  q7: 1
+  q8: 1
+  q8b: 1
+  q9: 1
+  q9b: 1
+
+Errors: 0
+Result: PASSED
+
+──────────────────────────────────────────────────
+SUMMARY
+──────────────────────────────────────────────────
+{
+  "patient": {
+    "name": "Maria",
+    "age": 44
+  },
+  "anesthesia_history": {
+    "prior_anesthesia": "yes",
+    "prior_anesthesia_issues": "no",
+    "family_reaction": "no",
+    "family_reaction_type": "unknown"
+  },
+  "airway": {
+    "difficult_airway": "no",
+    "sleep_apnea": "no",
+    "dental": "metal wires from braces"
+  },
+  "allergies_and_medications": {
+    "allergies": "medical tape (rash)",
+    "prescription_medications": "eye drops for allergies",
+    "blood_thinners": "no",
+    "supplements": "creatine, hair vitamins, D vitamin"
+  },
+  "cardiopulmonary": {
+    "cardiac_history": "no",
+    "respiratory_history": "no",
+    "exertional_dyspnea": "yes"
+  },
+  "gi_and_recent_health": {
+    "acid_reflux": "yes (wine-related)",
+    "recent_health_changes": "cold (resolved)"
+  },
+  "lifestyle": {
+    "smoking_status": "never",
+    "smoking_details": "partner smokes indoors",
+    "alcohol": "2 glasses weekly",
+    "recreational_drugs": "no"
+  },
+  "psychological": {
+    "anxiety_level": "some",
+    "additional_history": "blood donation",
+    "additional_questions": "how soon before surgery do I need to stop eating?"
+  },
+  "red_flags": [
+    {
+      "category": "allergy_concern",
+      "severity": "low",
+      "details": "medical tape reaction"
+    }
+  ],
+  "asa_classification": "ASA-III",
+  "notes": "Patient has a history of allergic reaction to adhesive materials, mild exertional dyspnea, and occasional acid reflux. No significant comorbidities. Questions about preoperative fasting and anesthesia specifics were raised.",
+  "questionnaire_answers": [
+    {
+      "question_id": "q0",
+      "question": "Hi! I'm here to conduct your pre-surgery consultation. We'll go through some questions about your medical history and current health — it should only take a few minutes. Feel free to ask me anything along the way. Just let me know when you're ready to begin.",
+      "answer": "yes I'm ready"
+    },
+    {
+      "question_id": "q1",
+      "question": "What is your name?",
+      "answer": "Maria"
+    },
+    {
+      "question_id": "q2",
+      "question": "How old are you?",
+      "answer": "44"
+    },
+    {
+      "question_id": "q3",
+      "question": "Have you ever had anesthesia before?",
+      "answer": "yes"
+    },
+    {
+      "question_id": "q3b",
+      "question": "Did you experience any problems with it?",
+      "answer": "no"
+    },
+    {
+      "question_id": "q4",
+      "question": "Has anyone in your family ever had an adverse reaction to anesthesia?",
+      "answer": "not that I know of"
+    },
+    {
+      "question_id": "q5",
+      "question": "Has a doctor ever told you that you were difficult to intubate or that you have a difficult airway?",
+      "answer": "no"
+    },
+    {
+      "question_id": "q6",
+      "question": "Do you have sleep apnea or use a CPAP machine at night?",
+      "answer": "no I dont"
+    },
+    {
+      "question_id": "q7",
+      "question": "Do you have any loose teeth, dentures, or dental implants?",
+      "answer": "I have some metal wires behind my teeth from braces"
+    },
+    {
+      "question_id": "q8",
+      "question": "Do you have any allergies to medications, latex, or anesthesia drugs?",
+      "answer": "yes"
+    },
+    {
+      "question_id": "q8b",
+      "question": "Which ones, and what kind of reaction do you get?",
+      "answer": "medical tape gives me a rash"
+    },
+    {
+      "question_id": "q9",
+      "question": "Do you take any daily prescription medications?",
+      "answer": "yes"
+    },
+    {
+      "question_id": "q9b",
+      "question": "Could you list them for me?",
+      "answer": "prescription eye drops for allergies"
+    },
+    {
+      "question_id": "q10",
+      "question": "Do you take blood thinners such as aspirin, warfarin, Eliquis, or Xarelto?",
+      "answer": "no"
+    },
+    {
+      "question_id": "q11",
+      "question": "Do you take any non-prescription medications, supplements, or herbal remedies — including things like fish oil, vitamins, or over-the-counter painkillers?",
+      "answer": "I take creatine and some hair vitamins"
+    },
+    {
+      "question_id": "q11b",
+      "question": "Could you list what you're taking?",
+      "answer": "creatine, hair vitamins, and sometimes D vitamin"
+    },
+    {
+      "question_id": "q12",
+      "question": "Do you have any heart conditions, chest pain, or a history of heart surgery or stents?",
+      "answer": "no"
+    },
+    {
+      "question_id": "q13",
+      "question": "Do you have asthma, COPD, or any other breathing problems?",
+      "answer": "no"
+    },
+    {
+      "question_id": "q14",
+      "question": "Do you get short of breath when walking on flat ground or climbing stairs?",
+      "answer": "only if I really push myself like running, is that a problem?"
+    },
+    {
+      "question_id": "q15",
+      "question": "Do you experience acid reflux or heartburn, or take any medication for it?",
+      "answer": "I get it sometimes when I drink wine"
+    },
+    {
+      "question_id": "q16",
+      "question": "Have you had any recent infections, fever, or major health changes in the last few weeks?",
+      "answer": "I had a cold a while back but I feel fine now"
+    },
+    {
+      "question_id": "q17",
+      "question": "Do you smoke or use any nicotine products?",
+      "answer": "no never"
+    },
+    {
+      "question_id": "q18",
+      "question": "How much alcohol do you consume on a weekly basis?",
+      "answer": "maybe 2 glasses on the weekend"
+    },
+    {
+      "question_id": "q19",
+      "question": "Do you use any recreational or illicit drugs?",
+      "answer": "no"
+    },
+    {
+      "question_id": "q20",
+      "question": "Are you feeling anxious or worried about the anesthesia or the operation?",
+      "answer": "a bit yes"
+    },
+    {
+      "question_id": "q21",
+      "question": "Is there anything else about your health or previous surgeries that you think the anesthesiologist should know?",
+      "answer": "I donate blood regularly"
+    },
+    {
+      "question_id": "q22",
+      "question": "Do you have any additional questions or concerns that you would like to discuss?",
+      "answer": "yes"
+    }
+  ],
+  "raw_transcript": [
+    {
+      "role": "assistant",
+      "content": "Hi! I'm here to conduct your pre-surgery consultation. We'll go through some questions about your medical history and current health — it should only take a few minutes. Feel free to ask me anything along the way. Just let me know when you're ready to begin.",
+      "timestamp": 1777820882
+    },
+    {
+      "role": "patient",
+      "content": "yes I'm ready, how long will this take by the way?",
+      "timestamp": 1777820886
+    },
+    {
+      "role": "assistant",
+      "content": "It should only take a few minutes—thank you for being ready! Let's get started.\n\nWhat is your name?",
+      "timestamp": 1777820899
+    },
+    {
+      "role": "patient",
+      "content": "Maria, what is this information used for exactly?",
+      "timestamp": 1777820901
+    },
+    {
+      "role": "assistant",
+      "content": "Your name helps us ensure you receive the right care and safety measures during your procedure.\n\nHow old are you?",
+      "timestamp": 1777820912
+    },
+    {
+      "role": "patient",
+      "content": "44, does age matter for the anesthesia?",
+      "timestamp": 1777820914
+    },
+    {
+      "role": "assistant",
+      "content": "Your age is part of the assessment, but your medical team will review all factors together—everything you share here is passed along to them.\n\nHave you ever had anesthesia before?",
+      "timestamp": 1777820927
+    },
+    {
+      "role": "patient",
+      "content": "I had it once for a tooth extraction, what kind will I be getting?",
+      "timestamp": 1777820929
+    },
+    {
+      "role": "assistant",
+      "content": "Maria, your anesthesiologist will provide details about the specific type of anesthesia you’ll receive. Let me know if you have any other questions.\n\nDid you experience any problems with it?",
+      "timestamp": 1777820967
+    },
+    {
+      "role": "patient",
+      "content": "no it went fine, but should I expect side effects this time?",
+      "timestamp": 1777820969
+    },
+    {
+      "role": "assistant",
+      "content": "It's natural to be concerned, Maria — your medical team will provide detailed information about any potential side effects specific to your situation.\n\nHas anyone in your family ever had an adverse reaction to anesthesia?",
+      "timestamp": 1777820984
+    },
+    {
+      "role": "patient",
+      "content": "not that I know of, is that something that runs in families?",
+      "timestamp": 1777820986
+    },
+    {
+      "role": "assistant",
+      "content": "It’s great you’re thinking about your family history—while I can’t confirm if it runs in families, your medical team can provide more details about risk factors and how they’ll monitor you safely.\n\nHas a doctor ever told you that you were difficult to intubate or that you have a difficult airway?",
+      "timestamp": 1777821000
+    },
+    {
+      "role": "patient",
+      "content": "no, what would happen if I did have a difficult airway?",
+      "timestamp": 1777821002
+    },
+    {
+      "role": "assistant",
+      "content": "Your medical team will explain the steps they’ll take if a difficult airway is encountered. Everything you share here is passed on to them, so you don’t need to repeat it.\n\nDo you have sleep apnea or use a CPAP machine at night?",
+      "timestamp": 1777821034
+    },
+    {
+      "role": "patient",
+      "content": "no I dont, but what is a CPAP machine exactly?",
+      "timestamp": 1777821036
+    },
+    {
+      "role": "assistant",
+      "content": "A CPAP machine is a device that delivers gentle air pressure through a mask to keep your airways open during sleep, helping people with sleep apnea breathe more easily.\n\nDo you have any loose teeth, dentures, or dental implants?",
+      "timestamp": 1777821049
+    },
+    {
+      "role": "patient",
+      "content": "I have some metal wires behind my teeth from braces, is that a concern?",
+      "timestamp": 1777821051
+    },
+    {
+      "role": "assistant",
+      "content": "Your braces with metal wires are part of your dental history, and our team will take that into account during your consultation to ensure everything is considered.\n\nDo you have any allergies to medications, latex, or anesthesia drugs?",
+      "timestamp": 1777821067
+    },
+    {
+      "role": "patient",
+      "content": "yes I react to some types of tape, could that be a problem during surgery?",
+      "timestamp": 1777821069
+    },
+    {
+      "role": "assistant",
+      "content": "Your reaction to tape is noted, and our team will take necessary precautions to ensure your comfort and safety during surgery.\n\nWhich ones, and what kind of reaction do you get?",
+      "timestamp": 1777821080
+    },
+    {
+      "role": "patient",
+      "content": "medical tape gives me a rash, do you use that during the operation?",
+      "timestamp": 1777821082
+    },
+    {
+      "role": "assistant",
+      "content": "We use adhesive tapes during procedures, but if you have a reaction to them, we can use alternative methods to secure your belongings safely.\n\nDo you take any daily prescription medications?",
+      "timestamp": 1777821094
+    },
+    {
+      "role": "patient",
+      "content": "yes I take eye drops that are prescription, do those count?",
+      "timestamp": 1777821096
+    },
+    {
+      "role": "assistant",
+      "content": "Yes, your prescription eye drops are important to note—they’ll be reviewed by the medical team to ensure everything is safe for your procedure.\n\nCould you list them for me?",
+      "timestamp": 1777821106
+    },
+    {
+      "role": "patient",
+      "content": "prescription eye drops for allergies, I dont know the brand name",
+      "timestamp": 1777821108
+    },
+    {
+      "role": "assistant",
+      "content": "Thank you, Maria. I've noted your prescription eye drops for allergies, and the team will review them and address any concerns.\n\nDo you take blood thinners such as aspirin, warfarin, Eliquis, or Xarelto?",
+      "timestamp": 1777821139
+    },
+    {
+      "role": "patient",
+      "content": "no, what are those used for exactly?",
+      "timestamp": 1777821141
+    },
+    {
+      "role": "assistant",
+      "content": "Your medical team can provide detailed information about blood thinners and their uses.\n\nDo you take any non-prescription medications, supplements, or herbal remedies — including things like fish oil, vitamins, or over-the-counter painkillers?",
+      "timestamp": 1777821184
+    },
+    {
+      "role": "patient",
+      "content": "I take creatine and some hair vitamins, should I stop those before surgery?",
+      "timestamp": 1777821186
+    },
+    {
+      "role": "assistant",
+      "content": "Maria, it's best to consult your medical team or pharmacist about stopping any supplements before surgery—they can provide personalized advice based on your specific situation.\n\nCould you list what you're taking?",
+      "timestamp": 1777821199
+    },
+    {
+      "role": "patient",
+      "content": "creatine, hair vitamins, and sometimes D vitamin",
+      "timestamp": 1777821201
+    },
+    {
+      "role": "assistant",
+      "content": "Do you have any heart conditions, chest pain, or a history of heart surgery or stents?",
+      "timestamp": 1777821205
+    },
+    {
+      "role": "patient",
+      "content": "no, but can anesthesia affect the heart?",
+      "timestamp": 1777821207
+    },
+    {
+      "role": "assistant",
+      "content": "Your concerns are important, Maria. Your medical team can provide detailed information about how anesthesia might affect your heart.\n\nDo you have asthma, COPD, or any other breathing problems?",
+      "timestamp": 1777821224
+    },
+    {
+      "role": "patient",
+      "content": "no but what is COPD? I keep hearing that word",
+      "timestamp": 1777821226
+    },
+    {
+      "role": "assistant",
+      "content": "COPD stands for Chronic Obstructive Pulmonary Disease, which is a lung condition that makes breathing harder over time—your medical team can explain more about it if needed.\n\nDo you get short of breath when walking on flat ground or climbing stairs?",
+      "timestamp": 1777821272
+    },
+    {
+      "role": "patient",
+      "content": "only if I really push myself like running, is that a problem?",
+      "timestamp": 1777821274
+    },
+    {
+      "role": "assistant",
+      "content": "Do you experience acid reflux or heartburn, or take any medication for it?",
+      "timestamp": 1777821278
+    },
+    {
+      "role": "patient",
+      "content": "I get it sometimes when I drink wine, is that relevant?",
+      "timestamp": 1777821280
+    },
+    {
+      "role": "assistant",
+      "content": "Yes, that’s important for your care—we’ll make sure your team is aware and can address it safely.\n\nHave you had any recent infections, fever, or major health changes in the last few weeks?",
+      "timestamp": 1777821292
+    },
+    {
+      "role": "patient",
+      "content": "I had a cold a while back but I feel fine now, does that matter?",
+      "timestamp": 1777821294
+    },
+    {
+      "role": "assistant",
+      "content": "Your medical team will review your full health history to ensure everything is clear for your procedure — it’s great you’re feeling better, but they’ll have the final say on what’s needed.\n\nDo you smoke or use any nicotine products?",
+      "timestamp": 1777821308
+    },
+    {
+      "role": "patient",
+      "content": "no never, but my partner smokes inside, is passive smoking a concern?",
+      "timestamp": 1777821310
+    },
+    {
+      "role": "assistant",
+      "content": "I understand your concern about passive smoking; your medical team can provide detailed guidance on this.\n\nHow much alcohol do you consume on a weekly basis?",
+      "timestamp": 1777821328
+    },
+    {
+      "role": "patient",
+      "content": "maybe 2 glasses on the weekend, is that too much before surgery?",
+      "timestamp": 1777821330
+    },
+    {
+      "role": "assistant",
+      "content": "Maria, it's important to share all details with your medical team—they’ll assess how alcohol might affect your surgery. Let me know if there’s anything else you’d like to discuss.\n\nDo you use any recreational or illicit drugs?",
+      "timestamp": 1777821348
+    },
+    {
+      "role": "patient",
+      "content": "no, but can recreational drugs interact with anesthesia?",
+      "timestamp": 1777821351
+    },
+    {
+      "role": "assistant",
+      "content": "Your medical team can provide detailed information about how medications interact with anesthesia — it’s important to share all your medications and health history so we can ensure your safety.\n\nAre you feeling anxious or worried about the anesthesia or the operation?",
+      "timestamp": 1777821366
+    },
+    {
+      "role": "patient",
+      "content": "a bit yes, what happens if I wake up during the procedure?",
+      "timestamp": 1777821368
+    },
+    {
+      "role": "assistant",
+      "content": "It's completely normal to feel that way, Maria, but your anesthesia team will work closely with you to ensure you stay comfortably asleep and unaware during the procedure.\n\nIs there anything else about your health or previous surgeries that you think the anesthesiologist should know?",
+      "timestamp": 1777821382
+    },
+    {
+      "role": "patient",
+      "content": "I donate blood regularly, should I mention that?",
+      "timestamp": 1777821384
+    },
+    {
+      "role": "assistant",
+      "content": "Yes, it's good to mention blood donation as it can impact anesthesia, but your medical team will handle the specifics.\n\nDo you have any additional questions or concerns that you would like to discuss?",
+      "timestamp": 1777821406
+    },
+    {
+      "role": "patient",
+      "content": "yes, how soon before surgery do I need to stop eating?",
+      "timestamp": 1777821408
+    },
+    {
+      "role": "assistant",
+      "content": "Thank you, Maria, for being here today. Your questions have been noted, and everything you shared will be passed on to the medical team.",
+      "timestamp": 1777821421
+    }
+  ]
+}

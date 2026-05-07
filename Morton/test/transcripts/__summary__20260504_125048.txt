@@ -1,0 +1,117 @@
+
+============================================================
+  FULL EVALUATION SUMMARY
+============================================================
+  Date:             2026-05-04 12:50
+  Runs per persona: 10
+  Transcripts dir:  C:\development\gitrep\Morton\Morton\test\transcripts
+
+  ────────────────────────────────────────────────────────
+  UNCERTAIN (Uncertain Patient)
+  ────────────────────────────────────────────────────────
+  Completed:              10/10
+  Avg turns:              27.0  (min 27, max 27)
+  Avg first-attempt rate: 100.0%
+  Avg acknowledgment rate:30.4%
+  Avg follow-ups triggered:4.0/7
+  Avg duration:           4m 58s  (total 49m 44s)
+
+  Run    Turns    1st-att            Ack     F-ups   Re-asked               Time     Result
+  ───    ─────    ───────            ───     ─────   ────────               ────     ──────
+  1      27       27/27 (100.0%)     31%     4/7     —                      5m28s    PASS
+  2      27       27/27 (100.0%)     31%     4/7     —                      5m10s    PASS
+  3      27       27/27 (100.0%)     27%     4/7     —                      4m36s    PASS
+  4      27       27/27 (100.0%)     31%     4/7     —                      4m53s    PASS
+  5      27       27/27 (100.0%)     31%     4/7     —                      4m50s    PASS
+  6      27       27/27 (100.0%)     35%     4/7     —                      4m39s    PASS
+  7      27       27/27 (100.0%)     27%     4/7     —                      6m19s    PASS
+  8      27       27/27 (100.0%)     31%     4/7     —                      4m24s    PASS
+  9      27       27/27 (100.0%)     31%     4/7     —                      4m44s    PASS
+  10     27       27/27 (100.0%)     31%     4/7     —                      4m37s    PASS
+
+  Follow-up triggers (across 10 runs):
+    q11b: 10/10 runs (100%)
+    q17b: never triggered
+    q19b: never triggered
+    q3b: 10/10 runs (100%)
+    q4b: 10/10 runs (100%)
+    q8b: never triggered
+    q9b: 10/10 runs (100%)
+
+  ────────────────────────────────────────────────────────
+  INQUISITIVE (Inquisitive Patient)
+  ────────────────────────────────────────────────────────
+  Completed:              10/10
+  Avg turns:              27.0  (min 27, max 27)
+  Avg first-attempt rate: 100.0%
+  Avg acknowledgment rate:92.3%
+  Avg follow-ups triggered:4.0/7
+  Avg duration:           8m 13s  (total 82m 19s)
+
+  Run    Turns    1st-att            Ack     F-ups   Re-asked               Time     Result
+  ───    ─────    ───────            ───     ─────   ────────               ────     ──────
+  1      27       27/27 (100.0%)     92%     4/7     —                      7m22s    PASS
+  2      27       27/27 (100.0%)     92%     4/7     —                      8m18s    PASS
+  3      27       27/27 (100.0%)     92%     4/7     —                      7m25s    PASS
+  4      27       27/27 (100.0%)     92%     4/7     —                      9m38s    PASS
+  5      27       27/27 (100.0%)     92%     4/7     —                      7m32s    PASS
+  6      27       27/27 (100.0%)     92%     4/7     —                      8m00s    PASS
+  7      27       27/27 (100.0%)     92%     4/7     —                      8m00s    PASS
+  8      27       27/27 (100.0%)     92%     4/7     —                      9m26s    PASS
+  9      27       27/27 (100.0%)     92%     4/7     —                      7m56s    PASS
+  10     27       27/27 (100.0%)     92%     4/7     —                      8m37s    PASS
+
+  Follow-up triggers (across 10 runs):
+    q11b: 10/10 runs (100%)
+    q17b: never triggered
+    q19b: never triggered
+    q3b: 10/10 runs (100%)
+    q4b: never triggered
+    q8b: 10/10 runs (100%)
+    q9b: 10/10 runs (100%)
+
+  ────────────────────────────────────────────────────────
+  CONTRADICTORY (Contradictory Patient)
+  ────────────────────────────────────────────────────────
+  Completed:              9/10
+  Avg turns:              29.3  (min 29, max 30)
+  Avg first-attempt rate: 100.0%
+  Avg acknowledgment rate:43.4%
+  Avg follow-ups triggered:6.3/7
+  Avg duration:           6m 14s  (total 62m 20s)
+
+  Run    Turns    1st-att            Ack     F-ups   Re-asked               Time     Result
+  ───    ─────    ───────            ───     ─────   ────────               ────     ──────
+  1      29       29/29 (100.0%)     39%     6/7     —                      6m00s    PASS
+  2      30       30/30 (100.0%)     48%     7/7     —                      6m15s    PASS
+  3      29       29/29 (100.0%)     46%     6/7     —                      6m37s    PASS
+  4      29       29/29 (100.0%)     39%     6/7     —                      5m43s    PASS
+  5      29       29/29 (100.0%)     46%     6/7     —                      5m46s    PASS
+  6      30       30/30 (100.0%)     48%     7/7     —                      5m52s    PASS
+  7      29       29/29 (100.0%)     39%     6/7     —                      5m58s    PASS
+  8      29       29/29 (100.0%)     43%     6/7     —                      5m48s    PASS
+  9      30       30/30 (100.0%)     41%     7/7     —                      8m30s    FAIL
+  10     29       29/29 (100.0%)     43%     6/7     —                      5m46s    PASS
+
+  Follow-up triggers (across 10 runs):
+    q11b: 10/10 runs (100%)
+    q17b: 10/10 runs (100%)
+    q19b: 10/10 runs (100%)
+    q3b: 10/10 runs (100%)
+    q4b: 10/10 runs (100%)
+    q8b: 3/10 runs (30%)
+    q9b: 10/10 runs (100%)
+
+  ========================================================
+  CROSS-PERSONA COMPARISON
+  ========================================================
+
+  Persona            Completed    Avg turns    Avg 1st-att    Avg ack    Avg f-ups  Avg time   Most re-asked
+  ───────            ─────────    ─────────    ───────────    ───────    ─────────  ────────   ─────────────
+  uncertain          10/10         27.0         100.0         % 30.4     % 4.0       4m58s      —
+  inquisitive        10/10         27.0         100.0         % 92.3     % 4.0       8m13s      —
+  contradictory      9/10         29.3         100.0         % 43.4     % 6.3       6m14s      —
+
+  ────────────────────────────────────────────────────────
+  OVERALL: 29/30 completed (97%)  —  Total time: 194m 25s
+  ────────────────────────────────────────────────────────

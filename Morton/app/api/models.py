@@ -32,6 +32,7 @@ class MessageResponse(BaseModel):
     bot_text: str
     done: bool = False
     current_question_id: Optional[str] = None
+    acknowledged: bool = False
 
 
 class ConversationStateResponse(BaseModel):

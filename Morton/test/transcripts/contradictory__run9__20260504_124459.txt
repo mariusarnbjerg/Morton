@@ -1,0 +1,198 @@
+Contradictory Patient — Run 9
+Conversation ID: eval-contradictory-run9-1777890990
+Date: 2026-05-04 12:44
+──────────────────────────────────────────────────
+
+[Assistant]  [asking: q0]: Hi! I'm here to conduct your pre-surgery consultation. We'll go through some questions about your medical history and current health — it should only take a few minutes. Feel free to ask me anything along the way. Just let me know when you're ready to begin.
+
+[Patient]  [→ q0]: lets go
+
+[Assistant]  [asking: q1 | bare]: What is your name?
+
+[Patient]  [→ q1]: Katrine Holm
+
+[Assistant]  [asking: q2 | bare]: How old are you?
+
+[Patient]  [→ q2]: oh sorry I'm 31, I keep saying 30 out of habit
+
+[Assistant]  [asking: q3 | ack]: Thank you for sharing, Katrine. It's easy to get used to a certain number, but 31 sounds just right.
+
+Have you ever had anesthesia before?
+
+[Patient]  [→ q3]: yes, well actually I think it was local anesthesia not full
+
+[Assistant]  [asking: q3b | ack]: Thank you for clarifying, Katrine — the team will note that you're referring to local anesthesia rather than full anesthesia.
+
+Did you experience any problems with it?
+
+[Patient]  [→ q3b]: no wait, I'm not sure it counts as real anesthesia actually
+
+[Assistant]  [asking: q4 | bare]: Has anyone in your family ever had an adverse reaction to anesthesia?
+
+[Patient]  [→ q4]: hmm yes I think my aunt had something
+
+[Assistant]  [asking: q4b | bare]: What type of reaction was it — for example, malignant hyperthermia, prolonged muscle relaxation, or something else?
+
+[Patient]  [→ q4b]: actually I might be mixing it up with something else, I'm not confident
+
+[Assistant]  [asking: q5 | bare]: Has a doctor ever told you that you were difficult to intubate or that you have a difficult airway?
+
+[Patient]  [→ q5]: no, well I was told my throat is narrow on one side
+
+[Assistant]  [asking: q6 | ack]: I understand that can be a concern—your medical team will take that into careful consideration during your assessment.
+
+Do you have sleep apnea or use a CPAP machine at night?
+
+[Patient]  [→ q6]: no, actually my husband says I stop breathing sometimes at night
+
+[Assistant]  [asking: q7 | bare]: Do you have any loose teeth, dentures, or dental implants?
+
+[Patient]  [→ q7]: no, oh wait I do have crowns on some teeth
+
+[Assistant]  [asking: q8 | ack]: Thank you for letting me know about your crowns; the dental team will take that into consideration during your consultation.
+
+Do you have any allergies to medications, latex, or anesthesia drugs?
+
+[Patient]  [→ q8]: no, well actually I react to some plasters but I wouldnt call it an allergy
+
+[Assistant]  [asking: q8b | ack]: Thank you for sharing that, Katrine — it’s important to note that even mild reactions can still require attention, and your medical team will review everything carefully to ensure your safety.
+
+Which ones, and what kind of reaction do you get?
+
+[Patient]  [→ q8b]: I said I dont think its a real allergy, my skin just gets irritated
+
+[Assistant]  [asking: q9 | ack]: I understand your concern, Katrine — it's important to share these feelings, and our team will review your symptoms carefully during your consultation.
+
+Do you take any daily prescription medications?
+
+[Patient]  [→ q9]: no, oh wait I do take something for my thyroid I forgot about that
+
+[Assistant]  [asking: q9b | bare]: Could you list them for me?
+
+[Patient]  [→ q9b]: thyroid medication, I always forget to count it
+
+[Assistant]  [asking: q10 | ack]: I’m sorry you sometimes forget—your team knows about your thyroid medication and will make sure it’s managed carefully.
+
+Do you take blood thinners such as aspirin, warfarin, Eliquis, or Xarelto?
+
+[Patient]  [→ q10]: no I dont, actually wait does ibuprofen count as a blood thinner?
+
+[Assistant]  [asking: q11 | ack]: Ibuprofen isn’t a blood thinner, but it can increase bleeding risk. Let me know if you have more questions.
+
+Do you take any non-prescription medications, supplements, or herbal remedies — including things like fish oil, vitamins, or over-the-counter painkillers?
+
+[Patient]  [→ q11]: no, well I take painkillers when I get headaches
+
+[Assistant]  [asking: q11b | bare]: Could you list what you're taking?
+
+[Patient]  [→ q11b]: just panodil for headaches, nothing else
+
+[Assistant]  [asking: q12 | ack]: Thank you for sharing, Katrine — I’ll make sure your medication is noted and discussed with the team. Let me know if anything else comes to mind.
+
+Do you have any heart conditions, chest pain, or a history of heart surgery or stents?
+
+[Patient]  [→ q12]: yes
+
+[Assistant]  [asking: q13 | bare]: Do you have asthma, COPD, or any other breathing problems?
+
+[Patient]  [→ q13]: I have asthma, well had asthma, I havent used my inhaler in years
+
+[Assistant]  [asking: q14 | bare]: Do you get short of breath when walking on flat ground or climbing stairs?
+
+[Patient]  [→ q14]: no, well maybe a little when climbing many stairs
+
+[Assistant]  [asking: q15 | ack]: Thanks for sharing that, Katrine. It's important to note any changes in how you feel, and I'll make sure your team is aware.
+
+Do you experience acid reflux or heartburn, or take any medication for it?
+
+[Patient]  [→ q15]: no, actually yes sometimes but only after eating late
+
+[Assistant]  [asking: q16 | bare]: Have you had any recent infections, fever, or major health changes in the last few weeks?
+
+[Patient]  [→ q16]: no, oh actually I had a bad cold two weeks ago but I'm over it now
+
+[Assistant]  [asking: q17 | ack]: Thank you for sharing that, Katrine—your cold is in the past, and we’ll note that for the team to ensure everything’s clear for your procedure.
+
+Do you smoke or use any nicotine products?
+
+[Patient]  [→ q17]: I used to smoke but I stopped, well I still have one at parties sometimes
+
+[Assistant]  [asking: q17b | bare]: How long have you been using it, and roughly how much per day?
+
+[Patient]  [→ q17b]: smoked for maybe 5 years, quit 3 years ago, now just socially
+
+[Assistant]  [asking: q18 | bare]: How much alcohol do you consume on a weekly basis?
+
+[Patient]  [→ q18]: I dont drink, well maybe a beer or two on fridays
+
+[Assistant]  [asking: q19 | bare]: Do you use any recreational or illicit drugs?
+
+[Patient]  [→ q19]: yes
+
+[Assistant]  [asking: q19b | bare]: What do you use, and how often?
+
+[Patient]  [→ q19b]: actually no, I dont use anything
+
+[Assistant]  [asking: q20 | bare]: Are you feeling anxious or worried about the anesthesia or the operation?
+
+[Patient]  [→ q20]: no im fine, well actually I am a little worried about waking up during it
+
+[Assistant]  [asking: q21 | bare]: Is there anything else about your health or previous surgeries that you think the anesthesiologist should know?
+
+[Patient]  [→ q21]: no wait I forgot, I had my tonsils removed as a kid, does that matter?
+
+[Assistant]  [asking: q22 | ack]: Your medical team will take that into account — it’s good you mentioned it, and everything you share helps ensure your safety.
+
+Do you have any additional questions or concerns that you would like to discuss?
+
+[Patient]  [→ q22]: no that should be everything, well actually who reads all this afterwards?
+
+[Assistant]  [done]: Thank you, Katrine, for taking the time to go through this with us. Everything you’ve shared will be passed on to the team, and you don’t need to repeat it.
+
+──────────────────────────────────────────────────
+Total patient turns: 30
+Free chat auto-responses: 0
+Fallback responses: 0
+Duration: 8m 28s
+Questions asked: 30
+First-attempt acceptance: 30/30 (100%)
+Acknowledgment rate: 12/29 (41%)
+Bare question responses: 17/29
+
+Follow-ups triggered: 7/7 (q3b, q4b, q8b, q9b, q11b, q17b, q19b)
+
+Turns per question:
+  q0: 1
+  q1: 1
+  q10: 1
+  q11: 1
+  q11b: 1
+  q12: 1
+  q13: 1
+  q14: 1
+  q15: 1
+  q16: 1
+  q17: 1
+  q17b: 1
+  q18: 1
+  q19: 1
+  q19b: 1
+  q2: 1
+  q20: 1
+  q21: 1
+  q22: 1
+  q3: 1
+  q3b: 1
+  q4: 1
+  q4b: 1
+  q5: 1
+  q6: 1
+  q7: 1
+  q8: 1
+  q8b: 1
+  q9: 1
+  q9b: 1
+
+Errors: 1
+  ERROR: Failed to fetch summary: 500 Server Error: Internal Server Error for url: http://localhost:8000/api/v1/conversations/eval-contradictory-run9-1777890990/summary
+Result: FAILED

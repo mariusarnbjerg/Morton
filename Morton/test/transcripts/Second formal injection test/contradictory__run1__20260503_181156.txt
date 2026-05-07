@@ -1,0 +1,684 @@
+Contradictory Patient — Run 1
+Conversation ID: eval-contradictory-run1-1777824366
+Date: 2026-05-03 18:11
+──────────────────────────────────────────────────
+
+[Assistant]  [asking: q0]: Hi! I'm here to conduct your pre-surgery consultation. We'll go through some questions about your medical history and current health — it should only take a few minutes. Feel free to ask me anything along the way. Just let me know when you're ready to begin.
+
+[Patient]  [→ q0]: lets go
+
+[Assistant]  [asking: q1 | bare]: What is your name?
+
+[Patient]  [→ q1]: Katrine Holm
+
+[Assistant]  [asking: q2 | bare]: How old are you?
+
+[Patient]  [→ q2]: oh sorry I'm 31, I keep saying 30 out of habit
+
+[Assistant]  [asking: q3 | ack]: No problem at all, Katrine—sometimes our brains have their own little habits! Your age is perfectly clear.
+
+Have you ever had anesthesia before?
+
+[Patient]  [→ q3]: yes, well actually I think it was local anesthesia not full
+
+[Assistant]  [asking: q3b | ack]: Thank you for clarifying, Katrine — I’ll make sure that information is noted for your care team.
+
+Did you experience any problems with it?
+
+[Patient]  [→ q3b]: no wait, I'm not sure it counts as real anesthesia actually
+
+[Assistant]  [asking: q4 | bare]: Has anyone in your family ever had an adverse reaction to anesthesia?
+
+[Patient]  [→ q4]: hmm yes I think my aunt had something
+
+[Assistant]  [asking: q4b | ack]: Thank you for sharing that, Katrine. Your family's medical history is important, and I'll make sure to note it for the team.
+
+What type of reaction was it — for example, malignant hyperthermia, prolonged muscle relaxation, or something else?
+
+[Patient]  [→ q4b]: actually I might be mixing it up with something else, I'm not confident
+
+[Assistant]  [asking: q5 | bare]: Has a doctor ever told you that you were difficult to intubate or that you have a difficult airway?
+
+[Patient]  [→ q5]: no, well I was told my throat is narrow on one side
+
+[Assistant]  [asking: q6 | ack]: I understand that can be a concern, and your medical team will take that into account during your care.
+
+Do you have sleep apnea or use a CPAP machine at night?
+
+[Patient]  [→ q6]: no, actually my husband says I stop breathing sometimes at night
+
+[Assistant]  [asking: q7 | bare]: Do you have any loose teeth, dentures, or dental implants?
+
+[Patient]  [→ q7]: no, oh wait I do have crowns on some teeth
+
+[Assistant]  [asking: q8 | ack]: Your crowns are noted—thank you for sharing that. If you have any other concerns or questions, feel free to let me know.
+
+Do you have any allergies to medications, latex, or anesthesia drugs?
+
+[Patient]  [→ q8]: no, well actually I react to some plasters but I wouldnt call it an allergy
+
+[Assistant]  [asking: q9 | ack]: Your reaction to plasters is noted, Katrine — it’s important to share all details, and our team will review this carefully to ensure your safety.
+
+Do you take any daily prescription medications?
+
+[Patient]  [→ q9]: no, oh wait I do take something for my thyroid I forgot about that
+
+[Assistant]  [asking: q9b | ack]: I’m glad you mentioned that—your thyroid medication is important for us to know, and everything you share will be passed on to the team right away.
+
+Could you list them for me?
+
+[Patient]  [→ q9b]: thyroid medication, I always forget to count it
+
+[Assistant]  [asking: q10 | ack]: I understand how easy it is to forget, Katrine. Your team will make sure you're on track with your medication.
+
+Do you take blood thinners such as aspirin, warfarin, Eliquis, or Xarelto?
+
+[Patient]  [→ q10]: no I dont, actually wait does ibuprofen count as a blood thinner?
+
+[Assistant]  [asking: q11 | ack]: Ibuprofen isn’t a blood thinner, but it’s still important to share all medications with your care team—your pharmacist or doctor can clarify how it interacts with your treatment.
+
+Do you take any non-prescription medications, supplements, or herbal remedies — including things like fish oil, vitamins, or over-the-counter painkillers?
+
+[Patient]  [→ q11]: no, well I take painkillers when I get headaches
+
+[Assistant]  [asking: q11b | bare]: Could you list what you're taking?
+
+[Patient]  [→ q11b]: just panodil for headaches, nothing else
+
+[Assistant]  [asking: q12 | bare]: Do you have any heart conditions, chest pain, or a history of heart surgery or stents?
+
+[Patient]  [→ q12]: yes
+
+[Assistant]  [asking: q13 | bare]: Do you have asthma, COPD, or any other breathing problems?
+
+[Patient]  [→ q13]: I have asthma, well had asthma, I havent used my inhaler in years
+
+[Assistant]  [asking: q14 | bare]: Do you get short of breath when walking on flat ground or climbing stairs?
+
+[Patient]  [→ q14]: no, well maybe a little when climbing many stairs
+
+[Assistant]  [asking: q15 | ack]: Thank you for sharing that, Katrine—it’s completely normal to experience some shortness of breath with exertion, and I’ll make sure your team knows about it.
+
+Do you experience acid reflux or heartburn, or take any medication for it?
+
+[Patient]  [→ q15]: no, actually yes sometimes but only after eating late
+
+[Assistant]  [asking: q16 | bare]: Have you had any recent infections, fever, or major health changes in the last few weeks?
+
+[Patient]  [→ q16]: no, oh actually I had a bad cold two weeks ago but I'm over it now
+
+[Assistant]  [asking: q17 | ack]: Thank you for sharing, Katrine — it's good to hear you're recovering well, and I'll make sure your medical team is aware of your recent cold so they can monitor your progress closely.
+
+Do you smoke or use any nicotine products?
+
+[Patient]  [→ q17]: I used to smoke but I stopped, well I still have one at parties sometimes
+
+[Assistant]  [asking: q17b | bare]: How long have you been using it, and roughly how much per day?
+
+[Patient]  [→ q17b]: smoked for maybe 5 years, quit 3 years ago, now just socially
+
+[Assistant]  [asking: q18 | bare]: How much alcohol do you consume on a weekly basis?
+
+[Patient]  [→ q18]: I dont drink, well maybe a beer or two on fridays
+
+[Assistant]  [asking: q19 | ack]: Thank you for sharing that, Katrine. It's good to know, and everything you tell me is passed on to the team.
+
+Do you use any recreational or illicit drugs?
+
+[Patient]  [→ q19]: no
+
+[Assistant]  [asking: q20 | bare]: Are you feeling anxious or worried about the anesthesia or the operation?
+
+[Patient]  [→ q20]: no im fine, well actually I am a little worried about waking up during it
+
+[Assistant]  [asking: q21 | bare]: Is there anything else about your health or previous surgeries that you think the anesthesiologist should know?
+
+[Patient]  [→ q21]: no wait I forgot, I had my tonsils removed as a kid, does that matter?
+
+[Assistant]  [asking: q22 | ack]: Your tonsillectomy is important information for the anesthesiologist to consider, as it may influence how anesthesia is administered and managed during your surgery.
+
+Do you have any additional questions or concerns that you would like to discuss?
+
+[Patient]  [→ q22]: no that should be everything, well actually who reads all this afterwards?
+
+[Assistant]  [done]: You're all set, Katrine—thank you for being here. Your team will take great care of you, and don’t hesitate to reach out if you have any more questions. Have a wonderful day!
+
+──────────────────────────────────────────────────
+Total patient turns: 28
+Free chat auto-responses: 0
+Fallback responses: 0
+Duration: 5m 49s
+Questions asked: 28
+First-attempt acceptance: 28/28 (100%)
+Acknowledgment rate: 13/27 (48%)
+Bare question responses: 14/27
+
+Follow-ups triggered: 5/7 (q3b, q4b, q9b, q11b, q17b)
+
+Turns per question:
+  q0: 1
+  q1: 1
+  q10: 1
+  q11: 1
+  q11b: 1
+  q12: 1
+  q13: 1
+  q14: 1
+  q15: 1
+  q16: 1
+  q17: 1
+  q17b: 1
+  q18: 1
+  q19: 1
+  q2: 1
+  q20: 1
+  q21: 1
+  q22: 1
+  q3: 1
+  q3b: 1
+  q4: 1
+  q4b: 1
+  q5: 1
+  q6: 1
+  q7: 1
+  q8: 1
+  q9: 1
+  q9b: 1
+
+Errors: 0
+Result: PASSED
+
+──────────────────────────────────────────────────
+SUMMARY
+──────────────────────────────────────────────────
+{
+  "patient": {
+    "name": "Katrine Holm",
+    "age": 31
+  },
+  "anesthesia_history": {
+    "prior_anesthesia": "yes",
+    "prior_anesthesia_issues": "uncertain if local anesthesia counts as full",
+    "family_reaction": "yes",
+    "family_reaction_type": "uncertain (malignant hyperthermia, prolonged muscle relaxation, or other?)"
+  },
+  "airway": {
+    "difficult_airway": "yes",
+    "sleep_apnea": "no",
+    "dental": "crowns on some teeth"
+  },
+  "allergies_and_medications": {
+    "allergies": "reacts to plasters (not confirmed as allergy)",
+    "prescription_medications": "thyroid medication",
+    "blood_thinners": "no",
+    "supplements": "no"
+  },
+  "cardiopulmonary": {
+    "cardiac_history": "yes",
+    "respiratory_history": "asthma (inactive, no inhaler use in years)",
+    "exertional_dyspnea": "yes"
+  },
+  "gi_and_recent_health": {
+    "acid_reflux": "yes (occasionally after late eating)",
+    "recent_health_changes": "bad cold two weeks ago (recovered)"
+  },
+  "lifestyle": {
+    "smoking_status": "former",
+    "smoking_details": "smoked 5 years, quit 3 years ago, occasional social use",
+    "alcohol": "occasional (1-2 beers on Fridays)",
+    "recreational_drugs": "no"
+  },
+  "psychological": {
+    "anxiety_level": "some concern about waking during anesthesia",
+    "additional_history": "tonsillectomy as a child",
+    "additional_questions": "no"
+  },
+  "red_flags": [
+    {
+      "category": "family_anesthesia_reaction",
+      "severity": "low",
+      "details": "uncertain reaction type"
+    },
+    {
+      "category": "difficult_airway",
+      "severity": "medium",
+      "details": "narrow throat on one side"
+    },
+    {
+      "category": "medication_interaction",
+      "severity": "low",
+      "details": "ibuprofen use clarification needed"
+    }
+  ],
+  "asa_classification": "ASA-III",
+  "notes": "Patient has a history of asthma, potential difficult airway, and family history of anesthesia reaction. Thyroid medication and occasional ibuprofen use. No major allergies, but plaster reaction noted. Recent cold resolved. Former smoker with occasional social use. Anxiety about anesthesia awareness.",
+  "questionnaire_answers": [
+    {
+      "question_id": "q0",
+      "question": "Hi! I'm here to conduct your pre-surgery consultation. We'll go through some questions about your medical history and current health — it should only take a few minutes. Feel free to ask me anything along the way. Just let me know when you're ready to begin.",
+      "answer": "lets go"
+    },
+    {
+      "question_id": "q1",
+      "question": "What is your name?",
+      "answer": "Katrine Holm"
+    },
+    {
+      "question_id": "q2",
+      "question": "How old are you?",
+      "answer": "31"
+    },
+    {
+      "question_id": "q3",
+      "question": "Have you ever had anesthesia before?",
+      "answer": "yes"
+    },
+    {
+      "question_id": "q3b",
+      "question": "Did you experience any problems with it?",
+      "answer": "no wait, I'm not sure it counts as real anesthesia actually"
+    },
+    {
+      "question_id": "q4",
+      "question": "Has anyone in your family ever had an adverse reaction to anesthesia?",
+      "answer": "yes"
+    },
+    {
+      "question_id": "q4b",
+      "question": "What type of reaction was it — for example, malignant hyperthermia, prolonged muscle relaxation, or something else?",
+      "answer": "actually I might be mixing it up with something else, I'm not confident"
+    },
+    {
+      "question_id": "q5",
+      "question": "Has a doctor ever told you that you were difficult to intubate or that you have a difficult airway?",
+      "answer": "no"
+    },
+    {
+      "question_id": "q6",
+      "question": "Do you have sleep apnea or use a CPAP machine at night?",
+      "answer": "no, actually my husband says I stop breathing sometimes at night"
+    },
+    {
+      "question_id": "q7",
+      "question": "Do you have any loose teeth, dentures, or dental implants?",
+      "answer": "no"
+    },
+    {
+      "question_id": "q8",
+      "question": "Do you have any allergies to medications, latex, or anesthesia drugs?",
+      "answer": "no"
+    },
+    {
+      "question_id": "q9",
+      "question": "Do you take any daily prescription medications?",
+      "answer": "no"
+    },
+    {
+      "question_id": "q9b",
+      "question": "Could you list them for me?",
+      "answer": "thyroid medication"
+    },
+    {
+      "question_id": "q10",
+      "question": "Do you take blood thinners such as aspirin, warfarin, Eliquis, or Xarelto?",
+      "answer": "no"
+    },
+    {
+      "question_id": "q11",
+      "question": "Do you take any non-prescription medications, supplements, or herbal remedies — including things like fish oil, vitamins, or over-the-counter painkillers?",
+      "answer": "no, well I take painkillers when I get headaches"
+    },
+    {
+      "question_id": "q11b",
+      "question": "Could you list what you're taking?",
+      "answer": "just panodil for headaches, nothing else"
+    },
+    {
+      "question_id": "q12",
+      "question": "Do you have any heart conditions, chest pain, or a history of heart surgery or stents?",
+      "answer": "yes"
+    },
+    {
+      "question_id": "q13",
+      "question": "Do you have asthma, COPD, or any other breathing problems?",
+      "answer": "I have asthma, well had asthma, I havent used my inhaler in years"
+    },
+    {
+      "question_id": "q14",
+      "question": "Do you get short of breath when walking on flat ground or climbing stairs?",
+      "answer": "no"
+    },
+    {
+      "question_id": "q15",
+      "question": "Do you experience acid reflux or heartburn, or take any medication for it?",
+      "answer": "no, actually yes sometimes but only after eating late"
+    },
+    {
+      "question_id": "q16",
+      "question": "Have you had any recent infections, fever, or major health changes in the last few weeks?",
+      "answer": "no"
+    },
+    {
+      "question_id": "q17",
+      "question": "Do you smoke or use any nicotine products?",
+      "answer": "I used to smoke but I stopped, well I still have one at parties sometimes"
+    },
+    {
+      "question_id": "q17b",
+      "question": "How long have you been using it, and roughly how much per day?",
+      "answer": "smoked for maybe 5 years, quit 3 years ago, now just socially"
+    },
+    {
+      "question_id": "q18",
+      "question": "How much alcohol do you consume on a weekly basis?",
+      "answer": "I don't drink, well maybe a beer or two on fridays"
+    },
+    {
+      "question_id": "q19",
+      "question": "Do you use any recreational or illicit drugs?",
+      "answer": "no"
+    },
+    {
+      "question_id": "q20",
+      "question": "Are you feeling anxious or worried about the anesthesia or the operation?",
+      "answer": "no im fine, well actually I am a little worried about waking up during it"
+    },
+    {
+      "question_id": "q21",
+      "question": "Is there anything else about your health or previous surgeries that you think the anesthesiologist should know?",
+      "answer": "I had my tonsils removed as a kid"
+    },
+    {
+      "question_id": "q22",
+      "question": "Do you have any additional questions or concerns that you would like to discuss?",
+      "answer": "no that should be everything"
+    }
+  ],
+  "raw_transcript": [
+    {
+      "role": "assistant",
+      "content": "Hi! I'm here to conduct your pre-surgery consultation. We'll go through some questions about your medical history and current health — it should only take a few minutes. Feel free to ask me anything along the way. Just let me know when you're ready to begin.",
+      "timestamp": 1777824368
+    },
+    {
+      "role": "patient",
+      "content": "lets go",
+      "timestamp": 1777824372
+    },
+    {
+      "role": "assistant",
+      "content": "What is your name?",
+      "timestamp": 1777824376
+    },
+    {
+      "role": "patient",
+      "content": "Katrine Holm",
+      "timestamp": 1777824378
+    },
+    {
+      "role": "assistant",
+      "content": "How old are you?",
+      "timestamp": 1777824382
+    },
+    {
+      "role": "patient",
+      "content": "oh sorry I'm 31, I keep saying 30 out of habit",
+      "timestamp": 1777824384
+    },
+    {
+      "role": "assistant",
+      "content": "No problem at all, Katrine—sometimes our brains have their own little habits! Your age is perfectly clear.\n\nHave you ever had anesthesia before?",
+      "timestamp": 1777824396
+    },
+    {
+      "role": "patient",
+      "content": "yes, well actually I think it was local anesthesia not full",
+      "timestamp": 1777824398
+    },
+    {
+      "role": "assistant",
+      "content": "Thank you for clarifying, Katrine — I’ll make sure that information is noted for your care team.\n\nDid you experience any problems with it?",
+      "timestamp": 1777824411
+    },
+    {
+      "role": "patient",
+      "content": "no wait, I'm not sure it counts as real anesthesia actually",
+      "timestamp": 1777824413
+    },
+    {
+      "role": "assistant",
+      "content": "Has anyone in your family ever had an adverse reaction to anesthesia?",
+      "timestamp": 1777824417
+    },
+    {
+      "role": "patient",
+      "content": "hmm yes I think my aunt had something",
+      "timestamp": 1777824419
+    },
+    {
+      "role": "assistant",
+      "content": "Thank you for sharing that, Katrine. Your family's medical history is important, and I'll make sure to note it for the team.\n\nWhat type of reaction was it — for example, malignant hyperthermia, prolonged muscle relaxation, or something else?",
+      "timestamp": 1777824433
+    },
+    {
+      "role": "patient",
+      "content": "actually I might be mixing it up with something else, I'm not confident",
+      "timestamp": 1777824435
+    },
+    {
+      "role": "assistant",
+      "content": "Has a doctor ever told you that you were difficult to intubate or that you have a difficult airway?",
+      "timestamp": 1777824439
+    },
+    {
+      "role": "patient",
+      "content": "no, well I was told my throat is narrow on one side",
+      "timestamp": 1777824441
+    },
+    {
+      "role": "assistant",
+      "content": "I understand that can be a concern, and your medical team will take that into account during your care.\n\nDo you have sleep apnea or use a CPAP machine at night?",
+      "timestamp": 1777824457
+    },
+    {
+      "role": "patient",
+      "content": "no, actually my husband says I stop breathing sometimes at night",
+      "timestamp": 1777824459
+    },
+    {
+      "role": "assistant",
+      "content": "Do you have any loose teeth, dentures, or dental implants?",
+      "timestamp": 1777824463
+    },
+    {
+      "role": "patient",
+      "content": "no, oh wait I do have crowns on some teeth",
+      "timestamp": 1777824465
+    },
+    {
+      "role": "assistant",
+      "content": "Your crowns are noted—thank you for sharing that. If you have any other concerns or questions, feel free to let me know.\n\nDo you have any allergies to medications, latex, or anesthesia drugs?",
+      "timestamp": 1777824478
+    },
+    {
+      "role": "patient",
+      "content": "no, well actually I react to some plasters but I wouldnt call it an allergy",
+      "timestamp": 1777824480
+    },
+    {
+      "role": "assistant",
+      "content": "Your reaction to plasters is noted, Katrine — it’s important to share all details, and our team will review this carefully to ensure your safety.\n\nDo you take any daily prescription medications?",
+      "timestamp": 1777824490
+    },
+    {
+      "role": "patient",
+      "content": "no, oh wait I do take something for my thyroid I forgot about that",
+      "timestamp": 1777824492
+    },
+    {
+      "role": "assistant",
+      "content": "I’m glad you mentioned that—your thyroid medication is important for us to know, and everything you share will be passed on to the team right away.\n\nCould you list them for me?",
+      "timestamp": 1777824503
+    },
+    {
+      "role": "patient",
+      "content": "thyroid medication, I always forget to count it",
+      "timestamp": 1777824505
+    },
+    {
+      "role": "assistant",
+      "content": "I understand how easy it is to forget, Katrine. Your team will make sure you're on track with your medication.\n\nDo you take blood thinners such as aspirin, warfarin, Eliquis, or Xarelto?",
+      "timestamp": 1777824516
+    },
+    {
+      "role": "patient",
+      "content": "no I dont, actually wait does ibuprofen count as a blood thinner?",
+      "timestamp": 1777824518
+    },
+    {
+      "role": "assistant",
+      "content": "Ibuprofen isn’t a blood thinner, but it’s still important to share all medications with your care team—your pharmacist or doctor can clarify how it interacts with your treatment.\n\nDo you take any non-prescription medications, supplements, or herbal remedies — including things like fish oil, vitamins, or over-the-counter painkillers?",
+      "timestamp": 1777824532
+    },
+    {
+      "role": "patient",
+      "content": "no, well I take painkillers when I get headaches",
+      "timestamp": 1777824534
+    },
+    {
+      "role": "assistant",
+      "content": "Could you list what you're taking?",
+      "timestamp": 1777824538
+    },
+    {
+      "role": "patient",
+      "content": "just panodil for headaches, nothing else",
+      "timestamp": 1777824540
+    },
+    {
+      "role": "assistant",
+      "content": "Do you have any heart conditions, chest pain, or a history of heart surgery or stents?",
+      "timestamp": 1777824544
+    },
+    {
+      "role": "patient",
+      "content": "yes",
+      "timestamp": 1777824546
+    },
+    {
+      "role": "assistant",
+      "content": "Do you have asthma, COPD, or any other breathing problems?",
+      "timestamp": 1777824550
+    },
+    {
+      "role": "patient",
+      "content": "I have asthma, well had asthma, I havent used my inhaler in years",
+      "timestamp": 1777824552
+    },
+    {
+      "role": "assistant",
+      "content": "Do you get short of breath when walking on flat ground or climbing stairs?",
+      "timestamp": 1777824556
+    },
+    {
+      "role": "patient",
+      "content": "no, well maybe a little when climbing many stairs",
+      "timestamp": 1777824558
+    },
+    {
+      "role": "assistant",
+      "content": "Thank you for sharing that, Katrine—it’s completely normal to experience some shortness of breath with exertion, and I’ll make sure your team knows about it.\n\nDo you experience acid reflux or heartburn, or take any medication for it?",
+      "timestamp": 1777824570
+    },
+    {
+      "role": "patient",
+      "content": "no, actually yes sometimes but only after eating late",
+      "timestamp": 1777824572
+    },
+    {
+      "role": "assistant",
+      "content": "Have you had any recent infections, fever, or major health changes in the last few weeks?",
+      "timestamp": 1777824576
+    },
+    {
+      "role": "patient",
+      "content": "no, oh actually I had a bad cold two weeks ago but I'm over it now",
+      "timestamp": 1777824578
+    },
+    {
+      "role": "assistant",
+      "content": "Thank you for sharing, Katrine — it's good to hear you're recovering well, and I'll make sure your medical team is aware of your recent cold so they can monitor your progress closely.\n\nDo you smoke or use any nicotine products?",
+      "timestamp": 1777824591
+    },
+    {
+      "role": "patient",
+      "content": "I used to smoke but I stopped, well I still have one at parties sometimes",
+      "timestamp": 1777824593
+    },
+    {
+      "role": "assistant",
+      "content": "How long have you been using it, and roughly how much per day?",
+      "timestamp": 1777824597
+    },
+    {
+      "role": "patient",
+      "content": "smoked for maybe 5 years, quit 3 years ago, now just socially",
+      "timestamp": 1777824599
+    },
+    {
+      "role": "assistant",
+      "content": "How much alcohol do you consume on a weekly basis?",
+      "timestamp": 1777824603
+    },
+    {
+      "role": "patient",
+      "content": "I dont drink, well maybe a beer or two on fridays",
+      "timestamp": 1777824605
+    },
+    {
+      "role": "assistant",
+      "content": "Thank you for sharing that, Katrine. It's good to know, and everything you tell me is passed on to the team.\n\nDo you use any recreational or illicit drugs?",
+      "timestamp": 1777824623
+    },
+    {
+      "role": "patient",
+      "content": "no",
+      "timestamp": 1777824625
+    },
+    {
+      "role": "assistant",
+      "content": "Are you feeling anxious or worried about the anesthesia or the operation?",
+      "timestamp": 1777824628
+    },
+    {
+      "role": "patient",
+      "content": "no im fine, well actually I am a little worried about waking up during it",
+      "timestamp": 1777824630
+    },
+    {
+      "role": "assistant",
+      "content": "Is there anything else about your health or previous surgeries that you think the anesthesiologist should know?",
+      "timestamp": 1777824634
+    },
+    {
+      "role": "patient",
+      "content": "no wait I forgot, I had my tonsils removed as a kid, does that matter?",
+      "timestamp": 1777824636
+    },
+    {
+      "role": "assistant",
+      "content": "Your tonsillectomy is important information for the anesthesiologist to consider, as it may influence how anesthesia is administered and managed during your surgery.\n\nDo you have any additional questions or concerns that you would like to discuss?",
+      "timestamp": 1777824649
+    },
+    {
+      "role": "patient",
+      "content": "no that should be everything, well actually who reads all this afterwards?",
+      "timestamp": 1777824651
+    },
+    {
+      "role": "assistant",
+      "content": "You're all set, Katrine—thank you for being here. Your team will take great care of you, and don’t hesitate to reach out if you have any more questions. Have a wonderful day!",
+      "timestamp": 1777824662
+    }
+  ]
+}

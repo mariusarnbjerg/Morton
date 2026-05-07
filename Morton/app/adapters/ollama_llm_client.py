@@ -52,7 +52,7 @@ class OllamaLLMClient(ILLMClient):
         self,
         model: str,
         base_url: str,
-        timeout_s: int = 120,
+        timeout_s: int = 300,
     ):
         self.model = model
         self.base_url = base_url.rstrip("/")

@@ -103,7 +103,7 @@
           "text": "Could you list them for me?",
           "trigger": "Patient confirms taking prescription medications but used only a vague word like 'yes' or 'some' without naming any specific medication",
           "type": "free_text",
-          "completion_criteria": "Patient has named at least one specific medication. Approximate names are acceptable (e.g. 'blood pressure pill' if they don't know the name)."
+          "completion_criteria": "Patient has named at least one specific medication or expressed uncertainty about the specifics. Approximate names are acceptable (e.g. 'blood pressure pill' if they don't know the name)."
         }
       ]
     },

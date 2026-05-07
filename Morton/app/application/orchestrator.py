@@ -34,6 +34,7 @@ from app.interfaces.llm_client import ILLMClient
 class OrchestratorResult:
     bot_text: str
     done: bool = False
+    acknowledged: bool = False
 
 
 class ConversationOrchestrator:
@@ -92,6 +93,9 @@ class ConversationOrchestrator:
         patient_name = conv.answers.get("q1", "")
         reply = self.llm.generate_reply(transcript, instruction, patient_name)
 
+        # Track whether the LLM generated an acknowledgment - used as quantitative test metric
+        acknowledged = bool(reply.strip())
+
         # For deterministic actions, append the question text in Python
         action = instruction.get("action")
         question_text = instruction.get("question_text")
@@ -111,9 +115,9 @@ class ConversationOrchestrator:
         unanswered = self.question_flow.get_unanswered_required_ids(conv)
         if not unanswered:
             conv.state = ConversationState.DONE
-            return OrchestratorResult(bot_text=reply, done=True)
+            return OrchestratorResult(bot_text=reply, done=True, acknowledged=acknowledged)
 
-        return OrchestratorResult(bot_text=reply, done=False)
+        return OrchestratorResult(bot_text=reply, done=False, acknowledged=acknowledged)
 
     def finalize(self, conv: Conversation) -> dict:
         if not self.summarizer:

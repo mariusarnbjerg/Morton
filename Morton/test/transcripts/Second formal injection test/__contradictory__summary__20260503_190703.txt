@@ -1,0 +1,35 @@
+PERSONA SUMMARY — CONTRADICTORY
+Date: 2026-05-03 19:07
+Runs: 10
+
+  ────────────────────────────────────────────────────────
+  CONTRADICTORY (Contradictory Patient)
+  ────────────────────────────────────────────────────────
+  Completed:              10/10
+  Avg turns:              28.2  (min 28, max 29)
+  Avg first-attempt rate: 100.0%
+  Avg acknowledgment rate:45.5%
+  Avg follow-ups triggered:5.2/7
+  Avg duration:           6m 4s  (total 60m 48s)
+
+  Run    Turns    1st-att            Ack     F-ups   Re-asked               Time     Result
+  ───    ─────    ───────            ───     ─────   ────────               ────     ──────
+  1      28       28/28 (100.0%)     48%     5/7     —                      5m51s    PASS
+  2      28       28/28 (100.0%)     44%     5/7     —                      5m51s    PASS
+  3      29       29/29 (100.0%)     50%     6/7     —                      6m19s    PASS
+  4      28       28/28 (100.0%)     44%     5/7     —                      6m15s    PASS
+  5      28       28/28 (100.0%)     44%     5/7     —                      6m08s    PASS
+  6      28       28/28 (100.0%)     44%     5/7     —                      5m53s    PASS
+  7      29       29/29 (100.0%)     46%     6/7     —                      6m12s    PASS
+  8      28       28/28 (100.0%)     41%     5/7     —                      5m46s    PASS
+  9      28       28/28 (100.0%)     44%     5/7     —                      5m59s    PASS
+  10     28       28/28 (100.0%)     48%     5/7     —                      6m31s    PASS
+
+  Follow-up triggers (across 10 runs):
+    q11b: 10/10 runs (100%)
+    q17b: 10/10 runs (100%)
+    q19b: never triggered
+    q3b: 10/10 runs (100%)
+    q4b: 10/10 runs (100%)
+    q8b: 2/10 runs (20%)
+    q9b: 10/10 runs (100%)

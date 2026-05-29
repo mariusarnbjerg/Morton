@@ -54,3 +54,12 @@ class ILLMClient(ABC):
             The assistant's reply as a string.
         """
         pass
+
+    @abstractmethod
+    def structured_call(
+        self,
+        system: str,
+        user: str,
+        schema: Dict) \
+        -> Dict[str, Any]:
+        """Call the LLM with structured output enforcement."""

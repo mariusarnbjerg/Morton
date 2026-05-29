@@ -1,0 +1,684 @@
+Lone — Run 1
+Conversation ID: eval-patient_12-run1-1779039776
+Date: 2026-05-17 19:47
+──────────────────────────────────────────────────
+
+[Assistant]  [asking: q0]: Hi! I'm here to conduct your pre-surgery consultation. We'll go through some questions about your medical history and current health — it should only take a few minutes. Feel free to ask me anything along the way. Just let me know when you're ready to begin.
+
+[Patient]  [→ q0]: Ready
+
+[Assistant]  [asking: q1 | bare]: What is your name?
+
+[Patient]  [→ q1]: My name is Lone
+
+[Assistant]  [asking: q2 | ack]: It's nice to meet you, Lone. Let me know if you have any questions or concerns.
+
+How old are you?
+
+[Patient]  [→ q2]: I am 62 years old
+
+[Assistant]  [asking: q2.1 | bare]: How tall are you in centimeters?
+
+[Patient]  [→ q2.1]: I am not sure
+
+[Assistant]  [asking: q2.2 | bare]: How much do you weigh in kilograms?
+
+[Patient]  [→ q2.2]: I am not sure
+
+[Assistant]  [asking: q2.3 | bare]: What is your biological gender?
+
+[Patient]  [→ q2.3]: Female
+
+[Assistant]  [asking: q3 | bare]: Have you ever had anesthesia before?
+
+[Patient]  [→ q3]: Yes
+
+[Assistant]  [asking: q3b | bare]: Did you experience any problems with it?
+
+[Patient]  [→ q3b]: No problems that I know of
+
+[Assistant]  [asking: q4 | bare]: Has anyone in your family ever had an adverse reaction to anesthesia?
+
+[Patient]  [→ q4]: Uncertain
+
+[Assistant]  [asking: q5 | bare]: Has a doctor ever told you that you were difficult to intubate or that you have a difficult airway?
+
+[Patient]  [→ q5]: No
+
+[Assistant]  [asking: q6 | bare]: Do you have sleep apnea or use a CPAP machine at night?
+
+[Patient]  [→ q6]: No
+
+[Assistant]  [asking: q7 | bare]: Do you have any loose teeth, dentures, or dental implants?
+
+[Patient]  [→ q7]: No
+
+[Assistant]  [asking: q8 | bare]: Do you have any allergies to medications, latex, or anesthesia drugs?
+
+[Patient]  [→ q8]: No
+
+[Assistant]  [asking: q9 | bare]: Do you take any daily prescription medications?
+
+[Patient]  [→ q9]: Yes
+
+[Assistant]  [asking: q9b | bare]: Could you list them for me?
+
+[Patient]  [→ q9b]: I take antidepressant medication, and I am treated for low thyroid function
+
+[Assistant]  [asking: q10 | bare]: Do you take blood thinners such as aspirin, warfarin, Eliquis, or Xarelto?
+
+[Patient]  [→ q10]: No
+
+[Assistant]  [asking: q11 | bare]: Do you take any non-prescription medications, supplements, or herbal remedies — including things like fish oil, vitamins, or over-the-counter painkillers?
+
+[Patient]  [→ q11]: No
+
+[Assistant]  [asking: q12 | bare]: Do you have any heart conditions, chest pain, or a history of heart surgery or stents?
+
+[Patient]  [→ q12]: Yes, I have high blood pressure
+
+[Assistant]  [asking: q13 | ack]: Thank you for sharing that, Lone — your medical team will carefully consider your high blood pressure and any medications you’re taking to ensure your safety during the procedure.
+
+Do you have asthma, COPD, or any other breathing problems?
+
+[Patient]  [→ q13]: No
+
+[Assistant]  [asking: q14 | bare]: Do you get short of breath when walking on flat ground or climbing stairs?
+
+[Patient]  [→ q14]: No
+
+[Assistant]  [asking: q15 | bare]: Do you experience acid reflux or heartburn, or take any medication for it?
+
+[Patient]  [→ q15]: No
+
+[Assistant]  [asking: q16 | bare]: Have you had any recent infections, fever, or major health changes in the last few weeks?
+
+[Patient]  [→ q16]: No
+
+[Assistant]  [asking: q17 | bare]: Do you smoke or use any nicotine products?
+
+[Patient]  [→ q17]: No, I do not smoke
+
+[Assistant]  [asking: q18 | bare]: How much alcohol do you consume on a weekly basis?
+
+[Patient]  [→ q18]: I do not really drink alcohol
+
+[Assistant]  [asking: q19 | bare]: Do you use any recreational or illicit drugs?
+
+[Patient]  [→ q19]: No
+
+[Assistant]  [asking: q20 | bare]: Are you feeling anxious or worried about the anesthesia or the operation?
+
+[Patient]  [→ q20]: A little, mostly because of the cancer diagnosis
+
+[Assistant]  [asking: q21 | bare]: Is there anything else about your health or previous surgeries that you think the anesthesiologist should know?
+
+[Patient]  [→ q21]: I have breast cancer, periods with depression, high blood pressure, and low thyroid function
+
+[Assistant]  [asking: q22 | bare]: Do you have any additional questions or concerns that you would like to discuss?
+
+[Patient]  [→ q22]: No additional questions right now
+
+[Assistant]  [done]: You're all set, Lone — thank you for your cooperation. Have a smooth and safe procedure, and don’t hesitate to reach out if you need anything else.
+
+──────────────────────────────────────────────────
+Total patient turns: 28
+Free chat auto-responses: 0
+Fallback responses: 0
+Duration: 4m 31s
+Questions asked: 28
+First-attempt acceptance: 28/28 (100%)
+Acknowledgment rate: 2/27 (7%)
+Bare question responses: 25/27
+
+Follow-ups triggered: 2/7 (q3b, q9b)
+
+Turns per question:
+  q0: 1
+  q1: 1
+  q10: 1
+  q11: 1
+  q12: 1
+  q13: 1
+  q14: 1
+  q15: 1
+  q16: 1
+  q17: 1
+  q18: 1
+  q19: 1
+  q2: 1
+  q2.1: 1
+  q2.2: 1
+  q2.3: 1
+  q20: 1
+  q21: 1
+  q22: 1
+  q3: 1
+  q3b: 1
+  q4: 1
+  q5: 1
+  q6: 1
+  q7: 1
+  q8: 1
+  q9: 1
+  q9b: 1
+
+Errors: 0
+Result: PASSED
+
+──────────────────────────────────────────────────
+SUMMARY
+──────────────────────────────────────────────────
+{
+  "patient": {
+    "name": "Lone",
+    "age": 62
+  },
+  "anesthesia_history": {
+    "prior_anesthesia": "yes",
+    "prior_anesthesia_issues": "no",
+    "family_reaction": "unknown",
+    "family_reaction_type": "unknown"
+  },
+  "airway": {
+    "difficult_airway": "no",
+    "sleep_apnea": "no",
+    "dental": "no"
+  },
+  "allergies_and_medications": {
+    "allergies": "none",
+    "prescription_medications": "antidepressant, low thyroid function",
+    "blood_thinners": "no",
+    "supplements": "none"
+  },
+  "cardiopulmonary": {
+    "cardiac_history": "high blood pressure",
+    "respiratory_history": "no",
+    "exertional_dyspnea": "no"
+  },
+  "gi_and_recent_health": {
+    "acid_reflux": "no",
+    "recent_health_changes": "no"
+  },
+  "lifestyle": {
+    "smoking_status": "never",
+    "smoking_details": "none",
+    "alcohol": "none",
+    "recreational_drugs": "none"
+  },
+  "psychological": {
+    "anxiety_level": "some",
+    "additional_history": "breast cancer, depression, high blood pressure, low thyroid function",
+    "additional_questions": "none"
+  },
+  "red_flags": [
+    {
+      "category": "cardiac_risk",
+      "severity": "high",
+      "details": "high blood pressure, thyroid dysfunction"
+    }
+  ],
+  "asa_classification": "ASA-II",
+  "notes": "Patient has breast cancer, depression, and thyroid dysfunction. Anxiety related to cancer diagnosis.",
+  "conversation_id": "eval-patient_12-run1-1779039776",
+  "questionnaire_answers": [
+    {
+      "question_id": "q0",
+      "question": "Hi! I'm here to conduct your pre-surgery consultation. We'll go through some questions about your medical history and current health — it should only take a few minutes. Feel free to ask me anything along the way. Just let me know when you're ready to begin.",
+      "answer": "Ready"
+    },
+    {
+      "question_id": "q1",
+      "question": "What is your name?",
+      "answer": "Lone"
+    },
+    {
+      "question_id": "q2",
+      "question": "How old are you?",
+      "answer": "I am 62 years old"
+    },
+    {
+      "question_id": "q2.1",
+      "question": "How tall are you in centimeters?",
+      "answer": "I am not sure"
+    },
+    {
+      "question_id": "q2.2",
+      "question": "How much do you weigh in kilograms?",
+      "answer": "I am not sure"
+    },
+    {
+      "question_id": "q2.3",
+      "question": "What is your biological gender?",
+      "answer": "Female"
+    },
+    {
+      "question_id": "q3",
+      "question": "Have you ever had anesthesia before?",
+      "answer": "Yes"
+    },
+    {
+      "question_id": "q3b",
+      "question": "Did you experience any problems with it?",
+      "answer": "No problems that I know of"
+    },
+    {
+      "question_id": "q4",
+      "question": "Has anyone in your family ever had an adverse reaction to anesthesia?",
+      "answer": "Uncertain"
+    },
+    {
+      "question_id": "q5",
+      "question": "Has a doctor ever told you that you were difficult to intubate or that you have a difficult airway?",
+      "answer": "No"
+    },
+    {
+      "question_id": "q6",
+      "question": "Do you have sleep apnea or use a CPAP machine at night?",
+      "answer": "No"
+    },
+    {
+      "question_id": "q7",
+      "question": "Do you have any loose teeth, dentures, or dental implants?",
+      "answer": "No"
+    },
+    {
+      "question_id": "q8",
+      "question": "Do you have any allergies to medications, latex, or anesthesia drugs?",
+      "answer": "No"
+    },
+    {
+      "question_id": "q9",
+      "question": "Do you take any daily prescription medications?",
+      "answer": "Yes"
+    },
+    {
+      "question_id": "q9b",
+      "question": "Could you list them for me?",
+      "answer": "I take antidepressant medication, and I am treated for low thyroid function"
+    },
+    {
+      "question_id": "q10",
+      "question": "Do you take blood thinners such as aspirin, warfarin, Eliquis, or Xarelto?",
+      "answer": "No"
+    },
+    {
+      "question_id": "q11",
+      "question": "Do you take any non-prescription medications, supplements, or herbal remedies — including things like fish oil, vitamins, or over-the-counter painkillers?",
+      "answer": "No"
+    },
+    {
+      "question_id": "q12",
+      "question": "Do you have any heart conditions, chest pain, or a history of heart surgery or stents?",
+      "answer": "Yes"
+    },
+    {
+      "question_id": "q13",
+      "question": "Do you have asthma, COPD, or any other breathing problems?",
+      "answer": "No"
+    },
+    {
+      "question_id": "q14",
+      "question": "Do you get short of breath when walking on flat ground or climbing stairs?",
+      "answer": "No"
+    },
+    {
+      "question_id": "q15",
+      "question": "Do you experience acid reflux or heartburn, or take any medication for it?",
+      "answer": "No"
+    },
+    {
+      "question_id": "q16",
+      "question": "Have you had any recent infections, fever, or major health changes in the last few weeks?",
+      "answer": "No"
+    },
+    {
+      "question_id": "q17",
+      "question": "Do you smoke or use any nicotine products?",
+      "answer": "No, I do not smoke"
+    },
+    {
+      "question_id": "q18",
+      "question": "How much alcohol do you consume on a weekly basis?",
+      "answer": "I do not really drink alcohol"
+    },
+    {
+      "question_id": "q19",
+      "question": "Do you use any recreational or illicit drugs?",
+      "answer": "No"
+    },
+    {
+      "question_id": "q20",
+      "question": "Are you feeling anxious or worried about the anesthesia or the operation?",
+      "answer": "A little, mostly because of the cancer diagnosis"
+    },
+    {
+      "question_id": "q21",
+      "question": "Is there anything else about your health or previous surgeries that you think the anesthesiologist should know?",
+      "answer": "I have breast cancer, periods with depression, high blood pressure, and low thyroid function"
+    },
+    {
+      "question_id": "q22",
+      "question": "Do you have any additional questions or concerns that you would like to discuss?",
+      "answer": "No additional questions right now"
+    }
+  ],
+  "raw_transcript": [
+    {
+      "role": "assistant",
+      "content": "Hi! I'm here to conduct your pre-surgery consultation. We'll go through some questions about your medical history and current health — it should only take a few minutes. Feel free to ask me anything along the way. Just let me know when you're ready to begin.",
+      "timestamp": 1779039778
+    },
+    {
+      "role": "patient",
+      "content": "Ready",
+      "timestamp": 1779039782
+    },
+    {
+      "role": "assistant",
+      "content": "What is your name?",
+      "timestamp": 1779039786
+    },
+    {
+      "role": "patient",
+      "content": "My name is Lone",
+      "timestamp": 1779039788
+    },
+    {
+      "role": "assistant",
+      "content": "It's nice to meet you, Lone. Let me know if you have any questions or concerns.\n\nHow old are you?",
+      "timestamp": 1779039803
+    },
+    {
+      "role": "patient",
+      "content": "I am 62 years old",
+      "timestamp": 1779039805
+    },
+    {
+      "role": "assistant",
+      "content": "How tall are you in centimeters?",
+      "timestamp": 1779039809
+    },
+    {
+      "role": "patient",
+      "content": "I am not sure",
+      "timestamp": 1779039811
+    },
+    {
+      "role": "assistant",
+      "content": "How much do you weigh in kilograms?",
+      "timestamp": 1779039814
+    },
+    {
+      "role": "patient",
+      "content": "I am not sure",
+      "timestamp": 1779039816
+    },
+    {
+      "role": "assistant",
+      "content": "What is your biological gender?",
+      "timestamp": 1779039820
+    },
+    {
+      "role": "patient",
+      "content": "Female",
+      "timestamp": 1779039822
+    },
+    {
+      "role": "assistant",
+      "content": "Have you ever had anesthesia before?",
+      "timestamp": 1779039826
+    },
+    {
+      "role": "patient",
+      "content": "Yes",
+      "timestamp": 1779039828
+    },
+    {
+      "role": "assistant",
+      "content": "Did you experience any problems with it?",
+      "timestamp": 1779039831
+    },
+    {
+      "role": "patient",
+      "content": "No problems that I know of",
+      "timestamp": 1779039833
+    },
+    {
+      "role": "assistant",
+      "content": "Has anyone in your family ever had an adverse reaction to anesthesia?",
+      "timestamp": 1779039837
+    },
+    {
+      "role": "patient",
+      "content": "Uncertain",
+      "timestamp": 1779039839
+    },
+    {
+      "role": "assistant",
+      "content": "Has a doctor ever told you that you were difficult to intubate or that you have a difficult airway?",
+      "timestamp": 1779039843
+    },
+    {
+      "role": "patient",
+      "content": "No",
+      "timestamp": 1779039845
+    },
+    {
+      "role": "assistant",
+      "content": "Do you have sleep apnea or use a CPAP machine at night?",
+      "timestamp": 1779039849
+    },
+    {
+      "role": "patient",
+      "content": "No",
+      "timestamp": 1779039851
+    },
+    {
+      "role": "assistant",
+      "content": "Do you have any loose teeth, dentures, or dental implants?",
+      "timestamp": 1779039854
+    },
+    {
+      "role": "patient",
+      "content": "No",
+      "timestamp": 1779039856
+    },
+    {
+      "role": "assistant",
+      "content": "Do you have any allergies to medications, latex, or anesthesia drugs?",
+      "timestamp": 1779039860
+    },
+    {
+      "role": "patient",
+      "content": "No",
+      "timestamp": 1779039862
+    },
+    {
+      "role": "assistant",
+      "content": "Do you take any daily prescription medications?",
+      "timestamp": 1779039866
+    },
+    {
+      "role": "patient",
+      "content": "Yes",
+      "timestamp": 1779039868
+    },
+    {
+      "role": "assistant",
+      "content": "Could you list them for me?",
+      "timestamp": 1779039871
+    },
+    {
+      "role": "patient",
+      "content": "I take antidepressant medication, and I am treated for low thyroid function",
+      "timestamp": 1779039873
+    },
+    {
+      "role": "assistant",
+      "content": "Do you take blood thinners such as aspirin, warfarin, Eliquis, or Xarelto?",
+      "timestamp": 1779039878
+    },
+    {
+      "role": "patient",
+      "content": "No",
+      "timestamp": 1779039880
+    },
+    {
+      "role": "assistant",
+      "content": "Do you take any non-prescription medications, supplements, or herbal remedies — including things like fish oil, vitamins, or over-the-counter painkillers?",
+      "timestamp": 1779039883
+    },
+    {
+      "role": "patient",
+      "content": "No",
+      "timestamp": 1779039885
+    },
+    {
+      "role": "assistant",
+      "content": "Do you have any heart conditions, chest pain, or a history of heart surgery or stents?",
+      "timestamp": 1779039889
+    },
+    {
+      "role": "patient",
+      "content": "Yes, I have high blood pressure",
+      "timestamp": 1779039891
+    },
+    {
+      "role": "assistant",
+      "content": "Thank you for sharing that, Lone — your medical team will carefully consider your high blood pressure and any medications you’re taking to ensure your safety during the procedure.\n\nDo you have asthma, COPD, or any other breathing problems?",
+      "timestamp": 1779039904
+    },
+    {
+      "role": "patient",
+      "content": "No",
+      "timestamp": 1779039906
+    },
+    {
+      "role": "assistant",
+      "content": "Do you get short of breath when walking on flat ground or climbing stairs?",
+      "timestamp": 1779039910
+    },
+    {
+      "role": "patient",
+      "content": "No",
+      "timestamp": 1779039912
+    },
+    {
+      "role": "assistant",
+      "content": "Do you experience acid reflux or heartburn, or take any medication for it?",
+      "timestamp": 1779039916
+    },
+    {
+      "role": "patient",
+      "content": "No",
+      "timestamp": 1779039918
+    },
+    {
+      "role": "assistant",
+      "content": "Have you had any recent infections, fever, or major health changes in the last few weeks?",
+      "timestamp": 1779039921
+    },
+    {
+      "role": "patient",
+      "content": "No",
+      "timestamp": 1779039923
+    },
+    {
+      "role": "assistant",
+      "content": "Do you smoke or use any nicotine products?",
+      "timestamp": 1779039927
+    },
+    {
+      "role": "patient",
+      "content": "No, I do not smoke",
+      "timestamp": 1779039929
+    },
+    {
+      "role": "assistant",
+      "content": "How much alcohol do you consume on a weekly basis?",
+      "timestamp": 1779039933
+    },
+    {
+      "role": "patient",
+      "content": "I do not really drink alcohol",
+      "timestamp": 1779039935
+    },
+    {
+      "role": "assistant",
+      "content": "Do you use any recreational or illicit drugs?",
+      "timestamp": 1779039938
+    },
+    {
+      "role": "patient",
+      "content": "No",
+      "timestamp": 1779039940
+    },
+    {
+      "role": "assistant",
+      "content": "Are you feeling anxious or worried about the anesthesia or the operation?",
+      "timestamp": 1779039944
+    },
+    {
+      "role": "patient",
+      "content": "A little, mostly because of the cancer diagnosis",
+      "timestamp": 1779039946
+    },
+    {
+      "role": "assistant",
+      "content": "Is there anything else about your health or previous surgeries that you think the anesthesiologist should know?",
+      "timestamp": 1779039950
+    },
+    {
+      "role": "patient",
+      "content": "I have breast cancer, periods with depression, high blood pressure, and low thyroid function",
+      "timestamp": 1779039952
+    },
+    {
+      "role": "assistant",
+      "content": "Do you have any additional questions or concerns that you would like to discuss?",
+      "timestamp": 1779039957
+    },
+    {
+      "role": "patient",
+      "content": "No additional questions right now",
+      "timestamp": 1779039959
+    },
+    {
+      "role": "assistant",
+      "content": "You're all set, Lone — thank you for your cooperation. Have a smooth and safe procedure, and don’t hesitate to reach out if you need anything else.",
+      "timestamp": 1779039970
+    }
+  ],
+  "ml_asa_prediction": {
+    "asa_class": "ASA-III",
+    "asa_numeric": 3,
+    "probabilities": {
+      "ASA-I": 0.007,
+      "ASA-II": 0.1944,
+      "ASA-III": 0.7986
+    },
+    "confidence": 0.7986,
+    "features_used": {
+      "Age": 62.0,
+      "Height_cm": -1.0,
+      "Weight_kg": -1.0,
+      "BMI": null,
+      "AlcoholConsumption_X": null,
+      "NumberOfAllergies": 0.0,
+      "NumberOfDiagnoses": 4.0,
+      "Sex": "Mand",
+      "SmokingStatus_Simplified": "Never smoker",
+      "NeuroPsyk_flag": 0.0,
+      "Respiratorisk_flag": 0.0,
+      "Kardiovaskulært_flag": 1.0,
+      "GI/Lever/Nyre_flag": 0.0,
+      "Endo/Andet_flag": 1.0,
+      "Bevægeapparat_flag": 0.0
+    }
+  },
+  "hybrid_asa_assessment": {
+    "asa_class": "ASA-II",
+    "reasoning": "The patient has a history of hypertension and hypothyroidism, which are mild systemic diseases, but no severe systemic disease or significant comorbidities. The ML model overestimates the severity."
+  }
+}

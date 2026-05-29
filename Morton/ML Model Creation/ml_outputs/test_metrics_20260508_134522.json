@@ -1,0 +1,57 @@
+{
+  "model": "LightGBM",
+  "n_classes": 3,
+  "class_names": [
+    "ASA 1",
+    "ASA 2",
+    "ASA 3"
+  ],
+  "test_accuracy": 0.6236,
+  "test_f1_macro": 0.627,
+  "test_f1_weighted": 0.6213,
+  "test_roc_auc": 0.8381,
+  "n_train": 58465,
+  "n_val": 14614,
+  "n_test": 18271,
+  "n_features": 15,
+  "features": [
+    "Age",
+    "Height_cm",
+    "Weight_kg",
+    "BMI",
+    "AlcoholConsumption_X",
+    "NumberOfAllergies",
+    "NumberOfDiagnoses",
+    "Sex",
+    "SmokingStatus_Simplified",
+    "NeuroPsyk_flag",
+    "Respiratorisk_flag",
+    "Kardiovaskulært_flag",
+    "GI/Lever/Nyre_flag",
+    "Endo/Andet_flag",
+    "Bevægeapparat_flag"
+  ],
+  "patient_row_mode": "patient_asa_unique",
+  "cv_folds": 5,
+  "cv_results": {
+    "accuracy": {
+      "train_mean": 0.6614897881608991,
+      "val_mean": 0.6229027079555263,
+      "val_std": 0.0025721525986346296,
+      "gap": 0.038587080205372826
+    },
+    "f1_macro": {
+      "train_mean": 0.6640087929825784,
+      "val_mean": 0.625659249153956,
+      "val_std": 0.00244689733943127,
+      "gap": 0.038349543828622434
+    },
+    "f1_weighted": {
+      "train_mean": 0.6597421173663385,
+      "val_mean": 0.621079227369152,
+      "val_std": 0.002621358255774442,
+      "gap": 0.03866288999718648
+    }
+  },
+  "timestamp": "20260508_134522"
+}

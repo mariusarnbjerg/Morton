@@ -1,14 +1,11 @@
 import { useEffect, useMemo, useState } from 'react';
-import { Calendar, Search, User, Stethoscope } from 'lucide-react';
+import { User, Stethoscope, FolderOpen } from 'lucide-react';
 import { Button } from '@/app/components/ui/button';
-import { PatientSearch } from '@/app/components/PatientSearch';
-import { CalendarView } from '@/app/components/CalendarView';
-import { PatientDetails } from '@/app/components/PatientDetails';
-import { PatientSummaryModal } from '@/app/components/PatientSummaryModal';
+import { SavedConsultations  } from '@/app/components/SavedConsultations';
 import { PatientChatbot } from '@/app/components/PatientChatbot';
 import { ConsultationSummary, type SummaryData } from '@/app/components/ConsultationSummary';
 
-type View = 'search' | 'calendar' | 'details' | 'chatbot' | 'consultation-summary';
+type View = 'search' | 'chatbot' | 'consultation-summary';
 type UserRole = 'doctor' | 'patient';
 
 export interface Message {
@@ -22,9 +19,6 @@ const API_BASE = 'http://localhost:8000/api/v1';
 export default function App() {
   const [userRole, setUserRole] = useState<UserRole>('doctor');
   const [currentView, setCurrentView] = useState<View>('search');
-  const [selectedPatient, setSelectedPatient] = useState<Patient | null>(null);
-  const [modalPatient, setModalPatient] = useState<Patient | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   // ---- Chatbot state ----
   const conversationId = useMemo(() => `patient-${Date.now()}`, []);
@@ -61,27 +55,6 @@ export default function App() {
   }, [isDone, conversationId, consultationSummary, summaryLoading]);
 
    // ---- Doctor navigation ----
-  const handlePatientSelect = (patient: Patient) => {
-    setSelectedPatient(patient);
-    setCurrentView('details');
-  };
-
-  const handlePatientClick = (patient: Patient) => {
-    setModalPatient(patient);
-    setIsModalOpen(true);
-  };
-
-  const handleViewDetails = (patient: Patient) => {
-    setIsModalOpen(false);
-    setSelectedPatient(patient);
-    setCurrentView('details');
-  };
-
-  const handleBackToCalendar = () => {
-    setSelectedPatient(null);
-    setCurrentView('calendar');
-  };
-
   const switchRole = (role: UserRole) => {
     setUserRole(role);
     if (role === 'patient') {
@@ -90,7 +63,6 @@ export default function App() {
       // When switching to doctor view, show summary if one exists
       setCurrentView(consultationSummary ? 'consultation-summary' : 'search');
     }
-    setSelectedPatient(null);
   };
 
   // ---- Start conversation ----
@@ -181,7 +153,7 @@ export default function App() {
                 <Stethoscope className="size-6 text-white" />
               </div>
               <div>
-                <h1 className="text-xl text-slate-900">AnæstesiCare</h1>
+                <h1 className="text-xl text-slate-900">Morton</h1>
                 <p className="text-xs text-slate-500">AI-supported assessment tool</p>
               </div>
             </div>
@@ -233,23 +205,12 @@ export default function App() {
               )}
 
               <Button
-                variant={currentView === 'search' ? 'default' : 'ghost'}
-                size="sm"
-                onClick={() => setCurrentView('search')}
-                className={currentView === 'search' ? '' : 'text-slate-600'}
-              >
-                <Search className="size-4 mr-2" />
-                Patient search
-              </Button>
-
-              <Button
-                variant={currentView === 'calendar' ? 'default' : 'ghost'}
-                size="sm"
-                onClick={() => setCurrentView('calendar')}
-                className={currentView === 'calendar' ? '' : 'text-slate-600'}
-              >
-                <Calendar className="size-4 mr-2" />
-                Time schedule
+                  variant={currentView === 'search' ? 'default' : 'ghost'}
+                  size="sm"
+                  onClick={() => setCurrentView('search')}
+                  className={currentView === 'search' ? '' : 'text-slate-600'}>
+                  <FolderOpen className="size-4 mr-2" />
+                  Saved consultations
               </Button>
             </div>
           )}
@@ -259,26 +220,21 @@ export default function App() {
       {/* Main Content */}
       <div className="flex-1 min-h-0 overflow-y-auto">
         {userRole === 'doctor' ? (
-          <>
-            {currentView === 'consultation-summary' && consultationSummary && (
-              <ConsultationSummary
-                summary={consultationSummary}
-                onDismiss={() => setCurrentView('search')}
-              />
-            )}
-            {currentView === 'search' && <PatientSearch onPatientSelect={handlePatientSelect} />}
-            {currentView === 'calendar' && <CalendarView onPatientClick={handlePatientClick} />}
-            {currentView === 'details' && selectedPatient && (
-              <PatientDetails patient={selectedPatient} onBack={handleBackToCalendar} />
-            )}
-            <PatientSummaryModal
-              patient={modalPatient}
-              isOpen={isModalOpen}
-              onClose={() => setIsModalOpen(false)}
-              onViewDetails={handleViewDetails}
-            />
-          </>
-        ) : (
+              <>
+                {currentView === 'consultation-summary' && consultationSummary && (
+                  <ConsultationSummary
+                    summary={consultationSummary}
+                    onDismiss={() => setCurrentView('search')}
+                  />
+                )}
+                {currentView === 'search' && (
+                  <SavedConsultations onConsultationSelect={(summary) => {
+                    setConsultationSummary(summary);
+                    setCurrentView('consultation-summary');
+                  }} />
+                )}
+              </>
+         ) : (
           <PatientChatbot
             messages={messages}
             answer={answer}

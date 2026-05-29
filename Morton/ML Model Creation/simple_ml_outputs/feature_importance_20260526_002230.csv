@@ -1,0 +1,19 @@
+,importance
+BMI,15808
+Age,12382
+AlcoholConsumption_X,5173
+NumberOfDiagnoses,3756
+NumberOfAllergies,2892
+NeuroPsyk_flag,1374
+Endo/Andet_flag,1248
+Bevægeapparat_flag,1196
+Respiratorisk_flag,1153
+Kardiovaskulært_flag,1117
+Sex_Kvinde,1093
+GI/Lever/Nyre_flag,1066
+SmokingStatus_Simplified_Current smoker,892
+SmokingStatus_Simplified_Never smoker,709
+AlcoholConsumption_Missing,659
+SmokingStatus_Simplified_Unknown,652
+SmokingStatus_Simplified_Former smoker,582
+Sex_Mand,265

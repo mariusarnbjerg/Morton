@@ -23,6 +23,27 @@
       "completion_criteria": "Patient has provided an age."
     },
     {
+      "id": "q2.1",
+      "text": "How tall are you in centimeters?",
+      "type": "number",
+      "required": true,
+      "completion_criteria": "Patient has provided a height in centimeters (cm)."
+    },
+    {
+      "id": "q2.2",
+      "text": "How much do you weigh in kilograms?",
+      "type": "number",
+      "required": true,
+      "completion_criteria": "Patient has provided a weight in kilograms (kg)."
+    },
+    {
+      "id": "q2.3",
+      "text": "What is your biological gender?",
+      "type": "free_text",
+      "required": true,
+      "completion_criteria": "Patient has provided a gender (Male or Female)."
+    },
+    {
       "id": "q3",
       "text": "Have you ever had anesthesia before?",
       "type": "yesno",

@@ -1,0 +1,26 @@
+PERSONA SUMMARY — PATIENT_19
+Date: 2026-05-17 20:21
+Runs: 1
+
+  ────────────────────────────────────────────────────────
+  PATIENT_19 (Clara)
+  ────────────────────────────────────────────────────────
+  Completed:              1/1
+  Avg turns:              29.0  (min 29, max 29)
+  Avg first-attempt rate: 100.0%
+  Avg acknowledgment rate:10.7%
+  Avg follow-ups triggered:3.0/7
+  Avg duration:           5m 3s  (total 5m 3s)
+
+  Run    Turns    1st-att            Ack     F-ups   Re-asked               Time     Result
+  ───    ─────    ───────            ───     ─────   ────────               ────     ──────
+  1      29       29/29 (100.0%)     11%     3/7     —                      5m03s    PASS
+
+  Follow-up triggers (across 1 runs):
+    q11b: never triggered
+    q17b: never triggered
+    q19b: never triggered
+    q3b: 1/1 runs (100%)
+    q4b: never triggered
+    q8b: 1/1 runs (100%)
+    q9b: 1/1 runs (100%)

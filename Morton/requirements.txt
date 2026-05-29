@@ -7,3 +7,8 @@ requests # for sending request when we use the API
 langchain
 jsonschema
 dotenv
+scikit-learn
+lightGBM
+joblib
+seaborn
+matplotlib

@@ -1,0 +1,513 @@
+{
+  "patient": {
+    "name": "Marius",
+    "age": 25
+  },
+  "anesthesia_history": {
+    "prior_anesthesia": "yes",
+    "prior_anesthesia_issues": "no",
+    "family_reaction": "no",
+    "family_reaction_type": "adverse"
+  },
+  "airway": {
+    "difficult_airway": "no",
+    "sleep_apnea": "no",
+    "dental": "some plastic on bottom front tooth"
+  },
+  "allergies_and_medications": {
+    "allergies": "no",
+    "prescription_medications": "no",
+    "blood_thinners": "no",
+    "supplements": "fish oil (sometimes)"
+  },
+  "cardiopulmonary": {
+    "cardiac_history": "no",
+    "respiratory_history": "no",
+    "exertional_dyspnea": "no"
+  },
+  "gi_and_recent_health": {
+    "acid_reflux": "no",
+    "recent_health_changes": "cold (resolved)"
+  },
+  "lifestyle": {
+    "smoking_status": "never",
+    "smoking_details": "no",
+    "alcohol": "a couple of beers weekly",
+    "recreational_drugs": "no"
+  },
+  "psychological": {
+    "anxiety_level": "no",
+    "additional_history": "no",
+    "additional_questions": "no"
+  },
+  "red_flags": [
+    {
+      "category": "difficult_airway",
+      "severity": "low",
+      "details": "no"
+    }
+  ],
+  "asa_classification": "ASA-I",
+  "notes": "Patient has no known allergies, no chronic conditions, and no significant medical history. Recent cold resolved. Takes fish oil as a supplement. Dental note: plastic on bottom front tooth.",
+  "conversation_id": "patient-1778835274574",
+  "questionnaire_answers": [
+    {
+      "question_id": "q0",
+      "question": "Hi! I'm here to conduct your pre-surgery consultation. We'll go through some questions about your medical history and current health — it should only take a few minutes. Feel free to ask me anything along the way. Just let me know when you're ready to begin.",
+      "answer": "Ready"
+    },
+    {
+      "question_id": "q1",
+      "question": "What is your name?",
+      "answer": "Marius"
+    },
+    {
+      "question_id": "q2",
+      "question": "How old are you?",
+      "answer": "25"
+    },
+    {
+      "question_id": "q2.1",
+      "question": "How tall are you in centimeters?",
+      "answer": "173"
+    },
+    {
+      "question_id": "q2.2",
+      "question": "How much do you weigh in kilograms?",
+      "answer": "77"
+    },
+    {
+      "question_id": "q2.3",
+      "question": "What is your biological gender?",
+      "answer": "I'm a man"
+    },
+    {
+      "question_id": "q3",
+      "question": "Have you ever had anesthesia before?",
+      "answer": "Yes"
+    },
+    {
+      "question_id": "q3b",
+      "question": "Did you experience any problems with it?",
+      "answer": "No"
+    },
+    {
+      "question_id": "q4",
+      "question": "Has anyone in your family ever had an adverse reaction to anesthesia?",
+      "answer": "not to my knowledge"
+    },
+    {
+      "question_id": "q5",
+      "question": "Has a doctor ever told you that you were difficult to intubate or that you have a difficult airway?",
+      "answer": "no"
+    },
+    {
+      "question_id": "q6",
+      "question": "Do you have sleep apnea or use a CPAP machine at night?",
+      "answer": "no"
+    },
+    {
+      "question_id": "q7",
+      "question": "Do you have any loose teeth, dentures, or dental implants?",
+      "answer": "I have some plastic on my bottom front tooth, but that's all"
+    },
+    {
+      "question_id": "q8",
+      "question": "Do you have any allergies to medications, latex, or anesthesia drugs?",
+      "answer": "no"
+    },
+    {
+      "question_id": "q9",
+      "question": "Do you take any daily prescription medications?",
+      "answer": "no"
+    },
+    {
+      "question_id": "q10",
+      "question": "Do you take blood thinners such as aspirin, warfarin, Eliquis, or Xarelto?",
+      "answer": "no"
+    },
+    {
+      "question_id": "q11",
+      "question": "Do you take any non-prescription medications, supplements, or herbal remedies — including things like fish oil, vitamins, or over-the-counter painkillers?",
+      "answer": "fish oil sometimes"
+    },
+    {
+      "question_id": "q11b",
+      "question": "Could you list what you're taking?",
+      "answer": "fish oil"
+    },
+    {
+      "question_id": "q12",
+      "question": "Do you have any heart conditions, chest pain, or a history of heart surgery or stents?",
+      "answer": "no"
+    },
+    {
+      "question_id": "q13",
+      "question": "Do you have asthma, COPD, or any other breathing problems?",
+      "answer": "no"
+    },
+    {
+      "question_id": "q14",
+      "question": "Do you get short of breath when walking on flat ground or climbing stairs?",
+      "answer": "no"
+    },
+    {
+      "question_id": "q15",
+      "question": "Do you experience acid reflux or heartburn, or take any medication for it?",
+      "answer": "no"
+    },
+    {
+      "question_id": "q16",
+      "question": "Have you had any recent infections, fever, or major health changes in the last few weeks?",
+      "answer": "I've had a cold the past week but hat's resolved now"
+    },
+    {
+      "question_id": "q17",
+      "question": "Do you smoke or use any nicotine products?",
+      "answer": "no"
+    },
+    {
+      "question_id": "q18",
+      "question": "How much alcohol do you consume on a weekly basis?",
+      "answer": "a couple of beers maybe"
+    },
+    {
+      "question_id": "q19",
+      "question": "Do you use any recreational or illicit drugs?",
+      "answer": "no"
+    },
+    {
+      "question_id": "q20",
+      "question": "Are you feeling anxious or worried about the anesthesia or the operation?",
+      "answer": "no"
+    },
+    {
+      "question_id": "q21",
+      "question": "Is there anything else about your health or previous surgeries that you think the anesthesiologist should know?",
+      "answer": "no"
+    },
+    {
+      "question_id": "q22",
+      "question": "Do you have any additional questions or concerns that you would like to discuss?",
+      "answer": "nope"
+    }
+  ],
+  "raw_transcript": [
+    {
+      "role": "assistant",
+      "content": "Hi! I'm here to conduct your pre-surgery consultation. We'll go through some questions about your medical history and current health — it should only take a few minutes. Feel free to ask me anything along the way. Just let me know when you're ready to begin.",
+      "timestamp": 1778835278
+    },
+    {
+      "role": "patient",
+      "content": "Ready",
+      "timestamp": 1778835320
+    },
+    {
+      "role": "assistant",
+      "content": "What is your name?",
+      "timestamp": 1778835334
+    },
+    {
+      "role": "patient",
+      "content": "Marius",
+      "timestamp": 1778835340
+    },
+    {
+      "role": "assistant",
+      "content": "How old are you?",
+      "timestamp": 1778835343
+    },
+    {
+      "role": "patient",
+      "content": "25",
+      "timestamp": 1778835347
+    },
+    {
+      "role": "assistant",
+      "content": "How tall are you in centimeters?",
+      "timestamp": 1778835350
+    },
+    {
+      "role": "patient",
+      "content": "173",
+      "timestamp": 1778835354
+    },
+    {
+      "role": "assistant",
+      "content": "How much do you weigh in kilograms?",
+      "timestamp": 1778835358
+    },
+    {
+      "role": "patient",
+      "content": "77",
+      "timestamp": 1778835361
+    },
+    {
+      "role": "assistant",
+      "content": "What is your biological gender?",
+      "timestamp": 1778835364
+    },
+    {
+      "role": "patient",
+      "content": "I'm a man",
+      "timestamp": 1778835374
+    },
+    {
+      "role": "assistant",
+      "content": "Have you ever had anesthesia before?",
+      "timestamp": 1778835377
+    },
+    {
+      "role": "patient",
+      "content": "Yes",
+      "timestamp": 1778835381
+    },
+    {
+      "role": "assistant",
+      "content": "Did you experience any problems with it?",
+      "timestamp": 1778835384
+    },
+    {
+      "role": "patient",
+      "content": "No",
+      "timestamp": 1778835387
+    },
+    {
+      "role": "assistant",
+      "content": "Has anyone in your family ever had an adverse reaction to anesthesia?",
+      "timestamp": 1778835391
+    },
+    {
+      "role": "patient",
+      "content": "not to my knowledge",
+      "timestamp": 1778835397
+    },
+    {
+      "role": "assistant",
+      "content": "Has a doctor ever told you that you were difficult to intubate or that you have a difficult airway?",
+      "timestamp": 1778835400
+    },
+    {
+      "role": "patient",
+      "content": "no",
+      "timestamp": 1778835405
+    },
+    {
+      "role": "assistant",
+      "content": "Do you have sleep apnea or use a CPAP machine at night?",
+      "timestamp": 1778835408
+    },
+    {
+      "role": "patient",
+      "content": "no, I don't even know what that is",
+      "timestamp": 1778835418
+    },
+    {
+      "role": "assistant",
+      "content": "It's completely okay not to be familiar with those terms—many people aren't, and our team can explain anything you need during your consultation.\n\nDo you have any loose teeth, dentures, or dental implants?",
+      "timestamp": 1778835431
+    },
+    {
+      "role": "patient",
+      "content": "I have some plastic on my bottom fron tooth, but that's all",
+      "timestamp": 1778835450
+    },
+    {
+      "role": "assistant",
+      "content": "Thank you for sharing that, Marius. Your team will make sure everything is noted and addressed properly.\n\nDo you have any allergies to medications, latex, or anesthesia drugs?",
+      "timestamp": 1778835467
+    },
+    {
+      "role": "patient",
+      "content": "no",
+      "timestamp": 1778835478
+    },
+    {
+      "role": "assistant",
+      "content": "Do you take any daily prescription medications?",
+      "timestamp": 1778835482
+    },
+    {
+      "role": "patient",
+      "content": "no",
+      "timestamp": 1778835484
+    },
+    {
+      "role": "assistant",
+      "content": "Do you take blood thinners such as aspirin, warfarin, Eliquis, or Xarelto?",
+      "timestamp": 1778835488
+    },
+    {
+      "role": "patient",
+      "content": "no",
+      "timestamp": 1778835491
+    },
+    {
+      "role": "assistant",
+      "content": "Do you take any non-prescription medications, supplements, or herbal remedies — including things like fish oil, vitamins, or over-the-counter painkillers?",
+      "timestamp": 1778835495
+    },
+    {
+      "role": "patient",
+      "content": "fish oil sometimes",
+      "timestamp": 1778835508
+    },
+    {
+      "role": "assistant",
+      "content": "Could you list what you're taking?",
+      "timestamp": 1778835512
+    },
+    {
+      "role": "patient",
+      "content": "fish oil",
+      "timestamp": 1778835517
+    },
+    {
+      "role": "assistant",
+      "content": "Do you have any heart conditions, chest pain, or a history of heart surgery or stents?",
+      "timestamp": 1778835521
+    },
+    {
+      "role": "patient",
+      "content": "no",
+      "timestamp": 1778835524
+    },
+    {
+      "role": "assistant",
+      "content": "Do you have asthma, COPD, or any other breathing problems?",
+      "timestamp": 1778835527
+    },
+    {
+      "role": "patient",
+      "content": "no",
+      "timestamp": 1778835531
+    },
+    {
+      "role": "assistant",
+      "content": "Do you get short of breath when walking on flat ground or climbing stairs?",
+      "timestamp": 1778835535
+    },
+    {
+      "role": "patient",
+      "content": "no",
+      "timestamp": 1778835539
+    },
+    {
+      "role": "assistant",
+      "content": "Do you experience acid reflux or heartburn, or take any medication for it?",
+      "timestamp": 1778835543
+    },
+    {
+      "role": "patient",
+      "content": "no",
+      "timestamp": 1778835548
+    },
+    {
+      "role": "assistant",
+      "content": "Have you had any recent infections, fever, or major health changes in the last few weeks?",
+      "timestamp": 1778835552
+    },
+    {
+      "role": "patient",
+      "content": "I've had a cold the past week but hat's resolved now",
+      "timestamp": 1778835566
+    },
+    {
+      "role": "assistant",
+      "content": "Do you smoke or use any nicotine products?",
+      "timestamp": 1778835571
+    },
+    {
+      "role": "patient",
+      "content": "no",
+      "timestamp": 1778835582
+    },
+    {
+      "role": "assistant",
+      "content": "How much alcohol do you consume on a weekly basis?",
+      "timestamp": 1778835586
+    },
+    {
+      "role": "patient",
+      "content": "a couple of beers maybe",
+      "timestamp": 1778835599
+    },
+    {
+      "role": "assistant",
+      "content": "Do you use any recreational or illicit drugs?",
+      "timestamp": 1778835603
+    },
+    {
+      "role": "patient",
+      "content": "no",
+      "timestamp": 1778835607
+    },
+    {
+      "role": "assistant",
+      "content": "Are you feeling anxious or worried about the anesthesia or the operation?",
+      "timestamp": 1778835610
+    },
+    {
+      "role": "patient",
+      "content": "no",
+      "timestamp": 1778835612
+    },
+    {
+      "role": "assistant",
+      "content": "Is there anything else about your health or previous surgeries that you think the anesthesiologist should know?",
+      "timestamp": 1778835615
+    },
+    {
+      "role": "patient",
+      "content": "no",
+      "timestamp": 1778835622
+    },
+    {
+      "role": "assistant",
+      "content": "Do you have any additional questions or concerns that you would like to discuss?",
+      "timestamp": 1778835625
+    },
+    {
+      "role": "patient",
+      "content": "nope",
+      "timestamp": 1778835631
+    },
+    {
+      "role": "assistant",
+      "content": "Thank you, Marius, for your time and cooperation—everything is set, and the team is ready. You’re in good hands, and I’m here if you need anything else. Have a great day!",
+      "timestamp": 1778835645
+    }
+  ],
+  "ml_asa_prediction": {
+    "asa_class": "ASA-I",
+    "asa_numeric": 1,
+    "probabilities": {
+      "ASA-I": 0.9284,
+      "ASA-II": 0.0703,
+      "ASA-III": 0.0013
+    },
+    "confidence": 0.9284,
+    "features_used": {
+      "Age": 25,
+      "Height_cm": 173,
+      "Weight_kg": 77,
+      "BMI": 25.727555214006482,
+      "AlcoholConsumption_X": 1,
+      "NumberOfAllergies": 0,
+      "NumberOfDiagnoses": 0,
+      "Sex": "Mand",
+      "SmokingStatus_Simplified": "Unknown",
+      "NeuroPsyk_flag": 0,
+      "Respiratorisk_flag": 0,
+      "Kardiovaskulært_flag": 0,
+      "GI/Lever/Nyre_flag": 0,
+      "Endo/Andet_flag": 0,
+      "Bevægeapparat_flag": 0
+    }
+  },
+  "hybrid_asa_assessment": {
+    "asa_class": "ASA-I",
+    "reasoning": "The patient is young, healthy, with no medical history, allergies, or medications. No risk factors or comorbidities are present, supporting an ASA-I classification."
+  }
+}

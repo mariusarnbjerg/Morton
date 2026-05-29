@@ -60,6 +60,8 @@ PERSONAS_1: Dict[str, Dict] = {
             "q0":   ["I think im ready"],
             "q1":   ["Lars"],
             "q2":   ["im 52 i think, wait yes 52"],
+            "q2.1": ["About 173 I think"],
+            "q2.2": ["Maybe 80 kilos?"],
             "q3":   ["I think so, maybe once but im not sure"],
             "q3b":  ["I dont really remember, it was a long time ago"],
             "q4":   ["I dont know, noone has ever told me about that"],
@@ -200,7 +202,7 @@ Source transcript IDs use the last 3 digits for brevity:
   #382 = 1772382629904, #379 = 1772379728253, etc.
 """
 
-PERSONAS: Dict[str, Dict] = {
+PERSONAS_2: Dict[str, Dict] = {
 
     # ==================================================================
     # PERSONA 1: UNCERTAIN / VAGUE
@@ -216,6 +218,8 @@ PERSONAS: Dict[str, Dict] = {
             "q0": ["sure I guess"],  # inspired by #188 "Sure"
             "q1": ["Henrik"],
             "q2": ["55 I believe"],  # inspired by #185 "oh sorry, my age is actually 30" (uncertain about own details)
+            "q2.1": ["About 173 I think"],
+            "q2.2": ["Maybe 80 kilos?"],
             "q3": ["hmm, I'm not sure.. maybe?"],
             # inspired by #185 "I'm not sure.." and #188 "I dont think so, but Im unsure"
             "q3b": ["I honestly cant remember, it was years ago"],  # inspired by #179 "Not in particular"
@@ -393,6 +397,1278 @@ PERSONAS: Dict[str, Dict] = {
             # from #192 "wait i forgot i had been under anesthesia i think when i got rid of my tonsils"
             "q22": ["no that should be everything, well actually who reads all this afterwards?"],
             # inspired by #205 "so this will not be shared to the authorities?"
+        },
+    },
+}
+
+PERSONAS: Dict[str, Dict] = {
+
+    # ------------------------------------------------------------------
+    # Patient 01 | DurableKey 5693 | Age 19 | Sex Female | ASA 1
+    # ------------------------------------------------------------------
+    "patient_01": {
+        "name": "Emma",
+        "responses": {
+            "q0": ["Ready"],
+            "q1": ["My name is Emma"],
+            "q2": ["I am 19 years old"],
+            "q2.1": ["160 cm"],
+            "q2.2": ["49.5 kg"],
+            "q2.3": ["Female"],
+
+            "q3": ["No"],
+            "q3b": ["I have not had anesthesia before"],
+            "q4": ["No"],
+            "q4b": ["No known family reactions"],
+            "q5": ["No"],
+            "q6": ["No"],
+            "q7": ["No"],
+
+            "q8": ["Yes"],
+            "q8b": ["I react to NSAID anti-inflammatory painkillers, but I am not sure about the exact reaction"],
+            "q9": ["No"],
+            "q9b": ["No daily prescription medication"],
+            "q10": ["No"],
+            "q11": ["No"],
+            "q11b": ["No supplements"],
+
+            "q12": ["No"],
+            "q13": ["No"],
+            "q14": ["No"],
+            "q15": ["No"],
+            "q16": ["No"],
+
+            "q17": ["No, I do not smoke"],
+            "q17b": ["I do not use nicotine either"],
+            "q18": ["I do not really drink alcohol"],
+
+            "q19": ["No"],
+            "q19b": ["No"],
+            "q20": ["Yes, I can feel a bit anxious"],
+            "q21": ["I have had anxiety, and I have had a breast lump checked"],
+            "q22": ["No additional questions right now"],
+        },
+    },
+
+    # ------------------------------------------------------------------
+    # Patient 02 | DurableKey 5573 | Age 39 | Sex Female | ASA 1
+    # ------------------------------------------------------------------
+    "patient_02": {
+        "name": "Sofia",
+        "responses": {
+            "q0": ["Ready"],
+            "q1": ["My name is Sofia"],
+            "q2": ["I am 39 years old"],
+            "q2.1": ["169 cm"],
+            "q2.2": ["80 kg"],
+            "q2.3": ["Female"],
+
+            "q3": ["No"],
+            "q3b": ["I have not had anesthesia before"],
+            "q4": ["No"],
+            "q4b": ["No known family reactions"],
+            "q5": ["No"],
+            "q6": ["No"],
+            "q7": ["No"],
+
+            "q8": ["No"],
+            "q8b": ["No known allergies"],
+            "q9": ["No"],
+            "q9b": ["No daily prescription medication"],
+            "q10": ["No"],
+            "q11": ["No"],
+            "q11b": ["No supplements"],
+
+            "q12": ["No"],
+            "q13": ["Yes, I have asthma"],
+            "q14": ["No"],
+            "q15": ["No"],
+            "q16": ["No"],
+
+            "q17": ["No, I do not smoke"],
+            "q17b": ["I do not use nicotine"],
+            "q18": ["I drink occasionally, but not much"],
+
+            "q19": ["No"],
+            "q19b": ["No"],
+            "q20": ["A little, mostly because I have not tried anesthesia before"],
+            "q21": ["I have asthma, and I am being treated because of a missed abortion"],
+            "q22": ["No additional questions right now"],
+        },
+    },
+
+    # ------------------------------------------------------------------
+    # Patient 03 | DurableKey 40179 | Age 49 | Sex Female | ASA 1
+    # ------------------------------------------------------------------
+    "patient_03": {
+        "name": "Laura",
+        "responses": {
+            "q0": ["Ready"],
+            "q1": ["My name is Laura"],
+            "q2": ["I am 49 years old"],
+            "q2.1": ["167 cm"],
+            "q2.2": ["61 kg"],
+            "q2.3": ["Female"],
+
+            "q3": ["No"],
+            "q3b": ["I have not had anesthesia before"],
+            "q4": ["Uncertain"],
+            "q4b": ["I have never heard of anyone in my family reacting badly to anesthesia"],
+            "q5": ["No"],
+            "q6": ["No"],
+            "q7": ["No"],
+
+            "q8": ["No"],
+            "q8b": ["No known allergies"],
+            "q9": ["No"],
+            "q9b": ["No daily prescription medication"],
+            "q10": ["No"],
+            "q11": ["No"],
+            "q11b": ["No supplements"],
+
+            "q12": ["No"],
+            "q13": ["No"],
+            "q14": ["No"],
+            "q15": ["No"],
+            "q16": ["No"],
+
+            "q17": ["No, I do not smoke"],
+            "q17b": ["I do not use nicotine"],
+            "q18": ["I drink occasionally"],
+
+            "q19": ["No"],
+            "q19b": ["No"],
+            "q20": ["No, I feel okay about it"],
+            "q21": ["I have osteoarthritis"],
+            "q22": ["No additional questions right now"],
+        },
+    },
+
+    # ------------------------------------------------------------------
+    # Patient 04 | DurableKey 2269 | Age 61 | Sex Female | ASA 1
+    # ------------------------------------------------------------------
+    "patient_04": {
+        "name": "Hanne",
+        "responses": {
+            "q0": ["Ready"],
+            "q1": ["My name is Hanne"],
+            "q2": ["I am 61 years old"],
+            "q2.1": ["168 cm"],
+            "q2.2": ["80 kg"],
+            "q2.3": ["Female"],
+
+            "q3": ["Yes"],
+            "q3b": ["No problems that I know of"],
+            "q4": ["No"],
+            "q4b": ["No known family reactions"],
+            "q5": ["No"],
+            "q6": ["No"],
+            "q7": ["No"],
+
+            "q8": ["Yes"],
+            "q8b": ["I react to tramadol and sulfamethizole"],
+            "q9": ["No"],
+            "q9b": ["No daily prescription medication"],
+            "q10": ["No"],
+            "q11": ["No"],
+            "q11b": ["No supplements"],
+
+            "q12": ["No"],
+            "q13": ["No"],
+            "q14": ["No"],
+            "q15": ["No"],
+            "q16": ["No"],
+
+            "q17": ["No, I do not smoke"],
+            "q17b": ["I do not use nicotine"],
+            "q18": ["I do not really drink alcohol"],
+
+            "q19": ["No"],
+            "q19b": ["No"],
+            "q20": ["No, I feel okay about it"],
+            "q21": ["I have had prolapse problems, a cystocele, and stress incontinence"],
+            "q22": ["No additional questions right now"],
+        },
+    },
+
+    # ------------------------------------------------------------------
+    # Patient 05 | DurableKey 28435 | Age 83 | Sex Female | ASA 1
+    # ------------------------------------------------------------------
+    "patient_05": {
+        "name": "Ingrid",
+        "responses": {
+            "q0": ["Ready"],
+            "q1": ["My name is Ingrid"],
+            "q2": ["I am 83 years old"],
+            "q2.1": ["166 cm"],
+            "q2.2": ["52 kg"],
+            "q2.3": ["Female"],
+
+            "q3": ["Yes"],
+            "q3b": ["No problems that I know of"],
+            "q4": ["Uncertain"],
+            "q4b": ["I do not know of any family reactions"],
+            "q5": ["No"],
+            "q6": ["No"],
+            "q7": ["No"],
+
+            "q8": ["No"],
+            "q8b": ["No known allergies"],
+            "q9": ["No"],
+            "q9b": ["No daily prescription medication"],
+            "q10": ["No"],
+            "q11": ["No"],
+            "q11b": ["No supplements"],
+
+            "q12": ["No"],
+            "q13": ["No"],
+            "q14": ["No"],
+            "q15": ["No"],
+            "q16": ["Yes, I have an infection around a joint prosthesis"],
+
+            "q17": ["No, I do not smoke"],
+            "q17b": ["I do not use nicotine"],
+            "q18": ["I do not really drink alcohol"],
+
+            "q19": ["No"],
+            "q19b": ["No"],
+            "q20": ["No, I am not especially worried"],
+            "q21": ["I have an infection around a joint prosthesis after a previous operation"],
+            "q22": ["No additional questions right now"],
+        },
+    },
+
+    # ------------------------------------------------------------------
+    # Patient 06 | DurableKey 10293 | Age 24 | Sex Male | ASA 1
+    # ------------------------------------------------------------------
+    "patient_06": {
+        "name": "Magnus",
+        "responses": {
+            "q0": ["Ready"],
+            "q1": ["My name is Magnus"],
+            "q2": ["I am 24 years old"],
+            "q2.1": ["192 cm"],
+            "q2.2": ["100 kg"],
+            "q2.3": ["Male"],
+
+            "q3": ["Yes"],
+            "q3b": ["No problems, but I have been told I should not have a spinal block because of my back"],
+            "q4": ["No"],
+            "q4b": ["No known family reactions"],
+            "q5": ["No"],
+            "q6": ["No"],
+            "q7": ["No"],
+
+            "q8": ["Yes"],
+            "q8b": ["I react to morphine"],
+            "q9": ["No"],
+            "q9b": ["No daily prescription medication"],
+            "q10": ["No"],
+            "q11": ["No"],
+            "q11b": ["No supplements"],
+
+            "q12": ["No"],
+            "q13": ["No"],
+            "q14": ["No"],
+            "q15": ["No"],
+            "q16": ["No"],
+
+            "q17": ["No, I do not smoke"],
+            "q17b": ["I do not use nicotine"],
+            "q18": ["I drink occasionally, mostly socially"],
+
+            "q19": ["No"],
+            "q19b": ["No"],
+            "q20": ["No, I feel okay about it"],
+            "q21": ["I have a fracture in my ankle area, and I have a shortened spinal cord according to my mother"],
+            "q22": ["No additional questions right now"],
+        },
+    },
+
+    # ------------------------------------------------------------------
+    # Patient 07 | DurableKey 14653 | Age 43 | Sex Male | ASA 1
+    # ------------------------------------------------------------------
+    "patient_07": {
+        "name": "Jonas",
+        "responses": {
+            "q0": ["Ready"],
+            "q1": ["My name is Jonas"],
+            "q2": ["I am 43 years old"],
+            "q2.1": ["179 cm"],
+            "q2.2": ["84 kg"],
+            "q2.3": ["Male"],
+
+            "q3": ["Yes"],
+            "q3b": ["No problems"],
+            "q4": ["No"],
+            "q4b": ["No known family reactions"],
+            "q5": ["No"],
+            "q6": ["No"],
+            "q7": ["No"],
+
+            "q8": ["No"],
+            "q8b": ["No known allergies"],
+            "q9": ["No"],
+            "q9b": ["No daily prescription medication"],
+            "q10": ["No"],
+            "q11": ["No"],
+            "q11b": ["No supplements"],
+
+            "q12": ["No"],
+            "q13": ["No"],
+            "q14": ["No"],
+            "q15": ["No"],
+            "q16": ["No"],
+
+            "q17": ["No, I do not smoke"],
+            "q17b": ["I do not use nicotine"],
+            "q18": ["I drink occasionally"],
+
+            "q19": ["No"],
+            "q19b": ["No"],
+            "q20": ["No, I feel fine about it"],
+            "q21": ["I have a previous injury in my lower leg"],
+            "q22": ["No additional questions right now"],
+        },
+    },
+
+    # ------------------------------------------------------------------
+    # Patient 08 | DurableKey 6997 | Age 56 | Sex Male | ASA 1
+    # ------------------------------------------------------------------
+    "patient_08": {
+        "name": "Lars",
+        "responses": {
+            "q0": ["Ready"],
+            "q1": ["My name is Lars"],
+            "q2": ["I am 56 years old"],
+            "q2.1": ["183 cm"],
+            "q2.2": ["90 kg"],
+            "q2.3": ["Male"],
+
+            "q3": ["Yes"],
+            "q3b": ["No problems"],
+            "q4": ["Uncertain"],
+            "q4b": ["I have never heard of any family reactions to anesthesia"],
+            "q5": ["No"],
+            "q6": ["No"],
+            "q7": ["No"],
+
+            "q8": ["No"],
+            "q8b": ["No known allergies"],
+            "q9": ["No"],
+            "q9b": ["No daily prescription medication"],
+            "q10": ["No"],
+            "q11": ["No"],
+            "q11b": ["No supplements"],
+
+            "q12": ["No"],
+            "q13": ["No"],
+            "q14": ["No"],
+            "q15": ["No"],
+            "q16": ["No"],
+
+            "q17": ["No, I do not smoke"],
+            "q17b": ["I do not use nicotine"],
+            "q18": ["I drink occasionally, but not a lot"],
+
+            "q19": ["No"],
+            "q19b": ["No"],
+            "q20": ["No, I am not worried"],
+            "q21": ["I have polyps or disease in the gallbladder"],
+            "q22": ["No additional questions right now"],
+        },
+    },
+
+    # ------------------------------------------------------------------
+    # Patient 09 | DurableKey 13048 | Age 74 | Sex Male | ASA 1
+    # ------------------------------------------------------------------
+    "patient_09": {
+        "name": "Erik",
+        "responses": {
+            "q0": ["Ready"],
+            "q1": ["My name is Erik"],
+            "q2": ["I am 74 years old"],
+            "q2.1": ["175 cm"],
+            "q2.2": ["82 kg"],
+            "q2.3": ["Male"],
+
+            "q3": ["No"],
+            "q3b": ["I have not had anesthesia before"],
+            "q4": ["No"],
+            "q4b": ["No known family reactions"],
+            "q5": ["No"],
+            "q6": ["No"],
+            "q7": ["No"],
+
+            "q8": ["No"],
+            "q8b": ["No known allergies"],
+            "q9": ["No"],
+            "q9b": ["No daily prescription medication"],
+            "q10": ["No"],
+            "q11": ["No"],
+            "q11b": ["No supplements"],
+
+            "q12": ["No"],
+            "q13": ["No"],
+            "q14": ["No"],
+            "q15": ["No"],
+            "q16": ["No"],
+
+            "q17": ["No, I do not smoke"],
+            "q17b": ["I do not use nicotine"],
+            "q18": ["I do not really drink alcohol"],
+
+            "q19": ["No"],
+            "q19b": ["No"],
+            "q20": ["A little, mostly because I have not tried anesthesia before"],
+            "q21": ["I have osteoarthritis in both knees"],
+            "q22": ["No additional questions right now"],
+        },
+    },
+
+    # ------------------------------------------------------------------
+    # Patient 10 | DurableKey 4162 | Age 26 | Sex Female | ASA 2
+    # ------------------------------------------------------------------
+    "patient_10": {
+        "name": "Freja",
+        "responses": {
+            "q0": ["Ready"],
+            "q1": ["My name is Freja"],
+            "q2": ["I am 26 years old"],
+            "q2.1": ["158 cm"],
+            "q2.2": ["76 kg"],
+            "q2.3": ["Female"],
+
+            "q3": ["No"],
+            "q3b": ["I have not had anesthesia before"],
+            "q4": ["No"],
+            "q4b": ["No known family reactions"],
+            "q5": ["No"],
+            "q6": ["No"],
+            "q7": ["No"],
+
+            "q8": ["Yes"],
+            "q8b": ["I react to oxycodone"],
+            "q9": ["No"],
+            "q9b": ["No daily prescription medication"],
+            "q10": ["No"],
+            "q11": ["No"],
+            "q11b": ["No supplements"],
+
+            "q12": ["No"],
+            "q13": ["No"],
+            "q14": ["No"],
+            "q15": ["No"],
+            "q16": ["No"],
+
+            "q17": ["No, I do not smoke"],
+            "q17b": ["I do not use nicotine"],
+            "q18": ["I drink occasionally"],
+
+            "q19": ["No"],
+            "q19b": ["No"],
+            "q20": ["A little, mostly because I have not tried anesthesia before"],
+            "q21": ["I have a shoulder problem, including a SLAP lesion"],
+            "q22": ["No additional questions right now"],
+        },
+    },
+
+    # ------------------------------------------------------------------
+    # Patient 11 | DurableKey 13812 | Age 44 | Sex Female | ASA 2
+    # ------------------------------------------------------------------
+    "patient_11": {
+        "name": "Maria",
+        "responses": {
+            "q0": ["Ready"],
+            "q1": ["My name is Maria"],
+            "q2": ["I am 44 years old"],
+            "q2.1": ["153 cm"],
+            "q2.2": ["61 kg"],
+            "q2.3": ["Female"],
+
+            "q3": ["Yes"],
+            "q3b": ["No problems"],
+            "q4": ["No"],
+            "q4b": ["No known family reactions"],
+            "q5": ["No"],
+            "q6": ["No"],
+            "q7": ["No"],
+
+            "q8": ["No"],
+            "q8b": ["No known allergies"],
+            "q9": ["No"],
+            "q9b": ["No daily prescription medication"],
+            "q10": ["No"],
+            "q11": ["No"],
+            "q11b": ["No supplements"],
+
+            "q12": ["No"],
+            "q13": ["No"],
+            "q14": ["No"],
+            "q15": ["No"],
+            "q16": ["No"],
+
+            "q17": ["No, I do not smoke"],
+            "q17b": ["I do not use nicotine"],
+            "q18": ["I drink occasionally, mostly socially"],
+
+            "q19": ["No"],
+            "q19b": ["No"],
+            "q20": ["No, I feel okay about it"],
+            "q21": ["I have heavy or irregular menstrual bleeding"],
+            "q22": ["No additional questions right now"],
+        },
+    },
+
+    # ------------------------------------------------------------------
+    # Patient 12 | DurableKey 4460 | Age 62 | Sex Female | ASA 2
+    # ------------------------------------------------------------------
+    "patient_12": {
+        "name": "Lone",
+        "responses": {
+            "q0": ["Ready"],
+            "q1": ["My name is Lone"],
+            "q2": ["I am 62 years old"],
+            "q2.1": ["I am not sure"],
+            "q2.2": ["I am not sure"],
+            "q2.3": ["Female"],
+
+            "q3": ["Yes"],
+            "q3b": ["No problems that I know of"],
+            "q4": ["Uncertain"],
+            "q4b": ["I do not know of any family reactions"],
+            "q5": ["No"],
+            "q6": ["No"],
+            "q7": ["No"],
+
+            "q8": ["No"],
+            "q8b": ["No known allergies"],
+            "q9": ["Yes"],
+            "q9b": ["I take antidepressant medication, and I am treated for low thyroid function"],
+            "q10": ["No"],
+            "q11": ["No"],
+            "q11b": ["No supplements"],
+
+            "q12": ["Yes, I have high blood pressure"],
+            "q13": ["No"],
+            "q14": ["No"],
+            "q15": ["No"],
+            "q16": ["No"],
+
+            "q17": ["No, I do not smoke"],
+            "q17b": ["I do not use nicotine"],
+            "q18": ["I do not really drink alcohol"],
+
+            "q19": ["No"],
+            "q19b": ["No"],
+            "q20": ["A little, mostly because of the cancer diagnosis"],
+            "q21": ["I have breast cancer, periods with depression, high blood pressure, and low thyroid function"],
+            "q22": ["No additional questions right now"],
+        },
+    },
+
+    # ------------------------------------------------------------------
+    # Patient 13 | DurableKey 27355 | Age 93 | Sex Female | ASA 2
+    # ------------------------------------------------------------------
+    "patient_13": {
+        "name": "Gerda",
+        "responses": {
+            "q0": ["Ready"],
+            "q1": ["My name is Gerda"],
+            "q2": ["I am 93 years old"],
+            "q2.1": ["I am not sure"],
+            "q2.2": ["I am not sure"],
+            "q2.3": ["Female"],
+
+            "q3": ["Yes"],
+            "q3b": ["No problems that I know of"],
+            "q4": ["Uncertain"],
+            "q4b": ["I do not know of any family reactions"],
+            "q5": ["No"],
+            "q6": ["No"],
+            "q7": ["No"],
+
+            "q8": ["No"],
+            "q8b": ["No known allergies"],
+            "q9": ["Yes"],
+            "q9b": ["I take Pradaxa"],
+            "q10": ["Yes, I take Pradaxa"],
+            "q11": ["No"],
+            "q11b": ["No supplements"],
+
+            "q12": ["Yes, I have atrial fibrillation, and possibly high blood pressure"],
+            "q13": ["No"],
+            "q14": ["No"],
+            "q15": ["Yes, I have reflux"],
+            "q16": ["No"],
+
+            "q17": ["No, I do not smoke"],
+            "q17b": ["I do not use nicotine"],
+            "q18": ["I do not really drink alcohol"],
+
+            "q19": ["No"],
+            "q19b": ["No"],
+            "q20": ["No, I am not especially worried"],
+            "q21": ["I am being examined because of suspected cancer, and I have atrial fibrillation and reflux"],
+            "q22": ["No additional questions right now"],
+        },
+    },
+
+    # ------------------------------------------------------------------
+    # Patient 14 | DurableKey 11614 | Age 24 | Sex Male | ASA 2
+    # ------------------------------------------------------------------
+    "patient_14": {
+        "name": "Oliver",
+        "responses": {
+            "q0": ["Ready"],
+            "q1": ["My name is Oliver"],
+            "q2": ["I am 24 years old"],
+            "q2.1": ["186 cm"],
+            "q2.2": ["106.6 kg"],
+            "q2.3": ["Male"],
+
+            "q3": ["No"],
+            "q3b": ["I have not had anesthesia before"],
+            "q4": ["No"],
+            "q4b": ["No known family reactions"],
+            "q5": ["No"],
+            "q6": ["No"],
+            "q7": ["No"],
+
+            "q8": ["No"],
+            "q8b": ["No known allergies"],
+            "q9": ["No"],
+            "q9b": ["No daily prescription medication"],
+            "q10": ["No"],
+            "q11": ["No"],
+            "q11b": ["No supplements"],
+
+            "q12": ["No"],
+            "q13": ["No"],
+            "q14": ["No"],
+            "q15": ["No"],
+            "q16": ["No"],
+
+            "q17": ["No, I do not smoke"],
+            "q17b": ["I do not use nicotine"],
+            "q18": ["I drink occasionally, mostly socially"],
+
+            "q19": ["No"],
+            "q19b": ["No"],
+            "q20": ["A little, mostly because I have not tried anesthesia before"],
+            "q21": ["I have an inguinal hernia and have also had a bruised toe"],
+            "q22": ["No additional questions right now"],
+        },
+    },
+
+    # ------------------------------------------------------------------
+    # Patient 15 | DurableKey 6417 | Age 39 | Sex Male | ASA 2
+    # ------------------------------------------------------------------
+    "patient_15": {
+        "name": "Mads",
+        "responses": {
+            "q0": ["Ready"],
+            "q1": ["My name is Mads"],
+            "q2": ["I am 39 years old"],
+            "q2.1": ["180 cm"],
+            "q2.2": ["63 kg"],
+            "q2.3": ["Male"],
+
+            "q3": ["Yes"],
+            "q3b": ["No problems that I know of"],
+            "q4": ["No"],
+            "q4b": ["No known family reactions"],
+            "q5": ["No"],
+            "q6": ["No"],
+            "q7": ["No"],
+
+            "q8": ["No"],
+            "q8b": ["No known allergies"],
+            "q9": ["Yes"],
+            "q9b": ["I have epilepsy, but I am not sure what medication is relevant here"],
+            "q10": ["No"],
+            "q11": ["No"],
+            "q11b": ["No supplements"],
+
+            "q12": ["No"],
+            "q13": ["No"],
+            "q14": ["No"],
+            "q15": ["No"],
+            "q16": ["No"],
+
+            "q17": ["No, I do not smoke"],
+            "q17b": ["I do not use nicotine"],
+            "q18": ["I drink occasionally"],
+
+            "q19": ["No"],
+            "q19b": ["No"],
+            "q20": ["A little, mostly because of the testicular cancer examination"],
+            "q21": ["I have epilepsy and I am being examined because of suspected testicular cancer"],
+            "q22": ["No additional questions right now"],
+        },
+    },
+
+    # ------------------------------------------------------------------
+    # Patient 16 | DurableKey 7884 | Age 57 | Sex Male | ASA 2
+    # ------------------------------------------------------------------
+    "patient_16": {
+        "name": "Thomas",
+        "responses": {
+            "q0": ["Ready"],
+            "q1": ["My name is Thomas"],
+            "q2": ["I am 57 years old"],
+            "q2.1": ["165 cm"],
+            "q2.2": ["95 kg"],
+            "q2.3": ["Male"],
+
+            "q3": ["No"],
+            "q3b": ["I have not had anesthesia before"],
+            "q4": ["Uncertain"],
+            "q4b": ["I have never heard of any family reactions"],
+            "q5": ["No"],
+            "q6": ["No"],
+            "q7": ["No"],
+
+            "q8": ["No"],
+            "q8b": ["No known allergies"],
+            "q9": ["No"],
+            "q9b": ["No daily prescription medication"],
+            "q10": ["No"],
+            "q11": ["No"],
+            "q11b": ["No supplements"],
+
+            "q12": ["No"],
+            "q13": ["No"],
+            "q14": ["No, I can walk up to the second floor without a break"],
+            "q15": ["No"],
+            "q16": ["No"],
+
+            "q17": ["No, I do not smoke"],
+            "q17b": ["I do not use nicotine"],
+            "q18": ["I drink occasionally, but not much"],
+
+            "q19": ["No"],
+            "q19b": ["No"],
+            "q20": ["No, I feel okay about it"],
+            "q21": ["I have gallstones"],
+            "q22": ["No additional questions right now"],
+        },
+    },
+
+    # ------------------------------------------------------------------
+    # Patient 17 | DurableKey 6574 | Age 61 | Sex Male | ASA 2
+    # ------------------------------------------------------------------
+    "patient_17": {
+        "name": "Henrik",
+        "responses": {
+            "q0": ["Ready"],
+            "q1": ["My name is Henrik"],
+            "q2": ["I am 61 years old"],
+            "q2.1": ["183 cm"],
+            "q2.2": ["94 kg"],
+            "q2.3": ["Male"],
+
+            "q3": ["Yes"],
+            "q3b": ["No problems that I know of"],
+            "q4": ["Uncertain"],
+            "q4b": ["I do not know of any family reactions"],
+            "q5": ["No"],
+            "q6": ["No"],
+            "q7": ["No"],
+
+            "q8": ["No"],
+            "q8b": ["No known allergies"],
+            "q9": ["Yes"],
+            "q9b": ["I am on blood-thinning treatment, but I do not remember the exact name"],
+            "q10": ["Yes"],
+            "q11": ["No"],
+            "q11b": ["No supplements"],
+
+            "q12": ["Yes, I have heart failure and an enlarged heart"],
+            "q13": ["No"],
+            "q14": ["I can get tired more easily than before"],
+            "q15": ["No"],
+            "q16": ["No"],
+
+            "q17": ["No, I do not smoke"],
+            "q17b": ["I do not use nicotine"],
+            "q18": ["I do not really drink alcohol"],
+
+            "q19": ["No"],
+            "q19b": ["No"],
+            "q20": ["A little, because of my heart condition"],
+            "q21": ["I have AL amyloidosis, previous blood clot inflammation in the leg, heart failure, an enlarged heart, chronic kidney disease, and abducens palsy"],
+            "q22": ["No additional questions right now"],
+        },
+    },
+
+    # ------------------------------------------------------------------
+    # Patient 18 | DurableKey 8983 | Age 76 | Sex Male | ASA 2
+    # ------------------------------------------------------------------
+    "patient_18": {
+        "name": "Poul",
+        "responses": {
+            "q0": ["Ready"],
+            "q1": ["My name is Poul"],
+            "q2": ["I am 76 years old"],
+            "q2.1": ["170 cm"],
+            "q2.2": ["91.2 kg"],
+            "q2.3": ["Male"],
+
+            "q3": ["Yes"],
+            "q3b": ["No problems that I know of"],
+            "q4": ["No"],
+            "q4b": ["No known family reactions"],
+            "q5": ["No"],
+            "q6": ["No"],
+            "q7": ["No"],
+
+            "q8": ["No"],
+            "q8b": ["No known allergies"],
+            "q9": ["Yes"],
+            "q9b": ["I take tramadol for knee and back pain"],
+            "q10": ["No"],
+            "q11": ["No"],
+            "q11b": ["No supplements"],
+
+            "q12": ["No"],
+            "q13": ["No"],
+            "q14": ["No, I can walk up to the second floor without a break"],
+            "q15": ["No"],
+            "q16": ["No"],
+
+            "q17": ["No, I do not smoke"],
+            "q17b": ["I do not use nicotine"],
+            "q18": ["I do not really drink alcohol"],
+
+            "q19": ["No"],
+            "q19b": ["No"],
+            "q20": ["No, I am not especially worried"],
+            "q21": ["I have a knee prosthesis, reduced hearing and use hearing aids, and I have knee and back pain treated with tramadol"],
+            "q22": ["No additional questions right now"],
+        },
+    },
+
+    # ------------------------------------------------------------------
+    # Patient 19 | DurableKey 79713 | Age 28 | Sex Female | ASA 3
+    # ------------------------------------------------------------------
+    "patient_19": {
+        "name": "Clara",
+        "responses": {
+            "q0": ["Ready"],
+            "q1": ["My name is Clara"],
+            "q2": ["I am 28 years old"],
+            "q2.1": ["169 cm"],
+            "q2.2": ["57 kg"],
+            "q2.3": ["Female"],
+
+            "q3": ["Yes"],
+            "q3b": ["No problems that I know of"],
+            "q4": ["Uncertain"],
+            "q4b": ["I do not know of any family reactions"],
+            "q5": ["No"],
+            "q6": ["No"],
+            "q7": ["No"],
+
+            "q8": ["Yes"],
+            "q8b": ["I react to morphine, levothyroxine, and infliximab"],
+            "q9": ["Yes"],
+            "q9b": ["I take lamotrigine and Cymbalta"],
+            "q10": ["No"],
+            "q11": ["No"],
+            "q11b": ["No supplements"],
+
+            "q12": ["No"],
+            "q13": ["Yes, I am being checked for lung issues"],
+            "q14": ["Yes, I get short of breath on stairs"],
+            "q15": ["No"],
+            "q16": ["No"],
+
+            "q17": ["No, I do not smoke"],
+            "q17b": ["I do not use nicotine"],
+            "q18": ["I drink occasionally, but not much"],
+
+            "q19": ["No"],
+            "q19b": ["No"],
+            "q20": ["A little, mostly because of the lung issues and the examination"],
+            "q21": ["I have depression, chronic stomach pain, ulcerative colitis, and I am being checked for possible urinary tract cancer"],
+            "q22": ["No additional questions right now"],
+        },
+    },
+
+    # ------------------------------------------------------------------
+    # Patient 20 | DurableKey 1353055 | Age 35 | Sex Female | ASA 3
+    # ------------------------------------------------------------------
+    "patient_20": {
+        "name": "Julie",
+        "responses": {
+            "q0": ["Ready"],
+            "q1": ["My name is Julie"],
+            "q2": ["I am 35 years old"],
+            "q2.1": ["165 cm"],
+            "q2.2": ["152.8 kg"],
+            "q2.3": ["Female"],
+
+            "q3": ["Yes, but mostly for tests and smaller procedures"],
+            "q3b": ["No problems that I know of"],
+            "q4": ["No"],
+            "q4b": ["No known family reactions"],
+            "q5": ["No"],
+            "q6": ["No"],
+            "q7": ["No"],
+
+            "q8": ["Yes"],
+            "q8b": ["I react to plaster"],
+            "q9": ["No"],
+            "q9b": ["No daily prescription medication"],
+            "q10": ["No"],
+            "q11": ["No"],
+            "q11b": ["No supplements"],
+
+            "q12": ["No"],
+            "q13": ["No"],
+            "q14": ["I can get short of breath with longer stairs, mostly because of my weight"],
+            "q15": ["No"],
+            "q16": ["No"],
+
+            "q17": ["No, I do not smoke"],
+            "q17b": ["I do not use nicotine"],
+            "q18": ["I drink occasionally"],
+
+            "q19": ["No"],
+            "q19b": ["No"],
+            "q20": ["Yes, I am a bit nervous about the operation"],
+            "q21": ["I have left-sided breast cancer, and I have a high body weight"],
+            "q22": ["No additional questions right now"],
+        },
+    },
+
+    # ------------------------------------------------------------------
+    # Patient 21 | DurableKey 4477 | Age 44 | Sex Female | ASA 3
+    # ------------------------------------------------------------------
+    "patient_21": {
+        "name": "Katrine",
+        "responses": {
+            "q0": ["Ready"],
+            "q1": ["My name is Katrine"],
+            "q2": ["I am 44 years old"],
+            "q2.1": ["170 cm"],
+            "q2.2": ["129 kg"],
+            "q2.3": ["Female"],
+
+            "q3": ["Yes"],
+            "q3b": ["No problems with anesthesia, but I can be difficult to place an IV in"],
+            "q4": ["Uncertain"],
+            "q4b": ["I do not know of any family reactions"],
+            "q5": ["No"],
+            "q6": ["No"],
+            "q7": ["No"],
+
+            "q8": ["Yes"],
+            "q8b": ["I react to nickel"],
+            "q9": ["Yes"],
+            "q9b": ["I take sertraline"],
+            "q10": ["No"],
+            "q11": ["No"],
+            "q11b": ["No supplements"],
+
+            "q12": ["No"],
+            "q13": ["No"],
+            "q14": ["I can get short of breath with stairs, mostly because of my weight"],
+            "q15": ["No"],
+            "q16": ["No"],
+
+            "q17": ["No, I do not smoke"],
+            "q17b": ["I do not use nicotine"],
+            "q18": ["I drink occasionally, mostly socially"],
+
+            "q19": ["No"],
+            "q19b": ["No"],
+            "q20": ["Yes, I have anxiety and I am worried about the IV"],
+            "q21": ["I have anxiety, type 2 diabetes, diverticular disease, and I am being examined because of possible colon or rectal cancer"],
+            "q22": ["No additional questions right now"],
+        },
+    },
+
+    # ------------------------------------------------------------------
+    # Patient 22 | DurableKey 91578 | Age 55 | Sex Female | ASA 3
+    # ------------------------------------------------------------------
+    "patient_22": {
+        "name": "Mette",
+        "responses": {
+            "q0": ["Ready"],
+            "q1": ["My name is Mette"],
+            "q2": ["I am 55 years old"],
+            "q2.1": ["163 cm"],
+            "q2.2": ["111 kg"],
+            "q2.3": ["Female"],
+
+            "q3": ["No"],
+            "q3b": ["I have never had general anesthesia before"],
+            "q4": ["No"],
+            "q4b": ["No known family reactions"],
+            "q5": ["No"],
+            "q6": ["No"],
+            "q7": ["No"],
+
+            "q8": ["No"],
+            "q8b": ["No known allergies"],
+            "q9": ["Yes"],
+            "q9b": ["I take Losartan, a PPI, ibuprofen, Gabapentin, and Wegovy"],
+            "q10": ["No"],
+            "q11": ["No"],
+            "q11b": ["No supplements"],
+
+            "q12": ["Yes, I have high blood pressure, but it is well controlled"],
+            "q13": ["No"],
+            "q14": ["I can get short of breath with stairs, mostly because of my weight and back problems"],
+            "q15": ["Yes, I have reflux, but it is well controlled with medication"],
+            "q16": ["No"],
+
+            "q17": ["No, I do not smoke"],
+            "q17b": ["I do not use nicotine"],
+            "q18": ["I drink occasionally"],
+
+            "q19": ["No"],
+            "q19b": ["No"],
+            "q20": ["Yes, I am a bit nervous because I have not had general anesthesia before"],
+            "q21": ["I have high blood pressure, reflux, back problems with two slipped discs, uterine and cervical polyps, and I use Wegovy for weight loss"],
+            "q22": ["No additional questions right now"],
+        },
+    },
+
+    # ------------------------------------------------------------------
+    # Patient 23 | DurableKey 108759 | Age 29 | Sex Male | ASA 3
+    # ------------------------------------------------------------------
+    "patient_23": {
+        "name": "Andreas",
+        "responses": {
+            "q0": ["Ready"],
+            "q1": ["My name is Andreas"],
+            "q2": ["I am 29 years old"],
+            "q2.1": ["150 cm"],
+            "q2.2": ["45.3 kg"],
+            "q2.3": ["Male"],
+
+            "q3": ["Yes"],
+            "q3b": ["No problems that I know of"],
+            "q4": ["Uncertain"],
+            "q4b": ["I do not know of any family reactions"],
+            "q5": ["No"],
+            "q6": ["No"],
+            "q7": ["No"],
+
+            "q8": ["No"],
+            "q8b": ["No known allergies"],
+            "q9": ["Yes"],
+            "q9b": ["I am not sure what medication is relevant"],
+            "q10": ["No"],
+            "q11": ["No"],
+            "q11b": ["No supplements"],
+
+            "q12": ["No"],
+            "q13": ["No"],
+            "q14": ["I need help with daily activities because of my disabilities"],
+            "q15": ["No"],
+            "q16": ["Yes, I have a urinary tract infection"],
+
+            "q17": ["No, I do not smoke"],
+            "q17b": ["I do not use nicotine"],
+            "q18": ["I do not drink alcohol"],
+
+            "q19": ["No"],
+            "q19b": ["No"],
+            "q20": ["Yes, I can become anxious or upset in medical situations"],
+            "q21": ["I have a severe brain injury, multiple disabilities, developmental disability, behavioural difficulties, ulcerative colitis, and a urinary tract infection"],
+            "q22": ["No additional questions right now"],
+        },
+    },
+
+    # ------------------------------------------------------------------
+    # Patient 24 | DurableKey 2771500 | Age 33 | Sex Male | ASA 3
+    # ------------------------------------------------------------------
+    "patient_24": {
+        "name": "Rasmus",
+        "responses": {
+            "q0": ["Ready"],
+            "q1": ["My name is Rasmus"],
+            "q2": ["I am 33 years old"],
+            "q2.1": ["185 cm"],
+            "q2.2": ["149 kg"],
+            "q2.3": ["Male"],
+
+            "q3": ["Yes"],
+            "q3b": ["I have had nausea and vomiting after anesthesia before"],
+            "q4": ["No"],
+            "q4b": ["No known family reactions"],
+            "q5": ["No"],
+            "q6": ["No"],
+            "q7": ["No"],
+
+            "q8": ["No"],
+            "q8b": ["No known allergies"],
+            "q9": ["Yes"],
+            "q9b": ["I take oxycodone and Wegovy"],
+            "q10": ["No"],
+            "q11": ["No"],
+            "q11b": ["No supplements"],
+
+            "q12": ["No"],
+            "q13": ["No"],
+            "q14": ["I can get short of breath with stairs, mostly because of my weight"],
+            "q15": ["No"],
+            "q16": ["No"],
+
+            "q17": ["No, I do not smoke"],
+            "q17b": ["I do not use nicotine"],
+            "q18": ["I drink occasionally, mostly socially"],
+
+            "q19": ["No"],
+            "q19b": ["No"],
+            "q20": ["Yes, mostly because I have vomited after anesthesia before"],
+            "q21": ["I have kidney stones with a ureter stone, I take oxycodone, and I have lost weight recently, 12kg on Wegovy"],
+            "q22": ["No additional questions right now"],
+        },
+    },
+
+    # ------------------------------------------------------------------
+    # Patient 25 | DurableKey 13973 | Age 41 | Sex Male | ASA 3
+    # ------------------------------------------------------------------
+    "patient_25": {
+        "name": "Nikolaj",
+        "responses": {
+            "q0": ["Ready"],
+            "q1": ["My name is Nikolaj"],
+            "q2": ["I am 41 years old"],
+            "q2.1": ["I am not sure"],
+            "q2.2": ["I am not sure"],
+            "q2.3": ["Male"],
+
+            "q3": ["Yes"],
+            "q3b": ["No problems"],
+            "q4": ["No"],
+            "q4b": ["No known family reactions"],
+            "q5": ["No"],
+            "q6": ["No"],
+            "q7": ["I have a dental abscess, but no dentures or implants"],
+
+            "q8": ["No"],
+            "q8b": ["No known allergies"],
+            "q9": ["Yes"],
+            "q9b": ["I take pantoprazole"],
+            "q10": ["No"],
+            "q11": ["No"],
+            "q11b": ["No supplements"],
+
+            "q12": ["No"],
+            "q13": ["No"],
+            "q14": ["No"],
+            "q15": ["No, not while I take pantoprazole"],
+            "q16": ["Yes, I have an abscess or infection in my mouth"],
+
+            "q17": ["No, I do not smoke"],
+            "q17b": ["I do not use nicotine"],
+            "q18": ["I drink occasionally"],
+
+            "q19": ["No"],
+            "q19b": ["No"],
+            "q20": ["A little, mostly because of the infection in my mouth"],
+            "q21": ["I have an abscess or infection in my mouth, and I take pantoprazole"],
+            "q22": ["No additional questions right now"],
+        },
+    },
+
+    # ------------------------------------------------------------------
+    # Patient 26 | DurableKey 2341 | Age 56 | Sex Male | ASA 3
+    # ------------------------------------------------------------------
+    "patient_26": {
+        "name": "Søren",
+        "responses": {
+            "q0": ["Ready"],
+            "q1": ["My name is Søren"],
+            "q2": ["I am 56 years old"],
+            "q2.1": ["177 cm"],
+            "q2.2": ["100 kg"],
+            "q2.3": ["Male"],
+
+            "q3": ["Yes"],
+            "q3b": ["No problems"],
+            "q4": ["Uncertain"],
+            "q4b": ["I do not know of any family reactions"],
+            "q5": ["No"],
+            "q6": ["No"],
+            "q7": ["No"],
+
+            "q8": ["No"],
+            "q8b": ["No known allergies"],
+            "q9": ["Yes"],
+            "q9b": ["I take medication for high blood pressure and type 2 diabetes, but I do not remember all the names"],
+            "q10": ["No"],
+            "q11": ["No"],
+            "q11b": ["No supplements"],
+
+            "q12": ["Yes, I have high blood pressure, but it is well controlled"],
+            "q13": ["No"],
+            "q14": ["I can get a bit winded on stairs, but nothing dramatic"],
+            "q15": ["No"],
+            "q16": ["No"],
+
+            "q17": ["No, I do not smoke"],
+            "q17b": ["I do not use nicotine"],
+            "q18": ["I drink occasionally, but not much"],
+
+            "q19": ["No"],
+            "q19b": ["No"],
+            "q20": ["Yes, I have PTSD, so hospitals can make me nervous"],
+            "q21": ["I have PTSD, high blood pressure, type 2 diabetes, and an umbilical hernia"],
+            "q22": ["No additional questions right now"],
+        },
+    },
+
+    # ------------------------------------------------------------------
+    # Patient 27 | DurableKey 26219 | Age 88 | Sex Male | ASA 3
+    # ------------------------------------------------------------------
+    "patient_27": {
+        "name": "Knud",
+        "responses": {
+            "q0": ["Ready"],
+            "q1": ["My name is Knud"],
+            "q2": ["I am 88 years old"],
+            "q2.1": ["178 cm"],
+            "q2.2": ["77.5 kg"],
+            "q2.3": ["Male"],
+
+            "q3": ["Yes"],
+            "q3b": ["No problems that I know of"],
+            "q4": ["No"],
+            "q4b": ["No known family reactions"],
+            "q5": ["No"],
+            "q6": ["No"],
+            "q7": ["No"],
+
+            "q8": ["No"],
+            "q8b": ["No known allergies"],
+            "q9": ["Yes"],
+            "q9b": ["I take regular medication, but I am not completely sure of all the names"],
+            "q10": ["Uncertain"],
+            "q11": ["No"],
+            "q11b": ["No supplements"],
+
+            "q12": ["Yes, I have atrial fibrillation and a pacemaker"],
+            "q13": ["No"],
+            "q14": ["I can get tired more easily because of my age and heart condition"],
+            "q15": ["No"],
+            "q16": ["No"],
+
+            "q17": ["No, I do not smoke"],
+            "q17b": ["I do not use nicotine"],
+            "q18": ["I do not really drink alcohol"],
+
+            "q19": ["No"],
+            "q19b": ["No"],
+            "q20": ["No, I feel okay about it"],
+            "q21": ["I have colon cancer, atrial fibrillation, a pacemaker, a colostomy, and previous prostate cancer"],
+            "q22": ["No additional questions right now"],
         },
     },
 }
@@ -606,6 +1882,12 @@ class ConversationTester:
             except Exception as e:
                 self._error(f"Failed to fetch summary: {e}")
 
+            # Save consultation to disk
+            try:
+                self._save_consultation(summary)
+            except Exception as e:
+                self._error(f"Failed to save consultation: {e}")
+
         # Step 4: Save transcript
         self._save_transcript(summary)
 
@@ -670,6 +1952,13 @@ class ConversationTester:
         requests.delete(
             f"{self.api}/conversations/{self.conversation_id}",
             timeout=10,
+        )
+
+    def _save_consultation(self, summary: dict):
+        requests.post(
+            f"{self.api}/consultations/save",
+            json=summary,
+            timeout=30,
         )
 
     # ------------------------------------------------------------------

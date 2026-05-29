@@ -1,0 +1,686 @@
+Rasmus — Run 1
+Conversation ID: eval-patient_24-run1-1779043274
+Date: 2026-05-17 20:46
+──────────────────────────────────────────────────
+
+[Assistant]  [asking: q0]: Hi! I'm here to conduct your pre-surgery consultation. We'll go through some questions about your medical history and current health — it should only take a few minutes. Feel free to ask me anything along the way. Just let me know when you're ready to begin.
+
+[Patient]  [→ q0]: Ready
+
+[Assistant]  [asking: q1 | bare]: What is your name?
+
+[Patient]  [→ q1]: My name is Rasmus
+
+[Assistant]  [asking: q2 | ack]: Nice to meet you, Rasmus. Everything you share will be passed on to the medical team right away.
+
+How old are you?
+
+[Patient]  [→ q2]: I am 33 years old
+
+[Assistant]  [asking: q2.1 | bare]: How tall are you in centimeters?
+
+[Patient]  [→ q2.1]: 185 cm
+
+[Assistant]  [asking: q2.2 | bare]: How much do you weigh in kilograms?
+
+[Patient]  [→ q2.2]: 149 kg
+
+[Assistant]  [asking: q2.3 | bare]: What is your biological gender?
+
+[Patient]  [→ q2.3]: Male
+
+[Assistant]  [asking: q3 | bare]: Have you ever had anesthesia before?
+
+[Patient]  [→ q3]: Yes
+
+[Assistant]  [asking: q3b | bare]: Did you experience any problems with it?
+
+[Patient]  [→ q3b]: I have had nausea and vomiting after anesthesia before
+
+[Assistant]  [asking: q4 | bare]: Has anyone in your family ever had an adverse reaction to anesthesia?
+
+[Patient]  [→ q4]: No
+
+[Assistant]  [asking: q5 | bare]: Has a doctor ever told you that you were difficult to intubate or that you have a difficult airway?
+
+[Patient]  [→ q5]: No
+
+[Assistant]  [asking: q6 | bare]: Do you have sleep apnea or use a CPAP machine at night?
+
+[Patient]  [→ q6]: No
+
+[Assistant]  [asking: q7 | bare]: Do you have any loose teeth, dentures, or dental implants?
+
+[Patient]  [→ q7]: No
+
+[Assistant]  [asking: q8 | bare]: Do you have any allergies to medications, latex, or anesthesia drugs?
+
+[Patient]  [→ q8]: No
+
+[Assistant]  [asking: q9 | bare]: Do you take any daily prescription medications?
+
+[Patient]  [→ q9]: Yes
+
+[Assistant]  [asking: q9b | bare]: Could you list them for me?
+
+[Patient]  [→ q9b]: I take oxycodone and Wegovy
+
+[Assistant]  [asking: q10 | bare]: Do you take blood thinners such as aspirin, warfarin, Eliquis, or Xarelto?
+
+[Patient]  [→ q10]: No
+
+[Assistant]  [asking: q11 | bare]: Do you take any non-prescription medications, supplements, or herbal remedies — including things like fish oil, vitamins, or over-the-counter painkillers?
+
+[Patient]  [→ q11]: No
+
+[Assistant]  [asking: q12 | bare]: Do you have any heart conditions, chest pain, or a history of heart surgery or stents?
+
+[Patient]  [→ q12]: No
+
+[Assistant]  [asking: q13 | bare]: Do you have asthma, COPD, or any other breathing problems?
+
+[Patient]  [→ q13]: No
+
+[Assistant]  [asking: q14 | bare]: Do you get short of breath when walking on flat ground or climbing stairs?
+
+[Patient]  [→ q14]: I can get short of breath with stairs, mostly because of my weight
+
+[Assistant]  [asking: q15 | ack]: I understand, Rasmus – we'll keep that in mind as we prepare for your procedure.
+
+Do you experience acid reflux or heartburn, or take any medication for it?
+
+[Patient]  [→ q15]: No
+
+[Assistant]  [asking: q16 | bare]: Have you had any recent infections, fever, or major health changes in the last few weeks?
+
+[Patient]  [→ q16]: No
+
+[Assistant]  [asking: q17 | bare]: Do you smoke or use any nicotine products?
+
+[Patient]  [→ q17]: No, I do not smoke
+
+[Assistant]  [asking: q18 | bare]: How much alcohol do you consume on a weekly basis?
+
+[Patient]  [→ q18]: I drink occasionally, mostly socially
+
+[Assistant]  [asking: q19 | bare]: Do you use any recreational or illicit drugs?
+
+[Patient]  [→ q19]: No
+
+[Assistant]  [asking: q20 | bare]: Are you feeling anxious or worried about the anesthesia or the operation?
+
+[Patient]  [→ q20]: Yes, mostly because I have vomited after anesthesia before
+
+[Assistant]  [asking: q21 | ack]: I understand your concern, Rasmus—your medical team is fully aware and will take all necessary steps to ensure your comfort and safety during the procedure.
+
+Is there anything else about your health or previous surgeries that you think the anesthesiologist should know?
+
+[Patient]  [→ q21]: I have kidney stones with a ureter stone, I take oxycodone, and I have lost weight recently, 12kg on Wegovy
+
+[Assistant]  [asking: q22 | bare]: Do you have any additional questions or concerns that you would like to discuss?
+
+[Patient]  [→ q22]: No additional questions right now
+
+[Assistant]  [done]: You're all set, Rasmus—thank you for being here. Your team will be with you shortly; take care and feel free to reach out if you need anything.
+
+──────────────────────────────────────────────────
+Total patient turns: 28
+Free chat auto-responses: 0
+Fallback responses: 0
+Duration: 4m 59s
+Questions asked: 28
+First-attempt acceptance: 28/28 (100%)
+Acknowledgment rate: 3/27 (11%)
+Bare question responses: 24/27
+
+Follow-ups triggered: 2/7 (q3b, q9b)
+
+Turns per question:
+  q0: 1
+  q1: 1
+  q10: 1
+  q11: 1
+  q12: 1
+  q13: 1
+  q14: 1
+  q15: 1
+  q16: 1
+  q17: 1
+  q18: 1
+  q19: 1
+  q2: 1
+  q2.1: 1
+  q2.2: 1
+  q2.3: 1
+  q20: 1
+  q21: 1
+  q22: 1
+  q3: 1
+  q3b: 1
+  q4: 1
+  q5: 1
+  q6: 1
+  q7: 1
+  q8: 1
+  q9: 1
+  q9b: 1
+
+Errors: 0
+Result: PASSED
+
+──────────────────────────────────────────────────
+SUMMARY
+──────────────────────────────────────────────────
+{
+  "patient": {
+    "name": "Rasmus",
+    "age": 33
+  },
+  "anesthesia_history": {
+    "prior_anesthesia": "yes",
+    "prior_anesthesia_issues": "nausea and vomiting",
+    "family_reaction": "no",
+    "family_reaction_type": "none"
+  },
+  "airway": {
+    "difficult_airway": "no",
+    "sleep_apnea": "no",
+    "dental": "no"
+  },
+  "allergies_and_medications": {
+    "allergies": "none",
+    "prescription_medications": "oxycodone, Wegovy",
+    "blood_thinners": "no",
+    "supplements": "none"
+  },
+  "cardiopulmonary": {
+    "cardiac_history": "no",
+    "respiratory_history": "no",
+    "exertional_dyspnea": "yes"
+  },
+  "gi_and_recent_health": {
+    "acid_reflux": "no",
+    "recent_health_changes": "no"
+  },
+  "lifestyle": {
+    "smoking_status": "never",
+    "smoking_details": "none",
+    "alcohol": "occasional (social)",
+    "recreational_drugs": "no"
+  },
+  "psychological": {
+    "anxiety_level": "yes",
+    "additional_history": "history of vomiting after anesthesia",
+    "additional_questions": "no"
+  },
+  "red_flags": [
+    {
+      "category": "other",
+      "severity": "low",
+      "details": "kidney stones with ureter stone, weight loss (12kg) on Wegovy"
+    }
+  ],
+  "asa_classification": "ASA-III",
+  "notes": "Shortness of breath attributed to obesity. Anxiety related to prior anesthetic side effects. Weight loss noted on Wegovy. No significant comorbidities identified.",
+  "conversation_id": "eval-patient_24-run1-1779043274",
+  "questionnaire_answers": [
+    {
+      "question_id": "q0",
+      "question": "Hi! I'm here to conduct your pre-surgery consultation. We'll go through some questions about your medical history and current health — it should only take a few minutes. Feel free to ask me anything along the way. Just let me know when you're ready to begin.",
+      "answer": "Ready"
+    },
+    {
+      "question_id": "q1",
+      "question": "What is your name?",
+      "answer": "Rasmus"
+    },
+    {
+      "question_id": "q2",
+      "question": "How old are you?",
+      "answer": "I am 33 years old"
+    },
+    {
+      "question_id": "q2.1",
+      "question": "How tall are you in centimeters?",
+      "answer": "185 cm"
+    },
+    {
+      "question_id": "q2.2",
+      "question": "How much do you weigh in kilograms?",
+      "answer": "149 kg"
+    },
+    {
+      "question_id": "q2.3",
+      "question": "What is your biological gender?",
+      "answer": "Male"
+    },
+    {
+      "question_id": "q3",
+      "question": "Have you ever had anesthesia before?",
+      "answer": "Yes"
+    },
+    {
+      "question_id": "q3b",
+      "question": "Did you experience any problems with it?",
+      "answer": "I have had nausea and vomiting after anesthesia before"
+    },
+    {
+      "question_id": "q4",
+      "question": "Has anyone in your family ever had an adverse reaction to anesthesia?",
+      "answer": "No"
+    },
+    {
+      "question_id": "q5",
+      "question": "Has a doctor ever told you that you were difficult to intubate or that you have a difficult airway?",
+      "answer": "No"
+    },
+    {
+      "question_id": "q6",
+      "question": "Do you have sleep apnea or use a CPAP machine at night?",
+      "answer": "No"
+    },
+    {
+      "question_id": "q7",
+      "question": "Do you have any loose teeth, dentures, or dental implants?",
+      "answer": "No"
+    },
+    {
+      "question_id": "q8",
+      "question": "Do you have any allergies to medications, latex, or anesthesia drugs?",
+      "answer": "No"
+    },
+    {
+      "question_id": "q9",
+      "question": "Do you take any daily prescription medications?",
+      "answer": "Yes"
+    },
+    {
+      "question_id": "q9b",
+      "question": "Could you list them for me?",
+      "answer": "I take oxycodone and Wegovy"
+    },
+    {
+      "question_id": "q10",
+      "question": "Do you take blood thinners such as aspirin, warfarin, Eliquis, or Xarelto?",
+      "answer": "No"
+    },
+    {
+      "question_id": "q11",
+      "question": "Do you take any non-prescription medications, supplements, or herbal remedies — including things like fish oil, vitamins, or over-the-counter painkillers?",
+      "answer": "No"
+    },
+    {
+      "question_id": "q12",
+      "question": "Do you have any heart conditions, chest pain, or a history of heart surgery or stents?",
+      "answer": "No"
+    },
+    {
+      "question_id": "q13",
+      "question": "Do you have asthma, COPD, or any other breathing problems?",
+      "answer": "No"
+    },
+    {
+      "question_id": "q14",
+      "question": "Do you get short of breath when walking on flat ground or climbing stairs?",
+      "answer": "yes"
+    },
+    {
+      "question_id": "q15",
+      "question": "Do you experience acid reflux or heartburn, or take any medication for it?",
+      "answer": "No"
+    },
+    {
+      "question_id": "q16",
+      "question": "Have you had any recent infections, fever, or major health changes in the last few weeks?",
+      "answer": "No"
+    },
+    {
+      "question_id": "q17",
+      "question": "Do you smoke or use any nicotine products?",
+      "answer": "No, I do not smoke"
+    },
+    {
+      "question_id": "q18",
+      "question": "How much alcohol do you consume on a weekly basis?",
+      "answer": "I drink occasionally, mostly socially"
+    },
+    {
+      "question_id": "q19",
+      "question": "Do you use any recreational or illicit drugs?",
+      "answer": "No"
+    },
+    {
+      "question_id": "q20",
+      "question": "Are you feeling anxious or worried about the anesthesia or the operation?",
+      "answer": "Yes"
+    },
+    {
+      "question_id": "q21",
+      "question": "Is there anything else about your health or previous surgeries that you think the anesthesiologist should know?",
+      "answer": "I have kidney stones with a ureter stone, I take oxycodone, and I have lost weight recently, 12kg on Wegovy"
+    },
+    {
+      "question_id": "q22",
+      "question": "Do you have any additional questions or concerns that you would like to discuss?",
+      "answer": "No additional questions right now"
+    }
+  ],
+  "raw_transcript": [
+    {
+      "role": "assistant",
+      "content": "Hi! I'm here to conduct your pre-surgery consultation. We'll go through some questions about your medical history and current health — it should only take a few minutes. Feel free to ask me anything along the way. Just let me know when you're ready to begin.",
+      "timestamp": 1779043276
+    },
+    {
+      "role": "patient",
+      "content": "Ready",
+      "timestamp": 1779043280
+    },
+    {
+      "role": "assistant",
+      "content": "What is your name?",
+      "timestamp": 1779043284
+    },
+    {
+      "role": "patient",
+      "content": "My name is Rasmus",
+      "timestamp": 1779043286
+    },
+    {
+      "role": "assistant",
+      "content": "Nice to meet you, Rasmus. Everything you share will be passed on to the medical team right away.\n\nHow old are you?",
+      "timestamp": 1779043299
+    },
+    {
+      "role": "patient",
+      "content": "I am 33 years old",
+      "timestamp": 1779043301
+    },
+    {
+      "role": "assistant",
+      "content": "How tall are you in centimeters?",
+      "timestamp": 1779043305
+    },
+    {
+      "role": "patient",
+      "content": "185 cm",
+      "timestamp": 1779043307
+    },
+    {
+      "role": "assistant",
+      "content": "How much do you weigh in kilograms?",
+      "timestamp": 1779043311
+    },
+    {
+      "role": "patient",
+      "content": "149 kg",
+      "timestamp": 1779043313
+    },
+    {
+      "role": "assistant",
+      "content": "What is your biological gender?",
+      "timestamp": 1779043317
+    },
+    {
+      "role": "patient",
+      "content": "Male",
+      "timestamp": 1779043319
+    },
+    {
+      "role": "assistant",
+      "content": "Have you ever had anesthesia before?",
+      "timestamp": 1779043323
+    },
+    {
+      "role": "patient",
+      "content": "Yes",
+      "timestamp": 1779043325
+    },
+    {
+      "role": "assistant",
+      "content": "Did you experience any problems with it?",
+      "timestamp": 1779043329
+    },
+    {
+      "role": "patient",
+      "content": "I have had nausea and vomiting after anesthesia before",
+      "timestamp": 1779043331
+    },
+    {
+      "role": "assistant",
+      "content": "Has anyone in your family ever had an adverse reaction to anesthesia?",
+      "timestamp": 1779043335
+    },
+    {
+      "role": "patient",
+      "content": "No",
+      "timestamp": 1779043337
+    },
+    {
+      "role": "assistant",
+      "content": "Has a doctor ever told you that you were difficult to intubate or that you have a difficult airway?",
+      "timestamp": 1779043341
+    },
+    {
+      "role": "patient",
+      "content": "No",
+      "timestamp": 1779043343
+    },
+    {
+      "role": "assistant",
+      "content": "Do you have sleep apnea or use a CPAP machine at night?",
+      "timestamp": 1779043347
+    },
+    {
+      "role": "patient",
+      "content": "No",
+      "timestamp": 1779043349
+    },
+    {
+      "role": "assistant",
+      "content": "Do you have any loose teeth, dentures, or dental implants?",
+      "timestamp": 1779043353
+    },
+    {
+      "role": "patient",
+      "content": "No",
+      "timestamp": 1779043355
+    },
+    {
+      "role": "assistant",
+      "content": "Do you have any allergies to medications, latex, or anesthesia drugs?",
+      "timestamp": 1779043359
+    },
+    {
+      "role": "patient",
+      "content": "No",
+      "timestamp": 1779043361
+    },
+    {
+      "role": "assistant",
+      "content": "Do you take any daily prescription medications?",
+      "timestamp": 1779043365
+    },
+    {
+      "role": "patient",
+      "content": "Yes",
+      "timestamp": 1779043367
+    },
+    {
+      "role": "assistant",
+      "content": "Could you list them for me?",
+      "timestamp": 1779043370
+    },
+    {
+      "role": "patient",
+      "content": "I take oxycodone and Wegovy",
+      "timestamp": 1779043372
+    },
+    {
+      "role": "assistant",
+      "content": "Do you take blood thinners such as aspirin, warfarin, Eliquis, or Xarelto?",
+      "timestamp": 1779043377
+    },
+    {
+      "role": "patient",
+      "content": "No",
+      "timestamp": 1779043379
+    },
+    {
+      "role": "assistant",
+      "content": "Do you take any non-prescription medications, supplements, or herbal remedies — including things like fish oil, vitamins, or over-the-counter painkillers?",
+      "timestamp": 1779043383
+    },
+    {
+      "role": "patient",
+      "content": "No",
+      "timestamp": 1779043385
+    },
+    {
+      "role": "assistant",
+      "content": "Do you have any heart conditions, chest pain, or a history of heart surgery or stents?",
+      "timestamp": 1779043389
+    },
+    {
+      "role": "patient",
+      "content": "No",
+      "timestamp": 1779043391
+    },
+    {
+      "role": "assistant",
+      "content": "Do you have asthma, COPD, or any other breathing problems?",
+      "timestamp": 1779043394
+    },
+    {
+      "role": "patient",
+      "content": "No",
+      "timestamp": 1779043396
+    },
+    {
+      "role": "assistant",
+      "content": "Do you get short of breath when walking on flat ground or climbing stairs?",
+      "timestamp": 1779043401
+    },
+    {
+      "role": "patient",
+      "content": "I can get short of breath with stairs, mostly because of my weight",
+      "timestamp": 1779043403
+    },
+    {
+      "role": "assistant",
+      "content": "I understand, Rasmus – we'll keep that in mind as we prepare for your procedure.\n\nDo you experience acid reflux or heartburn, or take any medication for it?",
+      "timestamp": 1779043420
+    },
+    {
+      "role": "patient",
+      "content": "No",
+      "timestamp": 1779043422
+    },
+    {
+      "role": "assistant",
+      "content": "Have you had any recent infections, fever, or major health changes in the last few weeks?",
+      "timestamp": 1779043426
+    },
+    {
+      "role": "patient",
+      "content": "No",
+      "timestamp": 1779043428
+    },
+    {
+      "role": "assistant",
+      "content": "Do you smoke or use any nicotine products?",
+      "timestamp": 1779043432
+    },
+    {
+      "role": "patient",
+      "content": "No, I do not smoke",
+      "timestamp": 1779043434
+    },
+    {
+      "role": "assistant",
+      "content": "How much alcohol do you consume on a weekly basis?",
+      "timestamp": 1779043438
+    },
+    {
+      "role": "patient",
+      "content": "I drink occasionally, mostly socially",
+      "timestamp": 1779043440
+    },
+    {
+      "role": "assistant",
+      "content": "Do you use any recreational or illicit drugs?",
+      "timestamp": 1779043444
+    },
+    {
+      "role": "patient",
+      "content": "No",
+      "timestamp": 1779043446
+    },
+    {
+      "role": "assistant",
+      "content": "Are you feeling anxious or worried about the anesthesia or the operation?",
+      "timestamp": 1779043450
+    },
+    {
+      "role": "patient",
+      "content": "Yes, mostly because I have vomited after anesthesia before",
+      "timestamp": 1779043452
+    },
+    {
+      "role": "assistant",
+      "content": "I understand your concern, Rasmus—your medical team is fully aware and will take all necessary steps to ensure your comfort and safety during the procedure.\n\nIs there anything else about your health or previous surgeries that you think the anesthesiologist should know?",
+      "timestamp": 1779043466
+    },
+    {
+      "role": "patient",
+      "content": "I have kidney stones with a ureter stone, I take oxycodone, and I have lost weight recently, 12kg on Wegovy",
+      "timestamp": 1779043468
+    },
+    {
+      "role": "assistant",
+      "content": "Do you have any additional questions or concerns that you would like to discuss?",
+      "timestamp": 1779043474
+    },
+    {
+      "role": "patient",
+      "content": "No additional questions right now",
+      "timestamp": 1779043476
+    },
+    {
+      "role": "assistant",
+      "content": "You're all set, Rasmus—thank you for being here. Your team will be with you shortly; take care and feel free to reach out if you need anything.",
+      "timestamp": 1779043488
+    }
+  ],
+  "ml_asa_prediction": {
+    "asa_class": "ASA-III",
+    "asa_numeric": 3,
+    "probabilities": {
+      "ASA-I": 0.0717,
+      "ASA-II": 0.0699,
+      "ASA-III": 0.8584
+    },
+    "confidence": 0.8584,
+    "features_used": {
+      "Age": 33.0,
+      "Height_cm": 185.0,
+      "Weight_kg": 149.0,
+      "BMI": 43.5354273192111,
+      "AlcoholConsumption_X": null,
+      "NumberOfAllergies": 0.0,
+      "NumberOfDiagnoses": 0.0,
+      "Sex": "Mand",
+      "SmokingStatus_Simplified": "Never smoker",
+      "NeuroPsyk_flag": 0.0,
+      "Respiratorisk_flag": 0.0,
+      "Kardiovaskulært_flag": 0.0,
+      "GI/Lever/Nyre_flag": 1.0,
+      "Endo/Andet_flag": 0.0,
+      "Bevægeapparat_flag": 0.0
+    }
+  },
+  "hybrid_asa_assessment": {
+    "asa_class": "ASA-III",
+    "reasoning": "The patient has significant obesity (149 kg) and a history of post-anesthesia nausea/vomiting, which indicates severe systemic disease. His weight also contributes to respiratory compromise and increased surgical risk."
+  }
+}

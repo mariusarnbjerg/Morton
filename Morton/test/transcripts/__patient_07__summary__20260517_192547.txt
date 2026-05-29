@@ -1,0 +1,26 @@
+PERSONA SUMMARY — PATIENT_07
+Date: 2026-05-17 19:25
+Runs: 1
+
+  ────────────────────────────────────────────────────────
+  PATIENT_07 (Jonas)
+  ────────────────────────────────────────────────────────
+  Completed:              1/1
+  Avg turns:              27.0  (min 27, max 27)
+  Avg first-attempt rate: 100.0%
+  Avg acknowledgment rate:0.0%
+  Avg follow-ups triggered:1.0/7
+  Avg duration:           4m 11s  (total 4m 11s)
+
+  Run    Turns    1st-att            Ack     F-ups   Re-asked               Time     Result
+  ───    ─────    ───────            ───     ─────   ────────               ────     ──────
+  1      27       27/27 (100.0%)     0%      1/7     —                      4m11s    PASS
+
+  Follow-up triggers (across 1 runs):
+    q11b: never triggered
+    q17b: never triggered
+    q19b: never triggered
+    q3b: 1/1 runs (100%)
+    q4b: never triggered
+    q8b: never triggered
+    q9b: never triggered

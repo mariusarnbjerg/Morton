@@ -1,6 +1,7 @@
 """
 API routes for conversation management.
 """
+import time
 from fastapi import APIRouter, HTTPException
 
 from app.api.models import (
@@ -91,7 +92,6 @@ async def get_conversation_state(conversation_id: str):
         current_question_id=current_qid,
     )
 
-
 # ============================================================================
 # Get final summary (after questionnaire complete)
 # ============================================================================
@@ -108,8 +108,9 @@ async def get_summary(conversation_id: str):
     try:
         return orch.finalize(conv)
     except Exception as e:
+        import traceback
+        traceback.print_exc()
         raise HTTPException(status_code=500, detail=f"Failed to generate summary: {e}")
-
 
 # ============================================================================
 # Delete conversation
@@ -140,3 +141,77 @@ async def list_conversations():
             for cid, conv in active_conversations.items()
         ],
     }
+
+# ============================================================================
+# Save the consultation
+# ============================================================================
+
+@router.post("/consultations/save")
+async def save_consultation(summary: dict):
+    import json
+    from pathlib import Path
+
+    save_dir = Path("data/saved_consultations")
+    save_dir.mkdir(parents=True, exist_ok=True)
+
+    patient_name = summary.get("patient", {}).get("name", "unknown").replace(" ", "_")
+    conversation_id = summary.get("conversation_id", f"unknown_{int(time.time())}")
+    filename = f"{patient_name}_{conversation_id}.json"
+    filepath = save_dir / filename
+
+    if filepath.exists():
+        return {"message": "Already saved", "filename": filename}
+
+    with open(filepath, "w", encoding="utf-8") as f:
+        json.dump(summary, f, indent=2, ensure_ascii=False)
+
+    return {"message": "Consultation saved", "filename": filename}
+
+# ============================================================================
+# List the saved consultations
+# ============================================================================
+
+@router.get("/consultations")
+async def list_consultations():
+    """List all saved consultations with basic info for the search view."""
+    import json
+    from pathlib import Path
+
+    save_dir = Path("data/saved_consultations")
+    if not save_dir.exists():
+        return {"consultations": []}
+
+    consultations = []
+    for filepath in save_dir.glob("*.json"):
+        try:
+            with open(filepath, "r", encoding="utf-8") as f:
+                data = json.load(f)
+            consultations.append({
+                "filename": filepath.name,
+                "patient_name": data.get("patient", {}).get("name", "Unknown"),
+                "patient_age": data.get("patient", {}).get("age"),
+                "conversation_id": data.get("conversation_id"),
+                "asa_classification": data.get("llm_asa_classification", "not_assessed"),
+                "ml_asa_class": data.get("ml_asa_prediction", {}).get("asa_class") if data.get("ml_asa_prediction") else None,
+            })
+        except Exception:
+            continue
+
+    return {"consultations": consultations}
+
+# ============================================================================
+# Load a consultation
+# ============================================================================
+
+@router.get("/consultations/{filename}")
+async def load_consultation(filename: str):
+    """Load a single saved consultation."""
+    import json
+    from pathlib import Path
+
+    filepath = Path("data/saved_consultations") / filename
+    if not filepath.exists():
+        raise HTTPException(status_code=404, detail="Consultation not found")
+
+    with open(filepath, "r", encoding="utf-8") as f:
+        return json.load(f)

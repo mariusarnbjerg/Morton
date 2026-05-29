@@ -1,0 +1,52 @@
+{
+  "model_name": "LightGBM",
+  "class_names": [
+    "ASA 1",
+    "ASA 2",
+    "ASA 3"
+  ],
+  "features": [
+    "Age",
+    "BMI",
+    "AlcoholConsumption_X",
+    "NumberOfAllergies",
+    "NumberOfDiagnoses",
+    "Sex",
+    "SmokingStatus_Simplified",
+    "NeuroPsyk_flag",
+    "Respiratorisk_flag",
+    "Kardiovaskulært_flag",
+    "GI/Lever/Nyre_flag",
+    "Endo/Andet_flag",
+    "Bevægeapparat_flag",
+    "AlcoholConsumption_Missing"
+  ],
+  "feature_groups": {
+    "numerical": [
+      "Age",
+      "BMI",
+      "AlcoholConsumption_X",
+      "NumberOfAllergies",
+      "NumberOfDiagnoses"
+    ],
+    "categorical": [
+      "Sex",
+      "SmokingStatus_Simplified"
+    ],
+    "binary": [
+      "NeuroPsyk_flag",
+      "Respiratorisk_flag",
+      "Kardiovaskulært_flag",
+      "GI/Lever/Nyre_flag",
+      "Endo/Andet_flag",
+      "Bevægeapparat_flag",
+      "AlcoholConsumption_Missing"
+    ]
+  },
+  "notes": "Model trained on structured features only (no TF-IDF). Features are aligned with what can be extracted from a patient chatbot transcript via LLM, ensuring no domain gap between training and inference.",
+  "test_accuracy": 0.6245,
+  "test_f1_macro": 0.6278,
+  "test_roc_auc": 0.8384,
+  "patient_row_mode": "patient_asa_unique",
+  "timestamp": "20260526_002230"
+}

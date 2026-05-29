@@ -199,8 +199,8 @@
     },
     "asa_classification": {
       "type": "string",
-      "enum": ["ASA-I", "ASA-II", "ASA-III", "ASA-IV", "ASA-V", "not_assessed"],
-      "description": "ASA Physical Status: ASA-I=A normal healthy patient (e.g., healthy, non-smoker, no/minimal alcohol consumption), ASA-II=A patient with mild systemic disease (e.g., current smoker, social drinker, pregnancy, obesity), ASA-III=A patient with severe systemic disease (e.g., poorly controlled DM/HTN, morbid obesity, chronic renal failure), ASA-IV=A patient with severe systemic disease that is a constant threat to life (e.g., recent <3 months MI, CVA, TIA, or stent), ASA-V=A moribund patient who is not expected to survive without the operation (e.g., ruptured aneurysm, massive trauma), not_assessed=insufficient information"
+      "enum": ["ASA-I", "ASA-II", "ASA-III", "ASA-IV", "ASA-V", "ASA-VI"],
+      "description": "ASA physical status assessment based on the full conversation. ASA-I= healthy patient, ASA-II= mild systemic disease, ASA-III= severe systemic disease, ASA-IV= severe systemic disease, ASA-V= moribund patient, ASA-VI= braindead organ donor"
     },
     "notes": {
       "type": "string",

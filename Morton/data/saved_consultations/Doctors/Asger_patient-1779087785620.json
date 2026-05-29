@@ -1,0 +1,558 @@
+{
+  "patient": {
+    "name": "Asger",
+    "age": 58
+  },
+  "anesthesia_history": {
+    "prior_anesthesia": "yes",
+    "prior_anesthesia_issues": "no",
+    "family_reaction": "no",
+    "family_reaction_type": "none"
+  },
+  "airway": {
+    "difficult_airway": "no",
+    "sleep_apnea": "no",
+    "dental": "no"
+  },
+  "allergies_and_medications": {
+    "allergies": "no",
+    "prescription_medications": "no",
+    "blood_thinners": "no",
+    "supplements": "paracetamol"
+  },
+  "cardiopulmonary": {
+    "cardiac_history": "no",
+    "respiratory_history": "no",
+    "exertional_dyspnea": "yes"
+  },
+  "gi_and_recent_health": {
+    "acid_reflux": "no",
+    "recent_health_changes": "no"
+  },
+  "lifestyle": {
+    "smoking_status": "never",
+    "smoking_details": "no",
+    "alcohol": "two beers weekly",
+    "recreational_drugs": "no"
+  },
+  "psychological": {
+    "anxiety_level": "some",
+    "additional_history": "no",
+    "additional_questions": "no"
+  },
+  "red_flags": [
+    {
+      "category": "respiratory_risk",
+      "severity": "low",
+      "details": "exertional dyspnea"
+    }
+  ],
+  "asa_classification": "ASA-III",
+  "notes": "Patient uses two pillows for comfort. Paracetamol is used occasionally. Exertional dyspnea noted. No significant medical history. Anesthesia history includes childhood and dental procedures with no complications. No allergies. No recent health changes. Low-risk for respiratory issues.",
+  "conversation_id": "patient-1779087785620",
+  "questionnaire_answers": [
+    {
+      "question_id": "q0",
+      "question": "Hi! I'm here to conduct your pre-surgery consultation. We'll go through some questions about your medical history and current health — it should only take a few minutes. Feel free to ask me anything along the way. Just let me know when you're ready to begin.",
+      "answer": "ready"
+    },
+    {
+      "question_id": "q1",
+      "question": "What is your name?",
+      "answer": "asger"
+    },
+    {
+      "question_id": "q2",
+      "question": "How old are you?",
+      "answer": "58"
+    },
+    {
+      "question_id": "q2.1",
+      "question": "How tall are you in centimeters?",
+      "answer": "180"
+    },
+    {
+      "question_id": "q2.2",
+      "question": "How much do you weigh in kilograms?",
+      "answer": "80"
+    },
+    {
+      "question_id": "q2.3",
+      "question": "What is your biological gender?",
+      "answer": "male"
+    },
+    {
+      "question_id": "q3",
+      "question": "Have you ever had anesthesia before?",
+      "answer": "yes"
+    },
+    {
+      "question_id": "q3b",
+      "question": "Did you experience any problems with it?",
+      "answer": "No"
+    },
+    {
+      "question_id": "q4",
+      "question": "Has anyone in your family ever had an adverse reaction to anesthesia?",
+      "answer": "Not to my knowledge"
+    },
+    {
+      "question_id": "q5",
+      "question": "Has a doctor ever told you that you were difficult to intubate or that you have a difficult airway?",
+      "answer": "no"
+    },
+    {
+      "question_id": "q6",
+      "question": "Do you have sleep apnea or use a CPAP machine at night?",
+      "answer": "No"
+    },
+    {
+      "question_id": "q7",
+      "question": "Do you have any loose teeth, dentures, or dental implants?",
+      "answer": "No"
+    },
+    {
+      "question_id": "q8",
+      "question": "Do you have any allergies to medications, latex, or anesthesia drugs?",
+      "answer": "no"
+    },
+    {
+      "question_id": "q9",
+      "question": "Do you take any daily prescription medications?",
+      "answer": "No"
+    },
+    {
+      "question_id": "q9b",
+      "question": "Could you list them for me?",
+      "answer": "paracetamol"
+    },
+    {
+      "question_id": "q10",
+      "question": "Do you take blood thinners such as aspirin, warfarin, Eliquis, or Xarelto?",
+      "answer": "no"
+    },
+    {
+      "question_id": "q11",
+      "question": "Do you take any non-prescription medications, supplements, or herbal remedies — including things like fish oil, vitamins, or over-the-counter painkillers?",
+      "answer": "paracetamol"
+    },
+    {
+      "question_id": "q11b",
+      "question": "Could you list what you're taking?",
+      "answer": "paracetamol"
+    },
+    {
+      "question_id": "q12",
+      "question": "Do you have any heart conditions, chest pain, or a history of heart surgery or stents?",
+      "answer": "no"
+    },
+    {
+      "question_id": "q13",
+      "question": "Do you have asthma, COPD, or any other breathing problems?",
+      "answer": "no"
+    },
+    {
+      "question_id": "q14",
+      "question": "Do you get short of breath when walking on flat ground or climbing stairs?",
+      "answer": "yes"
+    },
+    {
+      "question_id": "q15",
+      "question": "Do you experience acid reflux or heartburn, or take any medication for it?",
+      "answer": "no"
+    },
+    {
+      "question_id": "q16",
+      "question": "Have you had any recent infections, fever, or major health changes in the last few weeks?",
+      "answer": "no"
+    },
+    {
+      "question_id": "q17",
+      "question": "Do you smoke or use any nicotine products?",
+      "answer": "no"
+    },
+    {
+      "question_id": "q18",
+      "question": "How much alcohol do you consume on a weekly basis?",
+      "answer": "two beers a week"
+    },
+    {
+      "question_id": "q19",
+      "question": "Do you use any recreational or illicit drugs?",
+      "answer": "no"
+    },
+    {
+      "question_id": "q20",
+      "question": "Are you feeling anxious or worried about the anesthesia or the operation?",
+      "answer": "yes a little bit"
+    },
+    {
+      "question_id": "q21",
+      "question": "Is there anything else about your health or previous surgeries that you think the anesthesiologist should know?",
+      "answer": "no"
+    },
+    {
+      "question_id": "q22",
+      "question": "Do you have any additional questions or concerns that you would like to discuss?",
+      "answer": "no"
+    }
+  ],
+  "raw_transcript": [
+    {
+      "role": "assistant",
+      "content": "Hi! I'm here to conduct your pre-surgery consultation. We'll go through some questions about your medical history and current health — it should only take a few minutes. Feel free to ask me anything along the way. Just let me know when you're ready to begin.",
+      "timestamp": 1779087813
+    },
+    {
+      "role": "patient",
+      "content": "ready",
+      "timestamp": 1779087873
+    },
+    {
+      "role": "assistant",
+      "content": "What is your name?",
+      "timestamp": 1779087885
+    },
+    {
+      "role": "patient",
+      "content": "asger",
+      "timestamp": 1779087891
+    },
+    {
+      "role": "assistant",
+      "content": "How old are you?",
+      "timestamp": 1779087895
+    },
+    {
+      "role": "patient",
+      "content": "58",
+      "timestamp": 1779087900
+    },
+    {
+      "role": "assistant",
+      "content": "How tall are you in centimeters?",
+      "timestamp": 1779087904
+    },
+    {
+      "role": "patient",
+      "content": "180",
+      "timestamp": 1779087916
+    },
+    {
+      "role": "assistant",
+      "content": "How much do you weigh in kilograms?",
+      "timestamp": 1779087920
+    },
+    {
+      "role": "patient",
+      "content": "80",
+      "timestamp": 1779087928
+    },
+    {
+      "role": "assistant",
+      "content": "What is your biological gender?",
+      "timestamp": 1779087932
+    },
+    {
+      "role": "patient",
+      "content": "male",
+      "timestamp": 1779087938
+    },
+    {
+      "role": "assistant",
+      "content": "Have you ever had anesthesia before?",
+      "timestamp": 1779087942
+    },
+    {
+      "role": "patient",
+      "content": "yes, I think I had surgery when I was 3 years old. But not since. And then I had some anesthesia at the dentist",
+      "timestamp": 1779088017
+    },
+    {
+      "role": "assistant",
+      "content": "Thank you for sharing that, Asger. Your medical team will review your history to ensure your care is safe and personalized.\n\nDid you experience any problems with it?",
+      "timestamp": 1779088051
+    },
+    {
+      "role": "patient",
+      "content": "With anesthesia?",
+      "timestamp": 1779088066
+    },
+    {
+      "role": "assistant",
+      "content": "Your medical team can provide detailed information about your anesthesia experience.\n\nDid you experience any problems with it?",
+      "timestamp": 1779088082
+    },
+    {
+      "role": "patient",
+      "content": "No",
+      "timestamp": 1779088101
+    },
+    {
+      "role": "assistant",
+      "content": "Has anyone in your family ever had an adverse reaction to anesthesia?",
+      "timestamp": 1779088106
+    },
+    {
+      "role": "patient",
+      "content": "Not to my knowledge",
+      "timestamp": 1779088120
+    },
+    {
+      "role": "assistant",
+      "content": "Has a doctor ever told you that you were difficult to intubate or that you have a difficult airway?",
+      "timestamp": 1779088125
+    },
+    {
+      "role": "patient",
+      "content": "no",
+      "timestamp": 1779088131
+    },
+    {
+      "role": "assistant",
+      "content": "Do you have sleep apnea or use a CPAP machine at night?",
+      "timestamp": 1779088135
+    },
+    {
+      "role": "patient",
+      "content": "No, but I always use two pillows at night",
+      "timestamp": 1779088176
+    },
+    {
+      "role": "assistant",
+      "content": "I noted that you use two pillows each night—comfort is important, and I’ll make sure your team knows your preferences.\n\nDo you have any loose teeth, dentures, or dental implants?",
+      "timestamp": 1779088194
+    },
+    {
+      "role": "patient",
+      "content": "No",
+      "timestamp": 1779088221
+    },
+    {
+      "role": "assistant",
+      "content": "Do you have any allergies to medications, latex, or anesthesia drugs?",
+      "timestamp": 1779088226
+    },
+    {
+      "role": "patient",
+      "content": "no",
+      "timestamp": 1779088230
+    },
+    {
+      "role": "assistant",
+      "content": "Do you take any daily prescription medications?",
+      "timestamp": 1779088234
+    },
+    {
+      "role": "patient",
+      "content": "No, I use paracetamol sometimes. But that it is",
+      "timestamp": 1779088260
+    },
+    {
+      "role": "assistant",
+      "content": "Thank you for sharing that, Asger—your medical team will note your paracetamol use and ensure everything is accounted for.\n\nCould you list them for me?",
+      "timestamp": 1779088283
+    },
+    {
+      "role": "patient",
+      "content": "that is it",
+      "timestamp": 1779088309
+    },
+    {
+      "role": "assistant",
+      "content": "Your information is noted, Asger — everything you’ve shared will be passed on to the medical team.\n\nCould you list them for me?",
+      "timestamp": 1779088325
+    },
+    {
+      "role": "patient",
+      "content": "paracetamol",
+      "timestamp": 1779088336
+    },
+    {
+      "role": "assistant",
+      "content": "Do you take blood thinners such as aspirin, warfarin, Eliquis, or Xarelto?",
+      "timestamp": 1779088340
+    },
+    {
+      "role": "patient",
+      "content": "no",
+      "timestamp": 1779088345
+    },
+    {
+      "role": "assistant",
+      "content": "Do you take any non-prescription medications, supplements, or herbal remedies — including things like fish oil, vitamins, or over-the-counter painkillers?",
+      "timestamp": 1779088349
+    },
+    {
+      "role": "patient",
+      "content": "paracetamol",
+      "timestamp": 1779088363
+    },
+    {
+      "role": "assistant",
+      "content": "Could you list what you're taking?",
+      "timestamp": 1779088368
+    },
+    {
+      "role": "patient",
+      "content": "paracetamol",
+      "timestamp": 1779088376
+    },
+    {
+      "role": "assistant",
+      "content": "Do you have any heart conditions, chest pain, or a history of heart surgery or stents?",
+      "timestamp": 1779088381
+    },
+    {
+      "role": "patient",
+      "content": "no",
+      "timestamp": 1779088388
+    },
+    {
+      "role": "assistant",
+      "content": "Do you have asthma, COPD, or any other breathing problems?",
+      "timestamp": 1779088393
+    },
+    {
+      "role": "patient",
+      "content": "no",
+      "timestamp": 1779088399
+    },
+    {
+      "role": "assistant",
+      "content": "Do you get short of breath when walking on flat ground or climbing stairs?",
+      "timestamp": 1779088403
+    },
+    {
+      "role": "patient",
+      "content": "yes, sometimes when I walk up to 2nd floor",
+      "timestamp": 1779088437
+    },
+    {
+      "role": "assistant",
+      "content": "I’m sorry to hear that, Asger — it’s important to share these details so our team can prepare appropriately. Everything you tell me is passed on to them right away.\n\nDo you experience acid reflux or heartburn, or take any medication for it?",
+      "timestamp": 1779088455
+    },
+    {
+      "role": "patient",
+      "content": "no",
+      "timestamp": 1779088463
+    },
+    {
+      "role": "assistant",
+      "content": "Have you had any recent infections, fever, or major health changes in the last few weeks?",
+      "timestamp": 1779088468
+    },
+    {
+      "role": "patient",
+      "content": "no",
+      "timestamp": 1779088473
+    },
+    {
+      "role": "assistant",
+      "content": "Do you smoke or use any nicotine products?",
+      "timestamp": 1779088477
+    },
+    {
+      "role": "patient",
+      "content": "no",
+      "timestamp": 1779088485
+    },
+    {
+      "role": "assistant",
+      "content": "How much alcohol do you consume on a weekly basis?",
+      "timestamp": 1779088489
+    },
+    {
+      "role": "patient",
+      "content": "two beers a week",
+      "timestamp": 1779088501
+    },
+    {
+      "role": "assistant",
+      "content": "Do you use any recreational or illicit drugs?",
+      "timestamp": 1779088506
+    },
+    {
+      "role": "patient",
+      "content": "no",
+      "timestamp": 1779088511
+    },
+    {
+      "role": "assistant",
+      "content": "Are you feeling anxious or worried about the anesthesia or the operation?",
+      "timestamp": 1779088515
+    },
+    {
+      "role": "patient",
+      "content": "yes a little bit",
+      "timestamp": 1779088527
+    },
+    {
+      "role": "assistant",
+      "content": "Is there anything else about your health or previous surgeries that you think the anesthesiologist should know?",
+      "timestamp": 1779088532
+    },
+    {
+      "role": "patient",
+      "content": "no",
+      "timestamp": 1779088539
+    },
+    {
+      "role": "assistant",
+      "content": "Do you have any additional questions or concerns that you would like to discuss?",
+      "timestamp": 1779088543
+    },
+    {
+      "role": "patient",
+      "content": "how long will the operation take?",
+      "timestamp": 1779088562
+    },
+    {
+      "role": "assistant",
+      "content": "The operation duration depends on the specific procedure, but your medical team will provide precise timing details before the surgery.\n\nDo you have any additional questions or concerns that you would like to discuss?",
+      "timestamp": 1779088575
+    },
+    {
+      "role": "patient",
+      "content": "no",
+      "timestamp": 1779088584
+    },
+    {
+      "role": "assistant",
+      "content": "Thank you, Asger, for your time and honesty—your concerns are important, and the team will review everything carefully. Wishing you a smooth process and a swift recovery. Take care!",
+      "timestamp": 1779088603
+    }
+  ],
+  "ml_asa_prediction": {
+    "asa_class": "ASA-I",
+    "asa_numeric": 1,
+    "probabilities": {
+      "ASA-I": 0.9114,
+      "ASA-II": 0.084,
+      "ASA-III": 0.0046
+    },
+    "confidence": 0.9114,
+    "features_used": {
+      "Age": 58,
+      "Height_cm": 180,
+      "Weight_kg": 80,
+      "BMI": 24.691358024691358,
+      "AlcoholConsumption_X": 2,
+      "NumberOfAllergies": 0,
+      "NumberOfDiagnoses": 0,
+      "Sex": "Mand",
+      "SmokingStatus_Simplified": "Unknown",
+      "NeuroPsyk_flag": 0,
+      "Respiratorisk_flag": 0,
+      "Kardiovaskulært_flag": 0,
+      "GI/Lever/Nyre_flag": 0,
+      "Endo/Andet_flag": 0,
+      "Bevægeapparat_flag": 0
+    }
+  },
+  "hybrid_asa_assessment": {
+    "asa_class": "ASA-I",
+    "reasoning": "The patient has no significant medical history, no chronic conditions, no allergies, and only uses paracetamol. He reports mild shortness of breath with stair climbing, but no major systemic disease. The ML prediction of ASA-I is appropriate."
+  }
+}

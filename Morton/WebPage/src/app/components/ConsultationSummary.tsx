@@ -90,6 +90,7 @@ interface TranscriptMessage {
 }
 
 export interface SummaryData {
+  conversation_id?: string;
   // LLM-generated structured interpretation
   patient: PatientInfo;
   anesthesia_history: AnesthesiaHistory;
@@ -100,7 +101,18 @@ export interface SummaryData {
   lifestyle: Lifestyle;
   psychological: Psychological;
   red_flags: RedFlag[];
-  asa_classification: string;
+  llm_asa_classification: string;
+  ml_asa_prediction?: {
+    asa_class: string;
+    asa_numeric: number;
+    probabilities: Record<string, number>;
+    confidence: number;
+    features_used: Record<string, any>;
+  };
+  hybrid_asa_assessment?: {
+    asa_class: string;
+    reasoning: string;
+  };
   notes: string;
   // Deterministically populated by the orchestrator
   questionnaire_answers: QAItem[];
@@ -113,6 +125,7 @@ interface Props {
 }
 
 // ── Helpers ──────────────────────────────────────────────────────────────
+
 
 const ASA_LABELS: Record<string, { label: string; desc: string; color: string }> = {
   'ASA-I':        { label: 'ASA I',  desc: 'Healthy patient',                     color: 'bg-emerald-100 text-emerald-800 border-emerald-300' },
@@ -202,10 +215,11 @@ function Section({
 // ── Field row helper ─────────────────────────────────────────────────────
 
 function Field({ label, value }: { label: string; value: string | undefined }) {
+  const sentenceCase = (s: string) => s.charAt(0).toUpperCase() + s.slice(1)
   return (
     <div className="py-2 border-b border-slate-100 last:border-b-0">
       <p className="text-[11px] uppercase tracking-wide text-slate-400 mb-0.5">{label}</p>
-      <p className="text-sm text-slate-800 leading-snug">{value || '—'}</p>
+      <p className="text-sm text-slate-800 leading-snug">{value ? sentenceCase(value): '—'}</p>
     </div>
   );
 }
@@ -223,14 +237,19 @@ export function ConsultationSummary({ summary, onDismiss }: Props) {
     lifestyle,
     psychological,
     red_flags,
-    asa_classification,
+    llm_asa_classification,
+    ml_asa_prediction,
+    hybrid_asa_assessment,
     notes,
     questionnaire_answers,
     raw_transcript,
   } = summary;
 
-  const asa = ASA_LABELS[asa_classification] ?? ASA_LABELS['not_assessed'];
-
+  const asa = ASA_LABELS[llm_asa_classification] ?? ASA_LABELS['not_assessed'];
+  const [asaTab, setAsaTab] = useState<'llm' | 'ml' | 'hybrid'>('llm');
+  const mlAsa = ml_asa_prediction ? (ASA_LABELS[ml_asa_prediction.asa_class] ?? ASA_LABELS['not_assessed']) : null;
+  const hybridAsa = hybrid_asa_assessment ? (ASA_LABELS[hybrid_asa_assessment.asa_class] ?? ASA_LABELS['not_assessed']) : null;
+  const [saveStatus, setSaveStatus] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle');
   return (
     <div className="min-h-full bg-slate-50 py-8 px-4">
       <div className="max-w-4xl mx-auto space-y-4">
@@ -248,41 +267,109 @@ export function ConsultationSummary({ summary, onDismiss }: Props) {
             <p className="text-sm text-slate-500 mt-0.5">
               {patient.age ? `${patient.age} years` : ''}
             </p>
+            {summary.conversation_id && (
+              <p className="text-xs text-slate-400 font-mono mt-0.5">{summary.conversation_id}</p>
+            )}
           </div>
-          <Button variant="ghost" size="sm" onClick={onDismiss} className="text-slate-500 mt-1">
-            Dismiss
-          </Button>
+          <div className="flex items-center gap-2">
+              {saveStatus === 'saved' ? (
+                <span className="text-xs text-emerald-600">✓ Saved</span>
+              ) : saveStatus === 'error' ? (
+                <span className="text-xs text-red-500">Save failed</span>
+              ) : null}
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={async () => {
+                  setSaveStatus('saving');
+                  try {
+                    const res = await fetch('http://localhost:8000/api/v1/consultations/save', {
+                      method: 'POST',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify(summary),
+                    });
+                    setSaveStatus(res.ok ? 'saved' : 'error');
+                  } catch {
+                    setSaveStatus('error');
+                  }
+                }}
+                disabled={saveStatus === 'saving' || saveStatus === 'saved'}
+                className="text-slate-500"
+              >
+                {saveStatus === 'saving' ? 'Saving...' : saveStatus === 'saved' ? 'Saved' : 'Save'}
+              </Button>
+              <Button variant="ghost" size="sm" onClick={onDismiss} className="text-slate-500">
+                Dismiss
+              </Button>
+          </div>
         </div>
 
         {/* ── Quick-glance cards ──────────────────────────────────── */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-          <Card className="p-3 bg-white border-slate-200">
-            <p className="text-[11px] uppercase tracking-wide text-slate-400 mb-1">ASA</p>
-            <Badge className={`${asa.color} border text-xs`}>{asa.label}</Badge>
-            <p className="text-[11px] text-slate-500 mt-1">{asa.desc}</p>
+        <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
+          <Card className="p-3 bg-white border-slate-200 col-span-5">
+            <p className="text-[11px] uppercase tracking-wide text-slate-400 mb-1">Summary</p>
+            <p className="text-sm text-slate-800">{notes}</p>
           </Card>
 
-          <Card className="p-3 bg-white border-slate-200">
-            <p className="text-[11px] uppercase tracking-wide text-slate-400 mb-1">Allergies</p>
-            <p className="text-sm text-slate-800 leading-snug">
-              {allergies_and_medications.allergies || 'None'}
-            </p>
-          </Card>
+          <Card className="p-3 bg-white border-slate-200 col-span-5">
+              <p className="text-[11px] uppercase tracking-wide text-slate-400 mb-1">ASA Classification</p>
+              <div className="flex items-center gap-1 mb-2">
+                {(['llm', 'ml', 'hybrid'] as const).map((tab) => (
+                  <button
+                    key={tab}
+                    onClick={() => setAsaTab(tab)}
+                    className={`px-2 py-0.5 rounded text-[11px] uppercase tracking-wide transition-colors ${
+                      asaTab === tab
+                        ? 'bg-slate-800 text-white'
+                        : 'text-slate-400 hover:text-slate-600 hover:bg-slate-100'
+                    }`}
+                  >
+                    {tab === 'llm' ? 'LLM' : tab === 'ml' ? 'ML Model' : 'Hybrid'}
+                  </button>
+                ))}
+              </div>
 
-          <Card className="p-3 bg-white border-slate-200">
-            <p className="text-[11px] uppercase tracking-wide text-slate-400 mb-1">Smoking</p>
-            <div className="flex items-center gap-1.5">
-              <Cigarette className="size-3.5 text-slate-400" />
-              <p className="text-sm text-slate-800">
-                {SMOKING_LABELS[lifestyle.smoking_status] ?? lifestyle.smoking_status}
-              </p>
-            </div>
-          </Card>
+              {asaTab === 'llm' && (
+                <div>
+                  <Badge className={`${asa.color} border text-xs`}>{asa.label}</Badge>
+                  <p className="text-[11px] text-slate-500 mt-1">{asa.desc}</p>
+                </div>
+              )}
 
-          <Card className="p-3 bg-white border-slate-200">
-            <p className="text-[11px] uppercase tracking-wide text-slate-400 mb-1">Prior anaesthesia</p>
-            <p className="text-sm text-slate-800 capitalize">{anesthesia_history.prior_anesthesia}</p>
-          </Card>
+              {asaTab === 'ml' && mlAsa && ml_asa_prediction && (
+                <div>
+                  <div className="flex items-center gap-2">
+                    <Badge className={`${mlAsa.color} border text-xs`}>{mlAsa.label}</Badge>
+                    <span className="text-[11px] text-slate-400">
+                      {(ml_asa_prediction.confidence * 100).toFixed(0)}% confidence
+                    </span>
+                  </div>
+                  <div className="flex gap-2 mt-1.5">
+                    {Object.entries(ml_asa_prediction.probabilities).map(([cls, prob]) => (
+                      <span key={cls} className="text-[10px] text-slate-500">
+                        {cls}: {(prob * 100).toFixed(0)}%
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {asaTab === 'hybrid' && hybridAsa && hybrid_asa_assessment && (
+                <div>
+                  <Badge className={`${hybridAsa.color} border text-xs`}>{hybridAsa.label}</Badge>
+                  <p className="text-[11px] text-slate-500 mt-1.5 leading-relaxed">
+                    {hybrid_asa_assessment.reasoning}
+                  </p>
+                </div>
+              )}
+
+              {asaTab === 'ml' && !ml_asa_prediction && (
+                <p className="text-[11px] text-slate-400">ML prediction not available</p>
+              )}
+              {asaTab === 'hybrid' && !hybrid_asa_assessment && (
+                <p className="text-[11px] text-slate-400">Hybrid assessment not available</p>
+              )}
+            </Card>
         </div>
 
         {/* ── Red flags ──────────────────────────────────────────── */}
@@ -307,11 +394,11 @@ export function ConsultationSummary({ summary, onDismiss }: Props) {
                     <Badge className={`${SEVERITY_BADGE[flag.severity] ?? ''} text-[10px] uppercase px-1.5 py-0`}>
                       {flag.severity}
                     </Badge>
-                    <span className="text-xs font-medium">
+                    <span className="text-xs font-medium capitalize">
                       {CATEGORY_LABELS[flag.category] ?? flag.category}
                     </span>
                   </div>
-                  <p className="text-sm leading-relaxed">{flag.details || flag.description || ''}</p>
+                  <p className="text-sm leading-relaxed capitalize">{flag.details || flag.description || ''}</p>
                 </div>
               ))}
             </div>
@@ -319,7 +406,7 @@ export function ConsultationSummary({ summary, onDismiss }: Props) {
         )}
 
         {/* ── Clinical notes ─────────────────────────────────────── */}
-        {notes && (
+        {/*{notes && (
           <Section
             title="Clinical notes"
             icon={<FileText className="size-4" />}
@@ -327,7 +414,7 @@ export function ConsultationSummary({ summary, onDismiss }: Props) {
           >
             <p className="text-sm text-slate-700 leading-relaxed whitespace-pre-line">{notes}</p>
           </Section>
-        )}
+        )}*/}
 
         {/* ── Anesthesia history ─────────────────────────────────── */}
         <Section
@@ -407,6 +494,28 @@ export function ConsultationSummary({ summary, onDismiss }: Props) {
           <Field label="Additional history" value={psychological.additional_history} />
           <Field label="Additional questions" value={psychological.additional_questions} />
         </Section>
+
+        {/* ── ML Features ──────────────────────────────────────── */}
+        {ml_asa_prediction?.features_used && (
+          <Section
+            title="ML extracted features"
+            icon={<Activity className="size-4" />}
+            defaultOpen={false}
+            badge={
+              <span className="text-xs text-slate-400">
+                {Object.keys(ml_asa_prediction.features_used).length} features
+              </span>
+            }
+          >
+            {Object.entries(ml_asa_prediction.features_used).map(([key, value]) => (
+              <Field
+                key={key}
+                label={key}
+                value={value != null ? String(value) : '—'}
+              />
+            ))}
+          </Section>
+        )}
 
         {/* ── Full Q & A transcript (deterministic) ──────────────── */}
         <Section

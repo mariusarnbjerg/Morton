@@ -28,6 +28,8 @@ from app.interfaces.question_flow import IQuestionFlow
 from app.interfaces.transcript_store import ITranscriptStore
 from app.interfaces.summarizer import ISummarizer
 from app.interfaces.llm_client import ILLMClient
+from app.adapters.feature_extractor import FEATURE_SCHEMA, FEATURE_EXTRACTOR_SYSTEM_PROMPT, build_extraction_prompt
+from app.adapters.hybrid_asa_assessor import HYBRID_ASA_SCHEMA, HYBRID_ASA_SYSTEM_PROMPT, build_hybrid_prompt
 
 
 @dataclass
@@ -45,12 +47,14 @@ class ConversationOrchestrator:
         llm_client: ILLMClient,
         summarizer: Optional[ISummarizer] = None,
         summary_schema_path: Optional[str] = None,
+        asa_predictor=None,
     ):
         self.question_flow = question_flow
         self.store = transcript_store
         self.llm = llm_client
         self.summarizer = summarizer
         self.summary_schema_path = summary_schema_path
+        self.asa_predictor = asa_predictor
 
     # -----------------------------------------------------------------------
     # Public API
@@ -128,8 +132,32 @@ class ConversationOrchestrator:
             schema = json.load(f)
         transcript = self.store.get(conv.conversation_id)
         summary = self.summarizer.summarize(transcript=transcript, schema=schema)
+        summary["conversation_id"] = conv.conversation_id
         summary["questionnaire_answers"] = self._build_questionnaire_answers(conv)
         summary["raw_transcript"] = self._build_raw_transcript(transcript)
+
+        # Assessment 2: ML prediction
+        if self.asa_predictor:
+            extraction_prompt = build_extraction_prompt(transcript)
+            features = self.llm.structured_call(
+                FEATURE_EXTRACTOR_SYSTEM_PROMPT,
+                extraction_prompt,
+                FEATURE_SCHEMA
+            )
+            print(f"[DEBUG] Extracted features: {features}")
+
+            ml_prediction = self.asa_predictor.predict(features)
+            summary["ml_asa_prediction"] = ml_prediction
+
+            # Assessment 3: Hybrid LLM + ML
+            hybrid_prompt = build_hybrid_prompt(transcript, ml_prediction)
+            hybrid_assessment = self.llm.structured_call(
+                HYBRID_ASA_SYSTEM_PROMPT,
+                hybrid_prompt,
+                HYBRID_ASA_SCHEMA
+            )
+            summary["hybrid_asa_assessment"] = hybrid_assessment
+
         return summary
 
     # -----------------------------------------------------------------------

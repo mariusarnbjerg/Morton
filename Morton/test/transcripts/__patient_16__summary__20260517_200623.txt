@@ -1,0 +1,26 @@
+PERSONA SUMMARY — PATIENT_16
+Date: 2026-05-17 20:06
+Runs: 1
+
+  ────────────────────────────────────────────────────────
+  PATIENT_16 (Thomas)
+  ────────────────────────────────────────────────────────
+  Completed:              1/1
+  Avg turns:              26.0  (min 26, max 26)
+  Avg first-attempt rate: 100.0%
+  Avg acknowledgment rate:8.0%
+  Avg follow-ups triggered:0.0/7
+  Avg duration:           4m 55s  (total 4m 55s)
+
+  Run    Turns    1st-att            Ack     F-ups   Re-asked               Time     Result
+  ───    ─────    ───────            ───     ─────   ────────               ────     ──────
+  1      26       26/26 (100.0%)     8%      0/7     —                      4m55s    PASS
+
+  Follow-up triggers (across 1 runs):
+    q11b: never triggered
+    q17b: never triggered
+    q19b: never triggered
+    q3b: never triggered
+    q4b: never triggered
+    q8b: never triggered
+    q9b: never triggered

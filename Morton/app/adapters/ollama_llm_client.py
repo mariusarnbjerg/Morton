@@ -229,6 +229,10 @@ class OllamaLLMClient(ILLMClient):
         r.raise_for_status()
         return r.json()["message"]["content"].strip()
 
+    def structured_call(self, system: str, user: str, schema: Dict) -> Dict[str, Any]:
+        """Public wrapper for structured output calls."""
+        return self._ollama_structured(system, user, schema)
+
     # -------------------------------------------------------------------
     # Ollama HTTP helper
     # -------------------------------------------------------------------

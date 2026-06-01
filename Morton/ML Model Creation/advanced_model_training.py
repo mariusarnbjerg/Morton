@@ -1,6 +1,6 @@
 """
 ================================================================================
-  ASA SCORE PREDICTION — SIMPLIFIED TRAINING PIPELINE
+  ASA SCORE PREDICTION — TRAINING PIPELINE
 ================================================================================
 
   Features:
@@ -12,8 +12,6 @@
     NumberOfAllergies, NumberOfDiagnoses, Anamnese, Diagnoses, SKS_codes, CAVE,
     ASA Score
 
-  Usage:
-    Run this file directly in your IDE or terminal.
 ================================================================================
 """
 
@@ -75,7 +73,8 @@ KEEP_ASA = [1, 2, 3]
 
 # Paths
 PROJECT_DIR = Path(__file__).parent
-DATA_PATH = PROJECT_DIR / "Dataset" / "Final_raw_data.xlsx"
+DATA_PATH = "C:/Users/Mariu/Documents/Masters thesis/Data/Final_raw_data.xlsx"
+# DATA_PATH = PROJECT_DIR / "Dataset" / "Final_raw_data.xlsx"
 OUTPUT_DIR = PROJECT_DIR / "advanced_ml_outputs"
 OUTPUT_DIR.mkdir(exist_ok=True)
 
@@ -376,24 +375,24 @@ def main():
             "colsample_bytree": 0.75, "reg_alpha": 0.5,
             "reg_lambda": 4.0, "min_split_gain": 0.05,
         },
-        {
-            "name": "LightGBM_no_weight",
-            "class_weight": None,
-            "n_estimators": 600, "learning_rate": 0.03,
-            "num_leaves": 31, "max_depth": 8,
-            "min_child_samples": 70, "subsample": 0.75,
-            "colsample_bytree": 0.75, "reg_alpha": 0.5,
-            "reg_lambda": 4.0, "min_split_gain": 0.05,
-        },
-        {
-            "name": "LightGBM_less_reg",
-            "class_weight": "balanced",
-            "n_estimators": 800, "learning_rate": 0.025,
-            "num_leaves": 45, "max_depth": 9,
-            "min_child_samples": 50, "subsample": 0.80,
-            "colsample_bytree": 0.80, "reg_alpha": 0.2,
-            "reg_lambda": 2.0, "min_split_gain": 0.02,
-        },
+        # {
+        #     "name": "LightGBM_no_weight",
+        #     "class_weight": None,
+        #     "n_estimators": 600, "learning_rate": 0.03,
+        #     "num_leaves": 31, "max_depth": 8,
+        #     "min_child_samples": 70, "subsample": 0.75,
+        #     "colsample_bytree": 0.75, "reg_alpha": 0.5,
+        #     "reg_lambda": 4.0, "min_split_gain": 0.05,
+        # },
+        # {
+        #     "name": "LightGBM_less_reg",
+        #     "class_weight": "balanced",
+        #     "n_estimators": 800, "learning_rate": 0.025,
+        #     "num_leaves": 45, "max_depth": 9,
+        #     "min_child_samples": 50, "subsample": 0.80,
+        #     "colsample_bytree": 0.80, "reg_alpha": 0.2,
+        #     "reg_lambda": 2.0, "min_split_gain": 0.02,
+        # },
     ]
 
     scoring = {"accuracy": "accuracy", "f1_macro": "f1_macro", "f1_weighted": "f1_weighted"}

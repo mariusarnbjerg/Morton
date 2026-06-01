@@ -15,10 +15,10 @@ OLLAMA_BASE_URL = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")
 
 class OllamaSummarizer(ISummarizer):
     """
-    Simplified summarizer using Ollama's native structured output support.
+    Summarizer using Ollama's native structured output support.
 
     Ollama's 'format' parameter constrains the model to output valid JSON
-    matching the schema, eliminating most retry logic.
+    matching the schema.
     """
 
     def __init__(
@@ -61,7 +61,6 @@ class OllamaSummarizer(ISummarizer):
 
         transcript_text = "\n".join(fmt(m) for m in transcript)
 
-        # System prompt - simpler now since Ollama enforces structure
         system_prompt = (
             "You are a clinical summarization assistant. "
             "Extract and summarize the relevant medical information from the transcript. "
@@ -79,7 +78,6 @@ class OllamaSummarizer(ISummarizer):
             {"role": "user", "content": user_prompt},
         ]
 
-        # Single call - no retry loop needed!
         raw = self._ollama_chat(messages, schema)
 
         # Ollama guarantees valid JSON matching the schema
@@ -93,26 +91,3 @@ class OllamaSummarizer(ISummarizer):
                 f"Ollama returned invalid JSON despite schema constraint. "
                 f"Error: {e}\nOutput: {raw}"
             )
-
-
-# COMPARISON: Old approach with manual retries
-"""
-OLD VERSION (manual retry logic):
-- System prompt explicitly describes schema
-- Extract JSON from markdown fences
-- Validate against schema
-- If invalid, ask model to repair
-- Retry up to 3 times
-- ~80 lines of code
-
-NEW VERSION (Ollama native):
-- Pass schema directly to Ollama via 'format' param
-- Ollama constrains generation to valid JSON
-- Single call, no retries needed
-- ~40 lines of code
-- Higher success rate
-
-TRADE-OFF:
-- Ollama-specific (less portable)
-- But much simpler and more reliable
-"""

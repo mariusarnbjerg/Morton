@@ -1,5 +1,5 @@
 """
-FastAPI server for AnæstesiCare application.
+FastAPI server for Morton application.
 Main entry point for the API.
 """
 

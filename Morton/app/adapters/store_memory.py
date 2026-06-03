@@ -1,5 +1,5 @@
-'''What: Store conversation turns in memory.
-Why: This makes it easy to test now; later we replace it with SQLite/Postgres without touching orchestration logic.'''
+'''Store conversation turns in memory.
+This makes it easy to test now; later we replace it with SQLite/Postgres without touching orchestration logic.'''
 
 from __future__ import annotations
 from typing import Dict, List
